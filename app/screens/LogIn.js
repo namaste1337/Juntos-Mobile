@@ -18,6 +18,13 @@ import {
 } from 'react-native';
 
 //////////////////////////////
+// Imports Common Files
+///////////////////////////////
+
+// Common styles
+import CommonStyles from "../common/styles.js"
+
+//////////////////////////////
 // Imports Custom Components
 ///////////////////////////////
 
@@ -30,8 +37,6 @@ import TouchableText from './../components/TouchableText';
 // Constants
 ////////////////////////
 
-// Device
-const { height } = Dimensions.get("window"); // Move to common/device.js
 // Images
 const logo = require("./../assets/login/mobile_logo.png");
 //Navigation
@@ -95,15 +100,15 @@ class Login extends Component {
     }
 
     return (
-      <View style={styles.container} >
-        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_BEHAVIOR_PROPERTY} style={styles.keyboardViewWrapper}>
+      <View style={CommonStyles.container} >
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_BEHAVIOR_PROPERTY} style={CommonStyles.keyboardViewWrapper}>
           <View style={styles.logoWrap}>
             <Image 
               source={logo} 
               style={styles.logo} 
             resizeMode={LOGO_IMAGE_RESIZE_MODE_PROPERTY} />
           </View>
-          <View style={styles.wrapper}>
+          <View style={CommonStyles.contentWrapper}>
             <PrimaryTextInput 
               placeHolder={USERNAME_FIELD_PLACE_HOLDER_STRING} 
               keyboardType={USERNAME_FIELD_KEYBOARD_TYPE_PROPERTY}
@@ -124,7 +129,7 @@ class Login extends Component {
               buttonText={SIGN_IN_TEXT_STRING} 
               onPress={this.onSignInPressed} />
           </View>
-          <View style={styles.container}>
+          <View style={CommonStyles.container}>
             <View style={styles.signupWrap}>
               <Text style={styles.accountText}>Dont have an account?</Text>
               <TouchableText 
@@ -142,38 +147,11 @@ class Login extends Component {
 
 
 
+////////////////////////
+// Screen Styles
+////////////////////////
+
 const styles = StyleSheet.create({
-  
-  // Move to common/styles.js ends
-
-  // The following seems that they can be
-  // reused in other screens. Generalize
-  // the styles and move them the common/styles.js
-
-  container: {
-    flex: 1,
-  },
-  keyboardViewWrapper: {
-    backgroundColor: "#FFF",
-    height
-  },
-  wrapper: {
-    paddingVertical: 0,
-    paddingHorizontal: 10,
-  },
-  signupWrap: {
-    marginVertical: 20,
-    flexDirection: "row",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  // Move to common/styles.js ends //
-
-  ////////////////////////
-  // Screen Styles
-  ////////////////////////
 
   logoWrap: {
     marginVertical: 40,
@@ -197,11 +175,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontWeight: "100"
   },
+  signupWrap: {
+    marginVertical: 20,
+    flexDirection: "row",
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   signupLinkText: {
     marginLeft: 5,
     color: "#FF3366",
     fontWeight: "100"
   },
+
 });
 
 
