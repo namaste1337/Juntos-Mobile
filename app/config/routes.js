@@ -4,6 +4,7 @@ import LoginView      from '../screens/LogIn';
 import SignUpView     from '../screens/Signup';
 import ForgotPassword from '../screens/ForgotPassword';
 import MainView       from '../screens/Main';
+import Profile       from '../screens/Profile';
 
 
 
@@ -29,6 +30,13 @@ const routes = {
     }), 
   },
   Main: { screen: MainView },
+  Profile: { 
+    screen: Profile,
+    navigationOptions: ({navigation}) => ({
+      title: "Profile",
+    }), 
+  },
+
 }
 
 export default routes
