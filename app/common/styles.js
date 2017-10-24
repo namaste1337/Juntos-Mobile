@@ -22,9 +22,9 @@ const { height } = Dimensions.get("window"); // Move to common/device.js
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
   },
   keyboardViewWrapper: {
-    backgroundColor: "#FFF",
     height
   },
   contentWrapper: {
