@@ -16,7 +16,7 @@ import createReactClass from 'create-react-class'
 ////////////////////////
 
 //Strings
-const PLACE_HOLDER_TEXT_COLOR = "#000"; // Move to commons/styles.js
+const PLACE_HOLDER_TEXT_COLOR = "#858384"; // Move to commons/styles.js
 const ANDROID_UNDERLINE_COLOR = 'rgba(0,0,0,0)'; // Move to commons/styles.js
 
 /////////////////////////////
@@ -25,25 +25,31 @@ const ANDROID_UNDERLINE_COLOR = 'rgba(0,0,0,0)'; // Move to commons/styles.js
 
 const PrimaryTextInput = createReactClass({
 
+
+
+
   render(){
+
+    //Configure the style for singleline and multiline
+    let textInputWrapStyle = styles.inputWrap;
+    let textInputStyle     = styles.input;
+
+    if(this.props.multiline){
+      textInputWrapStyle = styles.multilineInputWrapSmall;
+      textInputStyle     = styles.multilineInputSmall;
+    }
+
     return (
-      <View style={styles.inputWrap}>
+      <View style={textInputWrapStyle}>
         <TextInput
           {...this.props}
           placeholderTextColor={PLACE_HOLDER_TEXT_COLOR}
           underlineColorAndroid={ANDROID_UNDERLINE_COLOR} 
-          style={styles.input} />
+          style={textInputStyle} />
       </View>
     )
   }
 });
 
-          
-
-          // placeholder={this.props.placeHolder}
-          // keyboardType={this.props.keyboardType} 
-          // autoCorrect={this.props.autoCorrect}
-          // returnKeyType={this.props.returnKeyType} 
-          // secureTextEntry={this.props.secure}
 
 export default PrimaryTextInput;

@@ -47,6 +47,14 @@ class Signup extends Component {
   }
 
   ////////////////////
+  // Life Cycle
+  ////////////////////
+
+  componentWillMount(){
+
+  }
+
+  ////////////////////
   // Callbacks
   ////////////////////
 
@@ -85,10 +93,22 @@ class Signup extends Component {
               Please select an image for your profile. This image will be shown to other users on the platform.
             </Text>
           </View>
-          <PrimaryTextInput placeholder={"Tell us about yourself?"}/>
-          <PrimaryTextInput placeholder={"E-mail"}/>
-          <PrimaryTextInput placeholder={"Password"} />
-          <PrimaryTextInput placeholder={"Confirm Password"} />
+          <PrimaryTextInput 
+            onChangeText={emailField => this.setState({emailField})} 
+            placeholder={"E-mail"}/>
+          <PrimaryTextInput 
+            onChangeText={passwordField => this.setState({passwordField})} 
+            placeholder={"Password"} 
+            secureTextEntry/>
+          <PrimaryTextInput 
+            onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
+            placeholder={"Confirm Password"} 
+            secureTextEntry/>
+          <PrimaryTextInput 
+            onChangeText={bioField => this.setState({bioField}) } 
+            multiline={true} 
+            maxLength={100}
+            placeholder={"Tell us about yourself?"}/>
           <PrimaryButton buttonText={"Sign Up"}/>
         </KeyboardAvoidingView>
       </View>
@@ -125,7 +145,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flex: 1,
     flexWrap: "wrap",
-    fontWeight: "100"
+    fontFamily: "Roboto-Light"
   },
   profileImageAddButton:{
     position: "absolute",
