@@ -167,12 +167,12 @@ const styles = StyleSheet.create({
     textAlign: "right",
     paddingRight: 15,
     paddingBottom: 10,
-    fontWeight: "100"
+    fontFamily: 'Roboto-Light'
   },
   accountText: {
     color: "#404040",
     alignItems: "center",
-    fontWeight: "100"
+    fontFamily: 'Roboto-Light'
   },
   signupWrap: {
     marginVertical: 20,
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   signupLinkText: {
     marginLeft: 5,
     color: "#FF3366",
-    fontWeight: "100"
+    fontFamily: 'Roboto-Light'
   },
 
 });

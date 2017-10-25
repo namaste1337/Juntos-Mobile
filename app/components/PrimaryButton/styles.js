@@ -21,6 +21,6 @@ export default StyleSheet.create({
   buttonText: {
     color: "#FFF",
     fontSize: 18,
-    fontWeight: "100"
+    fontFamily: 'Roboto-Light'
   }
 });
