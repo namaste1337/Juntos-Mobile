@@ -85,9 +85,10 @@ class Signup extends Component {
               Please select an image for your profile. This image will be shown to other users on the platform.
             </Text>
           </View>
-          <PrimaryTextInput placeHolder={"E-mail"}/>
-          <PrimaryTextInput placeHolder={"Password"} />
-          <PrimaryTextInput placeHolder={"Confirm Password"} />
+          <PrimaryTextInput placeholder={"Tell us about yourself?"}/>
+          <PrimaryTextInput placeholder={"E-mail"}/>
+          <PrimaryTextInput placeholder={"Password"} />
+          <PrimaryTextInput placeholder={"Confirm Password"} />
           <PrimaryButton buttonText={"Sign Up"}/>
         </KeyboardAvoidingView>
       </View>

@@ -29,18 +29,22 @@ const PrimaryTextInput = createReactClass({
     return (
       <View style={styles.inputWrap}>
         <TextInput
-          underlineColorAndroid={ANDROID_UNDERLINE_COLOR}
+          {...this.props}
           placeholderTextColor={PLACE_HOLDER_TEXT_COLOR}
-          placeholder={this.props.placeHolder}
-          style={styles.input}
-          keyboardType={this.props.keyboardType} 
-          autoCorrect={this.props.autoCorrect}
-          returnKeyType={this.props.returnKeyType} 
           onChangeText={(passwordField) => this.props.onTextChange(passwordField)}
-          secureTextEntry={this.props.secure} />
+          underlineColorAndroid={ANDROID_UNDERLINE_COLOR} 
+          style={styles.input} />
       </View>
     )
   }
 });
+
+          
+
+          // placeholder={this.props.placeHolder}
+          // keyboardType={this.props.keyboardType} 
+          // autoCorrect={this.props.autoCorrect}
+          // returnKeyType={this.props.returnKeyType} 
+          // secureTextEntry={this.props.secure}
 
 export default PrimaryTextInput;

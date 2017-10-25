@@ -110,17 +110,17 @@ class Login extends Component {
           </View>
           <View style={CommonStyles.contentWrapper}>
             <PrimaryTextInput 
-              placeHolder={USERNAME_FIELD_PLACE_HOLDER_STRING} 
+              placeholder={USERNAME_FIELD_PLACE_HOLDER_STRING} 
               keyboardType={USERNAME_FIELD_KEYBOARD_TYPE_PROPERTY}
               autoCorrect={USERNAME_FIELD_AUTO_CORRECT_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE}
               onTextChange={this.onUsernameTextChange} />
             <PrimaryTextInput 
-              placeHolder={PASSWORD_FIELD_PLACE_HOLDER_STRING} 
-              secure={SECURE_FIELD_BOOL}
+              placeholder={PASSWORD_FIELD_PLACE_HOLDER_STRING} 
               keyboardType={PASSWORD_FIELD_KEYBOARD_TYPE_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE} 
-              onTextChange={this.onPasswordTextChange}/>
+              onTextChange={this.onPasswordTextChange}
+              secureTextEntry/>
             <TouchableText 
               text={FORGOT_PASSWORD_TEXT_STRING} 
               onPress={this.onForgotPasswordPressed} 
