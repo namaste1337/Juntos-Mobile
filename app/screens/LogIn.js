@@ -72,8 +72,6 @@ class Login extends Component {
     // Callbacks
     ////////////////////////
 
-    this.onUsernameTextChange    = (usernameField) => this.setState({ usernameField });
-    this.onPasswordTextChange    = (passwordField) => this.setState({ passwordField });
     this.onSignInPressed         = () => this.props.sessionLogin(this.state.usernameField, this.state.passwordField);
     this.onSignUpPressed         = () => this.props.navigation.navigate(NAVIGATE_SIGNUP);
     this.onForgotPasswordPressed = () => this.props.navigation.navigate(NAVIGATE_FORGOT_PASSWORD);
@@ -89,6 +87,7 @@ class Login extends Component {
     // Should be moved else where, currently react native
     // is throwing a warning in regards to segues while
     // re-redering
+
     if(this.props.isLoggedIn){
       const resetAction = NavigationActions.reset({
         index: 0,
@@ -114,12 +113,12 @@ class Login extends Component {
               keyboardType={USERNAME_FIELD_KEYBOARD_TYPE_PROPERTY}
               autoCorrect={USERNAME_FIELD_AUTO_CORRECT_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE}
-              onTextChange={this.onUsernameTextChange} />
+              onChangeText={(usernameField) => this.setState({usernameField})} />
             <PrimaryTextInput 
               placeholder={PASSWORD_FIELD_PLACE_HOLDER_STRING} 
               keyboardType={PASSWORD_FIELD_KEYBOARD_TYPE_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE} 
-              onTextChange={this.onPasswordTextChange}
+              onChangeText={(passwordField) => this.setState({passwordField})}
               secureTextEntry/>
             <TouchableText 
               text={FORGOT_PASSWORD_TEXT_STRING} 

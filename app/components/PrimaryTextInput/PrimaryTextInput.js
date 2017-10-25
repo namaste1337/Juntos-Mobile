@@ -31,7 +31,6 @@ const PrimaryTextInput = createReactClass({
         <TextInput
           {...this.props}
           placeholderTextColor={PLACE_HOLDER_TEXT_COLOR}
-          onChangeText={(passwordField) => this.props.onTextChange(passwordField)}
           underlineColorAndroid={ANDROID_UNDERLINE_COLOR} 
           style={styles.input} />
       </View>
