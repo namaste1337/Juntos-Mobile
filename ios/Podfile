@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'juntosMobile' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for juntosMobile
+  pod 'RSKImageCropper'
+  pod 'QBImagePickerController'
+  target 'juntosMobile-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'juntosMobileTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+
