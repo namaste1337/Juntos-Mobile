@@ -85,7 +85,7 @@ class Signup extends Component {
   // Private Callbacks
   ////////////////////
 
-  //Handles on profile image button press
+  //Handles profile image button press
   _onProfileImagePress(){
 
     ImagePicker.openPicker({
@@ -104,7 +104,7 @@ class Signup extends Component {
 
   }
 
-  //Handles on sign up button press
+  //Handles sign up button press
   _onSignUpbuttonPress(){
 
     // If the field are valid, we process the user data
@@ -133,7 +133,7 @@ class Signup extends Component {
 
   }
 
-  //Handles validating password, return false if invlaid
+  //Handles validating password, returns false if invlaid
   _validatePassword(passwordOne, passwordTwo){
 
     // White space in password is not allowed
@@ -142,12 +142,11 @@ class Signup extends Component {
       return false;
     }
 
-    // Remove white space from password fields to check 
-    // for emptyfields
+    // Removes white space from password fields
     password        = passwordOne.removeWhiteSpace();
     confirmPassword = passwordTwo.removeWhiteSpace();
 
-    // Empty password field are not allowed
+    // Empty password fields are not allowed
     if(password === "" | confirmPassword === ""){
       this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
    
