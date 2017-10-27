@@ -12,8 +12,12 @@ import {
 
 // Activity indicator styles
 export default StyleSheet.create({
+  
+  /////////////////////
+  // Singleline input
+  /////////////////////
+
  inputWrap: {
-    flexDirection: "row",
     marginVertical: 10,
     height: 40,
     borderBottomWidth: 1,
@@ -21,10 +25,15 @@ export default StyleSheet.create({
   },
   input: {
     flex: 1,
+    height: 100,
     fontFamily: "Roboto-Light",
     paddingHorizontal: 10,
-    paddingVertical: 10,
   },
+
+  /////////////////////
+  // Multiline input
+  /////////////////////
+
   multilineInputSmall: {
     flex: 1,
     fontSize: 15,
@@ -34,11 +43,35 @@ export default StyleSheet.create({
     textAlignVertical: "top",
   },
    multilineInputWrapSmall: {
-    flexDirection: "row",
     height: 74,
     borderBottomWidth: 1,
     borderBottomColor: "#CCC",
   },
+
+  /////////////////////
+  // Footer
+  /////////////////////
+
+  footer:{
+    flexDirection: "row"
+  },
+  multilineCounter:{
+    color: "#ccc",
+    paddingLeft: 11,
+    fontFamily: 'Roboto-Light'
+  },
+  inputValidationMessage: {
+    flex: 1,
+    alignItems: "flex-end",
+    textAlign: "right",
+    color: "red",
+    fontFamily: "Roboto-Light",
+    fontSize: 15,
+    paddingRight: 11
+
+  },
+
+
  });
 
 
