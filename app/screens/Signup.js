@@ -214,16 +214,6 @@ class Signup extends Component {
             KeyboardType={"default"}
             valid={this.state.confirmPasswordIsValid}
             validationMessage={"Password is invalid or does not match"} />
-          <PrimaryTextInput 
-            onChangeText={bioField => this.setState({bioField})} 
-            multiline={true} 
-            maxLength={100}
-            placeholder={"Tell us about yourself?"}
-            returnKeyType={"done"}
-            valid={this.state.bioFieldIsValid}
-            validationMessage={"Required"} 
-            blurOnSubmit
-            onSubmitEditing={() => Keyboard.dismiss}/>
           <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={"Sign Up"}/>
         </KeyboardAvoidingView>
       </View>
