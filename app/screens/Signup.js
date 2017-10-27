@@ -13,6 +13,7 @@ import {
   Image,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Keyboard
 } from 'react-native';
 
 //////////////////////////////
@@ -220,7 +221,9 @@ class Signup extends Component {
             placeholder={"Tell us about yourself?"}
             returnKeyType={"done"}
             valid={this.state.bioFieldIsValid}
-            validationMessage={"Required"} />
+            validationMessage={"Required"} 
+            blurOnSubmit
+            onSubmitEditing={() => Keyboard.dismiss}/>
           <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={"Sign Up"}/>
         </KeyboardAvoidingView>
       </View>
