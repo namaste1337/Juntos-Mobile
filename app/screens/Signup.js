@@ -20,15 +20,16 @@ import {
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../common/styles.js"
+import CommonStyles from "../common/styles";
+import {validateEmail} from "../common/validations";
 
 //////////////////////////////
 // Imports Custom Components
 ///////////////////////////////
 
-import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
-import PrimaryTextInput from './../components/PrimaryTextInput';
-import PrimaryButton from './../components/PrimaryButton'
+import ActivityIndicatorOverlay from "./../components/ActivityIndicatorOverlay";
+import PrimaryTextInput from "./../components/PrimaryTextInput";
+import PrimaryButton from "./../components/PrimaryButton";
 
 //////////////////
 // Constants
@@ -36,29 +37,36 @@ import PrimaryButton from './../components/PrimaryButton'
 
 //Images
 const profilePlaceholder  = require("./../assets/signup/profile_image_placeholder.png");
-const imageAddButton  = require("./../assets/signup/plus_button.png");
+const imageAddButton      = require("./../assets/signup/plus_button.png");
 
 
 class Signup extends Component {
 
+  ////////////////////
+  // Constructor
+  ////////////////////
+
   constructor(props){
     super(props);
-    this.state = { profileImage: profilePlaceholder };
+    this.state = { 
+      emailField: "",
+      passwordField: "",
+      confirmPasswordField: "",
+      bioField: "",
+      profileImage: profilePlaceholder,
+      emailIsValid: true,
+      confirmPasswordIsValid: true,
+      bioFieldIsValid: true,
+      bioFieldLength: 0
+    };
   }
 
   ////////////////////
-  // Life Cycle
+  // Private Callbacks
   ////////////////////
 
-  componentWillMount(){
-
-  }
-
-  ////////////////////
-  // Callbacks
-  ////////////////////
-
-  onProfileImagePress(){
+  //Handles on profile image button press
+  _onProfileImagePress(){
 
     ImagePicker.openPicker({
       width: 400,
@@ -72,8 +80,105 @@ class Signup extends Component {
         profileImage: source
       });
 
+    }).catch(error => {
+      console.log("Image picker rejected")
+      console.log(error);
     });
 
+  }
+
+  //Handles on sign up button press
+  _onSignUpbuttonPress(){
+    console.log("sign up button pressed");
+    // If the field are valid, we process the user data
+    // and execute the appropriate action
+    if(this._validateFields()){
+      // if The
+      console.log("All fields are valid");
+
+    }else{
+      console.log("Some fields are invalid");
+    }
+
+  }
+
+
+  ////////////////////
+  // Private Methods
+  ////////////////////
+
+  // Handles email validation, returns false if invlalid
+  _validateEmail(email){
+
+    if(!validateEmail(email)){
+      this.setState({emailIsValid: false});
+      return false
+    }else{
+      this.setState({emailIsValid: true});
+    }
+
+  }
+
+  //Handles validating password, return false if invlaid
+  _validatePassword(passwordOne, passwordTwo){
+
+    // White space in password is not allowed
+    if(passwordOne.hasWhiteSpace() || passwordTwo.hasWhiteSpace()){
+      this.setState({confirmPasswordIsValid: false});
+      return false;
+    }
+
+    // Remove white space from password fields to check 
+    // for emptyfields
+    password        = passwordOne.removeWhiteSpace();
+    confirmPassword = passwordTwo.removeWhiteSpace();
+
+    // Empty password field are not allowed
+    if(password === "" | confirmPassword === ""){
+      this.setState({confirmPasswordIsValid: false});
+   
+    } // PasswordsOne and PasswordTwo must be equal
+    else if(passwordOne !== passwordTwo){
+      this.setState({confirmPasswordIsValid: false});
+      return false;
+    }
+    else{
+      this.setState({confirmPasswordIsValid: true});
+    }
+
+  }
+
+  //Handles validating bio, returns false if invalid
+  _validateBio(bio){
+
+    // Empty bio field is not allowed
+    if(bio === ""){
+      this.setState({bioFieldIsValid: false})
+      return false;
+    }else{
+      this.setState({bioFieldIsValid: true});
+    }
+
+  }
+
+  //Validates sign up form fields, returns true if all fields are valid
+  _validateFields(){
+    console.log("Attempting to validate fields")
+    let isValid         = true;
+    // Fields
+    let email           = this.state.emailField;
+    let password        = this.state.passwordField
+    let confirmPassword = this.state.confirmPasswordField
+    let bio             = this.state.bioField;
+
+    // Validate email
+    isValid = this._validateEmail(email);
+    // Vaidate password
+    isValid = this._validatePassword(password, confirmPassword);
+    // Validate bio
+    isValid = this._validateBio(bio);
+    console.log(isValid);
+    return isValid
   }
 
   ////////////////////
@@ -85,7 +190,7 @@ class Signup extends Component {
       <View style={CommonStyles.container}>
         <KeyboardAvoidingView behavior={"position"}  style={CommonStyles.contentWrapper}>
           <View style={styles.profileImageUploadWrapper}>
-            <TouchableOpacity onPress={() => this.onProfileImagePress()}>
+            <TouchableOpacity onPress={() => this._onProfileImagePress()}>
               <Image source={this.state.profileImage} behavior={"contain"} style={styles.profileImage} />
               <Image style={styles.profileImageAddButton} source={imageAddButton} shadowColor={"#000"} />
             </TouchableOpacity>
@@ -93,23 +198,36 @@ class Signup extends Component {
               Please select an image for your profile. This image will be shown to other users on the platform.
             </Text>
           </View>
-          <PrimaryTextInput 
+          <PrimaryTextInput
             onChangeText={emailField => this.setState({emailField})} 
-            placeholder={"E-mail"}/>
+            placeholder={"E-mail"}
+            returnKeyType={"done"} 
+            keyboardType={"email-address"}
+            valid={this.state.emailIsValid}
+            validationMessage={"Email is Invalid"} />
           <PrimaryTextInput 
             onChangeText={passwordField => this.setState({passwordField})} 
             placeholder={"Password"} 
-            secureTextEntry/>
+            secureTextEntry
+            returnKeyType={"done"}
+            KeyboardType={"default"}/>
           <PrimaryTextInput 
             onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
             placeholder={"Confirm Password"} 
-            secureTextEntry/>
+            secureTextEntry
+            returnKeyType={"done"}
+            KeyboardType={"default"}
+            valid={this.state.confirmPasswordIsValid}
+            validationMessage={"Password is invalid or does not match"} />
           <PrimaryTextInput 
-            onChangeText={bioField => this.setState({bioField}) } 
+            onChangeText={bioField => this.setState({bioField})} 
             multiline={true} 
             maxLength={100}
-            placeholder={"Tell us about yourself?"}/>
-          <PrimaryButton buttonText={"Sign Up"}/>
+            placeholder={"Tell us about yourself?"}
+            returnKeyType={"done"}
+            valid={this.state.bioFieldIsValid}
+            validationMessage={"Required"} />
+          <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={"Sign Up"}/>
         </KeyboardAvoidingView>
       </View>
     );
