@@ -37,8 +37,29 @@ import PrimaryButton from "./../components/PrimaryButton";
 //////////////////
 
 //Images
-const profilePlaceholder  = require("./../assets/signup/profile_image_placeholder.png");
-const imageAddButton      = require("./../assets/signup/plus_button.png");
+const profilePlaceholder                        = require("./../assets/signup/profile_image_placeholder.png");
+const imageAddButton                            = require("./../assets/signup/plus_button.png");
+//Strings
+const EMAIL_FIELD_PLACEHOLDER_STRING            = "E-mail";
+const PASSWORD_FIELD_PLACEHOLDER_STRING         = "Password";
+const CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING = "Confirm Password";
+const SIGNUP_BUTTON_STRING                      = "Sign Up";
+const EMAIL_VALIDATION_MESSAGE_STRING           = "E-mail is invalid";
+const PASSWORD_VALIDATION_MESSAGE_STRING        = "Password is invalid or does not match";
+//Properties
+const RETURN_KEY_TYPE                           = "done";
+const EMAIL_KEYBOARD_TYPE                       = "email-address";
+const DEFAULT_KEYBOARD_TYPE                     = "default";
+const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
+const PROFILE_IMAGE_BEHAVIOR                    = "contain";
+const IMAGE_PICKER_WIDTH                        = 400;
+const IMAGE_PICKER_HEIGHT                       = 400;
+const IMAGE_PICKER_CROPPING                     = true;
+//States
+const EMAIL_VALIDATION_TRUE_STATE               = true;
+const EMAIL_VALIDATION_FALSE_STATE              = false;
+const PASSWORD_VALIDATION_TRUE_STATE            = true;
+const PASSWORD_VALIDATION_FALSE_STATE           = false;
 
 
 class Signup extends Component {
@@ -55,10 +76,8 @@ class Signup extends Component {
       confirmPasswordField: "",
       bioField: "",
       profileImage: profilePlaceholder,
-      emailIsValid: true,
-      confirmPasswordIsValid: true,
-      bioFieldIsValid: true,
-      bioFieldLength: 0
+      emailIsValid: EMAIL_VALIDATION_TRUE_STATE,
+      confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE,
     };
   }
 
@@ -70,9 +89,9 @@ class Signup extends Component {
   _onProfileImagePress(){
 
     ImagePicker.openPicker({
-      width: 400,
-      height: 400,
-      cropping: true
+      width: IMAGE_PICKER_WIDTH,
+      height: IMAGE_PICKER_HEIGHT,
+      cropping: IMAGE_PICKER_CROPPING
     }).then(image => {
       let source = { uri: image.path };
       this.setState({
@@ -106,10 +125,10 @@ class Signup extends Component {
   _validateEmail(email){
 
     if(!validateEmail(email)){
-      this.setState({emailIsValid: false});
+      this.setState({emailIsValid: EMAIL_VALIDATION_FALSE_STATE});
       return false
     }else{
-      this.setState({emailIsValid: true});
+      this.setState({emailIsValid: EMAIL_VALIDATION_TRUE_STATE});
     }
 
   }
@@ -119,7 +138,7 @@ class Signup extends Component {
 
     // White space in password is not allowed
     if(passwordOne.hasWhiteSpace() || passwordTwo.hasWhiteSpace()){
-      this.setState({confirmPasswordIsValid: false});
+      this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
       return false;
     }
 
@@ -130,28 +149,15 @@ class Signup extends Component {
 
     // Empty password field are not allowed
     if(password === "" | confirmPassword === ""){
-      this.setState({confirmPasswordIsValid: false});
+      this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
    
     } // PasswordsOne and PasswordTwo must be equal
     else if(passwordOne !== passwordTwo){
-      this.setState({confirmPasswordIsValid: false});
+      this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
       return false;
     }
     else{
-      this.setState({confirmPasswordIsValid: true});
-    }
-
-  }
-
-  //Handles validating bio, returns false if invalid
-  _validateBio(bio){
-
-    // Empty bio field is not allowed
-    if(bio === ""){
-      this.setState({bioFieldIsValid: false})
-      return false;
-    }else{
-      this.setState({bioFieldIsValid: true});
+      this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE});
     }
 
   }
@@ -170,9 +176,7 @@ class Signup extends Component {
     isValid = this._validateEmail(email);
     // Vaidate password
     isValid = this._validatePassword(password, confirmPassword);
-    // Validate bio
-    isValid = this._validateBio(bio);
-    console.log(isValid);
+
     return isValid
   }
 
@@ -183,11 +187,11 @@ class Signup extends Component {
   render() {
     return (
       <View style={CommonStyles.container}>
-        <KeyboardAvoidingView behavior={"position"}  style={CommonStyles.contentWrapper}>
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
           <View style={styles.profileImageUploadWrapper}>
             <TouchableOpacity onPress={() => this._onProfileImagePress()}>
-              <Image source={this.state.profileImage} behavior={"contain"} style={styles.profileImage} />
-              <Image style={styles.profileImageAddButton} source={imageAddButton} shadowColor={"#000"} />
+              <Image source={this.state.profileImage} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImage} />
+              <Image style={styles.profileImageAddButton} source={imageAddButton} />
             </TouchableOpacity>
             <Text style={styles.profileImageText}> 
               Please select an image for your profile. This image will be shown to other users on the platform.
@@ -195,26 +199,26 @@ class Signup extends Component {
           </View>
           <PrimaryTextInput
             onChangeText={emailField => this.setState({emailField})} 
-            placeholder={"E-mail"}
-            returnKeyType={"done"} 
-            keyboardType={"email-address"}
+            placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
+            returnKeyType={RETURN_KEY_TYPE} 
+            keyboardType={EMAIL_KEYBOARD_TYPE}
             valid={this.state.emailIsValid}
-            validationMessage={"Email is Invalid"} />
+            validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
           <PrimaryTextInput 
             onChangeText={passwordField => this.setState({passwordField})} 
-            placeholder={"Password"} 
+            placeholder={PASSWORD_FIELD_PLACEHOLDER_STRING} 
             secureTextEntry
-            returnKeyType={"done"}
-            KeyboardType={"default"}/>
+            returnKeyType={RETURN_KEY_TYPE}
+            keyboardType={DEFAULT_KEYBOARD_TYPE}/>
           <PrimaryTextInput 
             onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
-            placeholder={"Confirm Password"} 
+            placeholder={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING} 
             secureTextEntry
-            returnKeyType={"done"}
-            KeyboardType={"default"}
+            returnKeyType={RETURN_KEY_TYPE}
+            keyboardType={DEFAULT_KEYBOARD_TYPE}
             valid={this.state.confirmPasswordIsValid}
-            validationMessage={"Password is invalid or does not match"} />
-          <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={"Sign Up"}/>
+            validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
+          <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={SIGNUP_BUTTON_STRING}/>
         </KeyboardAvoidingView>
       </View>
     );
