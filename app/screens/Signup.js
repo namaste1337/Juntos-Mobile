@@ -73,15 +73,12 @@ class Signup extends Component {
       height: 400,
       cropping: true
     }).then(image => {
-      console.log(image);
       let source = { uri: image.path };
-
       this.setState({
         profileImage: source
       });
 
     }).catch(error => {
-      console.log("Image picker rejected")
       console.log(error);
     });
 
@@ -89,15 +86,12 @@ class Signup extends Component {
 
   //Handles on sign up button press
   _onSignUpbuttonPress(){
-    console.log("sign up button pressed");
+
     // If the field are valid, we process the user data
     // and execute the appropriate action
     if(this._validateFields()){
-      // if The
-      console.log("All fields are valid");
 
-    }else{
-      console.log("Some fields are invalid");
+
     }
 
   }
@@ -163,7 +157,7 @@ class Signup extends Component {
 
   //Validates sign up form fields, returns true if all fields are valid
   _validateFields(){
-    console.log("Attempting to validate fields")
+
     let isValid         = true;
     // Fields
     let email           = this.state.emailField;
