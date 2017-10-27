@@ -19,7 +19,7 @@ export default StyleSheet.create({
 
  inputWrap: {
     marginVertical: 10,
-    height: 40,
+    height: 50,
     borderBottomWidth: 1,
     borderBottomColor: "#CCC"
   },
@@ -28,6 +28,7 @@ export default StyleSheet.create({
     height: 100,
     fontFamily: "Roboto-Light",
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
 
   /////////////////////
@@ -53,7 +54,7 @@ export default StyleSheet.create({
   /////////////////////
 
   footer:{
-    flexDirection: "row"
+    flexDirection: "row",
   },
   multilineCounter:{
     color: "#ccc",
@@ -66,7 +67,7 @@ export default StyleSheet.create({
     textAlign: "right",
     color: "red",
     fontFamily: "Roboto-Light",
-    fontSize: 15,
+    fontSize: 13,
     paddingRight: 11
 
   },
