@@ -61,8 +61,7 @@ export function sessionLoginProcessing(bool){
 
 // Handles server call for login request
 export function sessionLogin(email, password){
-    console.log("Fired Session Login Action");
-    console.log(email, password);
+
     return (dispatch) => {
     	login(email, password).then(function(response){
     		if(response.status == REQUEST_FAIL){
