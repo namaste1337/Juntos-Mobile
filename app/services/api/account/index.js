@@ -1,14 +1,18 @@
+///////////////////////////
+// Imports
+///////////////////////////
+
 import fetchApi from "./../";
 import apiConfig from "./../config";
-// Reference
-// fetchApi(endPoint, payload = {}, method = apiConfig.DEFAULT_METHOD)
+
+///////////////////////////
+// Constants
+///////////////////////////
+
 // End points
-const SIGNUP_END_POINT = "/signup";
 const LOGIN_END_POINT  = "/login";
 const LOGOUT_END_POINT = "/logout";
 
-// Method
-const POST_METHOD = "POST";
 
 
 // Handles sign up request

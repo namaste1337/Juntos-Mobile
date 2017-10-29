@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
-import { sessionLogin } from '../actions/sessions-actions';
+import { accountLogin } from '../actions/account-actions';
 import { NavigationActions } from 'react-navigation';
 import {
   StyleSheet,
@@ -72,7 +72,7 @@ class Login extends Component {
     // Callbacks
     ////////////////////////
 
-    this.onSignInPressed         = () => this.props.sessionLogin(this.state.usernameField, this.state.passwordField);
+    this.onSignInPressed         = () => this.props.accountLogin(this.state.usernameField, this.state.passwordField);
     this.onSignUpPressed         = () => this.props.navigation.navigate(NAVIGATE_SIGNUP);
     this.onForgotPasswordPressed = () => this.props.navigation.navigate(NAVIGATE_FORGOT_PASSWORD);
     
@@ -204,7 +204,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    sessionLogin: (email, password) => dispatch(sessionLogin(email, password))
+    accountLogin: (email, password) => dispatch(accountLogin(email, password))
   };
 }
 

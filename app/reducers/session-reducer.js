@@ -1,10 +1,10 @@
 import 
 {
-	SESSION_LOGIN_SUCCESS,
-	SESSION_LOGIN_ERROR,
-	SESSION_LOGIN_PROCESSING
+	ACCOUNT_LOGIN_SUCCESS,
+	ACCOUNT_LOGIN_ERROR,
+	ACCOUNT_LOGIN_PROCESSING
 
-} from "../actions/sessions-actions"
+} from "../actions/account-actions"
 
 
 export default function session(
@@ -15,18 +15,17 @@ export default function session(
 	}, action)
 {
 	switch (action.type) {
-		case SESSION_LOGIN_SUCCESS:
+		case ACCOUNT_LOGIN_SUCCESS:
 			return Object.assign({}, state, {
         		isLoggedIn: action.payload.isLoggedIn,
         		isFetching: action.payload.isFetching
       		});
-      	case SESSION_LOGIN_ERROR:
-      		console.log("Fired sessions error reducer", action.payload);
+      	case ACCOUNT_LOGIN_ERROR:
       		return Object.assign({}, state, {
       			isFetching: action.payload.isFetching,
       			isErorred: action.payload.isErorred
       		});
-      	case SESSION_LOGIN_PROCESSING:
+      	case ACCOUNT_LOGIN_PROCESSING:
       		return Object.assign({}, state, {
       			isFetching: action.payload
       		}); 
