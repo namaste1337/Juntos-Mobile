@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {signUp, login, logout} from './app/services/api/session';
 //Thunk import
 import thunk from 'redux-thunk';
 // Reducer import
