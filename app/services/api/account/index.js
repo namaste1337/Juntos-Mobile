@@ -10,6 +10,7 @@ import apiConfig from "./../config";
 ///////////////////////////
 
 // End points
+const SIGNUP_END_POINT = "/signup";
 const LOGIN_END_POINT  = "/login";
 const LOGOUT_END_POINT = "/logout";
 
