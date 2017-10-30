@@ -278,7 +278,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    sessionLogin: (email, password) => dispatch(sessionLogin(email, password))
+    accountSignUp: (email, password) => dispatch(accountSignup(email, password))
   };
 }
 
