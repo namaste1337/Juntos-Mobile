@@ -36,9 +36,8 @@ function accountError(bool, message="None"){
 }
 
 // Handles login success state 
-function accountLoginSuccess(isFetchingBool, isLoggedInBool){
+function accountSuccess(isFetchingBool, isLoggedInBool){
 
-	console.log("Session creation was successful");
 	return {
 		type: ACCOUNT_LOGIN_SUCCESS,
 		payload: {
@@ -73,11 +72,11 @@ export function accountLogin(email, password){
     	})
     	.then(function(reponse){ 
     		// Login Success
-    		dispatch(accountLoginSuccess(true, true));
+    		dispatch(accountSuccess(true, true));
     	})
     	.then(function(){
     		// Hide the spinner
-    		dispatch(accountLoginProcessing(false));
+    		dispatch(accountProcessing(false));
     	})
     	.catch(function(error){ 
     		// Display any errors
@@ -101,11 +100,11 @@ export function accountSignup(email, password){
 		})
 		.then(function(reponse){ 
     		// Login Success
-    		dispatch(accountLoginSuccess(true, true));
+    		dispatch(accountSuccess(true, true));
     	})
     	.then(function(){
     		// Hide the spinner
-    		dispatch(accountLoginProcessing(false));
+    		dispatch(accountProcessing(false));
     	})
     	.catch(function(error){ 
     		// Display any errors
