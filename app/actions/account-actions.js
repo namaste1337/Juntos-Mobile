@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////
 
-import {login} from "./../services/api/account";
+import {login, signUp} from "./../services/api/account";
 import {basicAlert} from "./../common/alerts";
 
 ////////////////////////
@@ -23,7 +23,7 @@ const REQUEST_FAIL = "fail";
 ////////////////////////
 
 // Handles login error state 
-function accountLoginError(bool, message="None"){
+function accountError(bool, message="None"){
 
 	// Show alert propting the user the type of authentication error
  	basicAlert(LOGIN_ERROR_STRING, message);
@@ -50,7 +50,7 @@ function accountLoginSuccess(isFetchingBool, isLoggedInBool){
 }
 
 // Handles state where login is being processed
-function accountLoginProcessing(bool){
+function accountProcessing(bool){
 
 	return {
 		type: ACCOUNT_LOGIN_PROCESSING,
@@ -61,14 +61,13 @@ function accountLoginProcessing(bool){
 
 // Handles server call for login request
 export function accountLogin(email, password){
-	console.log("Attempting to log in");
     return (dispatch) => {
     	// Show the spinner
-    	dispatch(accountLoginProcessing(true));
+    	dispatch(accountProcessing(true));
     	// Begin login sequence
     	login(email, password).then(function(response){
     		if(response.status == REQUEST_FAIL){
-    			dispatch(accountLoginError(true, response.data.message));
+    			dispatch(accountError(true, response.data.message));
     			throw Error(response.data.message);
     		}
     	})
@@ -87,6 +86,33 @@ export function accountLogin(email, password){
     }
 
 };
+
+//Handles server request for signup
+export function accountSignup(email, password){
+	return dispatch => {
+		//show spinner 
+		dispatch(accountProcessing(true));
+		//Begin signup sequence
+		signUp(email, password).then(function(response){
+			if (response.state == REQUEST_FAIL) {
+				dispatch(accountError(true, response.data.message));
+    			throw Error(response.data.message);
+			}
+		})
+		.then(function(reponse){ 
+    		// Login Success
+    		dispatch(accountLoginSuccess(true, true));
+    	})
+    	.then(function(){
+    		// Hide the spinner
+    		dispatch(accountLoginProcessing(false));
+    	})
+    	.catch(function(error){ 
+    		// Display any errors
+    		console.warn(error); 
+    	});
+	}
+}
 
 
 
