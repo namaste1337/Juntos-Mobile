@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import { NavigationActions } from 'react-navigation';
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,12 @@ import {
   KeyboardAvoidingView,
   Keyboard
 } from 'react-native';
+
+//////////////////////////////
+// Imports Actions
+///////////////////////////////
+
+import { accountSignup } from '../actions/account-actions';
 
 //////////////////////////////
 // Imports Common Files
@@ -82,6 +88,14 @@ class Signup extends Component {
   }
 
   ////////////////////
+  // Life Cycle
+  ////////////////////
+
+  componentDidMount(){
+
+  }
+
+  ////////////////////
   // Private Callbacks
   ////////////////////
 
@@ -106,12 +120,10 @@ class Signup extends Component {
 
   //Handles sign up button press
   _onSignUpbuttonPress(){
-
     // If the field are valid, we process the user data
     // and execute the appropriate action
     if(this._validateFields()){
-
-
+       this.props.accountSignup(this.state.emailField, this.state.passwordField);
     }
 
   }
@@ -129,6 +141,7 @@ class Signup extends Component {
       return false
     }else{
       this.setState({emailIsValid: EMAIL_VALIDATION_TRUE_STATE});
+      return true;
     }
 
   }
@@ -149,7 +162,7 @@ class Signup extends Component {
     // Empty password fields are not allowed
     if(password === "" | confirmPassword === ""){
       this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
-   
+      return false;
     } // PasswordsOne and PasswordTwo must be equal
     else if(passwordOne !== passwordTwo){
       this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_FALSE_STATE});
@@ -157,6 +170,7 @@ class Signup extends Component {
     }
     else{
       this.setState({confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE});
+      return true;
     }
 
   }
@@ -219,6 +233,7 @@ class Signup extends Component {
             validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
           <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={SIGNUP_BUTTON_STRING}/>
         </KeyboardAvoidingView>
+        <ActivityIndicatorOverlay isFetching={this.props.isFetching}/>
       </View>
     );
   }
@@ -272,13 +287,14 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+    isErrored: state.session.isErrored,
+    isLoggedIn: state.session.isLoggedIn
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    accountSignUp: (email, password) => dispatch(accountSignup(email, password))
+    accountSignup: (email, password) => dispatch(accountSignup(email, password))
   };
 }
 
