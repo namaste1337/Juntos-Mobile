@@ -9,6 +9,7 @@ import
 
 export default function session(
 	state = {
+    isErrored: false,
 		isFetching: false,
 		isLoggedIn: false,
 		sessionCookie: null
