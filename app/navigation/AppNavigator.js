@@ -1,7 +1,4 @@
-import { StackNavigator } from 'react-navigation'
 //Import Routes
-import Routes from '../config/routes'
-import HeaderOptions from '../config/header'
+import RootNavigator from '../config/routes'
 
-
-export default StackNavigator(Routes, HeaderOptions);
+export default RootNavigator
