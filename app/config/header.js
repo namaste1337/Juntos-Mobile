@@ -21,6 +21,9 @@ const headerOptions = {
    },
    headerTitleStyle:{
    	fontWeight
+   },
+   headerBackTitleStyle:{
+   	fontWeight
    }
  }
 }
