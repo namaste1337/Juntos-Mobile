@@ -6,20 +6,30 @@ export default fetchApi = (endPoint, payload = {}, method = apiConfig.GET_METHOD
 	
   console.log(endPoint, payload, method, header)
 
-	let myHeaders = new Headers();
-	let url   	  = apiConfig.URL + endPoint;
+	let headers = new Headers();
+	let url   	= apiConfig.URL + endPoint;
 
-	myHeaders.append(apiConfig.HEADER_TYPE, header);
+  // Define accept header
+  headers.append(apiConfig.HEADER_ACCEPT, apiConfig.JSON_HEADER);
+  // Define send header
+	headers.append(apiConfig.HEADER_CONTENT_TYPE, header);
 
 	var init = {   
-    method: method,
-    headers: myHeaders,
+    method,
+    headers,
   };
 
   // Body payload only allowed for POST, PUT, DELETE
   if(method != apiConfig.GET_METHOD){
-    init.body = JSON.stringify(payload)
+    if(header == apiConfig.JSON_HEADER){
+      init.body = JSON.stringify(payload)
+    }else if(header == apiConfig.MULTI_PART_HEADER){
+      init.body = payload;
+    }
+    
   }
+
+  console.log(init);
 
 	return fetch(url, init).then(response => {
       return response.json();
