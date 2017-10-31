@@ -10,11 +10,11 @@ import {basicAlert} from "./../common/alerts";
 ////////////////////////
 
 // Action types
-export const ACCOUNT_LOGIN_ERROR 		= "ACCOUNT_LOGIN_ERORR";
-export const ACCOUNT_LOGIN_SUCCESS 		= "ACCOUNT_LOGIN_SUCCESS";
-export const ACCOUNT_LOGIN_PROCESSING 	= "ACCOUNT_LOGIN_PROCESSING";
+export const ACCOUNT_ERROR          = "ACCOUNT_ERORR";
+export const ACCOUNT_SUCCESS 		= "ACCOUNT_SUCCESS";
+export const ACCOUNT_PROCESSING 	= "ACCOUNT_PROCESSING";
 // Strings
-const LOGIN_ERROR_STRING = "Login Error";
+const LOGIN_ERROR_STRING = "Account Error";
 // Error request fail
 const REQUEST_FAIL = "fail"; 
 
@@ -22,24 +22,24 @@ const REQUEST_FAIL = "fail";
 // Actions
 ////////////////////////
 
-// Handles login error state 
+// Handles account error state 
 function accountError(bool, message="None"){
 
-	// Show alert propting the user the type of authentication error
+	// Show alert propting the user the type of account error
  	basicAlert(LOGIN_ERROR_STRING, message);
 
 	return {
-		type: ACCOUNT_LOGIN_ERROR,
+		type: ACCOUNT_ERROR,
 		payload: bool
 	}
 
 }
 
-// Handles login success state 
+// Handles account success state 
 function accountSuccess(isFetchingBool, isLoggedInBool){
 
 	return {
-		type: ACCOUNT_LOGIN_SUCCESS,
+		type: ACCOUNT_SUCCESS,
 		payload: {
 			isFetching: isFetchingBool,
 			isLoggedIn: isLoggedInBool
@@ -48,11 +48,11 @@ function accountSuccess(isFetchingBool, isLoggedInBool){
 
 }
 
-// Handles state where login is being processed
+// Handles state where account is being processed
 function accountProcessing(bool){
 
 	return {
-		type: ACCOUNT_LOGIN_PROCESSING,
+		type: ACCOUNT_PROCESSING,
 		payload: {bool}
 	}
 
@@ -71,7 +71,7 @@ export function accountLogin(email, password){
     		}
     	})
     	.then(function(reponse){ 
-    		// Login Success
+    		// Account Success
     		dispatch(accountSuccess(true, true));
     	})
     	.then(function(){
@@ -93,13 +93,13 @@ export function accountSignup(email, password){
 		dispatch(accountProcessing(true));
 		//Begin signup sequence
 		signUp(email, password).then(function(response){
-			if (response.state == REQUEST_FAIL) {
+			if (response.status == REQUEST_FAIL) {
 				dispatch(accountError(true, response.data.message));
     			throw Error(response.data.message);
 			}
 		})
 		.then(function(reponse){ 
-    		// Login Success
+    		// Account success
     		dispatch(accountSuccess(true, true));
     	})
     	.then(function(){

@@ -1,8 +1,8 @@
 import 
 {
-	ACCOUNT_LOGIN_SUCCESS,
-	ACCOUNT_LOGIN_ERROR,
-	ACCOUNT_LOGIN_PROCESSING
+	ACCOUNT_SUCCESS,
+	ACCOUNT_ERROR,
+	ACCOUNT_PROCESSING
 
 } from "../actions/account-actions"
 
@@ -16,17 +16,17 @@ export default function session(
 	}, action)
 {
 	switch (action.type) {
-		case ACCOUNT_LOGIN_SUCCESS:
+		case ACCOUNT_SUCCESS:
 			return Object.assign({}, state, {
         		isLoggedIn: action.payload.isLoggedIn,
         		isFetching: action.payload.isFetching
       		});
-      	case ACCOUNT_LOGIN_ERROR:
+      	case ACCOUNT_ERROR:
       		return Object.assign({}, state, {
       			isFetching: action.payload.isFetching,
       			isErorred: action.payload.isErorred
       		});
-      	case ACCOUNT_LOGIN_PROCESSING:
+      	case ACCOUNT_PROCESSING:
       		return Object.assign({}, state, {
       			isFetching: action.payload
       		}); 
