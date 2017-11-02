@@ -19,11 +19,12 @@ const LOGOUT_END_POINT = "/logout";
 ///////////////////////////
 
 // Handles sign up request
-export function signUp(email, password){
+export function signUp(email, password, profileImageName){
 
 	let payload = {
-		email: email,
-		password: password
+		email,
+		password,
+		profileImageName
 	}
 
 	return fetchApi(SIGNUP_END_POINT, payload, apiConfig.POST_METHOD);
