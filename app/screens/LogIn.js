@@ -63,6 +63,17 @@ const SECURE_FIELD_BOOL                     = true;
 class Login extends Component {
 
   ////////////////////////
+  // Constructor
+  ////////////////////////
+  constructor(props){
+    super(props);
+    this.state = {
+      usernameField: "",
+      passwordField: ""
+    }
+  }
+
+  ////////////////////////
   // Life Cycle
   ////////////////////////
 
