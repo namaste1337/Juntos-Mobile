@@ -3,6 +3,7 @@
 ////////////////////////
 
 import {login, signUp} from "./../services/api/account";
+import {imageUpload} from "./../services/api/uploads";
 import {basicAlert} from "./../common/alerts";
 
 ////////////////////////
@@ -23,10 +24,7 @@ const REQUEST_FAIL = "fail";
 ////////////////////////
 
 // Handles account error state 
-function accountError(bool, message="None"){
-
-	// Show alert propting the user the type of account error
- 	basicAlert(LOGIN_ERROR_STRING, message);
+function accountError(bool){
 
 	return {
 		type: ACCOUNT_ERROR,
@@ -53,7 +51,7 @@ function accountProcessing(bool){
 
 	return {
 		type: ACCOUNT_PROCESSING,
-		payload: {bool}
+		payload: bool
 	}
 
 }
@@ -65,51 +63,37 @@ export function accountLogin(email, password){
     	dispatch(accountProcessing(true));
     	// Begin login sequence
     	login(email, password).then(function(response){
-    		if(response.status == REQUEST_FAIL){
-    			dispatch(accountError(true, response.data.message));
-    			throw Error(response.data.message);
-    		}
-    	})
-    	.then(function(reponse){ 
-    		// Account Success
-    		dispatch(accountSuccess(true, true));
-    	})
-    	.then(function(){
-    		// Hide the spinner
-    		dispatch(accountProcessing(false));
+            // Account Success
+            dispatch(accountSuccess(true, true));
     	})
     	.catch(function(error){ 
-    		// Display any errors
-    		console.warn(error); 
-    	});
+            dispatch(accountError(true));
+    	}).then(function(){
+            // Hide the activity spinner
+            dispatch(accountProcessing(false));
+        })
     }
 
 };
 
 //Handles server request for signup
-export function accountSignup(email, password){
+export function accountSignup(email, password, profileImagePath){
 	return dispatch => {
 		//show spinner 
 		dispatch(accountProcessing(true));
 		//Begin signup sequence
 		signUp(email, password).then(function(response){
-			if (response.status == REQUEST_FAIL) {
-				dispatch(accountError(true, response.data.message));
-    			throw Error(response.data.message);
-			}
+            // Account sign up success
+            dispatch(accountSuccess(true, true));
 		})
-		.then(function(reponse){ 
-    		// Account success
-    		dispatch(accountSuccess(true, true));
-    	})
-    	.then(function(){
-    		// Hide the spinner
-    		dispatch(accountProcessing(false));
-    	})
     	.catch(function(error){ 
     		// Display any errors
     		console.warn(error); 
-    	});
+    	})
+        .then(function(){
+            // Hide the activity spinner
+            dispatch(accountProcessing(false));
+        });
 	}
 }
 
