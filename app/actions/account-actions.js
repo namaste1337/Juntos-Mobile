@@ -58,42 +58,46 @@ function accountProcessing(bool){
 
 // Handles server call for login request
 export function accountLogin(email, password){
-    return (dispatch) => {
-    	// Show the spinner
-    	dispatch(accountProcessing(true));
-    	// Begin login sequence
-    	login(email, password).then(function(response){
-            // Account Success
-            dispatch(accountSuccess(true, true));
-    	})
-    	.catch(function(error){ 
-            dispatch(accountError(true));
-    	}).then(function(){
-            // Hide the activity spinner
-            dispatch(accountProcessing(false));
-        })
-    }
+  return (dispatch) => {
+  	// Show the spinner
+  	dispatch(accountProcessing(true));
+  	// Begin login sequence
+  	login(email, password).then(response =>{
+      // Account Success
+      dispatch(accountSuccess(true, true));
+  	})
+  	.catch(error =>{ 
+      dispatch(accountError(true));
+  	}).then(() => {
+      // Hide the activity spinner
+      dispatch(accountProcessing(false));
+    })
+  }
 
 };
 
 //Handles server request for signup
-export function accountSignup(email, password, profileImagePath){
+export function accountSignup(email, password, profileImagePath, imageMime){
 	return dispatch => {
 		//show spinner 
 		dispatch(accountProcessing(true));
 		//Begin signup sequence
-		signUp(email, password).then(function(response){
-            // Account sign up success
-            dispatch(accountSuccess(true, true));
-		})
-    	.catch(function(error){ 
-    		// Display any errors
-    		console.warn(error); 
-    	})
-        .then(function(){
-            // Hide the activity spinner
-            dispatch(accountProcessing(false));
-        });
+    imageUpload(profileImagePath, imageMime).then( response => {
+        let profileImageName = response.data[0];
+        return signUp(email, password, profileImageName);
+    })
+		.then(() => {
+      // Account sign up success
+      dispatch(accountSuccess(true, true)); 
+    })
+    .catch(error => { 
+      // Display any errors
+      console.warn(error); 
+    })
+    .then(() => {
+      // Hide the activity spinner
+      dispatch(accountProcessing(false));
+    });
 	}
 }
 
