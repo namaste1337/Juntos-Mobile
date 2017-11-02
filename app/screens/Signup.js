@@ -29,6 +29,7 @@ import { accountSignup } from '../actions/account-actions';
 // Common styles
 import CommonStyles from "../common/styles";
 import {validateEmail} from "../common/validations";
+import {renderIf} from "../common/components";
 
 //////////////////////////////
 // Imports Custom Components
@@ -66,6 +67,8 @@ const EMAIL_VALIDATION_TRUE_STATE               = true;
 const EMAIL_VALIDATION_FALSE_STATE              = false;
 const PASSWORD_VALIDATION_TRUE_STATE            = true;
 const PASSWORD_VALIDATION_FALSE_STATE           = false;
+const PROFILE_IMAGE_FALSE_STATE                 = false;
+const PROFILE_IMAGE_TRUE_STATE                  = true;
 
 
 class Signup extends Component {
@@ -82,8 +85,10 @@ class Signup extends Component {
       confirmPasswordField: "",
       bioField: "",
       profileImage: profilePlaceholder,
+      profileImageData: {},
       emailIsValid: EMAIL_VALIDATION_TRUE_STATE,
       confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE,
+      profileImageValid: PROFILE_IMAGE_TRUE_STATE
     };
   }
 
@@ -109,9 +114,13 @@ class Signup extends Component {
     }).then(image => {
       let source = { uri: image.path };
       this.setState({
-        profileImage: source
+        profileImageData: {
+          uri: image.path,
+          mime: image.mime
+        },
+        profileImage: source,
+        profileImageValid: PROFILE_IMAGE_TRUE_STATE
       });
-
     }).catch(error => {
       console.log(error);
     });
@@ -122,8 +131,9 @@ class Signup extends Component {
   _onSignUpbuttonPress(){
     // If the field are valid, we process the user data
     // and execute the appropriate action
+    console.log(this.state);
     if(this._validateFields()){
-       this.props.accountSignup(this.state.emailField, this.state.passwordField);
+       this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
     }
 
   }
@@ -175,6 +185,20 @@ class Signup extends Component {
 
   }
 
+  _validateProfileImage(){
+
+    let imageData = Object.keys(this.state.profileImageData)
+
+    if(imageData.length === 0){
+      this.setState({profileImageValid: PROFILE_IMAGE_FALSE_STATE});
+      return false
+    }else{
+      this.setState({profileImageValid: PROFILE_IMAGE_TRUE_STATE});
+      return true
+    }
+
+  }
+
   //Validates sign up form fields, returns true if all fields are valid
   _validateFields(){
 
@@ -189,6 +213,8 @@ class Signup extends Component {
     isValid = this._validateEmail(email);
     // Vaidate password
     isValid = this._validatePassword(password, confirmPassword);
+    // Validate profile image data
+    isValid = this._validateProfileImage();
 
     return isValid
   }
@@ -205,6 +231,7 @@ class Signup extends Component {
             <TouchableOpacity onPress={() => this._onProfileImagePress()}>
               <Image source={this.state.profileImage} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImage} />
               <Image style={styles.profileImageAddButton} source={imageAddButton} />
+              {renderIf(!this.state.profileImageValid, <Text style={styles.profileValidation}>Required</Text>)}
             </TouchableOpacity>
             <Text style={styles.profileImageText}> 
               Please select an image for your profile. This image will be shown to other users on the platform.
@@ -277,6 +304,11 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     opacity: 0.9
+  },
+  profileValidation:{
+    textAlign: "center",
+    fontFamily: "Roboto-Light",
+    color: "red"
   }
 })
 
@@ -294,7 +326,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    accountSignup: (email, password) => dispatch(accountSignup(email, password))
+    accountSignup: (email, password, profileImagePath, imageMime) => dispatch(accountSignup(email, password, profileImagePath, imageMime))
   };
 }
 
