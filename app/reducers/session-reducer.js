@@ -23,8 +23,7 @@ export default function session(
       		});
       	case ACCOUNT_ERROR:
       		return Object.assign({}, state, {
-      			isFetching: action.payload.isFetching,
-      			isErorred: action.payload.isErorred
+      			isErorred: action.payload
       		});
       	case ACCOUNT_PROCESSING:
       		return Object.assign({}, state, {
