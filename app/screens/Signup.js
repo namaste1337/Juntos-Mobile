@@ -97,7 +97,9 @@ class Signup extends Component {
   ////////////////////
 
   componentDidMount(){
+    this.onSignInPressed = async () => {
 
+    }
   }
 
   ////////////////////
@@ -129,13 +131,7 @@ class Signup extends Component {
 
   //Handles sign up button press
   _onSignUpbuttonPress(){
-    // If the field are valid, we process the user data
-    // and execute the appropriate action
-    console.log(this.state);
-    if(this._validateFields()){
-       this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
-    }
-
+    this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
   }
 
 

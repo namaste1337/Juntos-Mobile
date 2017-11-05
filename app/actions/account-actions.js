@@ -5,6 +5,7 @@
 import {login, signUp} from "./../services/api/account";
 import {imageUpload} from "./../services/api/uploads";
 import {basicAlert} from "./../common/alerts";
+import {NavigationActions} from "react-navigation";
 
 ////////////////////////
 // Constants
@@ -18,6 +19,8 @@ export const ACCOUNT_PROCESSING 	= "ACCOUNT_PROCESSING";
 const LOGIN_ERROR_STRING = "Account Error";
 // Error request fail
 const REQUEST_FAIL = "fail"; 
+//Navigation
+const NAVIGATE_SIGNED_IN_SCREEN = "signedIn";
 
 ////////////////////////
 // Actions
@@ -56,6 +59,17 @@ function accountProcessing(bool){
 
 }
 
+// Helper function redirects user to protected screens
+function redirectToProtected(dispatch){
+  const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: NAVIGATE_SIGNED_IN_SCREEN})
+    ]
+  })
+  dispatch(resetAction);
+}
+
 // Handles server call for login request
 export function accountLogin(email, password){
   return (dispatch) => {
@@ -65,6 +79,7 @@ export function accountLogin(email, password){
   	login(email, password).then(response =>{
       // Account Success
       dispatch(accountSuccess(true, true));
+      redirectToProtected(dispatch);
   	})
   	.catch(error =>{ 
       dispatch(accountError(true));
@@ -88,7 +103,8 @@ export function accountSignup(email, password, profileImagePath, imageMime){
     })
 		.then(() => {
       // Account sign up success
-      dispatch(accountSuccess(true, true)); 
+      dispatch(accountSuccess(true, true));
+      redirectToProtected(dispatch);
     })
     .catch(error => { 
       // Display any errors

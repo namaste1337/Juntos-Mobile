@@ -94,21 +94,6 @@ class Login extends Component {
   ////////////////////////
 
   render() {
-    // Handles login once the user has been authenticated
-    // Should be moved else where, currently react native
-    // is throwing a warning in regards to segues while
-    // re-redering
-
-    if(this.props.isLoggedIn){
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'signedIn'})
-         ]
-      })
-      this.props.navigation.dispatch(resetAction);
-    }
-
     return (
       <View style={CommonStyles.container} >
         <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_BEHAVIOR_PROPERTY} style={CommonStyles.keyboardViewWrapper}>
