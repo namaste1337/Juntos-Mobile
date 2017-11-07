@@ -1,11 +1,23 @@
+// This file host actions related to account authentication
+
 ////////////////////////
 // Imports
 ////////////////////////
 
+import {NavigationActions} from "react-navigation";
+
+/////////////////////////
+// Import services
+/////////////////////////
+
 import {login, signUp} from "./../services/api/account";
 import {imageUpload} from "./../services/api/uploads";
+
+/////////////////////////
+// Import common files
+/////////////////////////
+
 import {basicAlert} from "./../common/alerts";
-import {NavigationActions} from "react-navigation";
 
 ////////////////////////
 // Constants
@@ -13,8 +25,8 @@ import {NavigationActions} from "react-navigation";
 
 // Action types
 export const ACCOUNT_ERROR          = "ACCOUNT_ERORR";
-export const ACCOUNT_SUCCESS 		= "ACCOUNT_SUCCESS";
-export const ACCOUNT_PROCESSING 	= "ACCOUNT_PROCESSING";
+export const ACCOUNT_SUCCESS 		    = "ACCOUNT_SUCCESS";
+export const ACCOUNT_PROCESSING 	  = "ACCOUNT_PROCESSING";
 // Strings
 const LOGIN_ERROR_STRING = "Account Error";
 // Error request fail
