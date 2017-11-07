@@ -1,3 +1,4 @@
+// This file will host constats & functions related to async storage
 //////////////////////////////
 // Imports
 ///////////////////////////////
@@ -7,8 +8,6 @@ import {AsyncStorage} from "react-native"
 //////////////////////////////
 // Constants
 ///////////////////////////////
-
-// This file will host constats & functions related to async storage
 
 // This key will be utilizes to fetch and store the currect 
 // user login state
