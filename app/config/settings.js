@@ -1,3 +1,3 @@
 export default {
-	INITIAL_VIEW: "Login"
+	DEFAULT_INITIAL_VIEW: "Login"
 }
