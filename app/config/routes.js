@@ -42,6 +42,10 @@ const FORGOT_PASSWORD_SCREEN_TITLE_STRING = "Forgot Password";
 // Configs
 const ROUTE_ROUTE_HEADER_MODE             = "none";
 
+//////////////////////////////
+// Routes
+///////////////////////////////
+
 // Tab Navigator - After sign in or sign up
 const SignedIn = TabNavigator({
   Projects: { 
