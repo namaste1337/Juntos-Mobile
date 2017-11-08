@@ -11,14 +11,22 @@ import {AsyncStorage} from "react-native"
 
 // This key will be utilizes to fetch and store the currect 
 // user login state
-export const USER_LOGIN_STATE_KEY = "@UserLginState:key";
+export const USER_LOGIN_STATE_KEY = "@UserLoginState:key";
+
+//////////////////////////////
+// Helper Functions
+///////////////////////////////
+
+export function setLoginState(bool){
+
+}
 
 //////////////////////////////
 // Functions
 ///////////////////////////////
 
 // Handles setting a values by key to async storage
-export default function setValue(key, value){
+export async function setValue(key, value){
 
   try{
     await AsyncStorage.setItem(key, value);
@@ -29,7 +37,7 @@ export default function setValue(key, value){
 }
 
 // Handles fetching a value from async storage
-export default function getValue(key){
+export async function getValue(key){
 
 	try {
 		const value = await AsyncStorage.getItem(key);
