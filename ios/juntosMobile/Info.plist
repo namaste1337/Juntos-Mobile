@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Juntos would like access to take pictures</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Juntos would like access to find project near you</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Juntos would like access for you to be able ot capture audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>
