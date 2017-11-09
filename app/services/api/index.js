@@ -1,5 +1,6 @@
 import apiConfig from './config.js'
 import {basicAlert} from "./../../common/alerts"
+import {trigger401ErrorEvent} from "./../../common/networkEvents";
 
 
 // Will be used to make all future API request, abtracts and configures.
@@ -42,6 +43,8 @@ export default fetchAPI = (endPoint, payload = {}, method = apiConfig.GET_METHOD
       response.json().then(function(body){
         if(statusCode === 2){
           resolve(body)
+        }else if(statusCode === 4){
+          trigger401ErrorEvent(body);
         }else{
           throw Error(body.data.message);
         }

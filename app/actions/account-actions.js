@@ -18,6 +18,7 @@ import {imageUpload} from "./../services/api/uploads";
 /////////////////////////
 
 import {basicAlert} from "./../common/alerts";
+import {setLoginState} from "./../common/storage";
 
 ////////////////////////
 // Constants
@@ -32,7 +33,8 @@ const LOGIN_ERROR_STRING = "Account Error";
 // Error request fail
 const REQUEST_FAIL = "fail"; 
 //Navigation
-const NAVIGATE_SIGNED_IN_SCREEN = "signedIn";
+const NAVIGATE_SIGNED_IN_SCREEN = "Protected";
+const NAVIGATE_SIGNED_OUT_SCREEN = "Login";
 
 ////////////////////////
 // Actions
@@ -50,6 +52,9 @@ function accountError(bool){
 
 // Handles account success state 
 function accountSuccess(isFetchingBool, isLoggedInBool){
+
+  // Update sign in state to true 
+  setLoginState("true");
 
 	return {
 		type: ACCOUNT_SUCCESS,
@@ -71,15 +76,36 @@ function accountProcessing(bool){
 
 }
 
-// Helper function redirects user to protected screens
-function redirectToProtected(dispatch){
+// Handles updating the login state and transition 
+// the user to the logout portion of the app
+export function accountLogout(){
+
+    // Update sign in state to false 
+    setLoginState("false");
+    return redirectToSignedOut();
+  
+}
+
+// action redirects user to singedin portion of the app
+export function redirectToSignedIn(){
   const resetAction = NavigationActions.reset({
     index: 0,
     actions: [
       NavigationActions.navigate({ routeName: NAVIGATE_SIGNED_IN_SCREEN})
     ]
   })
-  dispatch(resetAction);
+  return resetAction;
+}
+
+// Action redirects user to signedOut portion of the app
+export function redirectToSignedOut(){
+    const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: NAVIGATE_SIGNED_OUT_SCREEN})
+    ]
+  })
+  return resetAction;
 }
 
 // Handles server call for login request
@@ -91,7 +117,7 @@ export function accountLogin(email, password){
   	login(email, password).then(response =>{
       // Account Success
       dispatch(accountSuccess(true, true));
-      redirectToProtected(dispatch);
+      dispatch(redirectToSignedIn());
   	})
   	.catch(error =>{ 
       dispatch(accountError(true));
@@ -116,7 +142,7 @@ export function accountSignup(email, password, profileImagePath, imageMime){
 		.then(() => {
       // Account sign up success
       dispatch(accountSuccess(true, true));
-      redirectToProtected(dispatch);
+      dispatch(redirectToSignedIn());
     })
     .catch(error => { 
       // Display any errors

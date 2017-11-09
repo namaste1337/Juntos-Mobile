@@ -17,8 +17,14 @@ export const USER_LOGIN_STATE_KEY = "@UserLoginState:key";
 // Helper Functions
 ///////////////////////////////
 
+// Helper function to set the login state
 export function setLoginState(bool){
+  setValue(USER_LOGIN_STATE_KEY, bool);
+}
 
+// Helper function to get the login state
+export function getLoginState(){
+  return getValue(USER_LOGIN_STATE_KEY);
 }
 
 //////////////////////////////
@@ -42,7 +48,7 @@ export async function getValue(key){
 	try {
 		const value = await AsyncStorage.getItem(key);
     if(value)
-      return value;
+      return (value == "true") ? true : false;
 	}catch(error){
     console.warn(error);
   }

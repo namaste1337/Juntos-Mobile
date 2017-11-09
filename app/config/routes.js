@@ -46,8 +46,11 @@ const ROUTE_ROUTE_HEADER_MODE             = "none";
 // Routes
 ///////////////////////////////
 
+
+// Stack Navigator - Before Sign in or sign up
+
 // Tab Navigator - After sign in or sign up
-const SignedIn = TabNavigator({
+const Protected = TabNavigator({
   Projects: { 
     screen: Projects,
     navigationOptions: ({navigation}) => ({
@@ -60,10 +63,19 @@ const SignedIn = TabNavigator({
       title: PROFILE_SCREEN_TITLE_STRING,
     }), 
   },
-}, HeaderOptions);
+},{
+  headerMode: ROUTE_ROUTE_HEADER_MODE
+});
 
-// Stack Navigator - Before Sign in or sign up
-const SignedOut = StackNavigator({ 
+
+// Root Navigator
+const RootRoutes = StackNavigator({
+  Landing: { 
+    screen: LandingView,
+    navigationOptions: ({navigation}) => ({
+      header: null // hide header only for the landing view
+    }),  
+  },
   Login:  { 
     screen: LoginView,
     navigationOptions: ({navigation}) => ({
@@ -71,7 +83,7 @@ const SignedOut = StackNavigator({
     }), 
   },
   Signup:{
-  	screen: SignUpView,
+    screen: SignUpView,
     navigationOptions: ({navigation}) => ({
       title: SIGN_UP_SCREEN_TITLE_STRING,
     }), 
@@ -82,24 +94,9 @@ const SignedOut = StackNavigator({
       title: FORGOT_PASSWORD_SCREEN_TITLE_STRING,
     }), 
   },
-  SignedIn:{
-    screen: SignedIn, 
+  Protected: {
+    screen: Protected,
   }
-}, HeaderOptions);
+},HeaderOptions);
 
-// Root Navigator
-const rootRoutes = StackNavigator({
-  Landing: { 
-    screen: LandingView 
-  },
-  SignedIn: {
-    screen: SignedIn,
-  },
-  SignedOut: {
-    screen: SignedOut
-  }
-},{
-    headerMode: ROUTE_ROUTE_HEADER_MODE 
-});
-
-export default rootRoutes;
+export default RootRoutes;
