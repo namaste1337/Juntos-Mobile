@@ -110,11 +110,12 @@ const styles = StyleSheet.create({
 ////////////////////////
 
 function matchDistpatchToProps(dispatch){
-  console.log(dispatch);
+
   return bindActionCreators({
     redirectToSignedIn: redirectToSignedIn,
     redirectToSignedOut: redirectToSignedOut
   }, dispatch);
+  
 }
 
 export default connect(null, matchDistpatchToProps)(LandingView);
