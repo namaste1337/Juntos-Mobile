@@ -47,8 +47,9 @@ export async function getValue(key){
 
 	try {
 		const value = await AsyncStorage.getItem(key);
-    if(value)
-      return (value == "true") ? true : false;
+    if(value){
+      return value
+    }
 	}catch(error){
     console.warn(error);
   }
