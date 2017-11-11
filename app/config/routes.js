@@ -22,6 +22,7 @@ import SignUpView     from '../screens/Signup';
 import ForgotPassword from '../screens/ForgotPassword';
 import Projects       from '../screens/Projects';
 import Profile        from '../screens/Profile';
+import Messages       from '../screens/Messages';
 
 //////////////////////////////
 // Imports Options
@@ -41,6 +42,7 @@ const PROFILE_SCREEN_TITLE_STRING         = "Profile";
 const LOGIN_SCREEN_TITLE_STRING           = "Log In";
 const SIGN_UP_SCREEN_TITLE_STRING         = "Sign Up";
 const FORGOT_PASSWORD_SCREEN_TITLE_STRING = "Forgot Password";
+const MESSAGES_SCREEN_TITLE_STRING        = "Messages";
 // Configs
 const ROUTE_ROUTE_HEADER_MODE             = "none";
 
@@ -59,12 +61,12 @@ const Protected = TabNavigator({
       title: PROJECT_SCREEN_TITLE_STRING,
     })
   },
-  Profile: { 
-    screen: Profile,
+  Messages: {
+    screen: Messages,
     navigationOptions: ({navigation}) => ({
-      title: PROFILE_SCREEN_TITLE_STRING,
+      title: MESSAGES_SCREEN_TITLE_STRING,
     }), 
-  },
+  }
 }, TabbarOptions);
 
 
