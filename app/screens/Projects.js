@@ -1,47 +1,146 @@
+/////////////////////////////
+// Imports
+/////////////////////////////
+
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
-import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import MapView from 'react-native-maps';
 import {
-  Alert,
-  AppRegistry,
+  View,
   StyleSheet,
   Text,
-  View,
-  Image,
-  ImageBackground,
   Dimensions,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  ActivityIndicator
+  Platform
 } from 'react-native';
 
-const { width, height } = Dimensions.get("window");
+/////////////////////////////
+// Import Common Files
+/////////////////////////////
 
+import {deviceTypes} from "./../common/device";
 
+/////////////////////////////
+// Import Custom Components
+/////////////////////////////
+
+import PrimaryButton from "./../components/PrimaryButton";
+import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
+
+////////////////////////
+// Import Services
+////////////////////////
+
+import {getProjects} from "./../services/api/projects";
+
+////////////////////////
+// Constants
+////////////////////////
+
+const { width, height }                   = Dimensions.get('window');
+const ASPECT_RATIO                        = width / height;
+const LATITUDE_DELTA                      = 0.0500;
+const LONGITUDE_DELTA                     = LATITUDE_DELTA * ASPECT_RATIO;
+const INITIAL_LONGITUDE                   = 95.50; // Center of the U.S.
+const INITIAL_LATITUDE                    = -98.35; // Center of the U.S.
+const REGION_ANIMATION_DURATION_PROPERTY  = 500;
+const GPS_HIGH_ACCURACY_BOOL              = true;
 
 class Projects extends Component {
-  componentDidMount(){
-    console.log(this.props);
+
+  ////////////////////////
+  // Constructor
+  ////////////////////////
+
+  constructor(props){
+    super(props)
+    // Set the initial region for the map component
+    this.state = {
+      region: {
+        latitude: INITIAL_LONGITUDE,
+        longitude: INITIAL_LATITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      },
+    }
   }
 
+  ////////////////////////
+  // Callback
+  ////////////////////////
+ 
+ // Handles on region changes for the map component
+  _onRegionChange(region){
+
+    this.setState({region});
+
+  }
+  
+  // Handles login for Map onMapReady callback
+  // for the map component
+  _onMapReady(){
+
+    // If the users device is iOS, prompt for 
+    // location permissions
+    if(Platform.OS == deviceTypes.ios)
+      navigator.geolocation.requestAuthorization();
+    // Get the users current location
+    navigator.geolocation.getCurrentPosition(data => {
+      console.log(data);
+      // Compose animated map region
+      let region = new MapView.AnimatedRegion({
+        latitude: data.coords.latitude,
+        longitude: data.coords.longitude,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+
+      });
+
+      // Animate to the region
+      this._map.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
+      this.setState({region});
+
+    }, error => {
+
+      console.log(error);
+
+    }, {
+      enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
+    }); 
+
+  }
+
+  ////////////////////////
+  // LifeCycle
+  ////////////////////////
+
+  componentDidMount(){
+
+  }
+
+  ////////////////////////
+  // Screen UI
+  ////////////////////////
+
   render() {
+
     return (
       <View style={styles.container}>
-        <MapView style={styles.map} initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        onDragEnd={(e) => this.setState({ x: e.nativeEvent.coordinate })}
+        <MapView
+        ref={ref => this._map = ref}  
+        showsUserLocation 
+        style={styles.map}
+        onRegionChange={ region => this._onRegionChange(region)}
+        onMapReady={ () => this._onMapReady() }
         />
       </View>
     );
   }
+
 }
 
+////////////////////////
+// Screen Styles
+////////////////////////
 
 const styles = StyleSheet.create({
   container: {
@@ -63,17 +162,19 @@ const styles = StyleSheet.create({
 
 });
 
+////////////////////////
+// Map to props
+////////////////////////
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+    // Props go here
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    sessionLogin: (email, password) => dispatch(sessionLogin(email, password))
+    // Action props that require dispatch go here
   };
 }
 
