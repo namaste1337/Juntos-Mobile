@@ -8,12 +8,15 @@ import {
 Text, 
 Dimensions,
 ScrollView,
-StyleSheet } from 'react-native';
+Image,
+StyleSheet 
+} from 'react-native';
 
 ////////////////////////
 // Constants
 ////////////////////////
 const screenCenter                  = Dimensions.get('window').width/2;
+const PROJECT_TABBAR_ICON_IMAGE     = require('./../assets/tabbar/messages_icon.png')
 
 class Profile extends Component {
 
@@ -22,12 +25,18 @@ class Profile extends Component {
     
   }
 
+
   ////////////////////////
-  // Navigation options
+  // Navigation Options
   ////////////////////////
 
   static navigationOptions = {
-   
+    tabBarIcon: ({tintColor}) => (
+      <Image
+        source={PROJECT_TABBAR_ICON_IMAGE}
+        style={[styles.tabBarIcon, {tintColor: tintColor}]}
+      />
+    )
   }
 
   ////////////////////////
@@ -57,6 +66,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+  tabBarIcon:{
+    width: 25,
+    height: 25
+  }
 });
 
 ////////////////////////
