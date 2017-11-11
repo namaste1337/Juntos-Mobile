@@ -4,10 +4,11 @@
 //////////////////////////////
 // Imports
 ///////////////////////////////
-
+import React, { Component } from 'react';
 import { 
   StackNavigator, 
-  TabNavigator 
+  TabNavigator,
+  Image
 } from 'react-navigation'
 
 //////////////////////////////
@@ -27,7 +28,8 @@ import Profile        from '../screens/Profile';
 ///////////////////////////////
 
 // Import header options
-import HeaderOptions from '../config/header'
+import HeaderOptions from '../config/header';
+import TabbarOptions from '../config/tabbar';
 
 //////////////////////////////
 // Constants
@@ -63,9 +65,7 @@ const Protected = TabNavigator({
       title: PROFILE_SCREEN_TITLE_STRING,
     }), 
   },
-},{
-  headerMode: ROUTE_ROUTE_HEADER_MODE
-});
+}, TabbarOptions);
 
 
 // Root Navigator
