@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  Platform
+  Platform,
+  Image
 } from 'react-native';
 
 /////////////////////////////
@@ -44,8 +45,22 @@ const INITIAL_LONGITUDE                   = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE                    = -98.35; // Center of the U.S.
 const REGION_ANIMATION_DURATION_PROPERTY  = 500;
 const GPS_HIGH_ACCURACY_BOOL              = true;
+const PROJECT_TABBAR_ICON_IMAGE           = require('./../assets/tabbar/project_icon.png')
 
 class Projects extends Component {
+
+  ////////////////////////
+  // Navigation Options
+  ////////////////////////
+
+  static navigationOptions = {
+    tabBarIcon: ({tintColor}) => (
+      <Image
+        source={PROJECT_TABBAR_ICON_IMAGE}
+        style={[styles.tabBarIcon, {tintColor: tintColor}]}
+      />
+    )
+  }
 
   ////////////////////////
   // Constructor
@@ -159,6 +174,10 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  tabBarIcon:{
+    width: 25,
+    height: 25
+  }
 
 });
 
