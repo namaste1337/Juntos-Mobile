@@ -97,7 +97,7 @@ class Projects extends Component {
   // Handles login for Map onMapReady callback
   // for the map component
   componentDidMount(){
-    console.log("On Map Ready Called");
+    
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
