@@ -11,7 +11,8 @@ import {
   Text,
   Dimensions,
   Platform,
-  Image
+  Image,
+  Button
 } from 'react-native';
 
 /////////////////////////////
@@ -54,6 +55,8 @@ class Projects extends Component {
   ////////////////////////
 
   static navigationOptions = {
+    headerLeft: <View style={{paddingLeft: 10}}><Button color="" title="Add" /></View>,
+    headerRight: <View style={{paddingRight: 10}}><Button title="List" /></View>,
     tabBarIcon: ({tintColor}) => (
       <Image
         source={PROJECT_TABBAR_ICON_IMAGE}
@@ -97,7 +100,6 @@ class Projects extends Component {
   // Handles login for Map onMapReady callback
   // for the map component
   componentDidMount(){
-    
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
@@ -172,8 +174,7 @@ const styles = StyleSheet.create({
   tabBarIcon:{
     width: 25,
     height: 25
-  }
-
+  },
 });
 
 ////////////////////////
