@@ -89,11 +89,15 @@ class Projects extends Component {
     this.setState({region});
 
   }
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
   
   // Handles login for Map onMapReady callback
   // for the map component
-  _onMapReady(){
-
+  componentDidMount(){
+    console.log("On Map Ready Called");
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
@@ -125,14 +129,6 @@ class Projects extends Component {
   }
 
   ////////////////////////
-  // LifeCycle
-  ////////////////////////
-
-  componentDidMount(){
-
-  }
-
-  ////////////////////////
   // Screen UI
   ////////////////////////
 
@@ -145,7 +141,6 @@ class Projects extends Component {
         showsUserLocation 
         style={styles.map}
         onRegionChange={ region => this._onRegionChange(region)}
-        onMapReady={ () => this._onMapReady() }
         />
       </View>
     );
