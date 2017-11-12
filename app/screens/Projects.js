@@ -55,7 +55,7 @@ class Projects extends Component {
   ////////////////////////
 
   static navigationOptions = {
-    headerLeft: <View style={{paddingLeft: 10}}><Button color="" title="Add" /></View>,
+    headerLeft: <View style={{paddingLeft: 10}}><Button title="Add" /></View>,
     headerRight: <View style={{paddingRight: 10}}><Button title="List" /></View>,
     tabBarIcon: ({tintColor}) => (
       <Image
