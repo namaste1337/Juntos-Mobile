@@ -1,5 +1,37 @@
-export const APP_IS_FETCHING 			= "APP_IS_FETCHING";
-export const APP_IS_DONE_FETCHING 		= "APP_IS_DONE_FETCHING";
+// This file host actions related to app
+// at a global scale example ex. push
+// notifications, service call states.
+
+
+////////////////////////
+// Import Modules
+////////////////////////
+
+////////////////////////
+// Import Services
+////////////////////////
+
+////////////////////////
+// Import Commmon Files
+////////////////////////
+
+////////////////////////
+// Constants
+////////////////////////
+
+////////////////////////
+// Action Types
+////////////////////////
+
+// Available app actions
+const AppActions = {
+	APP_IS_FETCHING: "APP_IS_FETCHING",
+	APP_IS_DONE_FETCHING: "APP_IS_FETCHING"
+}
+
+////////////////////////
+// Action Creatores
+////////////////////////
 
 export function appIsFetching(bool){
 
@@ -20,3 +52,7 @@ export function appDoneFetching(bool){
 	}
 
 }
+
+////////////////////////
+// Thunk Functions
+////////////////////////

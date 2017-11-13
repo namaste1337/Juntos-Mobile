@@ -1,7 +1,7 @@
 // This file host actions related to account authentication
 
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import {NavigationActions} from "react-navigation";
@@ -24,27 +24,30 @@ import {setLoginState} from "./../common/storage";
 // Constants
 ////////////////////////
 
-// Action types
-export const ACCOUNT_ERROR          = "ACCOUNT_ERORR";
-export const ACCOUNT_SUCCESS 		    = "ACCOUNT_SUCCESS";
-export const ACCOUNT_PROCESSING 	  = "ACCOUNT_PROCESSING";
-// Strings
-const LOGIN_ERROR_STRING = "Account Error";
-// Error request fail
-const REQUEST_FAIL = "fail"; 
 //Navigation
 const NAVIGATE_SIGNED_IN_SCREEN = "Protected";
 const NAVIGATE_SIGNED_OUT_SCREEN = "Login";
 
 ////////////////////////
-// Actions
+// Action Types
+////////////////////////
+
+// Available account actions
+export const AccountActions = {
+  ACCOUNT_ERROR: "ACCOUNT_ERORR",
+  ACCOUNT_SUCCESS: "ACCOUNT_SUCCESS",
+  ACCOUNT_PROCESSING: "ACCOUNT_PROCESSING"
+}
+
+////////////////////////
+// Action Creators
 ////////////////////////
 
 // Handles account error state 
 function accountError(bool){
 
 	return {
-		type: ACCOUNT_ERROR,
+		type: AccountActions.ACCOUNT_ERROR,
 		payload: bool
 	}
 
@@ -57,7 +60,7 @@ function accountSuccess(isFetchingBool, isLoggedInBool){
   setLoginState("true");
 
 	return {
-		type: ACCOUNT_SUCCESS,
+		type: AccountActions.ACCOUNT_SUCCESS,
 		payload: {
 			isFetching: isFetchingBool,
 			isLoggedIn: isLoggedInBool
@@ -70,20 +73,10 @@ function accountSuccess(isFetchingBool, isLoggedInBool){
 function accountProcessing(bool){
 
 	return {
-		type: ACCOUNT_PROCESSING,
+		type: AccountActions.ACCOUNT_PROCESSING,
 		payload: bool
 	}
 
-}
-
-// Handles updating the login state and transition 
-// the user to the logout portion of the app
-export function accountLogout(){
-
-    // Update sign in state to false 
-    setLoginState("false");
-    return redirectToSignedOut();
-  
 }
 
 // action redirects user to singedin portion of the app
@@ -107,6 +100,20 @@ export function redirectToSignedOut(){
   })
   return resetAction;
 }
+
+// Handles updating the login state and transition 
+// the user to the logout portion of the app
+export function accountLogout(){
+
+    // Update sign in state to false 
+    setLoginState("false");
+    return redirectToSignedOut();
+  
+}
+
+////////////////////////
+// Thunks Functions
+////////////////////////
 
 // Handles server call for login request
 export function accountLogin(email, password){
