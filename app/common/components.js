@@ -1,7 +1,23 @@
-// Thi file will host function commonly
-// user among presentational components
+// Thi file will host functions commonly
+// used among components
 
-// Move this function to a common file
+////////////////////////
+// Import Modules
+////////////////////////
+
+////////////////////////
+// Constants
+////////////////////////
+
+////////////////////////
+// Helper Functions
+////////////////////////
+
+////////////////////////
+// Functions
+////////////////////////
+
+// Function handles JSX conditional rendering
 export function renderIf(condition, content) {
     if (condition) {
         return content;

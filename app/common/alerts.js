@@ -1,5 +1,8 @@
+// This file will host functions
+// that abstract the Alerts API
+
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import { Alert } from 'react-native';
@@ -10,14 +13,18 @@ import { Alert } from 'react-native';
 
 //Strings
 const OK_STRING = "OK";
-// Bools
+//Bools
 const CANCELABEL_BOOL = true;
 
 ////////////////////////
-// Methods
+// Helper Functions
 ////////////////////////
 
-// Basic alerts will display a header, message, and ok button,/
+////////////////////////
+// Functions
+////////////////////////
+
+// Basic alerts will display a header, message, and ok button
 export function basicAlert(header, message){
 
     Alert.alert( header, message, [ {text: OK_STRING }], { cancelable: CANCELABEL_BOOL } )

@@ -2,7 +2,7 @@
 // used to create and trigger network events
 
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import SimpleEvents from 'react-native-simple-events';
@@ -12,6 +12,10 @@ import SimpleEvents from 'react-native-simple-events';
 ////////////////////////
 
 const API_401_EVENT    = "API_401";
+
+////////////////////////
+// Helper Functions
+////////////////////////
 
 ////////////////////////
 // Functions
