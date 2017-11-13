@@ -1,11 +1,10 @@
 // The prupose of this file is to define 
 // and standardize the organization of an
-// action file. Each section below has been defined
+// common files. Each section below has been defined
 // to organize code in regards to it's function.
 
-
 // Note:
-// Each action file must have a descriptive 
+// Each common file must have a descriptive 
 // purpose at the top of the file.
 
 
@@ -14,18 +13,6 @@
 ////////////////////////
 
 Note: node module imports
-
-////////////////////////
-// Import Services
-////////////////////////
-
-Note: Services located in app/services
-
-////////////////////////
-// Import Commmon Files
-////////////////////////
-
-Note: Common files located on app/common
 
 ////////////////////////
 // Constants
@@ -50,27 +37,14 @@ const IMAGE_SIZE_HEIFHT_PROPERTY = 100
 const INITIAL_PROFILE_IMAGE_SOURCE_STATE =  require("../assets/profile/default_profile.png")
 
 ////////////////////////
-// Action Types
+// Helper Functions
 ////////////////////////
 
-Note: Action types, all action types must be defined
-as object constant and allow for exporting as shown
-in the example below.
-
-export const PROFILE_ACTION_TYPES = {
-	PROFILE_LOADING: "PROFILE_LOADING",
-	PROFILE_FETCHED: "PROFILE_FETCHED",
-	PROFILE_FAILED: "PROFILE_FAILED"
-}
+Note: Helper functions
 
 ////////////////////////
-// Action Creators
+// Functions
 ///////////////////////
 
-Note: Action creator function
+Note: Functions
 
-////////////////////////
-// Thunk Functions
-////////////////////////
-
-Note: Thunk functions
