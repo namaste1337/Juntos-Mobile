@@ -48,7 +48,7 @@ class LandingView extends Component {
      determineTransition(){
         getLoginState().then(value => {
          let isSignedIn = value;
-         if(isSignedIn || isSignedIn === "undefined"){
+         if(isSignedIn === "true" || isSignedIn === "undefined"){
           this.props.redirectToSignedIn();
          }else{
           this.props.redirectToSignedOut();
