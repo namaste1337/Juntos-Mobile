@@ -179,7 +179,7 @@ export default {
 
       let url     = _getServerURL(endPoint); //Config.URL + Config.PATH + Config.VERSION + endPoint;
       let body    = _handleBody(method, sendHeader, payload);
-      let headers = _handleHeader(sendHeader, method, body);
+      let headers = _handleHeader(sendHeader);
       let init    = _handleInit(headers, method, body);
   
       fetch(url, init).then(response => {
