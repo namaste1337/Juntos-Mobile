@@ -110,9 +110,10 @@ function _handleBody(method, sendHeader, payload){
   
     if(sendHeader == Common.JSON_HEADER){
       body = JSON.stringify(payload)
-    }else if(sendHeader == Common.MULTI_PART_HEADER){
-      body = payload;
     }
+    
+    body = payload;
+    
   
     return body;
   }
