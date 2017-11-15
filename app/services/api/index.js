@@ -13,14 +13,12 @@ import SimpleEvents from 'react-native-simple-events';
 
 import Config from "./config";
 
-
 ////////////////////////
 // Import Common
 ////////////////////////
 
 import Common from "./common";
 import {basicAlert} from "./../../common/alerts";
-import {trigger401ErrorEvent} from "./../../common/networkEvents";
 
 ////////////////////////
 // Constants
@@ -140,7 +138,7 @@ function _handleInit(headers, method, body){
 
 }
 
-export default {
+export default Services = {
 
   ////////////////////////////
   // Public Methods
@@ -161,14 +159,13 @@ export default {
   },
 
   // Handles triggers a network event
-  trigger: function(eventName, data){
+  trigger: function(eventType, data){
 
-    // Validate the eventType and
+    // Validate the eventType
     if(_validateEventType(eventType) === undefined)
       console.error(INVALID_NETWORK_EVENT_TYPE_STRING);
-
     // Trigger event
-    SimpleEvents.trigger(eventName, data);
+    SimpleEvents.trigger(eventType, data);
 
   },
 
@@ -193,7 +190,7 @@ export default {
           if(statusCode == REPSONSE_CODES.CODE_200){
             resolve(body);
           }else if(statusCode === REPSONSE_CODES.CODE_401){
-            this.trigger(NETWORK_EVENT_TYPES.NETWORK_EVENT_401, body);
+            Services.trigger(NETWORK_EVENT_TYPES.NETWORK_EVENT_401, body);
           }else{
             throw Error(body.data.message);
           }
