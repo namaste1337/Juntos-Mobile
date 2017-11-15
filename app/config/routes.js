@@ -8,7 +8,8 @@ import React, { Component } from 'react';
 import { 
   StackNavigator, 
   TabNavigator,
-  Image
+  Image,
+  Text
 } from 'react-navigation'
 
 //////////////////////////////
@@ -23,6 +24,7 @@ import ForgotPassword from '../screens/ForgotPassword';
 import Projects       from '../screens/Projects';
 import Profile        from '../screens/Profile';
 import Messages       from '../screens/Messages';
+import Settings       from '../screens/Settings';
 
 //////////////////////////////
 // Imports Options
@@ -43,6 +45,7 @@ const LOGIN_SCREEN_TITLE_STRING           = "Log In";
 const SIGN_UP_SCREEN_TITLE_STRING         = "Sign Up";
 const FORGOT_PASSWORD_SCREEN_TITLE_STRING = "Forgot Password";
 const MESSAGES_SCREEN_TITLE_STRING        = "Messages";
+const SETTING_SCREEN_TITLE_STRING         = "Settings";
 // Configs
 const ROUTE_ROUTE_HEADER_MODE             = "none";
 
@@ -65,6 +68,12 @@ const Protected = TabNavigator({
     screen: Messages,
     navigationOptions: ({navigation}) => ({
       title: MESSAGES_SCREEN_TITLE_STRING,
+    }), 
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: ({navigation}) => ({
+      title: SETTING_SCREEN_TITLE_STRING,
     }), 
   }
 }, TabbarOptions);
