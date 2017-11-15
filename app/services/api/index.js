@@ -91,6 +91,7 @@ function _handleHeader(sendHeader){
   return headers;
 
 }
+
 // Handles determining if body should be a JSON string
 function _handleBody(method, sendHeader, payload){
 
@@ -159,10 +160,10 @@ export default Services = {
 
   },
 
-  // Handles triggers a network event
+  // Handles triggering a network event
   trigger: function(eventType, data){
 
-    // Validate the eventType
+    // Validate the eventType parameter
     if(_validateEventType(eventType) === undefined)
       console.error(INVALID_NETWORK_EVENT_TYPE_STRING);
     // Trigger event
@@ -182,9 +183,9 @@ export default Services = {
   
       fetch(url, init).then(response => {
   
-        // Retrive the status code
+        // Retrieve the status code
         let statusCode    = response.status;
-        
+
         // Handle the response
         response.json().then(function(body){
           if(statusCode === REPSONSE_CODES.CODE_200){
@@ -195,7 +196,7 @@ export default Services = {
             throw Error(body.data.message);
           }
         }).catch(error =>{
-          // Display any application level error in a alert
+          // Display any application level errors in a alert
           basicAlert("", error.toString());
           // Pass application level errors 
           reject(error);
