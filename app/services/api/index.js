@@ -1,4 +1,5 @@
-// The Service Class handles 
+// This file handles network request to external API's
+// at the lowest level. 
 
 
 ////////////////////////
@@ -187,7 +188,7 @@ export default Services = {
         // Handle the response
         response.json().then(function(body){
           // Handle the response
-          if(statusCode == REPSONSE_CODES.CODE_200){
+          if(statusCode === REPSONSE_CODES.CODE_200){
             resolve(body);
           }else if(statusCode === REPSONSE_CODES.CODE_401){
             Services.trigger(NETWORK_EVENT_TYPES.NETWORK_EVENT_401, body);
