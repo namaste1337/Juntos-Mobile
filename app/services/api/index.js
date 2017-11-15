@@ -25,13 +25,13 @@ import {basicAlert} from "./../../common/alerts";
 // Constants
 ////////////////////////
 
-// Avaialbe event types
+// Available event types
 export const NETWORK_EVENT_TYPES = {
   NETWORK_EVENT_401: "NETWORK_EVENT_401",
   NETWORK_EVENT_201: "NETWORK_EVENT_201",
   NETWORK_EVENT_FAIL: "NETWORK_EVENT_FAIL"
 };
-// Available Status Codes
+// Available status codes
 const REPSONSE_CODES = {
   CODE_200: 200,
   CODE_201: 201,
@@ -75,7 +75,7 @@ function _validateEventType(eventType){
 
 }
 
-// Handles composing header
+// Handles composition of the header
 function _handleHeader(sendHeader){
   
   if(sendHeader === undefined)
@@ -119,7 +119,7 @@ function _handleBody(method, sendHeader, payload){
 
 }
 
-// Handles composing init for fetch call
+// Handles composing init for fetch request
 function _handleInit(headers, method, body){
 
   if(headers === undefined)
@@ -182,12 +182,11 @@ export default Services = {
   
       fetch(url, init).then(response => {
   
-        // Round the status code;
+        // Retrive the status code
         let statusCode    = response.status;
         
         // Handle the response
         response.json().then(function(body){
-          // Handle the response
           if(statusCode === REPSONSE_CODES.CODE_200){
             resolve(body);
           }else if(statusCode === REPSONSE_CODES.CODE_401){
