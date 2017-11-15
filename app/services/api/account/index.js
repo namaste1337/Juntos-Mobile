@@ -2,8 +2,8 @@
 // Imports
 ///////////////////////////
 
-import fetchApi from "./../";
-import apiConfig from "./../config";
+import Services from "./../";
+import Common from "./../common";
 
 ///////////////////////////
 // Constants
@@ -27,7 +27,7 @@ export function signUp(email, password, profileImageName){
 		profileImageName
 	}
 
-	return fetchApi(SIGNUP_END_POINT, payload, apiConfig.POST_METHOD);
+	return Services.fetchApi(SIGNUP_END_POINT, payload, Common.POST_METHOD);
 
 }
 
@@ -41,13 +41,13 @@ export function login(email, password){
 		password: password
 	}
 
-	return fetchApi(LOGIN_END_POINT, payload, apiConfig.POST_METHOD);
+	return Services.fetchApi(LOGIN_END_POINT, payload, Common.POST_METHOD);
 
 }
 
 // Handles logout request
 export function logout(){
 
-	return fetchApi(LOGOUT_END_POINT, null, apiConfig.GET_METHOD);
+	return Services.fetchApi(LOGOUT_END_POINT, null, Common.GET_METHOD);
 
 }

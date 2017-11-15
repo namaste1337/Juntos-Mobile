@@ -2,8 +2,8 @@
 // Imports
 ///////////////////////////
 
-import fetchApi from "./../";
-import apiConfig from "./../config";
+import Services from "./../";
+import Common from "./../common";
 
 ///////////////////////////
 // Constants
@@ -56,7 +56,7 @@ export function imageUpload(uri, mimeType){
     type: mimeType
 	})
 
-	return fetchApi(UPLOAD_IMAGE_ENDPOINT, data, apiConfig.POST_METHOD, apiConfig.MULTI_PART_HEADER);
+	return Services.fetchApi(UPLOAD_IMAGE_ENDPOINT, data, Common.POST_METHOD, Common.MULTI_PART_HEADER);
 
 }
 

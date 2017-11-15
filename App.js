@@ -12,7 +12,7 @@ import AppNavigatorContainer from './app/navigation/AppNavigatorContainer';
 // Load object extensions
 require('./app/extensions/strings')
 // Import networkEvents 
-import {listenFor401Error} from "./app/common/networkEvents";
+import Services, { NETWORK_EVENT_TYPES } from "./app/services/api";
 // Import account actions 
 import { accountLogout } from './app/actions/account-actions';
 
@@ -26,8 +26,9 @@ export default class App extends React.Component {
   	// Listen for network 401 unauthorized user event,
   	// the logic will transition to the login screen.
   	// The listenFor401Error trigger can be found in services/index.js
-  	listenFor401Error(function(data){
+  	Services.on(NETWORK_EVENT_TYPES.NETWORK_EVENT_401, function(data){
   		// Perform the appropriate unauthorized logic
+      console.log("Triggering a 401 event");
   		store.dispatch(accountLogout());
   	})
 
