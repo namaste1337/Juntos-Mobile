@@ -131,7 +131,8 @@ class Signup extends Component {
 
   //Handles sign up button press
   _onSignUpbuttonPress(){
-    this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
+    if(this._validateFields())
+      this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
   }
 
 
