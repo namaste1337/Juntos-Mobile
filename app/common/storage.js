@@ -22,12 +22,16 @@ export const USER_LOGIN_STATE_KEY = "@UserLoginState:key";
 
 // Helper function to set the login state
 export function setLoginState(bool){
+
   setValue(USER_LOGIN_STATE_KEY, bool);
+
 }
 
 // Helper function to get the login state
 export function getLoginState(){
+
   return getValue(USER_LOGIN_STATE_KEY);
+
 }
 
 //////////////////////////////
