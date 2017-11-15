@@ -47,6 +47,7 @@ const MISSING_METHOD_PARAMETER_STRING       = "Error: Missing method parameter";
 const MISSING_BODY_PARAMETER_STRING         = "Error: Missing body parameter";
 const MISSING_PAYLOAD_PARAMETER_STRING      = "Error: Missing payload parameter";
 const MISSING_ENDPOINT_PARAMETER_STRING     = "Error: Missing endPoint parameter";
+const MISSING_ENDPOINT_ERROR_STRING         = "Error: Missing endPoint parameter";
 
 ////////////////////////////
 // Getters and Setters
@@ -173,7 +174,11 @@ export default Services = {
 
   // Handles API calls to a remote server
   fetchApi: function(endPoint, payload = {}, method = Common.GET_METHOD, sendHeader = Common.JSON_HEADER, params = {}){
-  
+    
+    //Validate endPoint parameter
+    if(endpoint === undefined)
+      console.error(MISSING_ENDPOINT_ERROR_STRING);
+
     return new Promise(function(resolve, reject){         
 
       let url     = _getServerURL(endPoint); //Config.URL + Config.PATH + Config.VERSION + endPoint;
