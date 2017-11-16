@@ -107,14 +107,13 @@ function _handleBody(method, sendHeader, payload){
 
   // Body payload only allowed for POST, PUT, DELETE methods
   if(method != Common.GET_METHOD){
-  
+
+    body = payload;
+
     if(sendHeader == Common.JSON_HEADER){
       body = JSON.stringify(payload)
     }
     
-    body = payload;
-    
-  
     return body;
   }
 
