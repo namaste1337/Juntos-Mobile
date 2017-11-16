@@ -176,7 +176,7 @@ export default Services = {
   fetchApi: function(endPoint, payload = {}, method = Common.GET_METHOD, sendHeader = Common.JSON_HEADER, params = {}){
     
     //Validate endPoint parameter
-    if(endpoint === undefined)
+    if(endPoint === undefined)
       console.error(MISSING_ENDPOINT_ERROR_STRING);
 
     return new Promise(function(resolve, reject){         
