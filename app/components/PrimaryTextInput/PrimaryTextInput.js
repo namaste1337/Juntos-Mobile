@@ -1,16 +1,14 @@
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
+import React, { Component } from 'react';
 import {
   View,
   TextInput,
   Text
 } from 'react-native';
-import styles from "./styles";
-import React from 'react';
 import PropTypes from "prop-types";
-import createReactClass from 'create-react-class';
 
 ////////////////////////
 // Imports Common Files
@@ -20,39 +18,51 @@ import createReactClass from 'create-react-class';
 import {renderIf} from "./../../common/components";
 
 ////////////////////////
+// Import Styles
+////////////////////////
+
+import styles from "./styles";
+
+////////////////////////
 // Constants
 ////////////////////////
 
-//Strings
-const PLACE_HOLDER_TEXT_COLOR = "#858384"; // Move to commons/styles.js
-const ANDROID_UNDERLINE_COLOR = 'rgba(0,0,0,0)'; // Move to commons/styles.js
+//Properties
+const PLACE_HOLDER_TEXT_COLOR_PROPERTY = "#858384"; // Move to commons/styles.js
+const ANDROID_UNDERLINE_COLOR_PROPERTY = 'rgba(0,0,0,0)'; // Move to commons/styles.js
 
-/////////////////////////////
-// Presentational Component
-/////////////////////////////
 
-const PrimaryTextInput = createReactClass({
+////////////////////////
+// Componenet
+////////////////////////
+
+class  PrimaryTextInput extends Component {
 
   ////////////////////////
-  // Getters & Setters
+  // Default Props
   ////////////////////////
 
+  static defaultProps = {
+    ...Component.defaultProps,
+    valid: true,
+    validationMessage: ""
+  }
 
-  // Set initial state
-  getInitialState(){
-    return {multilineCount: 0}
-  },
+  ////////////////////////
+  // Constructor
+  ////////////////////////
 
-  // Set default props
-  getDefaultProps(){
-    return{
-      valid: true,
-      validationMessage: ""
+  constructor(props){
+
+    super(props)
+    this.state = {
+      multilineCount: 0
     }
-  },
 
-   ////////////////////////
-  // Component
+  }
+
+  ////////////////////////
+  // Methods
   ////////////////////////
 
   // Renders component
@@ -64,11 +74,14 @@ const PrimaryTextInput = createReactClass({
 
 
     if(this.props.multiline){
+
       textInputWrapStyle = styles.multilineInputWrapSmall;
       textInputStyle     = styles.multilineInputSmall;
+
     }
 
     return (
+
       <View style={textInputWrapStyle}>
         <TextInput
           {...this.props}
@@ -80,8 +93,8 @@ const PrimaryTextInput = createReactClass({
             {/* Pass the field to the parent component */}
             this.props.onChangeText(field);
           }}
-          placeholderTextColor={PLACE_HOLDER_TEXT_COLOR}
-          underlineColorAndroid={ANDROID_UNDERLINE_COLOR} 
+          placeholderTextColor={PLACE_HOLDER_TEXT_COLOR_PROPERTY}
+          underlineColorAndroid={ANDROID_UNDERLINE_COLOR_PROPERTY} 
           style={textInputStyle} />
           <View style={styles.footer}>
             {/* Render the multilineCounter when multiline is enabled */}
@@ -94,15 +107,16 @@ const PrimaryTextInput = createReactClass({
           </View>
           {renderIf(!this.props.valid, <Text style={styles.inputValidationMessage}> {this.props.validationMessage} </Text>)}
       </View>
+
     )
   }
-});
+};
 
 ////////////////////////
 // Prop type checking
 ////////////////////////
 
-PrimaryTextInput.propTypes ={
+PrimaryTextInput.propTypes = {
   valid: PropTypes.bool,
   validationMessage: PropTypes.string
 }
