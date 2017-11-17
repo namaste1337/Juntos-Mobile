@@ -31,9 +31,8 @@ import styles from "./styles";
 const PLACE_HOLDER_TEXT_COLOR_PROPERTY = "#858384"; // Move to commons/styles.js
 const ANDROID_UNDERLINE_COLOR_PROPERTY = 'rgba(0,0,0,0)'; // Move to commons/styles.js
 
-
 ////////////////////////
-// Componenet
+// Component
 ////////////////////////
 
 class  PrimaryTextInput extends Component {
