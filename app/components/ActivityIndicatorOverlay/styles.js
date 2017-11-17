@@ -1,7 +1,7 @@
 // Styles for ActivityIndicatorOverlay
 
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import {
