@@ -1,15 +1,16 @@
+
 ////////////////////////
 // Imports
 ////////////////////////
 
+import React, { Component } from 'react';
 import {
   View,
   TextInput,
   TouchableOpacity,
   Text
 } from 'react-native'
-import React from 'react';
-import createReactClass from 'create-react-class'
+
 
 
 ////////////////////////
@@ -23,7 +24,7 @@ const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
 // Presentational Component
 /////////////////////////////
 
-const TouchableText = createReactClass({
+class  TouchableText extends Component {
 
   render(){
     return (
@@ -34,6 +35,6 @@ const TouchableText = createReactClass({
       </TouchableOpacity>
     )
   }
-});
+}
 
 export default TouchableText;
