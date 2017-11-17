@@ -1,17 +1,13 @@
-
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import React, { Component } from 'react';
 import {
   View,
-  TextInput,
   TouchableOpacity,
   Text
 } from 'react-native'
-
-
 
 ////////////////////////
 // Constants
@@ -20,11 +16,15 @@ import {
 //Strings
 const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
 
-/////////////////////////////
-// Presentational Component
-/////////////////////////////
+////////////////////////
+// Component
+////////////////////////
 
 class  TouchableText extends Component {
+
+  ////////////////////////
+  // Methods
+  ////////////////////////
 
   render(){
     return (
@@ -35,6 +35,7 @@ class  TouchableText extends Component {
       </TouchableOpacity>
     )
   }
+
 }
 
 export default TouchableText;
