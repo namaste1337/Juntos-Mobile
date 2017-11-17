@@ -1,5 +1,7 @@
+// Styles for PrimaryTextInput
+
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import {
@@ -10,7 +12,6 @@ import {
 // Styles
 ////////////////////////
 
-// Activity indicator styles
 export default StyleSheet.create({
   
   /////////////////////
