@@ -30,7 +30,7 @@ const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
 class  PrimaryButton extends Component {
 
   ////////////////////////
-  // Method
+  // Methods
   ////////////////////////
 
   render(){
