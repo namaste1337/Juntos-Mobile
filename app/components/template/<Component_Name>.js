@@ -124,7 +124,7 @@ class  <Component_Name> extends Component {
 ////////////////////////
 
 <Component_Name>.propTypes = {
-  //Prop validation definitions
+  //Prop validation definitions for custom props
 }
 
 export default <Component_Name>;
