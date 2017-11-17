@@ -47,8 +47,6 @@ const MISSING_METHOD_PARAMETER_STRING       = "Error: Missing method parameter";
 const MISSING_BODY_PARAMETER_STRING         = "Error: Missing body parameter";
 const MISSING_PAYLOAD_PARAMETER_STRING      = "Error: Missing payload parameter";
 const MISSING_ENDPOINT_PARAMETER_STRING     = "Error: Missing endPoint parameter";
-const MISSING_ENDPOINT_ERROR_STRING         = "Error: Missing endPoint parameter";
-
 ////////////////////////////
 // Getters and Setters
 ////////////////////////////
@@ -177,7 +175,7 @@ export default Services = {
     
     //Validate endPoint parameter
     if(endPoint === undefined)
-      console.error(MISSING_ENDPOINT_ERROR_STRING);
+      console.error(MISSING_ENDPOINT_PARAMETER_STRING);
 
     return new Promise(function(resolve, reject){         
 
