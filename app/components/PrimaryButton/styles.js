@@ -1,5 +1,7 @@
+// Styles for PrimaryTextInput
+
 ////////////////////////
-// Imports
+// Import Modules
 ////////////////////////
 
 import {
@@ -11,6 +13,11 @@ import {
 //////////////////////// 
 
 export default StyleSheet.create({
+
+  ////////////////////////
+  // Button Styles
+  //////////////////////// 
+
   button: {
     backgroundColor: "#FF3366",
     paddingVertical: 15,

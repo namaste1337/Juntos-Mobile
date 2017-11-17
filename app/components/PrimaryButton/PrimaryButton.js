@@ -9,9 +9,12 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native'
-import styles from "./styles"
 
+////////////////////////
+// Import Styles
+////////////////////////
 
+import styles from "./styles";
 
 ////////////////////////
 // Constants
@@ -20,11 +23,15 @@ import styles from "./styles"
 //Strings
 const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
 
-/////////////////////////////
-// Presentational Component
-/////////////////////////////
+////////////////////////
+// Component
+////////////////////////
 
 class  PrimaryButton extends Component {
+
+  ////////////////////////
+  // Method
+  ////////////////////////
 
   render(){
     return (
