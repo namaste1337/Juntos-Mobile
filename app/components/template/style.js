@@ -12,7 +12,6 @@ import {
 // Styles
 ////////////////////////
 
-// Activity indicator styles
 export default StyleSheet.create({
   
   ///////////////////////
