@@ -2,6 +2,7 @@
 // Imports
 ////////////////////////
 
+import React, { Component } from 'react';
 import {
   View,
   TextInput,
@@ -9,8 +10,7 @@ import {
   Text
 } from 'react-native'
 import styles from "./styles"
-import React from 'react';
-import createReactClass from 'create-react-class'
+
 
 
 ////////////////////////
@@ -24,7 +24,7 @@ const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
 // Presentational Component
 /////////////////////////////
 
-const PrimaryButton = createReactClass({
+class  PrimaryButton extends Component {
 
   render(){
     return (
@@ -33,6 +33,6 @@ const PrimaryButton = createReactClass({
       </TouchableOpacity>
     )
   }
-});
+}
 
 export default PrimaryButton;
