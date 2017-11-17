@@ -1,3 +1,5 @@
+// Styles for ActivityIndicatorOverlay
+
 ////////////////////////
 // Imports
 ////////////////////////
@@ -11,8 +13,12 @@ import {
 // Styles
 ////////////////////////
 
-// Activity indicator styles
 export default StyleSheet.create({
+
+  ////////////////////////
+  // Activity Indicator
+  ////////////////////////
+
   overlay: {
     flex: 1,
     position: 'absolute',
