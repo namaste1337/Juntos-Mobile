@@ -1,20 +1,18 @@
-// This file will host the routes for requires
+// This file will host the routes for required
 // by react-navigation
 
-//////////////////////////////
-// Imports
-///////////////////////////////
-import React, { Component } from 'react';
+////////////////////////
+// Import Modules
+////////////////////////
+
 import { 
   StackNavigator, 
   TabNavigator,
-  Image,
-  Text
 } from 'react-navigation'
 
-//////////////////////////////
+////////////////////////
 // Imports Screen
-///////////////////////////////
+////////////////////////
 
 // Import Screens
 import LandingView    from '../screens/Landing';
@@ -26,17 +24,17 @@ import Profile        from '../screens/Profile';
 import Messages       from '../screens/Messages';
 import Settings       from '../screens/Settings';
 
-//////////////////////////////
+////////////////////////
 // Imports Options
-///////////////////////////////
+////////////////////////
 
 // Import header options
-import HeaderOptions from '../config/header';
-import TabbarOptions from '../config/tabbar';
+import StackNavigationOptions from '../config/stackNavigation';
+import TabbarNavigationOptions from '../config/tabBarNavigation';
 
-//////////////////////////////
+////////////////////////
 // Constants
-///////////////////////////////
+////////////////////////
 
 // Strings
 const PROJECT_SCREEN_TITLE_STRING         = "Projects";
@@ -49,12 +47,9 @@ const SETTING_SCREEN_TITLE_STRING         = "Settings";
 // Configs
 const ROUTE_ROUTE_HEADER_MODE             = "none";
 
-//////////////////////////////
+////////////////////////
 // Routes
-///////////////////////////////
-
-
-// Stack Navigator - Before Sign in or sign up
+////////////////////////
 
 // Tab Navigator - After sign in or sign up
 const Protected = TabNavigator({
@@ -76,7 +71,7 @@ const Protected = TabNavigator({
       title: SETTING_SCREEN_TITLE_STRING,
     }), 
   }
-}, TabbarOptions);
+}, TabbarNavigationOptions);
 
 
 // Root Navigator
@@ -108,6 +103,6 @@ const RootRoutes = StackNavigator({
   Protected: {
     screen: Protected,
   }
-},HeaderOptions);
+}, StackNavigationOptions);
 
 export default RootRoutes;

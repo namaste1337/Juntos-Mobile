@@ -11,8 +11,12 @@ const activeTintColor           = "#FF3366";
 const inactiveTintColor         = "#8e8f8e";
 const indicatorbackgroudnColor  = "#FF3366";
 
-// Handles the configuration of the tabbar
-const tabBarConfig = {
+////////////////////////////
+// Tabbar Navigation Options
+////////////////////////////
+
+// Hndles the tabbar
+const TabbarNavigationOptions = {
 	tabBarOptions:{
     style:{
       backgroundColor: tabarBackgroundColor
@@ -23,4 +27,4 @@ const tabBarConfig = {
 	}
 }
 
- export default tabBarConfig
+ export default TabbarNavigationOptions

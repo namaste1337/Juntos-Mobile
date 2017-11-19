@@ -8,11 +8,16 @@
 //Strings
 const headerMode      = "screen";
 const backgroundColor = "#FFF";
-const fontWeight      = "100"
-const headerTintColor = "#FF3366"
+const fontWeight      = "100";
+const headerTintColor = "#FF3366";
 
-// Handles the configuration of the header
-const headerOptions = {
+////////////////////////////
+// Stack Navigation Options
+////////////////////////////
+
+// Handles the stack navigation
+// options
+const StackNavigatorOptions = {
  headerMode,
  navigationOptions: {
    headerTintColor, 
@@ -28,4 +33,4 @@ const headerOptions = {
  }
 }
 
- export default headerOptions
+ export default StackNavigatorOptions
