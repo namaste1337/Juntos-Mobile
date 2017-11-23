@@ -47,10 +47,18 @@ class Pager extends Component {
     super(props)
     this.state = {
       // Initial state definitions
-      pageIndicators: new Array(10),
+      pageIndicators: [],
       lastActiveIndicator: null,
       scrollViewBounced: false
     }
+    // Caveat: If the ref callback is set inline the, refs will get called 
+    // twice during update. Because a new instance of the function is created
+    // with each render, React needs to clear the old ref and set up the new 
+    // one. You can avoid this be defining the ref callback as a bound method
+    // on the class, but not that it shouldn't matter in most cases.
+    // We bind the setPagerIndicator to allow the pageIndicator refs
+    // to only be set once. 
+    this._setPagerIndicatorRefs = this._setPagerIndicatorRefs.bind(this);
   }
 
   ////////////////////////
@@ -60,28 +68,38 @@ class Pager extends Component {
   // Sets the active page indicator for 
   // the paging scroll view.
   _setActivePageIndicator(page){
-    console.log(this.state.pageIndicators);
+    console.log(page);
+
+    // Get the indicator in regards to the page
     let pageIndicator = this.state.pageIndicators[page];
-    pageIndicator.setNativeProps({styles: pageIndicatorActive});
+        
+    // First indicator is affected by this logic.
+    if(pageIndicator != this.state.lastActiveIndicator){
+      // Set the current page indicator to active
+      pageIndicator.setNativeProps({style: styles.pageIndicatorActive});
+  
+      // Set the last page indicator to 
+      if(this.state.lastActiveIndicator != null)
+        this.state.lastActiveIndicator.setNativeProps({style: styles.pageIndicatorInactive});
+  
+      // Set the last active indicator
+      this.state.lastActiveIndicator = pageIndicator;
+    }
+  }
 
-    // Set the last page indicator to 
-    if(lastActiveIndicator != null)
-      lastActiveIndicator.setNativeProps({styles: pageIndicatorInactive});
-
-    // Set the last active indicator
-    lastActiveIndicator = pageIndicator;
-
+  // Sets a ref for a page indicator to the pageIndicators state object
+  _setPagerIndicatorRefs(ref){
+    this.state.pageIndicators[this.state.pageIndicators.length] = ref
   }
 
   ////////////////////////
   // Lifecycle
   ////////////////////////
 
-  componenDidMount(){
+  componentDidMount(){
 
-
+    // Set the intial active page indicator
     this._setActivePageIndicator(0);
-
 
   }
 
@@ -97,12 +115,12 @@ class Pager extends Component {
     let currentOffset   = currentEvent.contentOffset.x;
     let currentPage     = Math.ceil(currentOffset/scrollViewWidth);
 
-    // Set the current active indicator
-    // this._setActivePageIndicator(currentPage);
+    // Set the current active indicator if it is within bounds
+    if(currentPage < this.props.data.length)
+      this._setActivePageIndicator(currentPage);
 
     // Validate that the onPageChangeEnd prop
     // had been set
-    console.log(`Current Page: ${currentPage}`);
     if(this.props.onPageChangeEnd)
       this.props.onPageChangeEnd(currentPage);
   }
@@ -112,7 +130,7 @@ class Pager extends Component {
   // to the right.
   _bounceScrollView(){
     
-    // Set the state of scroll view Bounces to true
+    // Set the state of scroll view bounced to true
     this.setState({
       scrollViewBounced: true
     })
@@ -129,9 +147,9 @@ class Pager extends Component {
 
   }
 
-  //Requires props
+  //Required props
   /* 
-  data: type projectData [
+  data: type data [
     {
       image: String,
     }
@@ -144,8 +162,8 @@ class Pager extends Component {
       <View>
         <View style={styles.pageIndicatorWrapper}>
           {this.props.data.map(data =>
-            <View key={data.id} 
-              ref={ref => this.state.pageIndicators[this.state.pageIndicators.length] = ref}
+            <View key={data.id + "-pager"} 
+              ref={this._setPagerIndicatorRefs}
               style={styles.pageIndicatorInactive}>
             </View>)
           }
@@ -156,9 +174,9 @@ class Pager extends Component {
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
         pagingEnabled={true} 
         horizontal={true}>
-          {this.props.data.map(data => 
+          {this.props.data.map(data =>
               <Image
-              key={data.key}  
+              key={data.id + "-image"}  
               source={{uri: data.image}} 
               onLoadEnd={()=>{ if (!this.state.scrollViewBounced) this._bounceScrollView()}}
               style={styles.pagerImage}/>
