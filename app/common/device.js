@@ -5,6 +5,9 @@
 ////////////////////////
 // Import Modules
 ////////////////////////
+import{
+	Dimensions
+} from "react-native";
 
 ////////////////////////
 // Constants
@@ -24,4 +27,9 @@
 export const deviceTypes = {
 	ios: "ios",
 	android: "android"
+}
+
+export const deviceProperties = {
+	width: Dimensions.get("window").width,
+	height: Dimensions.get("window").height,
 }
