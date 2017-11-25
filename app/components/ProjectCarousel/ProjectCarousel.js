@@ -72,7 +72,9 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
       distance: String
     }
   ]
-  onPageChangeEnd: type function
+  onPageChangeEnd: type function(page),
+  passes back project carousel current page
+  as the first parameter of the callback. 
   */
 
 class ProjectCarousel extends Component {
