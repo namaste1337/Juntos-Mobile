@@ -1,4 +1,4 @@
-// Styles for Pager Component
+// Styles for ProjectCarousel Component
 
 ////////////////////////
 // Import Modules
@@ -14,11 +14,9 @@ import {
 
 import {deviceProperties} from "./../../common/device";
 import {
-PRIMARY_FONT_FAMILY, 
-WHITE_COLOR,
-PRIMARY_COLOR,
-DARK_GREY_COLOR,
-TRANSPARENT_COLOR
+FONTS,
+COLORS,
+FONT_WEIGHT
 } from "./../../common/styles";
 
 ////////////////////////
@@ -28,26 +26,26 @@ TRANSPARENT_COLOR
 export default StyleSheet.create({
 
   /////////////////////////
-  // Page Indicator
+  // Carousel Indicator
   /////////////////////////
 
-  pageIndicatorWrapper:{
+  carouselIndicatorWrapper:{
     flexDirection: "row",
     justifyContent: "center",
     padding: 10
   },
-  pageIndicatorActive:{
+  carouselIndicatorActive:{
     width: 10, 
     height: 10,
     marginRight: 5,
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: COLORS.PRIMARY,
     borderRadius: 50,
   },
-  pageIndicatorInactive:{
+  carouselIndicatorInactive:{
     width: 10, 
     height: 10,
     marginRight: 5,
-    backgroundColor: DARK_GREY_COLOR,
+    backgroundColor: COLORS.DARK_GREY,
     borderRadius: 50
   },
 
@@ -55,45 +53,49 @@ export default StyleSheet.create({
   // Image
   /////////////////////////
 
-  pagerImage: {
+  carouselTempImage:{
+    width: deviceProperties.width;
+  }
+
+  carouselImage: {
   	width: deviceProperties.width,
   	height: 180,
   },
 
   /////////////////////////
-  // Image Text
+  // Carousel Image Text
   /////////////////////////
   
-  pagerTextView:{
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  carouselTextView:{
+    backgroundColor: COLORS.MID_TRANSPARENCY,
     padding: 5
   },
 
-  pagerFirstLineTextWrapper:{
+  carouselFirstLineTextWrapper:{
     flexDirection: "row",
   },
 
-  pagerTitleText:{
+  carouselTitleText:{
     flex:2, 
-    color: WHITE_COLOR,
-    backgroundColor: TRANSPARENT_COLOR,
-    fontFamily: PRIMARY_FONT_FAMILY,
-    fontWeight: "500",
+    color: COLORS.WHITE,
+    backgroundColor: COLORS.TRANSPARENT,
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.BOLD,
     fontSize: 20
   },
-  pagerDescriptionText:{
-    color: WHITE_COLOR,
-    backgroundColor: TRANSPARENT_COLOR,
-    fontFamily: PRIMARY_FONT_FAMILY,
-    fontSize:12,
-    fontWeight: "300"
+  carouselDescriptionText:{
+    color: COLORS.WHITE,
+    backgroundColor: COLORS.TRANSPARENT,
+    fontFamily: FONTS.PRIMARY,
+    fontSize: 12,
+    fontWeight: FONT_WEIGHT.LIGHT
   },
-  pagerDistanceText:{
+  carouselDistanceText:{
     flex:1, 
-    color: WHITE_COLOR,
+    color: COLORS.WHITE,
     textAlign: "right",
-    backgroundColor: TRANSPARENT_COLOR,
-    fontFamily: PRIMARY_FONT_FAMILY,
+    backgroundColor: COLORS.TRANSPARENT,
+    fontFamily: FONTS.PRIMARY,
     fontSize: 12,
   }
 });

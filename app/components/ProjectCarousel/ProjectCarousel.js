@@ -1,3 +1,4 @@
+
 ////////////////////////
 // Import Modules
 ////////////////////////
@@ -32,11 +33,34 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
+// Images
+const TEMPORARY_IMAGE                       = require("./../../assets/projects/tempImage.png");
+// Key Suffixes
+const PAGER_SUFFIX_KEY                      = "-pager";
+const IMAGEBACKGROUND_SUFFIX_KEY            = "-imageBackground";
+const IMAGE_SUFFIX_KEY                      = "-image"
+// Properties
+const SCROLL_VIEW_EVENT_THROTTILE_PROPERTY  = 1;
+const SCROLL_VIEW_PAGING_PROPERTY           = true;
+const SCROLL_VIEW_HORIZONTAL_PROPERTY       = true;
+const SCROLL_VIEW_INIAL_PAGE_PROPERTY       = 0;
+const SCROLL_VIEW_X_DESTINATION_PROPERTY    = 50;
+const SCROLL_VIEW_X_ORIGIN_PROPERTY         = 0;
+const SCROLL_VIEW_Y_ORIGIN_PROPERTY         = 0;
+const SCROLL_VIEW_ANIMATED_PROPERTY         = true;
+const SCROLL_VIEW_ANIMATION_TIME_1000       = 1000;
+const SCROLL_VIEW_ANIMATION_TIME_2000       = 2000;
+
+// Bools
+const SCROLL_VIEW_BOUNCED_TRUE_BOOL         = true;
+const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
+
+
 ////////////////////////
 // Component
 /////////////////////////
 
-class Pager extends Component {
+class ProjectCarousel extends Component {
 
 
   ////////////////////////
@@ -50,7 +74,7 @@ class Pager extends Component {
       // Initial state definitions
       pageIndicators: [],
       lastActiveIndicator: null,
-      scrollViewBounced: false
+      scrollViewBounced: SCROLL_VIEW_BOUNCED_FALSE_BOOL
     }
     // Caveat: If the ref callback is set inline the refs will get called 
     // twice during updates. Because a new instance of the function is created
@@ -100,7 +124,7 @@ class Pager extends Component {
   componentDidMount(){
 
     // Set the intial active page indicator
-    this._setActivePageIndicator(0);
+    this._setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY);
 
   }
 
@@ -133,17 +157,24 @@ class Pager extends Component {
     
     // Set the state of scroll view bounced to true
     this.setState({
-      scrollViewBounced: true
+      scrollViewBounced: SCROLL_VIEW_BOUNCED_TRUE_BOOL
     })
 
     // Show scrollView bounce effect
     this._scrollView.flashScrollIndicators();
     setTimeout(() => {
-      this._scrollView.scrollTo({x: 50, y: 0, animated: true});
-    }, 1000);
+      this._scrollView.scrollTo({x: 
+        SCROLL_VIEW_X_DESTINATION_PROPERTY, 
+        y: SCROLL_VIEW_Y_ORIGIN_PROPERTY, 
+        animated: SCROLL_VIEW_ANIMATED_PROPERTY
+      });
+    }, SCROLL_VIEW_ANIMATION_TIME_1000);
     setTimeout(() => {
-      this._scrollView.scrollTo({x: 0, y: 0, animated: true});
-    }, 2000);
+      this._scrollView.scrollTo({
+        x: SCROLL_VIEW_X_ORIGIN_PROPERTY, 
+        y: SCROLL_VIEW_Y_ORIGIN_PROPERTY, 
+        animated: SCROLL_VIEW_ANIMATED_PROPERTY});
+    }, SCROLL_VIEW_ANIMATION_TIME_2000);
  
 
   }
@@ -161,34 +192,34 @@ class Pager extends Component {
 
     return (
       <View>
-        <View style={styles.pageIndicatorWrapper}>
+        <View style={styles.carouselIndicatorWrapper}>
           {this.props.data.map(data =>
-            <View key={data.id + "-pager"} 
+            <View key={data.id + PAGER_SUFFIX_KEY} 
               ref={this._setPagerIndicatorRefs}
-              style={styles.pageIndicatorInactive}>
+              style={styles.carouselIndicatorInactive}>
             </View>)
           }
         </View>
         <ScrollView 
         ref={ref => this._scrollView = ref}
-        scrollEventThrottle={1} 
+        scrollEventThrottle={SCROLL_VIEW_EVENT_THROTTILE_PROPERTY} 
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
-        pagingEnabled={true} 
-        horizontal={true}>
+        pagingEnabled={SCROLL_VIEW_PAGING_PROPERTY} 
+        horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY}>
           {this.props.data.map(data =>
-          <ImageBackground style={{width: deviceProperties.width }}source={require("./../../assets/projects/tempImage.png")}>
+          <ImageBackground key={data.id + IMAGEBACKGROUND_SUFFIX_KEY} style={styles.carouselTempImage} source={TEMPORARY_IMAGE}>
               <ImageBackground
-              key={data.id + "-image"}  
+              key={data.id + IMAGE_SUFFIX_KEY}  
               source={{uri: data.image}} 
               onLoadEnd={()=>{ if (!this.state.scrollViewBounced) this._bounceScrollView()}}
-              style={styles.pagerImage}>
-                <View style={styles.pagerTextView}>
-                  <View style={styles.pagerFirstLineTextWrapper}>
-                    <Text style={styles.pagerTitleText}> {data.title} </Text>
-                    <Text style={styles.pagerDistanceText}> {data.distance}  </Text>
+              style={styles.carouselImage}>
+                <View style={styles.carouselTextView}>
+                  <View style={styles.carouselFirstLineTextWrapper}>
+                    <Text style={styles.carouselTitleText}> {data.title} </Text>
+                    <Text style={styles.carouselDistanceText}> {data.distance}  </Text>
                   </View>
                   <View>
-                    <Text style={styles.pagerDescriptionText}> {data.description}  </Text>
+                    <Text style={styles.carouselDescriptionText}> {data.description}  </Text>
                   </View>
                 </View>
               </ImageBackground>
@@ -207,12 +238,12 @@ class Pager extends Component {
 // Prop Type Checks
 ////////////////////////
 
-Pager.propTypes = {
+ProjectCarousel.propTypes = {
   //Prop validation definitions for custom props
   data: PropTypes.array.isRequired,
   onPageChangeEnd: PropTypes.func.isRequired
 
 }
 
-export default Pager;
+export default ProjectCarousel;
 
