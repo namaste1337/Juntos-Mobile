@@ -72,6 +72,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
       distance: String
     }
   ]
+  onPageChangeEnd: type function
   */
 
 class ProjectCarousel extends Component {
