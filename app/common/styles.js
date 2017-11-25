@@ -14,12 +14,24 @@ import {
 // Device properties
 const { height } = Dimensions.get("window"); // Move to common/device.js
 // Primary Styles - Fonts
-export const PRIMARY_FONT_FAMILY = "Roboto-Light";
+export const FONTS = {
+  PRIMARY: "Roboto-Light"
+}
 // Primary Styles - Colors
-export const PRIMARY_COLOR        = "#FF3366";
-export const WHITE_COLOR          = "#FFFFFF";
-export const DARK_GREY_COLOR      = "#505050";
-export const TRANSPARENT_COLOR    = "transparent";
+export const COLORS = {
+  PRIMARY: "#FF3366",
+  TRANSPARENT: "transparent",
+  MID_TRANSPARENCY: "rgba(0,0,0,0.5)",
+  WHITE: "#FFFFFF",
+  DARK_GREY: "#505050",
+
+}
+// Primary Styles - Font Weights
+export const FONT_WEIGHT = {
+  BOLD: "500",
+  REGULAR: "400",
+  LIGHT: "300"
+}
 
 ////////////////////////
 // Styles
