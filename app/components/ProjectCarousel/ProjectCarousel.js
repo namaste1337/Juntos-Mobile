@@ -59,6 +59,20 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
 ////////////////////////
 // Component
 /////////////////////////
+  /* 
+  
+  // Required props
+
+  data: type data (Array) [
+    {
+      id: Number,
+      image: String,
+      title: String,
+      description: String,
+      distance: String
+    }
+  ]
+  */
 
 class ProjectCarousel extends Component {
 
@@ -179,14 +193,9 @@ class ProjectCarousel extends Component {
 
   }
 
-  //Required props
-  /* 
-  data: type data [
-    {
-      image: String,
-    }
-  ]
-  */
+  ////////////////////////
+  // Methods
+  ////////////////////////
 
   render(){
 
