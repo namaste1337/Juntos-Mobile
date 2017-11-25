@@ -10,7 +10,8 @@ import {
   Text,
   Dimensions,
   ScrollView,
-  Image
+  Image,
+  ImageBackground
 } from 'react-native';
 import PropTypes from "prop-types";
 
@@ -51,8 +52,8 @@ class Pager extends Component {
       lastActiveIndicator: null,
       scrollViewBounced: false
     }
-    // Caveat: If the ref callback is set inline the, refs will get called 
-    // twice during update. Because a new instance of the function is created
+    // Caveat: If the ref callback is set inline the refs will get called 
+    // twice during updates. Because a new instance of the function is created
     // with each render, React needs to clear the old ref and set up the new 
     // one. You can avoid this be defining the ref callback as a bound method
     // on the class, but not that it shouldn't matter in most cases.
@@ -175,11 +176,23 @@ class Pager extends Component {
         pagingEnabled={true} 
         horizontal={true}>
           {this.props.data.map(data =>
-              <Image
+          <ImageBackground style={{width: deviceProperties.width }}source={require("./../../assets/projects/tempImage.png")}>
+              <ImageBackground
               key={data.id + "-image"}  
               source={{uri: data.image}} 
               onLoadEnd={()=>{ if (!this.state.scrollViewBounced) this._bounceScrollView()}}
-              style={styles.pagerImage}/>
+              style={styles.pagerImage}>
+                <View style={styles.pagerTextView}>
+                  <View style={styles.pagerFirstLineTextWrapper}>
+                    <Text style={styles.pagerTitleText}> {data.title} </Text>
+                    <Text style={styles.pagerDistanceText}> {data.distance}  </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.pagerDescriptionText}> {data.description}  </Text>
+                  </View>
+                </View>
+              </ImageBackground>
+            </ImageBackground>
             )
           }
         </ScrollView>
