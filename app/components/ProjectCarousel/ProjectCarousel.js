@@ -23,6 +23,12 @@ import PropTypes from "prop-types";
 import {renderIf} from "./../../common/components";
 import {deviceProperties} from "./../../common/device";
 
+//////////////////////////////
+// Imports Custom Components
+//////////////////////////////
+
+import ProjectPoster from "./../ProjectPoster";
+
 ////////////////////////
 // Import Styles
 ////////////////////////
@@ -33,12 +39,8 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
-// Images
-const TEMPORARY_IMAGE                       = require("./../../assets/projects/tempImage.png");
 // Key Suffixes
 const PAGER_SUFFIX_KEY                      = "-pager";
-const IMAGEBACKGROUND_SUFFIX_KEY            = "-imageBackground";
-const IMAGE_SUFFIX_KEY                      = "-image"
 // Properties
 const SCROLL_VIEW_EVENT_THROTTILE_PROPERTY  = 1;
 const SCROLL_VIEW_PAGING_PROPERTY           = true;
@@ -218,26 +220,7 @@ class ProjectCarousel extends Component {
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
         pagingEnabled={SCROLL_VIEW_PAGING_PROPERTY} 
         horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY}>
-          {this.props.data.map(data =>
-          <ImageBackground key={data.id + IMAGEBACKGROUND_SUFFIX_KEY} style={styles.carouselTempImage} source={TEMPORARY_IMAGE}>
-              <ImageBackground
-              key={data.id + IMAGE_SUFFIX_KEY}  
-              source={{uri: data.image}} 
-              onLoadEnd={()=>{ if (!this.state.scrollViewBounced) this._bounceScrollView()}}
-              style={styles.carouselImage}>
-                <View style={styles.carouselTextView}>
-                  <View style={styles.carouselFirstLineTextWrapper}>
-                    <Text style={styles.carouselTitleText}> {data.title} </Text>
-                    <Text style={styles.carouselDistanceText}> {data.distance}  </Text>
-                  </View>
-                  <View>
-                    <Text style={styles.carouselDescriptionText}> {data.description}  </Text>
-                  </View>
-                </View>
-              </ImageBackground>
-            </ImageBackground>
-            )
-          }
+          {this.props.data.map(data => <ProjectPoster data={data} />)}
         </ScrollView>
       </View>
     )
