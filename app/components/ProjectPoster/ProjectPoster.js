@@ -23,7 +23,7 @@ import styles from "./styles";
 ////////////////////////
 
 // Images
-const TEMPORARY_IMAGE = require("./../../assets/projects/tempImage.png");
+const TEMPORARY_IMAGE       = require("./../../assets/projects/tempImage.png");
 
 ////////////////////////
 // Component
