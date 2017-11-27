@@ -60,7 +60,8 @@ class  ProjectPoster extends Component {
       <ImageBackground style={styles.carouselTempImage} source={TEMPORARY_IMAGE}>
         <ImageBackground 
         source={{uri: this.props.data.image}} 
-        style={styles.carouselImage}>
+        style={styles.carouselImage}
+        onLoadEnd={this.props.onLoadEnd} >
           <View style={styles.carouselTextView}>
             <View style={styles.carouselFirstLineTextWrapper}>
               <Text style={styles.carouselTitleText}> {this.props.data.title} </Text>
