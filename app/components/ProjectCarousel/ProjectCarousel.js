@@ -207,6 +207,24 @@ class ProjectCarousel extends Component {
   // Methods
   ////////////////////////
 
+  
+  // Public method that handles scrolling the 
+  // carousel to the requested page.  
+  goToPage(page){
+    
+    // Get the x coordinate of the requested page
+    let pageXPosition = deviceProperties.width * page;
+    // Set the activity indicator to the requested page
+    this._setActivePageIndicator(page);
+    // Animate scroll the carousel to the requested page
+    this._scrollView.scrollTo({
+        x: pageXPosition, 
+        y: SCROLL_VIEW_Y_ORIGIN_PROPERTY, 
+        animated: SCROLL_VIEW_ANIMATED_PROPERTY
+    });
+
+  }
+
   render(){
 
     return (
