@@ -27,7 +27,7 @@ import {deviceTypes} from "./../common/device";
 /////////////////////////////
 
 import PrimaryButton from "./../components/PrimaryButton";
-import Pager from "./../components/Pager";
+import ProjectCarousel from "./../components/ProjectCarousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 
 ////////////////////////
@@ -192,6 +192,17 @@ class Projects extends Component {
 
   }
 
+  // Handles on map marker press, when
+  // a map marker is pressed the carousel is
+  // transition to the corresponding page
+  // and zooms in to the marker
+  _onMarkerPressed(e){
+    let event = e.nativeEvent;
+    let id    = Number(event.id);
+    let page  = id - 1;
+    this._projectCarousel.goToPage(page);
+  }
+
   ////////////////////////
   // Life Cycle
   ////////////////////////
@@ -236,14 +247,20 @@ class Projects extends Component {
         style={styles.map}
         >
           {TEMP_DATA.map(coord => 
-            <MapView.Marker.Animated 
+            <MapView.Marker.Animated
+            identifier={coord.id.toString()}
             key={coord.id} 
             image={require("./../assets/projects/map_marker.png")}
             title={coord.title} 
-            coordinate={{ latitude: coord.lat , longitude: coord.long }}/>)}
+            coordinate={{ latitude: coord.lat , longitude: coord.long }}
+            onPress={e => this._onMarkerPressed(e)}/>)}
+             
         </MapView.Animated>
         <View>
-          <Pager data={TEMP_DATA} onPageChangeEnd={page=> this._onPageChangeEnd(page)}/>
+          <ProjectCarousel 
+            ref={ref => this._projectCarousel = ref}
+            data={TEMP_DATA} 
+            onPageChangeEnd={page=> this._onPageChangeEnd(page)}/>
         </View>
       </View>
     );
