@@ -130,7 +130,7 @@ class  ProjectPoster extends Component {
 
 ProjectPoster.propTypes = {
   //Prop validation definitions for custom props
-  data: Proptypes.array.required
+  data: PropTypes.object.isRequired
 }
 
 export default ProjectPoster;
