@@ -120,20 +120,23 @@ class ProjectCarousel extends Component {
     // First indicator is affected by this logic.
     if(pageIndicator != this.state.lastActiveIndicator){
       // Set the current page indicator to active
-      pageIndicator.setNativeProps({style: styles.pageIndicatorActive});
+      pageIndicator.setNativeProps({style: styles.carouselIndicatorActive});
   
       // Set the last page indicator to 
       if(this.state.lastActiveIndicator != null)
-        this.state.lastActiveIndicator.setNativeProps({style: styles.pageIndicatorInactive});
+        this.state.lastActiveIndicator.setNativeProps({style: styles.carouselIndicatorInactive});
   
       // Set the last active indicator
       this.state.lastActiveIndicator = pageIndicator;
     }
+
   }
 
   // Sets a ref for a page indicator to the pageIndicators state object
   _setPagerIndicatorRefs(ref){
+
     this.state.pageIndicators[this.state.pageIndicators.length] = ref
+
   }
 
   ////////////////////////
