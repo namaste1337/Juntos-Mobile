@@ -41,6 +41,9 @@ const TEMPORARY_IMAGE       = require("./../../assets/projects/tempImage.png");
       distance: String
     }
   
+  // Optional props
+  
+  onLoadEnd: type function
 
   */
 
