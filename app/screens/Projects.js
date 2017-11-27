@@ -160,6 +160,8 @@ class Projects extends Component {
   // Helper Method
   ////////////////////////
 
+  // Handles animating the maps
+  // to the specified region
   _animateTo(lat, long){
     let region = new MapView.AnimatedRegion({
       latitude: lat,
@@ -173,13 +175,14 @@ class Projects extends Component {
     this.setState({region});
   }
 
-
   ////////////////////////
   // Callback
   ////////////////////////
 
+  // Handles animating to the marker corresponding to 
+  // the current page of the project carousel
   _onPageChangeEnd(page){
-    // console.log("On page did end: " + page);
+
     // Check if the currentPage is within bounds of
     // of the temp coordinate length
     if(page < TEMP_DATA.length){
@@ -197,10 +200,17 @@ class Projects extends Component {
   // transition to the corresponding page
   // and zooms in to the marker
   _onMarkerPressed(e){
+    
+    // Determine the page for the marker.
+    // The marker page is determined by
+    // the assined indentifier props
+    // for each marker.n
     let event = e.nativeEvent;
     let id    = Number(event.id);
     let page  = id - 1;
+    // Scroll to the page
     this._projectCarousel.goToPage(page);
+
   }
 
   ////////////////////////
