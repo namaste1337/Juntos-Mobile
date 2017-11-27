@@ -5,20 +5,12 @@
 // Note: node module imports
 import React, { Component } from 'react';
 import {
-  View,
-  TextInput,
   Text,
+  View,
   ImageBackground
 } from 'react-native';
 import PropTypes from "prop-types";
 
-////////////////////////
-// Import Commmon Files
-////////////////////////
-
-// Note: Common files located in app/common
-// Conditional rendering
-import {renderIf} from "./../../common/components";
 
 ////////////////////////
 // Import Styles
@@ -41,56 +33,18 @@ const TEMPORARY_IMAGE = require("./../../assets/projects/tempImage.png");
   
   // Required props
 
-  data: type data (Array) [
-    {
+  data: type posterData (object) {
       id: Number,
       image: String,
       title: String,
       description: String,
       distance: String
     }
-  ]
   
+
   */
 
 class  ProjectPoster extends Component {
-
-
-  ////////////////////////
-  // Default Props
-  ////////////////////////
-
-  static defaultProps = {
-    ...Component.defaultProps,
-    // Default props definitions
-  }
-
-  ////////////////////////
-  // Constructor
-  ////////////////////////
-
-  constructor(props){
-
-    super(props)
-    this.state = {
-    // Initial state definitions
-    }
-  }
-
-  ////////////////////////
-  // Life Cycle
-  ////////////////////////
-
-
-  ////////////////////////
-  // Getters and Setters
-  ////////////////////////
-
-  //Note: Public and private getters and setters
-
-  ////////////////////////
-  // Callbacks
-  ////////////////////////
 
   ////////////////////////
   // Methods
@@ -118,10 +72,7 @@ class  ProjectPoster extends Component {
 
     );
   }
-
 }
-
- // onLoadEnd={()=>{ if (!this.state.scrollViewBounced) this._bounceScrollView()}}
 
 
 ////////////////////////
