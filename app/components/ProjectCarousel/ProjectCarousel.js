@@ -103,6 +103,7 @@ class ProjectCarousel extends Component {
     // We bind the setPagerIndicator to allow the pageIndicator refs
     // to only be set once. 
     this._setPagerIndicatorRefs = this._setPagerIndicatorRefs.bind(this);
+
   }
 
   ////////////////////////
@@ -112,7 +113,6 @@ class ProjectCarousel extends Component {
   // Sets the active page indicator for 
   // the paging scroll view.
   _setActivePageIndicator(page){
-    console.log(page);
 
     // Get the indicator in regards to the page
     let pageIndicator = this.state.pageIndicators[page];
@@ -157,6 +157,7 @@ class ProjectCarousel extends Component {
   // ScrollDidEnd calculate the current page 
   // that the user has scrolled too.
   _onScrollDidEnd(event: Object){
+
     let currentEvent    = event.nativeEvent;
     let scrollViewWidth = currentEvent.layoutMeasurement.width;
     let currentOffset   = currentEvent.contentOffset.x;
@@ -170,6 +171,7 @@ class ProjectCarousel extends Component {
     // had been set
     if(this.props.onPageChangeEnd)
       this.props.onPageChangeEnd(currentPage);
+
   }
 
   // Handles bouncing the scroll view to indicate
