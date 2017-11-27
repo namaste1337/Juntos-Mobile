@@ -220,7 +220,12 @@ class ProjectCarousel extends Component {
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
         pagingEnabled={SCROLL_VIEW_PAGING_PROPERTY} 
         horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY}>
-          {this.props.data.map(data => <ProjectPoster data={data} />)}
+          {this.props.data.map(data => 
+            <ProjectPoster 
+              key={data.id} 
+              onLoadEnd={ () => !this.state.scrollViewBounced && this._bounceScrollView() }
+              data={data} />
+          )}
         </ScrollView>
       </View>
     )
