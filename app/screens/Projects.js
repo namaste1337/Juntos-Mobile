@@ -261,7 +261,6 @@ class Projects extends Component {
             identifier={coord.id.toString()}
             key={coord.id} 
             image={require("./../assets/projects/map_marker.png")}
-            title={coord.title} 
             coordinate={{ latitude: coord.lat , longitude: coord.long }}
             onPress={e => this._onMarkerPressed(e)}/>)}
              
