@@ -25,7 +25,12 @@ import styles from "./styles";
 
 /*
   Required Props
+
   source: type String, Icon image source
+
+  Options Props
+
+  onPress: type Function, onPress event for icon
 
 */
 
