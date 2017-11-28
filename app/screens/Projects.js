@@ -13,7 +13,6 @@ import {
   ScrollView,
   Image,
   Platform,
-  Text
 } from 'react-native';
 
 /////////////////////////////
