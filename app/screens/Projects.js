@@ -7,10 +7,7 @@ import {bindActionCreators, connect} from 'react-redux';
 import MapView from 'react-native-maps';
 import {
   View,
-  Dimensions,
-  Button,
   StyleSheet,
-  ScrollView,
   Image,
   Platform,
 } from 'react-native';
