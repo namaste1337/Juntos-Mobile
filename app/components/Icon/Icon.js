@@ -47,11 +47,9 @@ class Icon extends Component {
         <Image style={styles.iconImage} source={this.props.source} />
       </TouchableOpacity>
     )
-
   }
 
 }
-
 
 ////////////////////////
 // Prop Type Checks
@@ -62,4 +60,3 @@ Icon.propTypes = {
 }
 
 export default Icon;
-
