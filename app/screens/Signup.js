@@ -208,12 +208,19 @@ class Signup extends Component {
 
     // Validate email
     isValid = this._validateEmail(email);
+    if(!isValid)
+      return isValid;
     // Vaidate password
     isValid = this._validatePassword(password, confirmPassword);
+    if(!isValid)
+      return isValid;
     // Validate profile image data
     isValid = this._validateProfileImage();
+    if(!isValid)
+      return isValid;
 
     return isValid
+
   }
 
   ////////////////////
