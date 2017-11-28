@@ -2,13 +2,22 @@
 // also known as the navigation bar.
 
 ////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+  COLORS
+} from "./../common/styles"
+
+
+////////////////////////
 // Constants
 ////////////////////////
 
 //Properties
 const tabarBackgroundColor      = "white"; 
-const activeTintColor           = "#FF3366";
-const inactiveTintColor         = "#8e8f8e";
+const activeTintColor           = COLORS.PRIMARY;
+const inactiveTintColor         = COLORS.LIGHT_GREY;
 const indicatorbackgroudnColor  = "#FF3366";
 
 ////////////////////////////
