@@ -27,7 +27,7 @@ import { accountSignup } from '../actions/account-actions';
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../common/styles";
+import CommonStyles, {COLORS} from "../common/styles";
 import {validateEmail} from "../common/validations";
 import {renderIf} from "../common/components";
 
@@ -84,7 +84,7 @@ class Signup extends Component {
       passwordField: "",
       confirmPasswordField: "",
       bioField: "",
-      profileImage: profilePlaceholder,
+      profileImage: null,
       profileImageData: {},
       emailIsValid: EMAIL_VALIDATION_TRUE_STATE,
       confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE,
@@ -226,6 +226,7 @@ class Signup extends Component {
         <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
           <View style={styles.profileImageUploadWrapper}>
             <TouchableOpacity onPress={() => this._onProfileImagePress()}>
+              <Image source={profilePlaceholder} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImagePlaceHolder} />
               <Image source={this.state.profileImage} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImage} />
               <Image style={styles.profileImageAddButton} source={imageAddButton} />
               {renderIf(!this.state.profileImageValid, <Text style={styles.profileValidation}>Required</Text>)}
@@ -283,10 +284,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: "#CCC"
   },
-  profileImage:{
+  profileImagePlaceHolder:{
     width: 120,
     height: 120,
-    borderRadius: 60
+    borderRadius: 60,
+    tintColor: COLORS.PRIMARY
+  },
+  profileImage:{
+    position: "absolute",
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    top: 0,
+    left: 0
   },
   profileImageText:{
     marginLeft: 20,
