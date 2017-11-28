@@ -20,7 +20,10 @@ import {
 // Import Common Files
 /////////////////////////////
 
-import {deviceTypes} from "./../common/device";
+import {
+deviceTypes, 
+deviceProperties
+} from "./../common/device";
 
 /////////////////////////////
 // Import Custom Components
@@ -40,15 +43,19 @@ import {getProjects} from "./../services/api/projects";
 // Constants
 ////////////////////////
 
-const { width, height }                   = Dimensions.get('window');
-const ASPECT_RATIO                        = width / height;
-const LATITUDE_DELTA                      = 0.0900;
-const LONGITUDE_DELTA                     = LATITUDE_DELTA * ASPECT_RATIO;
-const INITIAL_LONGITUDE                   = 95.50; // Center of the U.S.
-const INITIAL_LATITUDE                    = -98.35; // Center of the U.S.
+// Number
+const ASPECT_RATIO_NUMBER                 = deviceProperties.width / deviceProperties.height;
+const LATITUDE_DELTA_NUMBER               = 0.0900;
+const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
+const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
+const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
+// Properties
 const REGION_ANIMATION_DURATION_PROPERTY  = 500;
+// Bools
 const GPS_HIGH_ACCURACY_BOOL              = true;
-const PROJECT_TABBAR_ICON_IMAGE           = require('./../assets/tabbar/project_icon.png')
+// Image
+const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
+const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
 const TEMP_DATA = [
   {
     id: 1,
@@ -148,10 +155,10 @@ class Projects extends Component {
     // Set the initial region for the map component
     this.state = {
       region: {
-        latitude: INITIAL_LONGITUDE,
-        longitude: INITIAL_LATITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA
+        latitude: INITIAL_LONGITUDE_NUMBER,
+        longitude: INITIAL_LATITUDE_NUMBER,
+        latitudeDelta: LATITUDE_DELTA_NUMBER,
+        longitudeDelta: LONGITUDE_DELTA_NUMBER
       },
     }
   }
@@ -166,8 +173,8 @@ class Projects extends Component {
     let region = new MapView.AnimatedRegion({
       latitude: lat,
       longitude: long,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
+      latitudeDelta: LATITUDE_DELTA_NUMBER,
+      longitudeDelta: LONGITUDE_DELTA_NUMBER
     });
 
     // Animate to the region
@@ -260,7 +267,7 @@ class Projects extends Component {
             <MapView.Marker.Animated
             identifier={coord.id.toString()}
             key={coord.id} 
-            image={require("./../assets/projects/map_marker.png")}
+            image={MAP_MARKER_IMAGE}
             coordinate={{ latitude: coord.lat , longitude: coord.long }}
             onPress={e => this._onMarkerPressed(e)}/>)}
              
