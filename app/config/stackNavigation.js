@@ -2,6 +2,14 @@
 // also known as the navigation bar.
 
 ////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+  COLORS
+} from "./../common/styles"
+
+////////////////////////
 // Constants
 ////////////////////////
 
@@ -9,7 +17,7 @@
 const headerMode      = "screen";
 const backgroundColor = "#FFF";
 const fontWeight      = "100";
-const headerTintColor = "#FF3366";
+const headerTintColor = COLORS.PRIMARY;
 
 ////////////////////////////
 // Stack Navigation Options
