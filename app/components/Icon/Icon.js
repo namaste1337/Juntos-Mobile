@@ -1,11 +1,10 @@
-// Component render a touchable icon.
+// Component renders a touchable icon.
 // Icon defaults to 25 x 25
 
 ////////////////////////
 // Import Modules
 ////////////////////////
 
-// Note: node module imports
 import React, { Component } from 'react';
 import {
   TouchableOpacity,
