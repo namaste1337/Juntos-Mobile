@@ -10,6 +10,12 @@ import {
 } from 'react-native'
 
 ////////////////////////
+// Import Styles
+////////////////////////
+
+import styles from "./styles";
+
+////////////////////////
 // Constants
 ////////////////////////
 
@@ -30,7 +36,7 @@ class  TouchableText extends Component {
     return (
       <TouchableOpacity activeOpacity={ACTIVE_OPACITY}>
         <View>
-          <Text style={this.props.style} onPress={this.props.onPress}>{this.props.text}</Text>
+          <Text style={[this.props.style, styles.textButton]} onPress={this.props.onPress}>{this.props.text}</Text>
         </View>
       </TouchableOpacity>
     )

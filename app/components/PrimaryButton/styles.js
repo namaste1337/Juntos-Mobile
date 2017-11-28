@@ -9,6 +9,14 @@ import {
 } from 'react-native'
 
 ////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+  COLORS
+} from "./../../common/styles"
+
+////////////////////////
 // Styles
 //////////////////////// 
 
@@ -19,7 +27,7 @@ export default StyleSheet.create({
   //////////////////////// 
 
   button: {
-    backgroundColor: "#FF3366",
+    backgroundColor: COLORS.PRIMARY,
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",

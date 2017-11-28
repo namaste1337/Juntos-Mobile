@@ -9,14 +9,27 @@ import {
 } from 'react-native'
 
 ////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+  COLORS
+} from "./../../common/styles"
+
+////////////////////////
 // Styles
 ////////////////////////
 
 export default StyleSheet.create({
   
   ///////////////////////
-  // Component Style Section ex. Profile Image
+  // Text Button
   ///////////////////////
+
+  textButton:{
+  	color: COLORS.PRIMARY
+  }
+
 
 });
 
