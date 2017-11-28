@@ -23,11 +23,11 @@ import styles from "./styles";
 /////////////////////////
 
 /*
-  Required Props
+  -Required Props
 
   source: type String, Icon image source
 
-  Options Props
+  -Optional Props
 
   onPress: type Function, onPress event for icon
 
