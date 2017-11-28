@@ -18,7 +18,7 @@ import {
 const tabarBackgroundColor      = "white"; 
 const activeTintColor           = COLORS.PRIMARY;
 const inactiveTintColor         = COLORS.LIGHT_GREY;
-const indicatorbackgroudnColor  = "#FF3366";
+const indicatorbackgroundColor  = "#FF3366";
 
 ////////////////////////////
 // Tabbar Navigation Options
@@ -32,7 +32,7 @@ const TabbarNavigationOptions = {
     },
     activeTintColor,
     inactiveTintColor,
-    indicatorStyle: {backgroundColor: indicatorbackgroudnColor},
+    indicatorStyle: {backgroundColor: indicatorbackgroundColor},
 	}
 }
 
