@@ -31,6 +31,7 @@ deviceProperties
 import PrimaryButton from "./../components/PrimaryButton";
 import ProjectCarousel from "./../components/ProjectCarousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
+import Icon from "./../components/Icon";
 
 ////////////////////////
 // Import Services
@@ -55,6 +56,7 @@ const GPS_HIGH_ACCURACY_BOOL              = true;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
+const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_project_button.png")
 const TEMP_DATA = [
   {
     id: 1,
@@ -135,7 +137,7 @@ class Projects extends Component {
   ////////////////////////
 
   static navigationOptions = {
-    headerRight: <View style={{paddingLeft: 10}}><Button title="Add" /></View>,
+    headerRight: <Icon source={ADD_PROJECT_BUTTON_IMAGE}/>,
     tabBarIcon: ({tintColor}) => (
       <Image
         source={PROJECT_TABBAR_ICON_IMAGE}
