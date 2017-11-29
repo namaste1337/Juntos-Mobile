@@ -15,10 +15,10 @@ import {
 ////////////////////////
 
 //Properties
-const tabarBackgroundColor      = "white"; 
+const tabarBackgroundColor      = COLORS.WHITE; 
 const activeTintColor           = COLORS.PRIMARY;
 const inactiveTintColor         = COLORS.LIGHT_GREY;
-const indicatorbackgroundColor  = "#FF3366";
+const indicatorbackgroundColor  = COLORS.PRIMARY;
 
 ////////////////////////////
 // Tabbar Navigation Options
