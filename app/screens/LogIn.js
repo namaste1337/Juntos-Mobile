@@ -22,7 +22,7 @@ import {
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../common/styles.js"
+import CommonStyles, {FONTS, COLORS}from "../common/styles.js"
 
 //////////////////////////////
 // Imports Custom Components
@@ -158,29 +158,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   forgotPasswordText: {
-    color: "#404040",
-    backgroundColor: "transparent",
+    backgroundColor: COLORS.TRANSPARENT,
     textAlign: "right",
     paddingRight: 15,
     paddingBottom: 10,
-    fontFamily: 'Roboto-Light'
+    fontFamily: FONTS.PRIMARY
   },
   accountText: {
-    color: "#404040",
     alignItems: "center",
-    fontFamily: 'Roboto-Light'
+    fontFamily: FONTS.PRIMARY
   },
   signupWrap: {
     marginVertical: 20,
     flexDirection: "row",
-    backgroundColor: "transparent",
+    backgroundColor: COLORS.TRANSPARENT,
     alignItems: "center",
     justifyContent: "center",
   },
   signupLinkText: {
     marginLeft: 5,
-    color: "#FF3366",
-    fontFamily: 'Roboto-Light'
+    fontFamily: FONTS.PRIMARY
   },
 
 });
