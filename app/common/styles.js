@@ -24,6 +24,7 @@ export const COLORS = {
   MID_TRANSPARENCY: "rgba(0,0,0,0.5)",
   WHITE: "#FFFFFF",
   DARK_GREY: "#505050",
+  MID_GREY: "#CCCCCC",
   LIGHT_GREY: "#8E8F8E",
   RED: "red"
 }

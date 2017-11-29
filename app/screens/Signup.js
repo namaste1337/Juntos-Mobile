@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:"center",
     borderBottomWidth: 1,
-    borderColor: "#CCC"
+    borderColor: COLORS.MID_GREY
   },
   profileImagePlaceHolder:{
     width: 120,
