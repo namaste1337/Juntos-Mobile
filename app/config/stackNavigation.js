@@ -6,7 +6,8 @@
 ////////////////////////
 
 import {
-  COLORS
+  COLORS,
+  FONT_WEIGHT
 } from "./../common/styles"
 
 ////////////////////////
@@ -15,8 +16,8 @@ import {
 
 //Strings
 const headerMode      = "screen";
-const backgroundColor = "#FFF";
-const fontWeight      = "100";
+const backgroundColor = COLORS.WHITE;
+const fontWeight      = FONT_WEIGHT.LIGHT;
 const headerTintColor = COLORS.PRIMARY;
 
 ////////////////////////////
