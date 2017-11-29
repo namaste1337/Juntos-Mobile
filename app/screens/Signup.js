@@ -27,7 +27,7 @@ import { accountSignup } from '../actions/account-actions';
 ///////////////////////////////
 
 // Common styles
-import CommonStyles, {COLORS} from "../common/styles";
+import CommonStyles, {COLORS, FONTS} from "../common/styles";
 import {validateEmail} from "../common/validations";
 import {renderIf} from "../common/components";
 
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flex: 1,
     flexWrap: "wrap",
-    fontFamily: "Roboto-Light"
+    fontFamily: FONTS.PRIMARY
   },
   profileImageAddButton:{
     position: "absolute",
@@ -321,8 +321,8 @@ const styles = StyleSheet.create({
   },
   profileValidation:{
     textAlign: "center",
-    fontFamily: "Roboto-Light",
-    color: "red"
+    fontFamily: FONTS.PRIMARY,
+    color: COLORS.RED
   }
 })
 
