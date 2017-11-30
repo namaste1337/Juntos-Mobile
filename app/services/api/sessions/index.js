@@ -10,26 +10,11 @@ import Common from "./../common";
 ///////////////////////////
 
 // End points
-const SIGNUP_END_POINT = "/signup";
-const LOGIN_END_POINT  = "/login";
-const LOGOUT_END_POINT = "/logout";
+const SESSIONS_END_POINT = "/session";
 
 ///////////////////////////
 // Functions
 ///////////////////////////
-
-// Handles sign up request
-export function signUp(email, password, profileImageName){
-
-	let payload = {
-		email,
-		password,
-		profileImageName
-	}
-
-	return Services.fetchApi(SIGNUP_END_POINT, payload, Common.POST_METHOD);
-
-}
 
 // Handles login request
 export function login(email, password){
@@ -41,13 +26,13 @@ export function login(email, password){
 		password: password
 	}
 
-	return Services.fetchApi(LOGIN_END_POINT, payload, Common.POST_METHOD);
+	return Services.fetchApi(SESSIONS_END_POINT, payload, Common.POST_METHOD);
 
 }
 
 // Handles logout request
 export function logout(){
 
-	return Services.fetchApi(LOGOUT_END_POINT, null, Common.GET_METHOD);
+	return Services.fetchApi(SESSIONS_END_POINT, null, Common.DELETE_METHOD);
 
 }
