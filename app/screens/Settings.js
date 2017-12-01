@@ -9,8 +9,29 @@ Text,
 Dimensions,
 ScrollView,
 Image,
-StyleSheet 
+StyleSheet,
+TouchableOpacity,
+View
 } from 'react-native';
+
+//////////////////////////////
+// Imports Common Files
+///////////////////////////////
+
+// Common styles
+import CommonStyles from "../common/styles.js"
+
+////////////////////////
+// Actions
+////////////////////////
+
+import {accountLogout} from "./../actions/account-actions.js";
+
+//////////////////////////////
+// Imports Custom Components
+///////////////////////////////
+
+import PrimaryButton from './../components/PrimaryButton';
 
 ////////////////////////
 // Constants
@@ -50,8 +71,12 @@ class Settings extends Component {
 
   render() {
     return (
-     <ScrollView style={styles.container}>
-      <Text>Settings</Text>
+     <ScrollView style={CommonStyles.container}>
+     <View style={CommonStyles.contentWrapper}>
+        <PrimaryButton 
+        buttonText="Log out"
+        onPress={this.props.logout} />
+      </View>
      </ScrollView>
     );
   }
@@ -85,7 +110,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    sessionLogin: (email, password) => dispatch(sessionLogin(email, password))
+    logout: () => dispatch(accountLogout())
   };
 }
 
