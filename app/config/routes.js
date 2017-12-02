@@ -60,46 +60,8 @@ const ROUTE_ROUTE_HEADER_MODE                   = "none";
 // Routes
 ////////////////////////
 
-// Stack Navigator - For Viewing a Porject Details
-const Project = StackNavigator({
-  ProjectDetails: { 
-    screen: ProjectDetails,
-    navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_DETAILS_TITLE_STRING,
-    })
-  }
-}, StackNavigationOptions);
-
-// Stack Navigator - For Create Project
-const CreateProject = StackNavigator({
-  CreateProjectDescription: { 
-    screen: CreateProjectDescription,
-    navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_DESCRIPTION_TITLE_STRING,
-    })
-  },
-  CreateProjectDetails: { 
-    screen: CreateProjectDetails,
-    navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_DETAILS_TITLE_STRING,
-    })
-  },
-  CreateProjectImages: { 
-    screen: CreateProjectImages,
-    navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_IMAGES_TITLE_STRING,
-    })
-  },
-  ProjectPreview: { 
-    screen: ProjectDetails,
-    navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_PREVIEW_TITLE_STRING,
-    })
-  },
-}, StackNavigationOptions);
-
 // Tab Navigator - After sign in or sign up
-const Protected = TabNavigator({
+const Tabs = TabNavigator({
   Projects: { 
     screen: Projects,
     navigationOptions: ({navigation}) => ({
@@ -123,6 +85,33 @@ const Protected = TabNavigator({
 
 // Root Navigator
 const RootRoutes = StackNavigator({
+  Root: {
+    screen: Tabs
+  },
+  CreateProjectDescription: { 
+    screen: CreateProjectDescription,
+    navigationOptions: ({navigation}) => ({
+      title: CREATE_PROJECT_DESCRIPTION_TITLE_STRING,
+    })
+  },
+  CreateProjectDetails: { 
+    screen: CreateProjectDetails,
+    navigationOptions: ({navigation}) => ({
+      title: CREATE_PROJECT_DETAILS_TITLE_STRING,
+    })
+  },
+  CreateProjectImages: { 
+    screen: CreateProjectImages,
+    navigationOptions: ({navigation}) => ({
+      title: CREATE_PROJECT_IMAGES_TITLE_STRING,
+    })
+  },
+  ProjectDetails: { 
+    screen: ProjectDetails,
+    navigationOptions: ({navigation}) => ({
+      title: CREATE_PROJECT_DETAILS_TITLE_STRING,
+    })
+  },
   Landing: { 
     screen: LandingView,
     navigationOptions: ({navigation}) => ({
@@ -147,15 +136,6 @@ const RootRoutes = StackNavigator({
       title: FORGOT_PASSWORD_SCREEN_TITLE_STRING,
     }), 
   },
-  Protected: {
-    screen: Protected,
-  },
-  CreateProject: {
-    screen: CreateProject,
-  },
-  ProjectDetails:{
-    screen: Project
-  }
 }, StackNavigationOptions);
 
 export default RootRoutes;

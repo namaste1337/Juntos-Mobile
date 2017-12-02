@@ -26,7 +26,7 @@ import {setLoginState} from "./../common/storage";
 ////////////////////////
 
 //Navigation
-const NAVIGATE_SIGNED_IN_SCREEN = "Protected";
+const NAVIGATE_SIGNED_IN_SCREEN = "Root";
 const NAVIGATE_SIGNED_OUT_SCREEN = "Login";
 
 ////////////////////////
