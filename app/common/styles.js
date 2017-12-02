@@ -26,7 +26,8 @@ export const COLORS = {
   DARK_GREY: "#505050",
   MID_GREY: "#CCCCCC",
   LIGHT_GREY: "#8E8F8E",
-  RED: "red"
+  RED: "red",
+  BLACK: "black"
 }
 // Primary Styles - Font Weights
 export const FONT_WEIGHT = {
