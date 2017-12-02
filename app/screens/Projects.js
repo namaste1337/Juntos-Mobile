@@ -20,6 +20,14 @@ import {
 deviceTypes, 
 deviceProperties
 } from "./../common/device";
+import {renderIf} from  "./../common/components";
+import {COLORS} from "../common/styles.js"
+
+////////////////////////
+// Actions
+////////////////////////
+
+import {navigateToCreateProject} from "./../actions/project-actions.js";
 
 /////////////////////////////
 // Import Custom Components
@@ -129,19 +137,24 @@ const TEMP_DATA = [
 
 class Projects extends Component {
 
+
+  _onAddIconPress(event){
+    console.log("Add Icon Press");
+
+  }
+
   ////////////////////////
   // Navigation Options
   ////////////////////////
 
   static navigationOptions = {
-    headerRight: <Icon source={ADD_PROJECT_BUTTON_IMAGE}/>,
-    tabBarIcon: ({tintColor}) => (
-      <Image
-        source={PROJECT_TABBAR_ICON_IMAGE}
-        style={[styles.tabBarIcon, {tintColor: tintColor}]}
-      />
-    )
-  }
+      tabBarIcon: ({tintColor}) => (
+        <Image
+          source={PROJECT_TABBAR_ICON_IMAGE}
+          style={[styles.tabBarIcon, {tintColor: tintColor}]}
+        />
+      )
+    }
 
   ////////////////////////
   // Constructor
@@ -240,11 +253,6 @@ class Projects extends Component {
     }, {
       enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
     });
-
-    // Set the initial page indicator the 
-    // first in the pageIndicators array
-    // this._setActivePageIndicator(0);
-
   }
 
   ////////////////////////
@@ -269,11 +277,15 @@ class Projects extends Component {
             onPress={e => this._onMarkerPressed(e)}/>)}
              
         </MapView.Animated>
+
         <View>
           <ProjectCarousel 
             ref={ref => this._projectCarousel = ref}
             data={TEMP_DATA} 
             onPageChangeEnd={page=> this._onPageChangeEnd(page)}/>
+        </View>
+        <View style={styles.addButtonWrapper}>
+          <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.goToCreateProject() }/>
         </View>
       </View>
     );
@@ -301,6 +313,23 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25
   },
+  addButtonWrapper:{
+    position:"absolute",
+    top: 10,
+    right: 10,
+  },
+  addProjectIcon:{
+    width: 50,
+    height: 50,
+    backgroundColor: COLORS.WHITE,
+    borderRadius: 25,
+    shadowColor: COLORS.BLACK,
+    shadowOffset: {
+      width: 10,
+      height: 10
+    },
+    shadowRadius: 10
+  }
 });
 
 ////////////////////////
@@ -315,7 +344,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    // Action props that require dispatch go here
+    goToCreateProject: () => dispatch(navigateToCreateProject())
   };
 }
 
