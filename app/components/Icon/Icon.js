@@ -44,7 +44,7 @@ class Icon extends Component {
 
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <Image style={styles.iconImage} source={this.props.source} />
+        <Image style={[styles.iconImage, this.props.style]} source={this.props.source} />
       </TouchableOpacity>
     )
   }
@@ -56,7 +56,7 @@ class Icon extends Component {
 ////////////////////////
 
 Icon.propTypes = {
-  source: PropTypes.string.isRequired
+  source: PropTypes.number.isRequired
 }
 
 export default Icon;
