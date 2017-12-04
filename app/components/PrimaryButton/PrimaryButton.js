@@ -36,7 +36,7 @@ class  PrimaryButton extends Component {
   render(){
     return (
       <TouchableOpacity activeOpacity={ACTIVE_OPACITY} onPress={this.props.onPress}>
-        <View style={styles.button}><Text style={styles.buttonText}>{this.props.buttonText}</Text></View>
+        <View style={[styles.button, this.props.style]}><Text style={styles.buttonText}>{this.props.buttonText}</Text></View>
       </TouchableOpacity>
     )
   }
