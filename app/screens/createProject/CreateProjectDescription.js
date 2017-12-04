@@ -4,14 +4,10 @@
 
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
-import { 
-Text, 
-Dimensions,
-ScrollView,
-Image,
+import {  
 StyleSheet,
-TouchableOpacity,
-View
+View,
+KeyboardAvoidingView
 } from 'react-native';
 
 //////////////////////////////
@@ -19,41 +15,43 @@ View
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../../common/styles.js"
+import CommonStyles from "./../../common/styles.js"
+import {deviceProperties} from "./../../common/device.js"
 
 ////////////////////////
 // Actions
 ////////////////////////
 
-import {accountLogout} from "./../../actions/account-actions.js";
 
 //////////////////////////////
 // Imports Custom Components
 ///////////////////////////////
 
 import PrimaryButton from './../../components/PrimaryButton';
+import PrimaryTextInput from "./../../components/PrimaryTextInput";
 
 ////////////////////////
 // Constants
 ////////////////////////
-const screenCenter                  = Dimensions.get('window').width/2;
-const PROJECT_TABBAR_ICON_IMAGE     = require('./../../assets/tabbar/settings_icon.png')
+
+// Strings
+const PROJECT_NAME_FIELD_PLACEHOLDER_STRING     = "Project Name";
+const LOCATION_FIELD_PLACEHOLDER_STRING         = "Location";
+const DESCRIPTION_FIELD_PLACEHOLDER_STRING      = "Description";
+const NEXT_BUTTON_STRING                        = "Next";
+const EMAIL_VALIDATION_MESSAGE_STRING           = "E-mail is invalid";
+const PASSWORD_VALIDATION_MESSAGE_STRING        = "Password is invalid or does not match";
+// Properties
+const RETURN_KEY_TYPE                           = "done";
+const DEFAULT_KEYBOARD_TYPE                     = "default";
+const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
+const MULTILINE_INPUT_MAX_CHARACTER_PROPERTY    = 300;
+// Bools
+const MULTILINE_ENABLED_BOOL                    = true;
+
 
 class CreateProjectDescription extends Component {
 
-
-  tabBarOnPress(){
-    
-  }
-
-
-  ////////////////////////
-  // Navigation Options
-  ////////////////////////
-
-  static navigationOptions = {
-    headerRight: <TouchableOpacity><Text>Next</Text></TouchableOpacity>,
-  }
 
   ////////////////////////
   // Callbacks
@@ -66,9 +64,31 @@ class CreateProjectDescription extends Component {
 
   render() {
     return (
-     <ScrollView style={CommonStyles.container}>
-     <Text> Create Project Description </Text>
-     </ScrollView>
+      <View style={CommonStyles.container}>
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
+          <PrimaryTextInput
+            onChangeText={emailField => this.setState({emailField})} 
+            placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
+            returnKeyType={RETURN_KEY_TYPE} 
+            validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
+          <PrimaryTextInput 
+            onChangeText={passwordField => this.setState({passwordField})} 
+            placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
+            returnKeyType={RETURN_KEY_TYPE}
+            keyboardType={DEFAULT_KEYBOARD_TYPE}/>
+          <PrimaryTextInput 
+            onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
+            placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
+            multiline={MULTILINE_ENABLED_BOOL}
+            maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
+            returnKeyType={RETURN_KEY_TYPE}
+            keyboardType={DEFAULT_KEYBOARD_TYPE}
+            validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
+        </KeyboardAvoidingView>
+        <View style={styles.buttonWrapper}> 
+          <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+        </View>
+      </View>
     );
   }
 }
@@ -85,6 +105,17 @@ const styles = StyleSheet.create({
   tabBarIcon:{
     width: 25,
     height: 25
+  },
+  buttonWrapper:{
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+  },
+  nextButton:{
+    flex: 1,
+    left: 0,
+    marginHorizontal: 20,
+    marginVertical: 20,
   }
 });
 
@@ -94,14 +125,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(accountLogout())
+
   };
 }
 
