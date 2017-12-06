@@ -10,6 +10,7 @@ View,
 KeyboardAvoidingView
 } from 'react-native';
 
+ 
 //////////////////////////////
 // Imports Common Files
 ///////////////////////////////
@@ -27,8 +28,9 @@ import {deviceProperties} from "./../../common/device.js"
 // Imports Custom Components
 ///////////////////////////////
 
-import PrimaryButton from './../../components/PrimaryButton';
+import PrimaryButton from "./../../components/PrimaryButton";
 import PrimaryTextInput from "./../../components/PrimaryTextInput";
+import GooglePlaces from "./../../components/GooglePlaces"
 
 ////////////////////////
 // Constants
@@ -48,7 +50,9 @@ const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
 const MULTILINE_INPUT_MAX_CHARACTER_PROPERTY    = 300;
 // Bools
 const MULTILINE_ENABLED_BOOL                    = true;
-
+const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
+const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
+ 
 
 class CreateProjectDescription extends Component {
 
@@ -56,6 +60,21 @@ class CreateProjectDescription extends Component {
   ////////////////////////
   // Callbacks
   ////////////////////////
+  ////////////////////
+  // Constructor
+  ////////////////////
+
+  constructor(props){
+    super(props);
+    this.state = { 
+      placeSearchVisible: "none",
+      placeSearchFocus: false,
+      projectNameField: "",
+      projetDescriptionField: "",
+      locationValue: "",
+      geometryLocation: "",
+    };
+  }
 
 
   ////////////////////////
@@ -63,30 +82,49 @@ class CreateProjectDescription extends Component {
   ////////////////////////
 
   render() {
+    console.log(this.state);
     return (
       <View style={CommonStyles.container}>
-        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
-          <PrimaryTextInput
-            onChangeText={emailField => this.setState({emailField})} 
-            placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
-            returnKeyType={RETURN_KEY_TYPE} 
-            validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
-          <PrimaryTextInput 
-            onChangeText={passwordField => this.setState({passwordField})} 
-            placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
-            returnKeyType={RETURN_KEY_TYPE}
-            keyboardType={DEFAULT_KEYBOARD_TYPE}/>
-          <PrimaryTextInput 
-            onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
-            placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
-            multiline={MULTILINE_ENABLED_BOOL}
-            maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
-            returnKeyType={RETURN_KEY_TYPE}
-            keyboardType={DEFAULT_KEYBOARD_TYPE}
-            validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
-        </KeyboardAvoidingView>
-        <View style={styles.buttonWrapper}> 
-          <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+      <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
+        <PrimaryTextInput
+          onChangeText={projectNameField => this.setState({projectNameField})} 
+          placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
+          returnKeyType={RETURN_KEY_TYPE} 
+          validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
+        <PrimaryTextInput 
+          onChangeText={projetDescriptionField => this.setState({projetDescriptionField})} 
+          placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
+          returnKeyType={RETURN_KEY_TYPE}
+          keyboardType={DEFAULT_KEYBOARD_TYPE}
+          value={this.state.locationValue}
+          onFocus={()=>{
+            this.setState({placeSearchVisible: "flex", placeSearchFocus: true});
+            this._places.triggerFocus()
+          }}/>
+        <PrimaryTextInput 
+          onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
+          placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
+          multiline={MULTILINE_ENABLED_BOOL}
+          maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
+          returnKeyType={RETURN_KEY_TYPE}
+          keyboardType={DEFAULT_KEYBOARD_TYPE}
+          validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
+      
+      </KeyboardAvoidingView>
+      <View style={styles.buttonWrapper}> 
+        <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+      </View>
+      <View style={{
+        position: "absolute",
+        backgroundColor: '#FFF',
+        display: this.state.placeSearchVisible,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+      }}>
+        <GooglePlaces 
+        ref={ref=> this._places = ref}/>
         </View>
       </View>
     );
@@ -116,7 +154,7 @@ const styles = StyleSheet.create({
     left: 0,
     marginHorizontal: 20,
     marginVertical: 20,
-  }
+  },
 });
 
 ////////////////////////
