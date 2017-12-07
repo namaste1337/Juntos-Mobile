@@ -97,6 +97,10 @@ class  GooglePlaces extends Component {
   // Methods
   ////////////////////////
 
+  triggerFocus(){
+    this._places.triggerFocus();
+  }
+
   // Note: Publci and private methods
 
   render(){
@@ -104,6 +108,7 @@ class  GooglePlaces extends Component {
     return (
       <GooglePlacesAutocomplete
         {...this.props}
+        ref={ref=> this._places = ref}/>
         placeholder='Enter Location'
         minLength={2}
         autoFocus={this.state.placeSearchFocus}
