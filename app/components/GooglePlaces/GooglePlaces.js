@@ -31,24 +31,15 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
-// Note: Constants must be defined with all uppercase
-// letters seprating words with by underscore (_).
-// The constants must be seperated by purpose, and each 
-// constant name followed by a pre-defined type.
-
-// Ex:
-// //Images
-// const PROFILE_IMAGE = require("../assets/profile/profile_image.png");
-// //Strings
-// const PROFILE_NAME_STRING = @"John";
-// //Numbers
-// const IMAGE_COUNT_NUMBER = 5;
-// //Properties 
-// const IMAGE_SIZE_WIDTH_PROPERTY  = 100;
-// const IMAGE_SIZE_HEIFHT_PROPERTY = 100
-// //States
-// const INITIAL_PROFILE_IMAGE_SOURCE_STATE =  require("../assets/profile/default_profile.png")
-
+// Strings
+const PLACE_HOLDER_STRING       = 'Enter Location';
+// Properties
+const RETURN_KEY_TYPE_PROPERTY  = 'default';
+const MINIMUM_LENGTH_PROPERTY   = 2;
+const FETCH_DETAILS_PROPERTY    = true;
+const QUERY_KEY_PROPERTY        = "AIzaSyA9DqXBxlJc8RVlHLwg_95H8yVDGdftD3Q";
+const LANGUAGE_CODE_PROPERTY    = "en";
+const TYPES_GEOCODES_PROPERTY   = "geocode";
 
 ////////////////////////
 // Component
@@ -104,34 +95,21 @@ class  GooglePlaces extends Component {
   // Note: Publci and private methods
 
   render(){
-    console.log(styles);
+
     return (
       <GooglePlacesAutocomplete
         {...this.props}
-        ref={ref=> this._places = ref}/>
-        placeholder='Enter Location'
-        minLength={2}
+        ref={ref=> this._places = ref}
+        placeholder={PLACE_HOLDER_STRING}
+        minLength={MINIMUM_LENGTH_PROPERTY}
         autoFocus={this.state.placeSearchFocus}
-        returnKeyType={'default'}
-        fetchDetails={true}
-        currentLocation={false}
-        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log(data);
-          // Will contain the longitude and latitutde in the geometry field
-          console.log(details); 
-          this.setState({
-            placeSearchVisible: "none",
-            locationValue: details.formatted_address,
-            geometryLocation: details.geometry.location
-          })
-
-        }}
+        returnKeyType={RETURN_KEY_TYPE_PROPERTY}
+        fetchDetails={FETCH_DETAILS_PROPERTY}
         styles={styles.placesSearch}
         query={{
-        // available options: https://developers.google.com/places/web-service/autocomplete
-        key: 'AIzaSyA9DqXBxlJc8RVlHLwg_95H8yVDGdftD3Q',
-        language: 'en', // language of the results
-        types: 'geocode' }} />
+        key: QUERY_KEY_PROPERTY,
+        language: LANGUAGE_CODE_PROPERTY,
+        types: TYPES_GEOCODES_PROPERTY }} />
     )
   }
 
