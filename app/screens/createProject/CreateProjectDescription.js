@@ -114,17 +114,21 @@ class CreateProjectDescription extends Component {
       <View style={styles.buttonWrapper}> 
         <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
       </View>
-      <View style={{
-        position: "absolute",
-        backgroundColor: '#FFF',
-        display: this.state.placeSearchVisible,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0
-      }}>
+      <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
         <GooglePlaces 
-        ref={ref=> this._places = ref}/>
+        ref={ref=> this._places = ref}
+        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+          console.log(data);
+          // Will contain the longitude and latitutde in the geometry field
+          console.log(details); 
+          this.setState({
+            placeSearchVisible: "none",
+            locationValue: details.formatted_address,
+            geometryLocation: details.geometry.location
+          })
+
+        }}/>
+
         </View>
       </View>
     );
@@ -155,6 +159,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 20,
   },
+  googlePlacesWrapper:{
+    position: "absolute",
+    backgroundColor: '#FFF',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  }
 });
 
 ////////////////////////
