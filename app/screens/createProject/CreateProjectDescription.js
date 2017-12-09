@@ -48,11 +48,10 @@ const RETURN_KEY_TYPE                           = "done";
 const DEFAULT_KEYBOARD_TYPE                     = "default";
 const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
 const MULTILINE_INPUT_MAX_CHARACTER_PROPERTY    = 300;
+const GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY    = "flex";
+const GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY  = "none";
 // Bools
 const MULTILINE_ENABLED_BOOL                    = true;
-const homePlace = { description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
-const workPlace = { description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
- 
 
 class CreateProjectDescription extends Component {
 
@@ -98,7 +97,7 @@ class CreateProjectDescription extends Component {
           keyboardType={DEFAULT_KEYBOARD_TYPE}
           value={this.state.locationValue}
           onFocus={()=>{
-            this.setState({placeSearchVisible: "flex", placeSearchFocus: true});
+            this.setState({placeSearchVisible: GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY, placeSearchFocus: true});
             this._places.triggerFocus()
           }}/>
         <PrimaryTextInput 
@@ -117,18 +116,15 @@ class CreateProjectDescription extends Component {
       <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
         <GooglePlaces 
         ref={ref=> this._places = ref}
-        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log(data);
-          // Will contain the longitude and latitutde in the geometry field
-          console.log(details); 
+        onPress={(data, details) => {
+          // Set the selected address physical address and coordinates
           this.setState({
-            placeSearchVisible: "none",
+            placeSearchVisible: GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY,
             locationValue: details.formatted_address,
             geometryLocation: details.geometry.location
           })
 
         }}/>
-
         </View>
       </View>
     );
