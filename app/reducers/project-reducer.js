@@ -1,6 +1,4 @@
-import 
-{ ProjectActions } from "../actions/account-actions"
-
+import { ProjectActions } from "./../actions/project-actions"
 
 export default function session(
 	state = {
@@ -8,13 +6,14 @@ export default function session(
 	}, action)
 {
 	switch (action.type) {
-		case AccountActions.POPULATE_TEMP_DESCRIPTION:
+		case ProjectActions.POPULATE_TEMP_DESCRIPTION:
 			return Object.assign({}, state, {
-        		isLoggedIn: action.payload.isLoggedIn,
-        		isFetching: action.payload.isFetching
+        		projectName: action.payload.projectName,
+        		projectCoords: action.payload.projectCoords,
+            projectDescription: action.payload.projectDescription
       		});
-      	default:
-      		return state;
+    default:
+      return state;
 	}
 
 }
