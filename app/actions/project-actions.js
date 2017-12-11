@@ -27,15 +27,15 @@ export function navigateToCreateProject(){
 
 }
 
-export function populateTempDescription(projectName, projectCoords, projectDescription){
+export function populateTempDescription(projectName, projectLocation, projectDescription){
 
 	let data = {}
 	data.projectName 		= projectName;
-	data.projectCoords 		= projectCoords;
+	data.projectLocation 	= projectLocation;
 	data.projectDescription = projectDescription;
  
 	return {
-		type: POPULATE_TEMP_DESCRIPTION,
+		type: ProjectActions.POPULATE_TEMP_DESCRIPTION,
 		payload: data
 	}
 
