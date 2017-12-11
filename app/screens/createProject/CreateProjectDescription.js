@@ -16,13 +16,14 @@ KeyboardAvoidingView
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "./../../common/styles.js"
-import {deviceProperties} from "./../../common/device.js"
+import CommonStyles from "./../../common/styles"
+import {deviceProperties} from "./../../common/device"
 
 ////////////////////////
 // Actions
 ////////////////////////
 
+import {populateTempDescription} from "./../../actions/project-actions"
 
 //////////////////////////////
 // Imports Custom Components
@@ -55,13 +56,9 @@ const MULTILINE_ENABLED_BOOL                    = true;
 
 class CreateProjectDescription extends Component {
 
-
-  ////////////////////////
-  // Callbacks
-  ////////////////////////
-  ////////////////////
+  ///////////////////////
   // Constructor
-  ////////////////////
+  ///////////////////////
 
   constructor(props){
     super(props);
@@ -75,13 +72,46 @@ class CreateProjectDescription extends Component {
     };
   }
 
+  ////////////////////////
+  // Callbacks
+  ////////////////////////
+
+  _onGooglePlacesPress(data, details){
+    this.setState({
+      placeSearchVisible: GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY,
+      locationValue: details.formatted_address,
+      geometryLocation: details.geometry.location
+    })
+  }
+
+  _onSignUpbuttonPress(){
+
+    let projectName        = this.state.projectNameField;
+    let projectLocation    = {
+      coordinates: this.state.geometryLocation,
+      address: this.state.locationValue
+    };
+    let projectDescription = this.state.projetDescriptionField;
+
+    // Set the the data the store 
+    this.props.populateTempDescription(projectName, projectLocation, projectDescription);
+
+    console.log(this.props.tempProject);
+  }
+
+  ////////////////////////
+  // Methods
+  ////////////////////////
+
+  _validateFields(){
+
+  }
 
   ////////////////////////
   // Screen UI
   ////////////////////////
 
   render() {
-    console.log(this.state);
     return (
       <View style={CommonStyles.container}>
       <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
@@ -90,8 +120,7 @@ class CreateProjectDescription extends Component {
           placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
           returnKeyType={RETURN_KEY_TYPE} 
           validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
-        <PrimaryTextInput 
-          onChangeText={projetDescriptionField => this.setState({projetDescriptionField})} 
+        <PrimaryTextInput  
           placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
           returnKeyType={RETURN_KEY_TYPE}
           keyboardType={DEFAULT_KEYBOARD_TYPE}
@@ -101,14 +130,13 @@ class CreateProjectDescription extends Component {
             this._places.triggerFocus()
           }}/>
         <PrimaryTextInput 
-          onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
+          onChangeText={projetDescriptionField => this.setState({projetDescriptionField})} 
           placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
           multiline={MULTILINE_ENABLED_BOOL}
           maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
           returnKeyType={RETURN_KEY_TYPE}
           keyboardType={DEFAULT_KEYBOARD_TYPE}
           validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
-      
       </KeyboardAvoidingView>
       <View style={styles.buttonWrapper}> 
         <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
@@ -116,15 +144,7 @@ class CreateProjectDescription extends Component {
       <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
         <GooglePlaces 
         ref={ref=> this._places = ref}
-        onPress={(data, details) => {
-          // Set the selected address physical address and coordinates
-          this.setState({
-            placeSearchVisible: GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY,
-            locationValue: details.formatted_address,
-            geometryLocation: details.geometry.location
-          })
-
-        }}/>
+        onPress={(data, details) => this._onGooglePlacesPress(data, details)}/>
         </View>
       </View>
     );
@@ -171,13 +191,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-
+    tempProject: state.project
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-
+    populateTempDescription: (projectName, projectLocation, projectDescription) => dispatch(populateTempDescription(projectName, projectLocation, projectDescription))
   };
 }
 
