@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import sessionReducer from './../reducers/session-reducer';
+import projectReducer from './../reducers/project-reducer';
 import AppNavigationReducer from '../navigation/AppNavigationReducer';
 
 const ALL_REDUCERS = combineReducers({
 	session: sessionReducer,
-	nav: AppNavigationReducer
+	nav: AppNavigationReducer,
+	project: projectReducer
 });
 
 
