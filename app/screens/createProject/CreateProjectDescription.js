@@ -38,21 +38,27 @@ import GooglePlaces from "./../../components/GooglePlaces"
 ////////////////////////
 
 // Strings
-const PROJECT_NAME_FIELD_PLACEHOLDER_STRING     = "Project Name";
-const LOCATION_FIELD_PLACEHOLDER_STRING         = "Location";
-const DESCRIPTION_FIELD_PLACEHOLDER_STRING      = "Description";
-const NEXT_BUTTON_STRING                        = "Next";
-const EMAIL_VALIDATION_MESSAGE_STRING           = "E-mail is invalid";
-const PASSWORD_VALIDATION_MESSAGE_STRING        = "Password is invalid or does not match";
-// Properties
-const RETURN_KEY_TYPE                           = "done";
-const DEFAULT_KEYBOARD_TYPE                     = "default";
-const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
-const MULTILINE_INPUT_MAX_CHARACTER_PROPERTY    = 300;
-const GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY    = "flex";
-const GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY  = "none";
-// Bools
-const MULTILINE_ENABLED_BOOL                    = true;
+const PROJECT_NAME_FIELD_PLACEHOLDER_STRING         = "Project Name";
+const LOCATION_FIELD_PLACEHOLDER_STRING             = "Location";
+const DESCRIPTION_FIELD_PLACEHOLDER_STRING          = "Description";
+const NEXT_BUTTON_STRING                            = "Next";
+const FIELD_VALIDATION_MESSAGE_STRING               = "Field cannot be empty";
+// Properties 
+const RETURN_KEY_TYPE                               = "done";
+const DEFAULT_KEYBOARD_TYPE                         = "default";
+const KEYBOARD_AVOIDING_VIEW_BEHAVIOR               = "position";
+const MULTILINE_INPUT_MAX_CHARACTER_PROPERTY        = 300;
+const GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY        = "flex";
+const GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY      = "none";
+// Bool 
+const GOOGLE_PLACES_FOCUS_ENABLED_BOOL_TRUE         = true;
+const MULTILINE_ENABLED_BOOL                        = true;
+const PROJECT_NAME_VALIDATION_TRUE_STATE            = true;
+const PROJECT_NAME_VALIDATION_FALSE_STATE           = false;
+const PROJECT_LOCATION_VALIDATION_TRUE_STATE        = true;
+const PROJECT_LOCATION_VALIDATION_FALSE_STATE       = false;
+const PROJECT_DESCRIPTION_VALIDATION_TRUE_STATE     = true;
+const PROJECT_DESCRIPTION_VALIDATION_FALSE_STATE    = false
 
 class CreateProjectDescription extends Component {
 
@@ -66,9 +72,12 @@ class CreateProjectDescription extends Component {
       placeSearchVisible: "none",
       placeSearchFocus: false,
       projectNameField: "",
-      projetDescriptionField: "",
-      locationValue: "",
+      projectDescriptionField: "",
+      projectLocationField: "",
       geometryLocation: "",
+      projectNameIsValid: PROJECT_NAME_VALIDATION_TRUE_STATE,
+      projectLocationIsValid: PROJECT_LOCATION_VALIDATION_TRUE_STATE,
+      projectDescriptionIsValid: PROJECT_DESCRIPTION_VALIDATION_TRUE_STATE
     };
   }
 
@@ -79,31 +88,94 @@ class CreateProjectDescription extends Component {
   _onGooglePlacesPress(data, details){
     this.setState({
       placeSearchVisible: GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY,
-      locationValue: details.formatted_address,
+      projectLocationField: details.formatted_address,
       geometryLocation: details.geometry.location
     })
   }
 
   _onSignUpbuttonPress(){
 
-    let projectName        = this.state.projectNameField;
-    let projectLocation    = {
-      coordinates: this.state.geometryLocation,
-      address: this.state.locationValue
-    };
-    let projectDescription = this.state.projetDescriptionField;
 
-    // Set the the data the store 
-    this.props.populateTempDescription(projectName, projectLocation, projectDescription);
+    if(this._validateFields()){
+      let projectName        = this.state.projectNameField;
+      let projectLocation    = {
+        coordinates: this.state.geometryLocation,
+        address: this.state.projectLocationField
+      };
+      let projectDescription = this.state.projetDescriptionField;
 
-    console.log(this.props.tempProject);
+      // Set the the data the store 
+      this.props.populateTempDescription(projectName, projectLocation, projectDescription);
+    }
+
   }
 
   ////////////////////////
   // Methods
   ////////////////////////
 
+  // handles validating the projectName value
+  _validateProjectName(projectName){
+
+    if(projectName == ""){
+      this.setState({projectNameIsValid: PROJECT_NAME_VALIDATION_FALSE_STATE});
+      return false;
+    }else{
+      this.setState({projectNameIsValid: PROJECT_NAME_VALIDATION_TRUE_STATE});
+      return true;
+    }
+
+  }
+
+  // Handles validating the ProjectLocation value
+  _validateLocation(projectLocation){
+
+    if(projectLocation == ""){
+      this.setState({projectLocationIsValid: PROJECT_LOCATION_VALIDATION_FALSE_STATE});
+      return false;
+    }else{
+      this.setState({projectLocationIsValid: PROJECT_LOCATION_VALIDATION_TRUE_STATE});
+      return true;
+    }
+
+  }
+
+  // Handles validating the projectDescriptionf field value
+  _validateDescription(projectDescription){
+    console.log(projectDescription);
+    if(projectDescription == ""){
+      this.setState({projectDescriptionIsValid: PROJECT_DESCRIPTION_VALIDATION_FALSE_STATE});
+      return false;
+    }else{
+      this.setState({projectDescriptionIsValid: PROJECT_DESCRIPTION_VALIDATION_TRUE_STATE});
+      return true; 
+    }
+
+  }
+
+  // Handles field validation
   _validateFields(){
+
+    let isValid = true;
+    //Fields
+    let projectName             = this.state.projectNameField;
+    let projectLocation         = this.state.projectLocationField;
+    let projectDescriptionField = this.state.projectDescriptionField;
+
+    // Validate project name field
+    isValid = this._validateProjectName(projectName);
+    if(!isValid)
+       return isValid;
+    // Validate project location field
+    isValid = this._validateLocation(projectLocation);
+    if(!isValid)
+      return isValid;
+    // Validate project description field
+    isValid = this._validateDescription(projectDescriptionField)
+    if(!isValid)
+      return isValid;
+
+    return true;
 
   }
 
@@ -112,6 +184,7 @@ class CreateProjectDescription extends Component {
   ////////////////////////
 
   render() {
+
     return (
       <View style={CommonStyles.container}>
       <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
@@ -119,24 +192,28 @@ class CreateProjectDescription extends Component {
           onChangeText={projectNameField => this.setState({projectNameField})} 
           placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
           returnKeyType={RETURN_KEY_TYPE} 
-          validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
+          validationMessage={FIELD_VALIDATION_MESSAGE_STRING} 
+          valid={this.state.projectNameIsValid}/>
         <PrimaryTextInput  
           placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
           returnKeyType={RETURN_KEY_TYPE}
           keyboardType={DEFAULT_KEYBOARD_TYPE}
-          value={this.state.locationValue}
+          value={this.state.projectLocationField}
+          validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+          valid={this.state.projectLocationIsValid}
           onFocus={()=>{
-            this.setState({placeSearchVisible: GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY, placeSearchFocus: true});
+            this.setState({placeSearchVisible: GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY, placeSearchFocus: GOOGLE_PLACES_FOCUS_ENABLED_BOOL_TRUE});
             this._places.triggerFocus()
           }}/>
         <PrimaryTextInput 
-          onChangeText={projetDescriptionField => this.setState({projetDescriptionField})} 
+          onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
           placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
           multiline={MULTILINE_ENABLED_BOOL}
           maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
           returnKeyType={RETURN_KEY_TYPE}
           keyboardType={DEFAULT_KEYBOARD_TYPE}
-          validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
+          validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+          valid={this.state.projectDescriptionIsValid} />
       </KeyboardAvoidingView>
       <View style={styles.buttonWrapper}> 
         <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
