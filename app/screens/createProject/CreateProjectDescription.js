@@ -23,7 +23,10 @@ import {deviceProperties} from "./../../common/device"
 // Actions
 ////////////////////////
 
-import {populateTempDescription} from "./../../actions/project-actions"
+import {
+populateTempDescription,
+navigateToProjectDetails
+} from "./../../actions/project-actions"
 
 //////////////////////////////
 // Imports Custom Components
@@ -95,8 +98,8 @@ class CreateProjectDescription extends Component {
 
   _onSignUpbuttonPress(){
 
-
     if(this._validateFields()){
+
       let projectName        = this.state.projectNameField;
       let projectLocation    = {
         coordinates: this.state.geometryLocation,
@@ -106,6 +109,10 @@ class CreateProjectDescription extends Component {
 
       // Set the the data the store 
       this.props.populateTempDescription(projectName, projectLocation, projectDescription);
+      
+      // Navigate to next view to continue the create project sequence
+      this.props.navigateToProjectDetails();
+
     }
 
   }
@@ -274,7 +281,8 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    populateTempDescription: (projectName, projectLocation, projectDescription) => dispatch(populateTempDescription(projectName, projectLocation, projectDescription))
+    populateTempDescription: (projectName, projectLocation, projectDescription) => dispatch(populateTempDescription(projectName, projectLocation, projectDescription)),
+    navigateToProjectDetails: dispatch(navigateToProjectDetails())
   };
 }
 
