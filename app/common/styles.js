@@ -52,5 +52,17 @@ export default StyleSheet.create({
   contentWrapper: {
     paddingHorizontal: 10,
   },
+  // Positions button to be fixed to bottom of view
+  buttonFixedWrapper:{
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+  },
+  buttonFixedBottom:{
+    flex: 1,
+    left: 0,
+    marginHorizontal: 20,
+    marginVertical: 20,
+  },
 
 });
