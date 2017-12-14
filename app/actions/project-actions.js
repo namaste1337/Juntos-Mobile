@@ -27,6 +27,12 @@ export function navigateToCreateProject(){
 
 }
 
+export function navigateToProjectDetails(){
+
+ return NavigationActions.navigate({routeName: "CreateProjectDetails"});
+
+}
+
 export function populateTempDescription(projectName, projectLocation, projectDescription){
 
 	let data = {}
