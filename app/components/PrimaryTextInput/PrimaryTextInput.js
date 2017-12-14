@@ -27,10 +27,11 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
-//Properties
+// Properties
 const PLACE_HOLDER_TEXT_COLOR_PROPERTY = "#858384"; // Move to commons/styles.js
 const ANDROID_UNDERLINE_COLOR_PROPERTY = 'rgba(0,0,0,0)'; // Move to commons/styles.js
-
+// Bool
+const BLUR_ON_SUBMIT_PROPERTY          = true;
 ////////////////////////
 // Component
 ////////////////////////
@@ -94,7 +95,8 @@ class  PrimaryTextInput extends Component {
           }}
           placeholderTextColor={PLACE_HOLDER_TEXT_COLOR_PROPERTY}
           underlineColorAndroid={ANDROID_UNDERLINE_COLOR_PROPERTY} 
-          style={textInputStyle} />
+          style={textInputStyle} 
+          blurOnSubmit={BLUR_ON_SUBMIT_PROPERTY}/>
           <View style={styles.footer}>
             {/* Render the multilineCounter when multiline is enabled */}
             {renderIf(this.props.multiline, 
