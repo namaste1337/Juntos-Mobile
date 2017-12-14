@@ -99,7 +99,7 @@ class CreateProjectDescription extends Component {
   _onSignUpbuttonPress(){
 
     if(this._validateFields()){
-
+      console.log("Fields are valid");
       let projectName        = this.state.projectNameField;
       let projectLocation    = {
         coordinates: this.state.geometryLocation,
@@ -282,7 +282,7 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     populateTempDescription: (projectName, projectLocation, projectDescription) => dispatch(populateTempDescription(projectName, projectLocation, projectDescription)),
-    navigateToProjectDetails: dispatch(navigateToProjectDetails())
+    navigateToProjectDetails: () => dispatch(navigateToProjectDetails())
   };
 }
 
