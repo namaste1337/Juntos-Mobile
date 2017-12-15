@@ -119,6 +119,12 @@ class CreateProjectDescription extends Component {
 
   }
 
+  // Handles on location focuse, makes the google place module visible
+  _onLocationFieldFocus(){
+    this.setState({placeSearchVisible: GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY, placeSearchFocus: GOOGLE_PLACES_FOCUS_ENABLED_TRUE_BOOL});
+    this._places.triggerFocus()
+  }
+
   ////////////////////////
   // Methods
   ////////////////////////
@@ -210,10 +216,7 @@ class CreateProjectDescription extends Component {
           value={this.state.projectLocationField}
           validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
           valid={this.state.projectLocationIsValid}
-          onFocus={()=>{
-            this.setState({placeSearchVisible: GOOGLE_PLACES_WRAPPER_VISIBLE_PROPERTY, placeSearchFocus: GOOGLE_PLACES_FOCUS_ENABLED_TRUE_BOOL});
-            this._places.triggerFocus()
-          }}/>
+          onFocus={() => this._onLocationFieldFocus() }/>
         <PrimaryTextInput 
           onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
           placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
