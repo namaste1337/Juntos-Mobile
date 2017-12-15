@@ -88,6 +88,7 @@ class CreateProjectDescription extends Component {
   // Callbacks
   ////////////////////////
 
+  // Handles google places on address press event
   _onGooglePlacesPress(data, details){
     this.setState({
       placeSearchVisible: GOOGLE_PLACES_WRAPPER_INVISIBLE_PROPERTY,
@@ -96,6 +97,7 @@ class CreateProjectDescription extends Component {
     })
   }
 
+  // Handles next button on press event
   _onSignUpbuttonPress(){
 
     if(this._validateFields()){
