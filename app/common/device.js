@@ -34,6 +34,8 @@ export const deviceTypes = {
 // property to future proof access
 export const deviceOS =  Platform.OS;
 
+// The following wraps the Dimmensions retrival 
+//  properties to future proof access
 export const deviceProperties = {
 	width: Dimensions.get("window").width,
 	height: Dimensions.get("window").height,
