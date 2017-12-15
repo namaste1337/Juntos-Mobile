@@ -5,13 +5,9 @@
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 import { 
-Text, 
-Dimensions,
-ScrollView,
-Image,
-StyleSheet,
-TouchableOpacity,
-View
+View,
+KeyboardAvoidingView,
+StyleSheet
 } from 'react-native';
 
 //////////////////////////////
@@ -36,22 +32,14 @@ import PrimaryButton from './../../components/PrimaryButton';
 ////////////////////////
 // Constants
 ////////////////////////
-const screenCenter                  = Dimensions.get('window').width/2;
+const KEYBOARD_AVOIDING_VIEW_BEHAVIOR               = "position";
+const NEXT_BUTTON_STRING                            = "Next";
 
 class CreateProjectDetails extends Component {
 
 
   tabBarOnPress(){
     
-  }
-
-
-  ////////////////////////
-  // Navigation Options
-  ////////////////////////
-
-  static navigationOptions = {
-    headerRight: <TouchableOpacity><Text>Next</Text></TouchableOpacity>,
   }
 
   ////////////////////////
@@ -65,9 +53,13 @@ class CreateProjectDetails extends Component {
 
   render() {
     return (
-     <ScrollView style={CommonStyles.container}>
-     <Text> Create Project Details </Text>
-     </ScrollView>
+      <View style={CommonStyles.container}>
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
+        </KeyboardAvoidingView>
+        <View style={CommonStyles.buttonFixedWrapper}> 
+          <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+        </View>
+      </View>
     );
   }
 }
