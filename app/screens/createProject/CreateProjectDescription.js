@@ -222,8 +222,8 @@ class CreateProjectDescription extends Component {
           validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
           valid={this.state.projectDescriptionIsValid} />
       </KeyboardAvoidingView>
-      <View style={styles.buttonWrapper}> 
-        <PrimaryButton style={styles.nextButton} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+      <View style={CommonStyles.buttonFixedWrapper}> 
+        <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
       </View>
       <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
         <GooglePlaces 
@@ -247,17 +247,6 @@ const styles = StyleSheet.create({
   tabBarIcon:{
     width: 25,
     height: 25
-  },
-  buttonWrapper:{
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-  },
-  nextButton:{
-    flex: 1,
-    left: 0,
-    marginHorizontal: 20,
-    marginVertical: 20,
   },
   googlePlacesWrapper:{
     position: "absolute",
