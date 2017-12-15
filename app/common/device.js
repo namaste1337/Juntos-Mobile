@@ -7,6 +7,7 @@
 ////////////////////////
 import{
 	Dimensions
+	Platform
 } from "react-native";
 
 ////////////////////////
@@ -28,6 +29,10 @@ export const deviceTypes = {
 	ios: "ios",
 	android: "android"
 }
+
+// The following wraps the platform retrival 
+// property to future proof access
+export const deviceOS =  Platform.OS;
 
 export const deviceProperties = {
 	width: Dimensions.get("window").width,
