@@ -27,6 +27,7 @@ import {accountLogout} from "./../../actions/account-actions.js";
 // Imports Custom Components
 ///////////////////////////////
 
+import DatePickerField from './../../components/DatePickerField';
 import PrimaryButton from './../../components/PrimaryButton';
 
 ////////////////////////
@@ -37,10 +38,6 @@ const NEXT_BUTTON_STRING                            = "Next";
 
 class CreateProjectDetails extends Component {
 
-
-  tabBarOnPress(){
-    
-  }
 
   ////////////////////////
   // Callbacks
@@ -54,11 +51,13 @@ class CreateProjectDetails extends Component {
   render() {
     return (
       <View style={CommonStyles.container}>
-        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
-        </KeyboardAvoidingView>
         <View style={CommonStyles.buttonFixedWrapper}> 
           <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
         </View>
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
+          <DatePickerField placeholder={"Project Start"}/>
+          <DatePickerField placeholder={"Project End"}/>
+        </KeyboardAvoidingView>
       </View>
     );
   }
