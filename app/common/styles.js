@@ -52,7 +52,21 @@ export default StyleSheet.create({
   contentWrapper: {
     paddingHorizontal: 10,
   },
-  // Positions button to be fixed to bottom of view
+
+  /////////////////////////
+  //  Tabbar Icon
+  /////////////////////////
+
+  tabBarIcon:{
+    width: 25,
+    height: 25
+  },
+
+  /////////////////////////
+  // Positions button to be
+  // fixed to bottom of view
+  /////////////////////////
+
   buttonFixedWrapper:{
     position: "absolute",
     bottom: 0,

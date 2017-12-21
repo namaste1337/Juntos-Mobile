@@ -21,7 +21,7 @@ deviceTypes,
 deviceProperties
 } from "./../common/device";
 import {renderIf} from  "./../common/components";
-import {COLORS} from "../common/styles.js"
+import CommonStyles, {COLORS} from "../common/styles"
 
 ////////////////////////
 // Actions
@@ -151,7 +151,7 @@ class Projects extends Component {
       tabBarIcon: ({tintColor}) => (
         <Image
           source={PROJECT_TABBAR_ICON_IMAGE}
-          style={[styles.tabBarIcon, {tintColor: tintColor}]}
+          style={[CommonStyles.tabBarIcon, {tintColor: tintColor}]}
         />
       )
     }
@@ -308,10 +308,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  tabBarIcon:{
-    width: 25,
-    height: 25
   },
   addButtonWrapper:{
     position:"absolute",

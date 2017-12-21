@@ -19,7 +19,7 @@ View
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../common/styles.js"
+import CommonStyles from "../common/styles"
 
 ////////////////////////
 // Actions
@@ -55,7 +55,7 @@ class Settings extends Component {
     tabBarIcon: ({tintColor}) => (
       <Image
         source={PROJECT_TABBAR_ICON_IMAGE}
-        style={[styles.tabBarIcon, {tintColor: tintColor}]}
+        style={[CommonStyles.tabBarIcon, {tintColor: tintColor}]}
       />
     )
   }
@@ -91,10 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
-  tabBarIcon:{
-    width: 25,
-    height: 25
-  }
 });
 
 ////////////////////////
