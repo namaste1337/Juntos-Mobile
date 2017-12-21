@@ -6,7 +6,7 @@
 // Import Modules
 ////////////////////////
 import{
-	Dimensions
+	Dimensions,
 	Platform
 } from "react-native";
 
