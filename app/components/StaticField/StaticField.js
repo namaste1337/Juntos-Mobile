@@ -34,13 +34,25 @@ import styles from "./styles";
 class  StaticField extends Component {
 
   ////////////////////////
+  // Callbacks
+  ////////////////////////
+
+  _onPress(){
+
+    if(this.props.onPress != null){
+      this.props.onPress();
+    }
+
+  }
+
+  ////////////////////////
   // Methods
   ////////////////////////
 
   render(){
 
     return(
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> this._onPress() }>
         <InputValidation valid={true} validationMessage={"Message"}>
  
           {renderIf(this.props.value == null || this.props.value === "" ,
