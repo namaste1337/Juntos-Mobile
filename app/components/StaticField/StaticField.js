@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import {
   Text,
+  TouchableOpacity
 } from 'react-native'
 
 ////////////////////////
@@ -39,14 +40,17 @@ class  StaticField extends Component {
   render(){
 
     return(
-      <InputValidation valid={true} validationMessage={"Message"}>
-        {renderIf(this.props.value == null || this.props.value === "" ,
-          <Text style={styles.text}> {this.props.placeHolder} </Text>
-        )}
-        {renderIf(this.props.value !== "",
-          <Text style={styles.text}> {this.props.value} </Text>
-        )}
-      </InputValidation>
+      <TouchableOpacity>
+        <InputValidation valid={true} validationMessage={"Message"}>
+ 
+          {renderIf(this.props.value == null || this.props.value === "" ,
+            <Text style={styles.text}> {this.props.placeHolder} </Text>
+          )}
+          {renderIf(this.props.value !== "",
+            <Text style={styles.text}> {this.props.value} </Text>
+          )}
+        </InputValidation>
+      </TouchableOpacity>
     )
   }
 
