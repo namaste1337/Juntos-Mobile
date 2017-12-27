@@ -33,7 +33,7 @@ import styles from "./styles";
 // Imports Custom Components
 ///////////////////////////////
 
-import PrimaryTextInput from './../PrimaryTextInput';
+import StaticField from './../StaticField';
 
 ////////////////////////
 // Constants
@@ -113,12 +113,10 @@ class DatePickerField extends Component {
 
     return (
       <View>
-        <PrimaryTextInput 
-        {...this.props} 
-        onChangeText={()=>{}}
+        <StaticField
+        placeHolder={this.props.placeHolder}
         value={this.state.textInputValue}
-        editable={DATE_PICKER_EDITABLE_BOOL} 
-        onFocus={() => this._onPrimaryInputFocus() }/>
+        onPress={() => this._onPrimaryInputFocus() }/>
         <View style={[styles.datePickerWrapper]}>
         	<DatePicker 
           ref={ref => this._datePicker = ref}

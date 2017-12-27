@@ -55,8 +55,8 @@ class CreateProjectDetails extends Component {
           <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
         </View>
         <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
-          <DatePickerField placeholder={"Project Start"}/>
-          <DatePickerField placeholder={"Project End"}/>
+          <DatePickerField placeHolder={"Project Start"}/>
+          <DatePickerField placeHolder={"Project End"}/>
         </KeyboardAvoidingView>
       </View>
     );
