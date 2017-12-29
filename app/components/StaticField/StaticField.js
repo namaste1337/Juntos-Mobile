@@ -37,6 +37,7 @@ class  StaticField extends Component {
   // Callbacks
   ////////////////////////
 
+  // Handles on press callback from touch opacity
   _onPress(){
 
     if(this.props.onPress != null){
@@ -53,7 +54,7 @@ class  StaticField extends Component {
 
     return(
       <TouchableOpacity onPress={()=> this._onPress() }>
-        <InputValidation valid={true} validationMessage={"Message"}>
+        <InputValidation valid={this.props.valid} validationMessage={this.props.validationMessage}>
  
           {renderIf(this.props.value == null || this.props.value === "" ,
             <Text style={styles.text}> {this.props.placeHolder} </Text>
