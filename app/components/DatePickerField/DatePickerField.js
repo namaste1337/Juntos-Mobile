@@ -57,11 +57,20 @@ const DATE_PICKER_EDITABLE_BOOL         = true;
 class DatePickerField extends Component {
 
   ////////////////////////
+  // Default Props
+  ////////////////////////
+
+  static defaultProps = {
+    ...Component.defaultProps,
+    valid: true,
+    validationMessage: ""
+  }
+
+  ////////////////////////
   // Constructor
   ////////////////////////
 
   constructor(props){
-
     super(props)
     this.state = {
     	defaultDate: new Date,
@@ -87,7 +96,7 @@ class DatePickerField extends Component {
   // Handlee dispalying the date picker when 
   // the input field is focused
   _onPrimaryInputFocus(){
-    console.log("Attempting to show date picker");
+
     Keyboard.dismiss();
     this._datePicker.onPressDate();
 
@@ -156,6 +165,9 @@ const buttonStyles= {
 
 DatePickerField.propTypes = {
   //Prop validation definitions for custom props
+  valid: PropTypes.bool,
+  validationMessage: PropTypes.string
+
 }
 
 export default DatePickerField;
