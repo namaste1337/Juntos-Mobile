@@ -114,7 +114,7 @@ class DatePickerField extends Component {
     return (
       <View>
         <StaticField
-        placeHolder={this.props.placeHolder}
+        placeholder={this.props.placeholder}
         value={this.state.textInputValue}
         onPress={() => this._onPrimaryInputFocus() }
         valid={this.props.valid || true}
