@@ -117,8 +117,8 @@ class DatePickerField extends Component {
         placeholder={this.props.placeholder}
         value={this.state.textInputValue}
         onPress={() => this._onPrimaryInputFocus() }
-        valid={this.props.valid || true}
-        validationMessage={this.props.validatioMessage}/>
+        valid={this.props.valid}
+        validationMessage={this.props.validationMessage}/>
         <View style={[styles.datePickerWrapper]}>
         	<DatePicker 
           ref={ref => this._datePicker = ref}
