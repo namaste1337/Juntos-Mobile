@@ -17,15 +17,13 @@ export default StyleSheet.create({
   inputValidationWrapper:{
     height: 49,
     marginVertical: 10,
-    paddingBottom: 0,
     borderBottomWidth: 1,
     borderColor: "#CCC",
-    justifyContent: "center"
+    justifyContent: "flex-end",
   },
   
   inputValidationMessage: {
-    flex: 1,
-    alignItems: "flex-end",
+
     textAlign: "right",
     color: "red",
     fontFamily: "Roboto-Light",
