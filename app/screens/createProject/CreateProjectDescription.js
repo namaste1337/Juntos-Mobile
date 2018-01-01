@@ -27,7 +27,7 @@ import {COLORS} from "./../../common/styles";
 import {
 populateTempDescription,
 navigateToProjectDetails
-} from "./../../actions/project-actions"
+} from "./../../actions/project-actions";
 
 //////////////////////////////
 // Imports Custom Components
@@ -35,7 +35,7 @@ navigateToProjectDetails
 
 import PrimaryButton from "./../../components/PrimaryButton";
 import PrimaryTextInput from "./../../components/PrimaryTextInput";
-import GooglePlaces from "./../../components/GooglePlaces"
+import GooglePlaces from "./../../components/GooglePlaces";
 
 ////////////////////////
 // Constants
@@ -62,7 +62,7 @@ const PROJECT_NAME_VALIDATION_FALSE_STATE_BOOL           = false;
 const PROJECT_LOCATION_VALIDATION_TRUE_STATE_BOOL        = true;
 const PROJECT_LOCATION_VALIDATION_FALSE_STATE_BOOL       = false;
 const PROJECT_DESCRIPTION_VALIDATION_TRUE_STATE_BOOL     = true;
-const PROJECT_DESCRIPTION_VALIDATION_FALSE_STATE_BOOL    = false
+const PROJECT_DESCRIPTION_VALIDATION_FALSE_STATE_BOOL    = false;
 
 class CreateProjectDescription extends Component {
 
