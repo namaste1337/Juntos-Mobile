@@ -51,12 +51,4 @@ class Icon extends Component {
 
 }
 
-////////////////////////
-// Prop Type Checks
-////////////////////////
-
-Icon.propTypes = {
-  source: PropTypes.number.isRequired
-}
-
 export default Icon;
