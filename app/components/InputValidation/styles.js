@@ -8,6 +8,10 @@ import {
   StyleSheet,
 } from 'react-native'
 
+import {
+FONTS,
+COLORS,
+} from "./../../common/styles";
 ////////////////////////
 // Styles
 ////////////////////////
@@ -18,18 +22,16 @@ export default StyleSheet.create({
     height: 49,
     marginVertical: 10,
     borderBottomWidth: 1,
-    borderColor: "#CCC",
+    borderColor: COLORS.MID_GREY,
     justifyContent: "flex-end",
   },
   
   inputValidationMessage: {
-
     textAlign: "right",
-    color: "red",
-    fontFamily: "Roboto-Light",
+    color: COLORS.RED,
+    fontFamily: FONTS.PRIMARY,
     fontSize: 13,
     paddingRight: 11
-
   },
 
 
