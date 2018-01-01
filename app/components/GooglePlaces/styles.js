@@ -1,5 +1,12 @@
+// Styles for GooglePlaces
 
+////////////////////////
+// Import Common Files
+////////////////////////
 
+import {
+COLORS,
+} from "./../../common/styles";
 
 // Special use case for the GooglePlaces Styles
 // GooglePlaces only allows overrides of existing 
@@ -7,7 +14,7 @@
 export default styles = {
   placesSearch:{
     textInputContainer: {
-      backgroundColor: 'rgba(0,0,0,0)',
+      backgroundColor: COLORS.RGB_TRANSAPRENT,
       borderTopWidth: 0,
       borderBottomWidth:0,
    	},
@@ -15,11 +22,8 @@ export default styles = {
       marginLeft: 0,
       marginRight: 0,
       height: 38,
-      color: '#5d5d5d',
+      color: COLORS.MID_GREY,
       fontSize: 16
   	},
-  	predefinedPlacesDescription: {
-      color: '#1faadb'
-   	},
   }
 }
