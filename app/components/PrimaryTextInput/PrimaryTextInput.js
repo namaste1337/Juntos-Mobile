@@ -92,7 +92,7 @@ class  PrimaryTextInput extends Component {
             this.props.onChangeText(field);
           }}
           placeholderTextColor={COLORS.MID_GREY}
-          underlineColorAndroid={COLORS.ANDROID_TRANSPARENT} 
+          underlineColorAndroid={COLORS.RGB_TRANSPARENT} 
           style={textInputStyle} 
           blurOnSubmit={BLUR_ON_SUBMIT_PROPERTY}/>
           <View style={styles.footer}>
