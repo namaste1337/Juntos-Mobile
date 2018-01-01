@@ -5,12 +5,6 @@
 
 // Note: node module imports
 import React, { Component } from 'react';
-import {
-  View,
-  TextInput,
-  Text
-} from 'react-native';
-import PropTypes from "prop-types";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 ////////////////////////
@@ -70,21 +64,6 @@ class  GooglePlaces extends Component {
   }
 
   ////////////////////////
-  // Life Cycle
-  ////////////////////////
-
-
-  ////////////////////////
-  // Getters and Setters
-  ////////////////////////
-
-  //Note: Public and private getters and setters
-
-  ////////////////////////
-  // Callbacks
-  ////////////////////////
-
-  ////////////////////////
   // Methods
   ////////////////////////
 
@@ -92,7 +71,7 @@ class  GooglePlaces extends Component {
     this._places.triggerFocus();
   }
 
-  // Note: Publci and private methods
+  // Note: Public and private methods
 
   render(){
 
@@ -113,15 +92,6 @@ class  GooglePlaces extends Component {
     )
   }
 
-}
-
-
-////////////////////////
-// Prop Type Checks
-////////////////////////
-
-GooglePlaces.propTypes = {
-  //Prop validation definitions for custom props
 }
 
 export default GooglePlaces;
