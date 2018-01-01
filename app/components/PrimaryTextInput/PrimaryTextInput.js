@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
 
 // Conditional rendering
 import {renderIf} from "./../../common/components";
-
+import {COLORS} from "./../../common/styles";
 ////////////////////////
 // Import Styles
 ////////////////////////
@@ -27,11 +27,9 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
-// Properties
-const PLACE_HOLDER_TEXT_COLOR_PROPERTY = "#858384"; // Move to commons/styles.js
-const ANDROID_UNDERLINE_COLOR_PROPERTY = 'rgba(0,0,0,0)'; // Move to commons/styles.js
 // Bool
 const BLUR_ON_SUBMIT_PROPERTY          = true;
+
 ////////////////////////
 // Component
 ////////////////////////
@@ -93,8 +91,8 @@ class  PrimaryTextInput extends Component {
             {/* Pass the field to the parent component */}
             this.props.onChangeText(field);
           }}
-          placeholderTextColor={PLACE_HOLDER_TEXT_COLOR_PROPERTY}
-          underlineColorAndroid={ANDROID_UNDERLINE_COLOR_PROPERTY} 
+          placeholderTextColor={COLORS.MID_GREY}
+          underlineColorAndroid={COLORS.ANDROID_TRANSPARENT} 
           style={textInputStyle} 
           blurOnSubmit={BLUR_ON_SUBMIT_PROPERTY}/>
           <View style={styles.footer}>
