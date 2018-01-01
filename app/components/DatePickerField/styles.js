@@ -9,7 +9,13 @@ import {
   Dimensions
 } from 'react-native'
 
-let {height, width} = Dimensions.get('window');
+////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+COLORS,
+} from "./../../common/styles";
 
 ////////////////////////
 // Styles
@@ -21,13 +27,11 @@ export default StyleSheet.create({
   // Date Picker
   ///////////////////////
   datePickerWrapper:{
-    backgroundColor: "#FFF",
+    backgroundColor: COLORS.WHITE,
     position: "absolute",
     top: 400,
     right: 0,
     left: 0,
-    // overflow: "visible",
-    // bottom: 0,
   }
 
 });
