@@ -12,6 +12,7 @@ import {
 FONTS,
 COLORS,
 } from "./../../common/styles";
+
 ////////////////////////
 // Styles
 ////////////////////////
