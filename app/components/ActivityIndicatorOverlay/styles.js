@@ -10,6 +10,14 @@ import {
 } from 'react-native'
 
 ////////////////////////
+// Import Common Files
+////////////////////////
+
+import {
+COLORS,
+} from "./../../common/styles";
+
+////////////////////////
 // Styles
 ////////////////////////
 
@@ -25,7 +33,7 @@ export default StyleSheet.create({
     left: 0,
     top: 0,
     opacity: 0.5,
-    backgroundColor: 'black',
+    backgroundColor: COLORS.BLACK,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height
   },  
