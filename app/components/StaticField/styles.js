@@ -6,10 +6,13 @@
 
 import {
   StyleSheet,
-  Dimensions
 } from 'react-native'
 
-let {height, width} = Dimensions.get('window');
+import {
+FONTS,
+COLORS,
+} from "./../../common/styles";
+
 
 ////////////////////////
 // Styles
@@ -18,8 +21,13 @@ let {height, width} = Dimensions.get('window');
 export default StyleSheet.create({
 
   text:{
-    fontFamily: "Roboto-Light",
-    color: "#929091",
+    fontFamily: FONTS.PRIMARY,
+    color: COLORS.BLACK
+  },
+
+  placeHolderText:{
+    fontFamily: FONTS.PRIMARY,
+    color: COLORS.MID_GREY,
     fontSize: 14,
     paddingVertical: 10,
     paddingHorizontal: 8
