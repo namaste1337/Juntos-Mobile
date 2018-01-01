@@ -16,8 +16,9 @@ KeyboardAvoidingView
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "./../../common/styles"
-import {deviceProperties} from "./../../common/device"
+import CommonStyles from "./../../common/styles";
+import {deviceProperties} from "./../../common/device";
+import {COLORS} from "./../../common/styles";
 
 ////////////////////////
 // Actions
@@ -247,7 +248,7 @@ class CreateProjectDescription extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.WHITE,
   },
   tabBarIcon:{
     width: 25,
@@ -255,7 +256,7 @@ const styles = StyleSheet.create({
   },
   googlePlacesWrapper:{
     position: "absolute",
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.WHITE,
     top: 0,
     left: 0,
     right: 0,
