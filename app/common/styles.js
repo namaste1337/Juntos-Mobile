@@ -45,7 +45,7 @@ export const FONT_WEIGHT = {
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF'
+    backgroundColor: COLORS.WHITE
   },
   keyboardViewWrapper: {
     height
