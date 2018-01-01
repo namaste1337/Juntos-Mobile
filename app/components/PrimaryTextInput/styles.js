@@ -8,6 +8,10 @@ import {
   StyleSheet,
 } from 'react-native'
 
+import {
+FONTS,
+COLORS,
+} from "./../../common/styles";
 ////////////////////////
 // Styles
 ////////////////////////
@@ -22,12 +26,12 @@ export default StyleSheet.create({
     marginVertical: 10,
     height: 50,
     borderBottomWidth: 1,
-    borderBottomColor: "#CCC"
+    borderBottomColor: COLORS.MID_GREY
   },
   input: {
     flex: 1,
     height: 100,
-    fontFamily: "Roboto-Light",
+    fontFamily: FONTS.PRIMARY,
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
@@ -39,7 +43,7 @@ export default StyleSheet.create({
   multilineInputSmall: {
     flex: 1,
     fontSize: 15,
-    fontFamily: "Roboto-Light",
+    fontFamily: FONTS.PRIMARY,
     paddingHorizontal: 10,
     paddingVertical: 10,
     textAlignVertical: "top",
@@ -47,7 +51,7 @@ export default StyleSheet.create({
    multilineInputWrapSmall: {
     height: 74,
     borderBottomWidth: 1,
-    borderBottomColor: "#CCC",
+    borderBottomColor: COLORS.MID_GREY,
   },
 
   /////////////////////
@@ -58,16 +62,16 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
   multilineCounter:{
-    color: "#ccc",
+    color: COLORS.MID_GREY,
     paddingLeft: 11,
-    fontFamily: 'Roboto-Light'
+    fontFamily: FONTS.PRIMARY
   },
   inputValidationMessage: {
     flex: 1,
     alignItems: "flex-end",
     textAlign: "right",
-    color: "red",
-    fontFamily: "Roboto-Light",
+    color: COLORS.RED,
+    fontFamily: FONTS.PRIMARY,
     fontSize: 13,
     paddingRight: 11
 
