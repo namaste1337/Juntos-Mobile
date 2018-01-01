@@ -57,7 +57,7 @@ class  StaticField extends Component {
         <InputValidation valid={this.props.valid} validationMessage={this.props.validationMessage}>
  
           {renderIf(this.props.value == null || this.props.value === "" ,
-            <Text style={styles.text}> {this.props.placeholder} </Text>
+            <Text style={styles.placeHolderText}> {this.props.placeholder} </Text>
           )}
           {renderIf(this.props.value !== "",
             <Text style={styles.text}> {this.props.value} </Text>
