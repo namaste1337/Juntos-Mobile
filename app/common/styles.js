@@ -21,6 +21,7 @@ export const FONTS = {
 export const COLORS = {
   PRIMARY: "#FF3366",
   TRANSPARENT: "transparent",
+  ANDROID_TRANSPARENT: "rgba(0,0,0,0)",
   MID_TRANSPARENCY: "rgba(0,0,0,0.5)",
   WHITE: "#FFFFFF",
   DARK_GREY: "#505050",
