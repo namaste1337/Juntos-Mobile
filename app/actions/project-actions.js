@@ -23,7 +23,8 @@ export const ProjectActions = {
 
 export function navigateToCreateProject(){
 
- return NavigationActions.navigate({routeName: "CreateProjectDescription"});
+	 return NavigationActions.navigate({routeName: "CreateProjectDetails"});
+ // return NavigationActions.navigate({routeName: "CreateProjectDescription"});
 
 }
 

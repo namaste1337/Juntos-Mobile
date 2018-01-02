@@ -67,6 +67,8 @@ const TEMP_DATA = [
     id: 1,
     image: "https://www.burney-falls.com/wp-content/uploads/2012/06/burney-cabin-m.jpg",
     title: "Wooden Home",
+    description: "Beautiful home on the prerrie",
+    distance: "5 miles",
     lat: 37.27,
     long: -121.90
   },
@@ -74,6 +76,7 @@ const TEMP_DATA = [
     id: 2,
     image: "https://odis.homeaway.com/odis/listing/2878aa26-7de3-4e26-95c0-41db54dde043.c10.jpg",
     title: "Stone Home",
+    description: "Beautiful home on the prerrie",
     lat: 37.29,
     long: -121.85
   },
@@ -237,6 +240,7 @@ class Projects extends Component {
   // Handles login for Map onMapReady callback
   // for the map component
   componentDidMount(){
+    console.log("Component Did Mount");
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
