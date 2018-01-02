@@ -11,7 +11,6 @@ import {
   DatePickerIOS,
   DatePickerAndroid,
   TouchableOpacity,
-  Keyboard
 } from 'react-native';
 import PropTypes from "prop-types";
 import DatePicker from 'react-native-datepicker'
@@ -71,6 +70,7 @@ class DatePickerField extends Component {
   ////////////////////////
 
   constructor(props){
+    
     super(props)
     this.state = {
     	defaultDate: new Date,
@@ -87,7 +87,6 @@ class DatePickerField extends Component {
   // the input field is focused
   _onPrimaryInputFocus(){
 
-    Keyboard.dismiss();
     this._datePicker.onPressDate();
 
   }
