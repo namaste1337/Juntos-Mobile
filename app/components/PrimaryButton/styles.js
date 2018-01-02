@@ -13,7 +13,8 @@ import {
 ////////////////////////
 
 import {
-  COLORS
+  COLORS,
+  FONTS
 } from "./../../common/styles"
 
 ////////////////////////
@@ -34,8 +35,8 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    color: "#FFF",
+    color: COLORS.WHITE,
     fontSize: 18,
-    fontFamily: 'Roboto-Light'
+    fontFamily: FONTS.PRIMARY
   }
 });
