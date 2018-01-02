@@ -83,16 +83,6 @@ class DatePickerField extends Component {
   // Callbacks
   ////////////////////////
 
-  _onDatePickerFocus(){
-
-    if(deviceOS == deviceTypes.ios){
-
-    }else if(deviceOS == deviceTypes.android){
-
-    }
-
-  }
-
   // Handlee dispalying the date picker when 
   // the input field is focused
   _onPrimaryInputFocus(){
@@ -115,8 +105,6 @@ class DatePickerField extends Component {
   ////////////////////////
   // Methods
   ////////////////////////
-
-  // Note: Publci and private methods
 
   render(){
 
