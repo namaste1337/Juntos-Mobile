@@ -52,6 +52,7 @@
 		D0BF4FB095CE447AAF027405 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E62F4AA493724BA98E2EBC54 /* Roboto-LightItalic.ttf */; };
 		D9C710B719644597B900C58E /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC2468494C014EE8A4F992C5 /* Roboto-Regular.ttf */; };
 		DDD3C67B92F6483CACDA170E /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6287BD67287F443DB621A8E5 /* libimageCropPicker.a */; };
+		E41EC3521FFD25550056A399 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E41EC32C1FFD254A0056A399 /* libRCTBEEPickerManager.a */; };
 		E48CE4AC1FA005AF007640F5 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E48CE4861FA0027E007640F5 /* libRCTCameraRoll.a */; };
 		E836C4567E164F34A86B8405 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 420B966AB9C44E3F962D617B /* Roboto-Italic.ttf */; };
 		EF8177AC5E9146D3A069BF08 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C1A5A5A5F3A404C89D14FEE /* Roboto-Light.ttf */; };
@@ -254,6 +255,27 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		E41EC32B1FFD254A0056A399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E41EC3221FFD254A0056A399 /* RCTBEEPickerManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17D41E551D7EE0CA0031415E;
+			remoteInfo = RCTBEEPickerManager;
+		};
+		E41EC34E1FFD254A0056A399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		E41EC3501FFD254A0056A399 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
+		};
 		E48CE4851FA0027E007640F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E48CE47B1FA0027E007640F5 /* RCTCameraRoll.xcodeproj */;
@@ -393,6 +415,7 @@
 		DC2468494C014EE8A4F992C5 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DD8C698A070D4CA796837848 /* sd_pro_display_bolditalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sd_pro_display_bolditalic.otf; path = ../assets/fonts/sd_pro_display_bolditalic.otf; sourceTree = "<group>"; };
 		DE6BF83CDD2642D6A943174F /* sfblack.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sfblack.otf; path = ../assets/fonts/sfblack.otf; sourceTree = "<group>"; };
+		E41EC3221FFD254A0056A399 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		E48CE47B1FA0027E007640F5 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		E62F4AA493724BA98E2EBC54 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		F1517762C1E94278B43316B3 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -416,6 +439,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E41EC3521FFD25550056A399 /* libRCTBEEPickerManager.a in Frameworks */,
 				E48CE4AC1FA005AF007640F5 /* libRCTCameraRoll.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -570,6 +594,8 @@
 				E48CE4A61FA0027E007640F5 /* libthird-party.a */,
 				E48CE4A81FA0027E007640F5 /* libdouble-conversion.a */,
 				E48CE4AA1FA0027E007640F5 /* libdouble-conversion.a */,
+				E41EC34F1FFD254A0056A399 /* libprivatedata.a */,
+				E41EC3511FFD254A0056A399 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -649,6 +675,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E41EC3221FFD254A0056A399 /* RCTBEEPickerManager.xcodeproj */,
 				E48CE47B1FA0027E007640F5 /* RCTCameraRoll.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -710,6 +737,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				E4C218F11F96F55B00489271 /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E41EC3231FFD254A0056A399 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E41EC32C1FFD254A0056A399 /* libRCTBEEPickerManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -898,6 +933,10 @@
 				{
 					ProductGroup = 5E91572E1DD0AC6500FF2AA8 /* Products */;
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
+				},
+				{
+					ProductGroup = E41EC3231FFD254A0056A399 /* Products */;
+					ProjectRef = E41EC3221FFD254A0056A399 /* RCTBEEPickerManager.xcodeproj */;
 				},
 				{
 					ProductGroup = ADBDB9201DFEBF0600ED6528 /* Products */;
@@ -1135,6 +1174,27 @@
 			fileType = archive.ar;
 			path = libRCTBlob.a;
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E41EC32C1FFD254A0056A399 /* libRCTBEEPickerManager.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTBEEPickerManager.a;
+			remoteRef = E41EC32B1FFD254A0056A399 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E41EC34F1FFD254A0056A399 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = E41EC34E1FFD254A0056A399 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E41EC3511FFD254A0056A399 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = E41EC3501FFD254A0056A399 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E48CE4861FA0027E007640F5 /* libRCTCameraRoll.a */ = {

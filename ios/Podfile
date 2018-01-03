@@ -11,6 +11,8 @@ target 'juntosMobile' do
   target 'juntosMobile-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Picker', :path => '../node_modules/react-native-picker'
+
   end
 
   target 'juntosMobileTests' do
