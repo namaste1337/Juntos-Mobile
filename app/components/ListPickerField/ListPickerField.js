@@ -3,9 +3,11 @@
 ////////////////////////
 
 import React, { Component } from 'react';
-import Picker from 'react-native-picker';
 import {
   View,
+  Modal,
+  Text,
+  Picker
 } from 'react-native'
 
 ////////////////////////
@@ -28,11 +30,6 @@ import styles from "./styles";
 import StaticField from './../StaticField';
 
 ////////////////////////
-// Constants
-////////////////////////
-
-
-////////////////////////
 // Componenet
 ////////////////////////
 
@@ -46,29 +43,26 @@ class  ListPickerField extends Component {
 
     super(props)
     this.state = {
-      textInputValue: "",
+      modalVisible: false
     }
 
 
   }
-
-  componentDidMount(){
-
-    Picker.init({
-      pickerData: this.props.pickerData
-    });
-
+  componentWillUnmount(){
+  
   }
 
   ////////////////////////
   // Callbacks
   ////////////////////////
 
-  // Handles dispalyingthe picker when 
-  // the input field is focused
+  // Handles dispalying the picker when 
+  // thefield is touched
   _onPrimaryInputFocus(){
 
-    Picker.show();
+    this.setState({
+      modalVisible: true
+    })
 
   }
 
@@ -87,6 +81,33 @@ class  ListPickerField extends Component {
         valid={this.props.valid}
         validationMessage={this.props.validationMessage}/>
         <View style={[styles.datePickerWrapper]} />
+        <Modal 
+        visible={this.state.modalVisible} 
+        transparent={true}
+        animationType={"slide"}>
+        <View style={{ flex: 1, justifyContent:"flex-end"}}>
+
+          <View style={{flexDirection: "row"}}>
+
+            <View stye={{flex: 1, backgroundColor: 'blue'}}>
+              <Text> Cancel </Text>
+            </View>
+
+            <View style={{ alignItems: "flex-end", backgroundColor: 'blue'}}>
+              <Text> Done </Text>
+            </View>
+
+          </View>
+
+          <Picker
+            style={{backgroundColor:"white"}}
+            selectedValue={this.state.language}
+            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
+        </View>
+        </Modal>
       </View>
     )
   }
