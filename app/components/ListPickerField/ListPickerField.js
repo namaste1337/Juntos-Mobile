@@ -3,7 +3,7 @@
 ////////////////////////
 
 import React, { Component } from 'react';
-import Pickerrr from 'react-native-picker';
+import Picker from 'react-native-picker';
 import {
   View,
 } from 'react-native'
@@ -54,14 +54,9 @@ class  ListPickerField extends Component {
 
   componentDidMount(){
 
-    let data = [];
-    for(var i=0;i<100;i++){
-        data.push(i);
-    }
-
-    console.log(Pickerrr)
-
-    Pickerrr.init();
+    Picker.init({
+      pickerData: this.props.pickerData
+    });
 
   }
 
@@ -73,9 +68,7 @@ class  ListPickerField extends Component {
   // the input field is focused
   _onPrimaryInputFocus(){
 
-    // this._datePicker.onPressDate();
-    Pickerrr.show();
-    console.log(Pickerrr)
+    Picker.show();
 
   }
 
