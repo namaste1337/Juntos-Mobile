@@ -7,7 +7,10 @@ import {
   View,
   Modal,
   Text,
-  Picker
+  Picker,
+  TouchableOpacity,
+  StyleSheet,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 ////////////////////////
@@ -16,12 +19,13 @@ import {
 
 // Conditional rendering
 import {renderIf} from "./../../common/components";
+import CommonStyles from "./../../common/styles";
 
 ////////////////////////
 // Import Styles
 ////////////////////////
 
-import styles from "./styles";
+// import styles from "./styles";
 
 //////////////////////////////
 // Imports Custom Components
@@ -58,7 +62,7 @@ class  ListPickerField extends Component {
 
   // Handles dispalying the picker when 
   // thefield is touched
-  _onPrimaryInputFocus(){
+  _onInputPress(){
 
     this.setState({
       modalVisible: true
@@ -66,9 +70,28 @@ class  ListPickerField extends Component {
 
   }
 
+  _onConfirmPress(){
+    this._closeModel();
+  }
+
+  _onCanelPress(){
+    this._closeModel();
+  }
+
+  ////////////////////////
+  // Pricate Methods
+  ////////////////////////
+
+  _closeModel(){
+    this.setState({
+      modalVisible: false
+    })
+  }
+
   ////////////////////////
   // Methods
   ////////////////////////
+
 
   render(){
 
@@ -77,7 +100,7 @@ class  ListPickerField extends Component {
         <StaticField
         placeholder={this.props.placeholder}
         value={this.state.textInputValue}
-        onPress={() => this._onPrimaryInputFocus() }
+        onPress={() => this._onInputPress() }
         valid={this.props.valid}
         validationMessage={this.props.validationMessage}/>
         <View style={[styles.datePickerWrapper]} />
@@ -85,16 +108,20 @@ class  ListPickerField extends Component {
         visible={this.state.modalVisible} 
         transparent={true}
         animationType={"slide"}>
-        <View style={{ flex: 1, justifyContent:"flex-end"}}>
+        <View onPress={()=> this._closeModel()} style={{ flex: 1, justifyContent:"flex-end", backgroundColor: "rgba(0,0,0,0.5)"}}>
 
           <View style={{flexDirection: "row"}}>
 
-            <View stye={{flex: 1, backgroundColor: 'blue'}}>
-              <Text> Cancel </Text>
+            <View style={{paddingLeft: 5, flex: 1}}>
+              <TouchableOpacity onPress={() => this._onCanelPress()}>
+                <Text> Cancel </Text>
+              </TouchableOpacity>
             </View>
 
-            <View style={{ alignItems: "flex-end", backgroundColor: 'blue'}}>
-              <Text> Done </Text>
+            <View style={{paddingRight: 5, flex: 1, alignItems: "flex-end"}}>
+              <TouchableOpacity onPress={() => this._onConfirmPress()}>
+                <Text> Done </Text>
+              </TouchableOpacity>
             </View>
 
           </View>
@@ -113,7 +140,9 @@ class  ListPickerField extends Component {
   }
 };
 
+const styles = StyleSheet.create({
 
+})
      
 
 export default ListPickerField;
