@@ -55,11 +55,10 @@ class  StaticField extends Component {
     return(
       <TouchableOpacity onPress={()=> this._onPress() }>
         <InputValidation valid={this.props.valid} validationMessage={this.props.validationMessage}>
- 
           {renderIf(this.props.value == null || this.props.value === "" ,
             <Text style={styles.placeHolderText}> {this.props.placeholder} </Text>
           )}
-          {renderIf(this.props.value !== "",
+          {renderIf(this.props.value !== "" && this.props.value != null,
             <Text style={styles.text}> {this.props.value} </Text>
           )}
         </InputValidation>
