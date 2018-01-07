@@ -10,7 +10,9 @@ import {
   Picker,
   TouchableOpacity,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated,
+  Dimensions
 } from 'react-native'
 
 ////////////////////////
@@ -34,6 +36,12 @@ import CommonStyles from "./../../common/styles";
 import StaticField from './../StaticField';
 
 ////////////////////////
+// Constants
+////////////////////////
+
+const { height, width } = Dimensions.get("window");
+
+////////////////////////
 // Componenet
 ////////////////////////
 
@@ -47,7 +55,9 @@ class  ListPickerField extends Component {
 
     super(props)
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+      yCoordinate: new Animated.Value(height),
+      pickerHeight: 0
     }
 
 
@@ -71,22 +81,50 @@ class  ListPickerField extends Component {
   }
 
   _onConfirmPress(){
+
     this._closeModel();
+
   }
 
   _onCanelPress(){
+
     this._closeModel();
+
+  }
+
+  _onModalShow(){
+
+    Animated.timing(           
+      this.state.yCoordinate,         
+      {
+        toValue: height - 220,                
+        duration: 200,           
+      }
+    ).start(); 
+
   }
 
   ////////////////////////
-  // Pricate Methods
+  // PriVate Methods
   ////////////////////////
 
+  // Handles closing the list picker model
   _closeModel(){
-    this.setState({
-      modalVisible: false
+
+    Animated.timing(           
+      this.state.yCoordinate,         
+      {
+        toValue: height,                
+        duration: 200,           
+      }
+    ).start(() => {
+      this.setState({
+        modalVisible: false
+      })
     })
+
   }
+  
 
   ////////////////////////
   // Methods
@@ -98,41 +136,43 @@ class  ListPickerField extends Component {
     return(
       <View>
         <StaticField
-        placeholder={this.props.placeholder}
-        value={this.state.textInputValue}
+        {...this.props}
         onPress={() => this._onInputPress() }
-        valid={this.props.valid}
-        validationMessage={this.props.validationMessage}/>
-        <View style={[styles.datePickerWrapper]} />
+        valid={this.props.valid}/>
         <Modal 
         visible={this.state.modalVisible} 
         transparent={true}
-        animationType={"slide"}>
-        <View onPress={()=> this._closeModel()} style={{ flex: 1, justifyContent:"flex-end", backgroundColor: "rgba(0,0,0,0.5)"}}>
-
-          <View style={{flexDirection: "row"}}>
-
-            <View style={{paddingLeft: 5, flex: 1}}>
-              <TouchableOpacity onPress={() => this._onCanelPress()}>
-                <Text> Cancel </Text>
-              </TouchableOpacity>
+        animationType={"none"}
+        onShow={()=> this._onModalShow()}>
+        <View style={{flex: 1, backgroundColor: "rgba(0,0,0,0.5)"}}>
+          <Animated.View 
+          ref={c => this._picker = c}
+          style={{ position:"absolute", width: width, left: 0, top: this.state.yCoordinate}}>
+  
+            <View style={{flexDirection: "row"}}>
+  
+              <View style={{paddingLeft: 5, flex: 1}}>
+                <TouchableOpacity onPress={() => this._onCanelPress()}>
+                  <Text> Cancel </Text>
+                </TouchableOpacity>
+              </View>
+  
+              <View style={{paddingRight: 5, flex: 1, alignItems: "flex-end"}}>
+                <TouchableOpacity onPress={() => this._onConfirmPress()}>
+                  <Text> Done </Text>
+                </TouchableOpacity>
+              </View>
+  
             </View>
-
-            <View style={{paddingRight: 5, flex: 1, alignItems: "flex-end"}}>
-              <TouchableOpacity onPress={() => this._onConfirmPress()}>
-                <Text> Done </Text>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-
-          <Picker
-            style={{backgroundColor:"white"}}
-            selectedValue={this.state.language}
-            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
+  
+            <Picker
+              style={{backgroundColor:"white", height: 220}}
+              selectedValue={this.state.language}
+              onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+          </Animated.View>
         </View>
         </Modal>
       </View>
