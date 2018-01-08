@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+import PropTypes from "prop-types";
 
 ////////////////////////
 // Imports Common Files
@@ -67,6 +68,16 @@ class  StaticField extends Component {
   }
 
 };
-     
+
+////////////////////////
+// Prop Type Checks
+////////////////////////
+
+StaticField.propTypes = {
+  //Prop validation definitions for custom props
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired
+
+}
 
 export default StaticField;
