@@ -97,7 +97,7 @@ class  ListPickerField extends Component {
     Animated.timing(           
       this.state.yCoordinate,         
       {
-        toValue: height - 220,                
+        toValue: height - 255,                
         duration: 200,           
       }
     ).start(); 
@@ -146,31 +146,32 @@ class  ListPickerField extends Component {
         onShow={()=> this._onModalShow()}>
         <View style={{flex: 1, backgroundColor: "rgba(0,0,0,0.5)"}}>
           <Animated.View 
-          ref={c => this._picker = c}
           style={{ position:"absolute", width: width, left: 0, top: this.state.yCoordinate}}>
+            
+            <View style={{flexDirection: "row", backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#CCCCCC'}}>
   
-            <View style={{flexDirection: "row"}}>
-  
-              <View style={{paddingLeft: 5, flex: 1}}>
+              <View style={{padding: 12, flex: 1}}>
                 <TouchableOpacity onPress={() => this._onCanelPress()}>
-                  <Text> Cancel </Text>
+                  <Text style={{fontSize: 16, color: "#5e5e5e"}}> Cancel </Text>
                 </TouchableOpacity>
               </View>
   
-              <View style={{paddingRight: 5, flex: 1, alignItems: "flex-end"}}>
+              <View style={{padding: 12, flex: 1, alignItems: "flex-end"}}>
                 <TouchableOpacity onPress={() => this._onConfirmPress()}>
-                  <Text> Done </Text>
+                  <Text style={{fontSize: 16, color: "#FF3366"}}> Done </Text>
                 </TouchableOpacity>
               </View>
   
             </View>
+
   
             <Picker
-              style={{backgroundColor:"white", height: 220}}
+              style={{backgroundColor:"white"}}
               selectedValue={this.state.language}
               onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              {this.props.pickerData.map((data) => {
+                return(<Picker.Item label={data} value={data} />)
+              })}
             </Picker>
           </Animated.View>
         </View>
@@ -179,7 +180,7 @@ class  ListPickerField extends Component {
     )
   }
 };
-
+// <ListItems pickerData={this.props.pickerData} />
 const styles = StyleSheet.create({
 
 })
