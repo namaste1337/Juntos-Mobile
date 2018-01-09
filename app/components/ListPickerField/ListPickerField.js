@@ -9,8 +9,6 @@ import {
   Text,
   Picker,
   TouchableOpacity,
-  StyleSheet,
-  TouchableWithoutFeedback,
   Animated,
   Dimensions
 } from 'react-native'
@@ -19,15 +17,13 @@ import {
 // Imports Common Files
 ////////////////////////
 
-// Conditional rendering
-import {renderIf} from "./../../common/components";
-import CommonStyles from "./../../common/styles";
+import {COLORS} from "./../../common/styles";
 
-////////////////////////
-// Import Styles
-////////////////////////
+//////////////////////
+//Import Styles
+//////////////////////
 
-// import styles from "./styles";
+import styles from "./styles";
 
 //////////////////////////////
 // Imports Custom Components
@@ -39,7 +35,16 @@ import StaticField from './../StaticField';
 // Constants
 ////////////////////////
 
-const { height, width } = Dimensions.get("window");
+// Properties
+const MODAL_ANIMATION_TYPE_PROPERTY     = "none"
+const MODAL_ANIMATION_DURATION_PROPERTY = 200;
+const PICKER_HEIGHT_PROPERTY            = 255;
+// Bools 
+const MODAL_TRANSPARENCY_BOOL           = true;
+const MODAL_VISIBLE_FALSE_BOOL          = false;
+const MODAL_VISIBLE_TRUE_BOOL           = true;
+// Device
+const { height }                        = Dimensions.get("window");
 
 ////////////////////////
 // Componenet
@@ -52,18 +57,13 @@ class  ListPickerField extends Component {
   ////////////////////////
 
   constructor(props){
-
     super(props)
+
     this.state = {
-      modalVisible: false,
+      modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       yCoordinate: new Animated.Value(height),
-      pickerHeight: 0
     }
 
-
-  }
-  componentWillUnmount(){
-  
   }
 
   ////////////////////////
@@ -75,7 +75,7 @@ class  ListPickerField extends Component {
   _onInputPress(){
 
     this.setState({
-      modalVisible: true
+      modalVisible: MODAL_VISIBLE_TRUE_BOOL
     })
 
   }
@@ -97,8 +97,8 @@ class  ListPickerField extends Component {
     Animated.timing(           
       this.state.yCoordinate,         
       {
-        toValue: height - 255,                
-        duration: 200,           
+        toValue: height - PICKER_HEIGHT_PROPERTY,                
+        duration: MODAL_ANIMATION_DURATION_PROPERTY,           
       }
     ).start(); 
 
@@ -115,16 +115,15 @@ class  ListPickerField extends Component {
       this.state.yCoordinate,         
       {
         toValue: height,                
-        duration: 200,           
+        duration: MODAL_ANIMATION_DURATION_PROPERTY,           
       }
     ).start(() => {
       this.setState({
-        modalVisible: false
+        modalVisible: MODAL_VISIBLE_FALSE_BOOL
       })
     })
 
   }
-  
 
   ////////////////////////
   // Methods
@@ -132,7 +131,6 @@ class  ListPickerField extends Component {
 
 
   render(){
-
     return(
       <View>
         <StaticField
@@ -141,36 +139,29 @@ class  ListPickerField extends Component {
         valid={this.props.valid}/>
         <Modal 
         visible={this.state.modalVisible} 
-        transparent={true}
-        animationType={"none"}
+        transparent={MODAL_TRANSPARENCY_BOOL}
+        animationType={MODAL_ANIMATION_TYPE_PROPERTY}
         onShow={()=> this._onModalShow()}>
-        <View style={{flex: 1, backgroundColor: "rgba(0,0,0,0.5)"}}>
+        <View style={styles.background}>
           <Animated.View 
-          style={{ position:"absolute", width: width, left: 0, top: this.state.yCoordinate}}>
-            
-            <View style={{flexDirection: "row", backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#CCCCCC'}}>
-  
-              <View style={{padding: 12, flex: 1}}>
+          style={[styles.animatedView, {top: this.state.yCoordinate}]}>
+            <View style={styles.toolBarWrapper}>
+              <View style={styles.toolBarLeftWrapper}>
                 <TouchableOpacity onPress={() => this._onCanelPress()}>
-                  <Text style={{fontSize: 16, color: "#5e5e5e"}}> Cancel </Text>
+                  <Text style={styles.toolBarCanceText}> Cancel </Text>
                 </TouchableOpacity>
               </View>
-  
-              <View style={{padding: 12, flex: 1, alignItems: "flex-end"}}>
+              <View style={styles.toolBarRightWrapper}>
                 <TouchableOpacity onPress={() => this._onConfirmPress()}>
-                  <Text style={{fontSize: 16, color: "#FF3366"}}> Done </Text>
+                  <Text style={styles.toolBarDoneText}> Done </Text>
                 </TouchableOpacity>
               </View>
-  
             </View>
-
-  
             <Picker
-              style={{backgroundColor:"white"}}
-              selectedValue={this.state.language}
+              style={styles.picker}
               onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
               {this.props.pickerData.map((data) => {
-                return(<Picker.Item label={data} value={data} />)
+                return(<Picker.Item key={data} label={data} value={data} />)
               })}
             </Picker>
           </Animated.View>
@@ -180,10 +171,5 @@ class  ListPickerField extends Component {
     )
   }
 };
-// <ListItems pickerData={this.props.pickerData} />
-const styles = StyleSheet.create({
-
-})
-     
 
 export default ListPickerField;
