@@ -70,8 +70,8 @@ class  ListPickerField extends Component {
   // Callbacks
   ////////////////////////
 
-  // Handles dispalying the picker when 
-  // thefield is touched
+  // Handles displaying the picker when 
+  // the field is selected
   _onInputPress(){
 
     this.setState({
@@ -80,19 +80,36 @@ class  ListPickerField extends Component {
 
   }
 
+  // Handles the logic for when 
+  // the confirm button is pressed
   _onConfirmPress(){
 
     this._closeModel();
 
   }
 
+  // Handles the logic for when
+  // the cofirm button is pressed
   _onCanelPress(){
 
     this._closeModel();
 
   }
 
+  // Handles executing the modal
+  // show animation.
   _onModalShow(){
+
+    this._openModal();
+
+  }
+
+  ////////////////////////
+  // Private methods
+  ////////////////////////
+
+  // Handles opening the list picker animation
+  _openModal(){
 
     Animated.timing(           
       this.state.yCoordinate,         
@@ -104,11 +121,7 @@ class  ListPickerField extends Component {
 
   }
 
-  ////////////////////////
-  // PriVate Methods
-  ////////////////////////
-
-  // Handles closing the list picker model
+  // Handles closing the list picker animation
   _closeModel(){
 
     Animated.timing(           
