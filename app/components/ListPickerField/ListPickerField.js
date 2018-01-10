@@ -12,6 +12,7 @@ import {
   Animated,
   Dimensions
 } from 'react-native'
+import PropTypes from "prop-types";
 
 ////////////////////////
 // Imports Common Files
@@ -235,5 +236,17 @@ class  ListPickerField extends Component {
     )
   }
 };
+
+////////////////////////
+// Prop Type Checks
+////////////////////////
+
+ListPickerField.propTypes = {
+  //Prop validation definitions for custom props
+  validationMessage: PropTypes.string.isRequired,
+  onValueChange: PropTypes.func.isRequired,
+  pickerData: PropTypes.array.isRequired
+
+}
 
 export default ListPickerField;
