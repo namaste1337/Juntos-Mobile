@@ -62,8 +62,18 @@ class  ListPickerField extends Component {
     this.state = {
       modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       yCoordinate: new Animated.Value(height),
+      listPickerValue: ""
     }
+  }
 
+  ////////////////////////
+  // Setters & Getters
+  ////////////////////////
+
+  set _pickerValue(value){
+    this.setState({
+      listPickerValue: value
+    })
   }
 
   ////////////////////////
@@ -94,6 +104,9 @@ class  ListPickerField extends Component {
 
     this._closeModel();
 
+    // Clear the list picker value if canceled
+    this._clearListPickerValue();
+
   }
 
   // Handles executing the modal
@@ -102,11 +115,44 @@ class  ListPickerField extends Component {
 
     this._openModal();
 
+    // Set the default picker selection
+    // to the staticField on open
+    if(this._pickerValue == "")
+      this._pickerValue = this.props.pickerData[0];
+
+  }
+
+  // Handles setting the pickerValue to the
+  // static field and sending the value 
+  // back to the component callback when 
+  // an item is selected
+  _onPickerItemSelect(itemValue){
+    console.log(itemValue)
+
+    // Set the value to the field
+    this._pickerValue = itemValue;
+    // Send value back to callback
+    this._sendValueToCallback(itemValue);
+
   }
 
   ////////////////////////
   // Private methods
   ////////////////////////
+
+  // Hanldes sending the value to
+  // the parent component onValueChange
+  // callback.
+  _sendValueToCallback(itemValue){
+
+    if(this.props.onValueChange != null)
+      this.props.onValueChange(itemValue)
+
+  }
+
+  _clearListPickerValue(){
+    this._pickerValue = "";
+  }
 
   // Handles opening the list picker animation
   _openModal(){
@@ -148,6 +194,7 @@ class  ListPickerField extends Component {
       <View>
         <StaticField
         {...this.props}
+        value={this.state.listPickerValue}
         onPress={() => this._onInputPress() }
         valid={this.props.valid}/>
         <Modal 
@@ -172,7 +219,8 @@ class  ListPickerField extends Component {
             </View>
             <Picker
               style={styles.picker}
-              onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+              selectedValue={this.state.listPickerValue}
+              onValueChange={(itemValue, itemIndex) => this._onPickerItemSelect(itemValue)}>
               {this.props.pickerData.map((data) => {
                 return(<Picker.Item key={data} label={data} value={data} />)
               })}
