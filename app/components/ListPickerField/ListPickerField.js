@@ -150,6 +150,7 @@ class  ListPickerField extends Component {
 
   }
 
+  // Handles clearing the picker value
   _clearListPickerValue(){
     this._pickerValue = "";
   }
