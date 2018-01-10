@@ -43,6 +43,8 @@ const PICKER_HEIGHT_PROPERTY            = 255;
 const MODAL_TRANSPARENCY_BOOL           = true;
 const MODAL_VISIBLE_FALSE_BOOL          = false;
 const MODAL_VISIBLE_TRUE_BOOL           = true;
+// String
+const PICKER_VALUE_EMPTY_STRING         = "";
 // Device
 const { height }                        = Dimensions.get("window");
 
@@ -62,7 +64,7 @@ class  ListPickerField extends Component {
     this.state = {
       modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       yCoordinate: new Animated.Value(height),
-      listPickerValue: ""
+      listPickerValue: PICKER_VALUE_EMPTY_STRING
     }
   }
 
@@ -117,7 +119,7 @@ class  ListPickerField extends Component {
 
     // Set the default picker selection
     // to the staticField on open
-    if(this._pickerValue == "")
+    if(this._pickerValue == PICKER_VALUE_EMPTY_STRING)
       this._pickerValue = this.props.pickerData[0];
 
   }
@@ -152,7 +154,7 @@ class  ListPickerField extends Component {
 
   // Handles clearing the picker value
   _clearListPickerValue(){
-    this._pickerValue = "";
+    this._pickerValue = PICKER_VALUE_EMPTY_STRING;
   }
 
   // Handles opening the list picker animation
