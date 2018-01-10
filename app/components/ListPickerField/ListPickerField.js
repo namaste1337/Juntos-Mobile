@@ -73,12 +73,20 @@ class  ListPickerField extends Component {
   // Setters & Getters
   ////////////////////////
 
+  get _pickerValue(){
+
+    return this.state.listPickerValue;
+
+  }
+
   // Handles setting the state for the
   // picker value
   set _pickerValue(value){
+
     this.setState({
       listPickerValue: value
     })
+
   }
 
   ////////////////////////
