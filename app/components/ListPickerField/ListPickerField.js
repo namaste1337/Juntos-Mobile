@@ -109,6 +109,8 @@ class  ListPickerField extends Component {
 
     this._closeModel();
 
+    // Send value back to callback
+    this._sendValueToCallback(this._pickerValue);
   }
 
   // Handles the logic for when
@@ -144,8 +146,6 @@ class  ListPickerField extends Component {
 
     // Set the value to the field
     this._pickerValue = itemValue;
-    // Send value back to callback
-    this._sendValueToCallback(itemValue);
 
   }
 
