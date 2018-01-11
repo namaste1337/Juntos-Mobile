@@ -142,7 +142,6 @@ class  ListPickerField extends Component {
   // back to the component callback when 
   // an item is selected
   _onPickerItemSelect(itemValue){
-    console.log(itemValue)
 
     // Set the value to the field
     this._pickerValue = itemValue;
