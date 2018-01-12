@@ -86,83 +86,43 @@ class CreateProjectDetails extends Component {
   // Setters and Getters
   ////////////////////////
 
-  // Sets the project start date value to state
-  set _projectStartDate(value){
+  set _isProjetStartDateValid(bool){
 
     this.setState({
-      projectStartDateValue: value
-    });
-    
-  }
-
-  // Retrieves the project start date value from state
-  get _projectStartDate(){
-
-    return this.state.projectStartDateValue;
-
-  }
-
-  // Sets the project end date value to state
-  set _projectEndDate(value){
-
-    this.setState({
-      projectEndDateValue: value
-    });
-
-  }
-
-  // Retrieves the project end date value from state
-  get _projectStartDate(){
-
-    return this.state.projectEndDateValue;
-
-  }
-
-  // Sets the food provided value to state
-  set _foodProvided(value){
-
-    this.setState({
-      foodProvidedValue: value
-    });
-
-  }
-
-  // Retrieves the food provided value from state
-  get _foodProvided(){
-
-    return this.state.foodProvidedValue;
-
-  }
-
-  // Sets the current status date value to state
-  set _currentStatus(value){
-
-    this.setState({
-      currentStatusValue: value
+      isProjetStartDateValid: bool
     })
 
   }
 
-  // Retrieves the current status value from state
-  get _currentStatus(){
-
-    return this.state.currentStatusValue
-
-  }
-
-   // Sets the project type date value to state
-  set _projectType(value){
+  set _isProjectEndDateValid(bool){
 
     this.setState({
-      projectTypeValue: value
+      isProjectEndDateValid: bool
     })
 
   }
 
-  // Retrieves the project type value from state
-  get _projectType(){
+  set _isFoodProvidedValid(bool){
 
-    return this.state.projectTypeValue;
+    this.setState({
+      isFoodProvidedValid: bool
+    })
+
+  }
+
+  set _isCurrentStatusValid(bool){
+
+    this.setState({
+      isCurrentStatusValid: bool
+    })
+
+  }
+
+  set _isProjectTypeValid(bool){
+
+    this.setState({
+      isProjectTypeValid: bool
+    })
 
   }
 
@@ -173,28 +133,37 @@ class CreateProjectDetails extends Component {
   // Handles on project start date value change
   _onProjectStartDateChange(value){
 
-    this._projectStartDate = value;
+    this.setState({
+      projectStartDateValue: value
+    });
 
   }
 
   // Handles on project end date value change
   _onProjectEndDateChange(value){
 
-    this._projectEndDate = value;
+    this.setState({
+      projectEndDateValue: value
+    });
 
   }
 
   // Handles on food provided value change
   _onFoodProvidedChange(value){
 
-    this._foodProvided = value;
+    this.setState({
+      foodProvidedValue: value
+    });
+
 
   }
 
   // Handles on current status value change
   _onCurrentStatusChange(value){
 
-    this._currentStatus = value;
+    this.setState({
+      projectTypeValue: value
+    })
 
   }
 
