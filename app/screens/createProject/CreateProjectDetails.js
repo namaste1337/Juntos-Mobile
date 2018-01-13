@@ -41,12 +41,12 @@ const KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY  = "position";
 // Strings
 const REQUIRED_FIELDS_STRING                    = "Required Field";
 const NEXT_BUTTON_STRING                        = "Next";
-const EMPTY_STRING                              = "";
 const PROJECT_START_PLACEHOLDER_STRING          = "Project Start";
 const PROJECT_END_PLACEHOLDER_STRING            = "Project End";
 const FOOD_PROVIDED_PLACEHOLDER_STRING          = "Food Provided";
 const CURRENT_STATUS_PLACEHOLDER_STRING         = "Current Status";
 const PROJECT_TYPE_PLACEHOLDER_STRING           = "Project Type";
+const EMPTY_STRING                              = "";
 // Bools
 const PROJECT_START_VALID_TRUE_BOOL             = true;
 const PROJECT_START_VALID_FALSE_BOOL            = false;
