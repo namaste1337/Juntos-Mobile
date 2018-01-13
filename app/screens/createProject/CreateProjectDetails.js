@@ -167,7 +167,7 @@ class CreateProjectDetails extends Component {
   _onCurrentStatusChange(value){
 
     this.setState({
-      projectTypeValue: value
+      currentStatusValue: value
     })
 
   }
