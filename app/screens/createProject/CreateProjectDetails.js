@@ -175,7 +175,9 @@ class CreateProjectDetails extends Component {
   // Handles on project type value change
   _onProjectTypeValueChange(value){
 
-    this._projectType = value;
+    this.setState({
+      projectTypeValue: value
+    })
 
   }
 
