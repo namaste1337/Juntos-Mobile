@@ -155,9 +155,9 @@ const buttonStyles= {
 
 DatePickerField.propTypes = {
   //Prop validation definitions for custom props
-  valid: PropTypes.bool.required,
-  validationMessage: PropTypes.string.required,
-  onDateChange: PropTypes.func.required
+  valid: PropTypes.bool.isRequired,
+  validationMessage: PropTypes.string.isRequired,
+  onDateChange: PropTypes.func.isRequired
 
 }
 
