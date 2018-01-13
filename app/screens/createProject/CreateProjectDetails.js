@@ -187,22 +187,109 @@ class CreateProjectDetails extends Component {
     
     let isValid = this._validateFields();
 
-    // if(isValid)
-      // Proceed to the next screen
+    if(isValid){
+        console.log("Valid, proceed to the next screen");
+    }else{
+      console.log("Invalid, halt process");
+    }
+      
   }
 
   ////////////////////////
   // Methods
   ////////////////////////
 
+  // Helper method validates for empty string
+  _validateForEmptyField(value){
+
+    return !(value === EMPTY_STRING);
+
+  }
 
 
+  // Handles validating project start date value
+  _validateProjectStartDate(dateValue){
+
+    // Validate for Empty Field
+    this._isProjectStartDateValid = this._validateForEmptyField(dateValue);
+
+    return this._isProjectStartDateValid 
+
+  }
+
+
+  //Handles validating project end date
+  _validateProjectEndDate(dateValue){  
+
+    // Validate for Empty Field
+    this._isProjectEndDateValid = this._validateForEmptyField(dateValue);
+
+    return this._isProjectEndDateValid 
+
+  }
+
+  // Handles validating for food provided value
+  _validateFoodProvided(foodProvidedValue){
+
+     // Validate for Empty Field
+    this._isFoodProvidedValid = this._validateForEmptyField(foodProvidedValue);
+
+    return this._isFoodProvidedValid 
+  }
+
+  // Handles validating of current status value
+  _validateCurrentStatus(currentStatusValue){
+
+    // Validate for Empty Field
+    this._isCurrentStatusValid = this._validateForEmptyField(currentStatusValue);
+
+    return this._isCurrentStatusValid 
+
+  }
+
+  // Handles validating of project type value
+  _validateProjectType(projectTypeValue){
+
+     // Validate for Empty Field
+    this._isProjectTypeValid = this._validateForEmptyField(projectTypeValue);
+
+    return this._isProjectTypeValid 
+
+  }
+
+  // Handles validating all required field values
   _validateFields(){
 
-    // if()
+    let isValid = true;
+
+    // Validate project state date value
+    isValid = this._validateProjectStartDate(this.state.projectStartDateValue);
+    if(isValid)
+       return isValid;
+
+    // Validate project end date value
+    isValid = this._validateProjectEndDate(this.state.projectEndDateValue);
+    if(isValid)
+       return isValid;
+
+    // Validate food provided value
+    isValid = this._validateFoodProvided(this.state.foodProvidedValue);
+    if(isValid)
+       return isValid;
+
+    // Validate current status value
+    isValid = this._validateCurrentStatus(this.state.currentStatusValue);
+    if(isValid)
+       return isValid;
+
+    // Validate project type value
+    isValid = this._validateProjectType(this.state.projectTypeValue);
+    if(isValid)
+       return isValid;
 
 
-    // return true
+    return isValid
+
   }
 
 
