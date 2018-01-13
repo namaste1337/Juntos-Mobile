@@ -86,6 +86,7 @@ class CreateProjectDetails extends Component {
   // Setters and Getters
   ////////////////////////
 
+  // Sets the project start date validation state
   set _isProjetStartDateValid(bool){
 
     this.setState({
@@ -94,6 +95,7 @@ class CreateProjectDetails extends Component {
 
   }
 
+   // Sets the project end date validation state
   set _isProjectEndDateValid(bool){
 
     this.setState({
@@ -102,6 +104,7 @@ class CreateProjectDetails extends Component {
 
   }
 
+  // Sets the food provided validation state
   set _isFoodProvidedValid(bool){
 
     this.setState({
@@ -110,6 +113,7 @@ class CreateProjectDetails extends Component {
 
   }
 
+  // Sets the current status valid validation state
   set _isCurrentStatusValid(bool){
 
     this.setState({
@@ -118,6 +122,7 @@ class CreateProjectDetails extends Component {
 
   }
 
+  // Sets the project type validation state
   set _isProjectTypeValid(bool){
 
     this.setState({
