@@ -99,6 +99,9 @@ class DatePickerField extends Component {
   		textInputValue: date
   	})
 
+    if(this.props.onDateChange != null)
+      this.props.onDateChange(date)
+
   }
 
   ////////////////////////
