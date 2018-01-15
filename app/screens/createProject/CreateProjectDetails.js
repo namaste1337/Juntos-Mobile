@@ -188,9 +188,18 @@ class CreateProjectDetails extends Component {
     let isValid = this._validateFields();
 
     if(isValid){
-        console.log("Valid, proceed to the next screen");
-    }else{
-      console.log("Invalid, halt process");
+ 
+        // Set the data to the store
+        this.props.populateTempDetails(
+          this.state.projectStartDateValue, 
+          this.state.projectEndDateValue, 
+          this.state.foodProvidedValue, 
+          this.state.currentStatusValue, 
+          this.state.projectTypeValue);
+
+        // Navigate to the next screen
+        this.props.navigateToProjectImages();
+
     }
       
   }
