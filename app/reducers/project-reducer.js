@@ -12,6 +12,16 @@ export default function session(
         		projectCoords: action.payload.projectCoords,
             projectDescription: action.payload.projectDescription
       		});
+      case ProjectActions.POPULATE_TEMP_DETAILS:
+      return Object.assign({}, state, {
+            tempProject:{
+              startDate: action.payload.startDate,
+              endDate: action.payload.endDate,
+              foodProvided: action.payload.foodProvided,
+              currentStatus: action.payload.currentStatus,
+              projectType: action.payload.projectType
+            }
+          });
     default:
       return state;
 	}
