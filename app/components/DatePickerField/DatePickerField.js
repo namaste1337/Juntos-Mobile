@@ -11,6 +11,7 @@ import {
   DatePickerIOS,
   DatePickerAndroid,
   TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import PropTypes from "prop-types";
 import DatePicker from 'react-native-datepicker'
@@ -47,7 +48,9 @@ const DATE_PICKER_DEFAULT_VALUE_STRING  = "";
 // Bools
 const DATE_PICKER_SHOW_ICON_BOOL        = false;
 const DATE_PICKER_HIDE_TEXT_BOOL        = true;   
-const DATE_PICKER_EDITABLE_BOOL         = true;     
+const DATE_PICKER_EDITABLE_BOOL         = true;
+//Device    
+let {WIDTH} = Dimensions.get('window'); 
 
 ////////////////////////
 // Component
@@ -146,6 +149,10 @@ class DatePickerField extends Component {
 const buttonStyles= {
   btnTextConfirm: {
     color: COLORS.PRIMARY
+  },
+  dateTouchBody:{
+    position: "absolute",
+    left: WIDTH,
   }
 }
 
