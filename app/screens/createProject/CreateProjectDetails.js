@@ -22,7 +22,7 @@ import CommonStyles from "./../../common/styles.js"
 // Actions
 ////////////////////////
 
-import {accountLogout} from "./../../actions/account-actions.js";
+import {populateTempDetails, navigateToProjectImages} from "./../../actions/project-actions.js";
 
 //////////////////////////////
 // Imports Custom Components
@@ -350,7 +350,8 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(accountLogout())
+    populateTempDetails: (startDate, endDate, foodProvided, currentStatus, projectType) => dispatch(populateTempDetails(startDate, endDate, foodProvided, currentStatus, projectType)),
+    navigateToProjectImages: () => dispatch(navigateToProjectImages())
   };
 }
 
