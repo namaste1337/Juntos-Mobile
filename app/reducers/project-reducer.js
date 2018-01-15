@@ -8,9 +8,11 @@ export default function session(
 	switch (action.type) {
 		case ProjectActions.POPULATE_TEMP_DESCRIPTION:
 			return Object.assign({}, state, {
-        		projectName: action.payload.projectName,
-        		projectCoords: action.payload.projectCoords,
-            projectDescription: action.payload.projectDescription
+            tempProject:{
+        		  name: action.payload.projectName,
+        		  coords: action.payload.projectCoords,
+              description: action.payload.projectDescription
+            }
       		});
       case ProjectActions.POPULATE_TEMP_DETAILS:
       return Object.assign({}, state, {
