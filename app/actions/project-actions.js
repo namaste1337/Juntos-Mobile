@@ -15,6 +15,7 @@ import {NavigationActions} from "react-navigation";
 // Available 
 export const ProjectActions = {
 	POPULATE_TEMP_DESCRIPTION: "POPULATE_TEMP_DESCRIPTION",
+	POPULATE_TEMP_DETAILS: "POPULATE_TEMP_DETAILS",
 }
 
 ////////////////////////
@@ -34,9 +35,15 @@ export function navigateToProjectDetails(){
 
 }
 
-export function populateTempDescription(projectName, projectLocation, projectDescription){
+export function navigateToProjectImages(){
 
-	let data = {}
+ return NavigationActions.navigate({routeName: "CreateProjectImages"});
+
+}
+
+export function populateTempDescription(projectName, projectLocation, projectDescription){
+	console.log(arguments);
+	let data = {};
 	data.projectName 		= projectName;
 	data.projectLocation 	= projectLocation;
 	data.projectDescription = projectDescription;
@@ -48,7 +55,20 @@ export function populateTempDescription(projectName, projectLocation, projectDes
 
 }
 
-export function populateTempDetails(projectDetailsTime, projectDetails){
+export function populateTempDetails(startDate, endDate, foodProvided, currentStatus, projectType){
+	
+	let data = {};
+
+	data.startDate 		= startDate;
+	data.endDate 		= endDate;
+	data.foodProvided 	= foodProvided;
+	data.currentStatus 	= currentStatus;
+	data.projectType 	= projectType;
+
+	return {
+		type: ProjectActions.POPULATE_TEMP_DETAILS,
+		payload: data
+	}
 
 }
 
