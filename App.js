@@ -15,9 +15,10 @@ require('./app/extensions/strings')
 import Services, { NETWORK_EVENT_TYPES } from "./app/services/api";
 // Import account actions 
 import { accountLogout } from './app/actions/account-actions';
-
+// Redux Logger
+import logger from 'redux-logger'
 // Create the store
-const store = createStore(ALL_REDUCERS, applyMiddleware(thunk));
+const store = createStore(ALL_REDUCERS, applyMiddleware(thunk), applyMiddleware(logger));
 
 export default class App extends React.Component {
 
