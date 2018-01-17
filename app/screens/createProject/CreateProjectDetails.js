@@ -221,7 +221,7 @@ class CreateProjectDetails extends Component {
 
     // Validate for Empty Field
     this._isProjectStartDateValid = this._validateForEmptyField(dateValue);
-    console.log(this._isProjectStartDateValid);
+
     return this._isProjectStartDateValid 
 
   }
@@ -307,7 +307,7 @@ class CreateProjectDetails extends Component {
   ////////////////////////
 
   render() {
-    console.log(this.state);
+    
     return (
       <View style={CommonStyles.container}>
         <View style={CommonStyles.buttonFixedWrapper}> 
