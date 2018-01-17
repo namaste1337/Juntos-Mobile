@@ -87,7 +87,7 @@ class CreateProjectDetails extends Component {
   ////////////////////////
 
   // Sets the project start date validation state
-  set _isProjetStartDateValid(bool){
+  set _isProjectStartDateValid(bool){
 
     this.setState({
       isProjetStartDateValid: bool
@@ -221,7 +221,7 @@ class CreateProjectDetails extends Component {
 
     // Validate for Empty Field
     this._isProjectStartDateValid = this._validateForEmptyField(dateValue);
-
+    console.log(this._isProjectStartDateValid);
     return this._isProjectStartDateValid 
 
   }
@@ -307,6 +307,7 @@ class CreateProjectDetails extends Component {
   ////////////////////////
 
   render() {
+    console.log(this.state);
     return (
       <View style={CommonStyles.container}>
         <View style={CommonStyles.buttonFixedWrapper}> 
