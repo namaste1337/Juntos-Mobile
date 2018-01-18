@@ -73,7 +73,7 @@ class CreateProjectDetails extends Component {
       foodProvidedValue: EMPTY_STRING,
       currentStatusValue: EMPTY_STRING,
       projectTypeValue: EMPTY_STRING,
-      isProjetStartDateValid: PROJECT_START_VALID_TRUE_BOOL,
+      isProjectStartDateValid: PROJECT_START_VALID_TRUE_BOOL,
       isProjectEndDateValid: PROJECT_END_VALID_TRUE_BOOL,
       isFoodProvidedValid: FOOD_PROVIDED_VALID_TRUE_BOOL,
       isCurrentStatusValid: CURRENT_STATUS_VALID_TRUE_BOOL,
@@ -88,14 +88,13 @@ class CreateProjectDetails extends Component {
 
   // Sets the project start date validation state
   set _isProjectStartDateValid(bool){
-
     this.setState({
-      isProjetStartDateValid: bool
+      isProjectStartDateValid: bool
     })
 
   }
 
-   // Sets the project end date validation state
+  // Sets the project end date validation state
   set _isProjectEndDateValid(bool){
 
     this.setState({
@@ -186,7 +185,6 @@ class CreateProjectDetails extends Component {
   _onNexButtonPress(){
     
     let isValid = this._validateFields();
-
     if(isValid){
  
         // Set the data to the store
@@ -195,7 +193,8 @@ class CreateProjectDetails extends Component {
           this.state.projectEndDateValue, 
           this.state.foodProvidedValue, 
           this.state.currentStatusValue, 
-          this.state.projectTypeValue);
+          this.state.projectTypeValue
+        );
 
         // Navigate to the next screen
         this.props.navigateToProjectImages();
@@ -211,18 +210,20 @@ class CreateProjectDetails extends Component {
   // Helper method validates for empty string
   _validateForEmptyField(value){
 
-    return !(value === EMPTY_STRING);
+    return (value !== EMPTY_STRING);
 
   }
 
 
   // Handles validating project start date value
   _validateProjectStartDate(dateValue){
+    
+    let isValid;
 
     // Validate for Empty Field
-    this._isProjectStartDateValid = this._validateForEmptyField(dateValue);
+    this._isProjectStartDateValid = isValid = this._validateForEmptyField(dateValue);
 
-    return this._isProjectStartDateValid 
+    return isValid; 
 
   }
 
@@ -230,39 +231,47 @@ class CreateProjectDetails extends Component {
   //Handles validating project end date
   _validateProjectEndDate(dateValue){  
 
-    // Validate for Empty Field
-    this._isProjectEndDateValid = this._validateForEmptyField(dateValue);
+    let isValid;
 
-    return this._isProjectEndDateValid 
+    // Validate for Empty Field
+    this._isProjectEndDateValid = isValid = this._validateForEmptyField(dateValue);
+
+    return isValid;
 
   }
 
   // Handles validating for food provided value
   _validateFoodProvided(foodProvidedValue){
 
+    let isValid;
      // Validate for Empty Field
-    this._isFoodProvidedValid = this._validateForEmptyField(foodProvidedValue);
+    this._isFoodProvidedValid = isValid = this._validateForEmptyField(foodProvidedValue);
+ 
+    return isValid
 
-    return this._isFoodProvidedValid 
   }
 
   // Handles validating of current status value
   _validateCurrentStatus(currentStatusValue){
 
-    // Validate for Empty Field
-    this._isCurrentStatusValid = this._validateForEmptyField(currentStatusValue);
+    let isValid;
 
-    return this._isCurrentStatusValid 
+    // Validate for Empty Field
+    this._isCurrentStatusValid = isValid = this._validateForEmptyField(currentStatusValue);
+
+    return isValid 
 
   }
 
   // Handles validating of project type value
   _validateProjectType(projectTypeValue){
 
-     // Validate for Empty Field
-    this._isProjectTypeValid = this._validateForEmptyField(projectTypeValue);
+    let isValid;
 
-    return this._isProjectTypeValid 
+     // Validate for Empty Field
+    this._isProjectTypeValid = isValid = this._validateForEmptyField(projectTypeValue);
+
+    return isValid
 
   }
 
@@ -273,29 +282,28 @@ class CreateProjectDetails extends Component {
 
     // Validate project state date value
     isValid = this._validateProjectStartDate(this.state.projectStartDateValue);
-    if(isValid)
+    if(!isValid)
        return isValid;
 
     // Validate project end date value
     isValid = this._validateProjectEndDate(this.state.projectEndDateValue);
-    if(isValid)
+    if(!isValid)
        return isValid;
 
     // Validate food provided value
     isValid = this._validateFoodProvided(this.state.foodProvidedValue);
-    if(isValid)
+    if(!isValid)
        return isValid;
 
     // Validate current status value
     isValid = this._validateCurrentStatus(this.state.currentStatusValue);
-    if(isValid)
+    if(!isValid)
        return isValid;
 
     // Validate project type value
     isValid = this._validateProjectType(this.state.projectTypeValue);
-    if(isValid)
+    if(!isValid)
        return isValid;
-
 
     return isValid
 
@@ -307,7 +315,7 @@ class CreateProjectDetails extends Component {
   ////////////////////////
 
   render() {
-    
+
     return (
       <View style={CommonStyles.container}>
         <View style={CommonStyles.buttonFixedWrapper}> 
@@ -317,7 +325,7 @@ class CreateProjectDetails extends Component {
           <DatePickerField  
           placeholder={PROJECT_START_PLACEHOLDER_STRING} 
           validationMessage={REQUIRED_FIELDS_STRING} 
-          valid={this.state.isProjetStartDateValid} 
+          valid={this.state.isProjectStartDateValid} 
           onDateChange={value => this._onProjectStartDateChange(value)}/>
           <DatePickerField placeholder={PROJECT_END_PLACEHOLDER_STRING} 
           validationMessage={REQUIRED_FIELDS_STRING}
@@ -345,6 +353,7 @@ class CreateProjectDetails extends Component {
       </View>
     );
   }
+  
 }
 
 ////////////////////////
