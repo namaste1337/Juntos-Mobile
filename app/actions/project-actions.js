@@ -42,7 +42,7 @@ export function navigateToProjectImages(){
 }
 
 export function populateTempDescription(projectName, projectLocation, projectDescription){
-	console.log(arguments);
+	
 	let data = {};
 	data.projectName 		= projectName;
 	data.projectLocation 	= projectLocation;
