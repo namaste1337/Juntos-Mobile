@@ -109,7 +109,7 @@ class CreateProjectDescription extends Component {
         address: this.state.projectLocationField
       };
       
-      let projectDescription = this.state.projetDescriptionField;
+      let projectDescription = this.state.projectDescriptionField;
 
       // Set the the data the store 
       this.props.populateTempDescription(projectName, projectLocation, projectDescription);
