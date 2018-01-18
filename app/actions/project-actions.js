@@ -48,7 +48,7 @@ export function navigateToProjectDetails(){
 // Action handles navigating to the create project images screen.
 export function navigateToProjectImages(){
 
- return NavigationActions.navigate({routeName: PROJECT_NAAVIGATION_ROUTES.CREATE_PROJECT_IMAGES});
+ return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_IMAGES});
 
 }
 
