@@ -99,15 +99,16 @@ class CreateProjectDescription extends Component {
   }
 
   // Handles next button on press event
-  _onSignUpbuttonPress(){
+  _onNextButtonPress(){
 
     if(this._validateFields()){
-      console.log("Fields are valid");
+     
       let projectName        = this.state.projectNameField;
       let projectLocation    = {
         coordinates: this.state.geometryLocation,
         address: this.state.projectLocationField
       };
+      
       let projectDescription = this.state.projetDescriptionField;
 
       // Set the the data the store 
@@ -229,7 +230,7 @@ class CreateProjectDescription extends Component {
           valid={this.state.projectDescriptionIsValid} />
       </KeyboardAvoidingView>
       <View style={CommonStyles.buttonFixedWrapper}> 
-        <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onSignUpbuttonPress()} buttonText={NEXT_BUTTON_STRING}/>
+        <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onNextButtonPress()} buttonText={NEXT_BUTTON_STRING}/>
       </View>
       <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
         <GooglePlaces 
