@@ -7,23 +7,23 @@ export default function session(
 {
 	switch (action.type) {
 		case ProjectActions.POPULATE_TEMP_DESCRIPTION:
-			return Object.assign({}, state, {
-            tempProject:{
+			return Object.assign(state, { tempProject:{
         		  name: action.payload.projectName,
         		  coords: action.payload.projectCoords,
               description: action.payload.projectDescription
             }
       		});
       case ProjectActions.POPULATE_TEMP_DETAILS:
-      return Object.assign({}, state, {
-            tempProject:{
+        let newState = Object.assign(state);
+        let tempProject = Object.assign(newState.tempProject,{
               startDate: action.payload.startDate,
               endDate: action.payload.endDate,
               foodProvided: action.payload.foodProvided,
               currentStatus: action.payload.currentStatus,
               projectType: action.payload.projectType
-            }
-          });
+            });
+        newState.tempProject = tempProject;
+        return newState;
     default:
       return state;
 	}
