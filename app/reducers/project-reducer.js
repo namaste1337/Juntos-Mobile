@@ -9,7 +9,7 @@ export default function session(
 		case ProjectActions.POPULATE_TEMP_DESCRIPTION:
 			return Object.assign(state, { tempProject:{
         		  name: action.payload.projectName,
-        		  coords: action.payload.projectCoords,
+        		  location: action.payload.projectLocation,
               description: action.payload.projectDescription
             }
       		});
