@@ -3,6 +3,7 @@
 ////////////////////////
 
 import React, { Component } from 'react';
+import ImagePicker from 'react-native-image-crop-picker';
 import {bindActionCreators, connect} from 'react-redux';
 import { 
 Text, 
@@ -40,6 +41,14 @@ const screenCenter                  = Dimensions.get('window').width/2;
 
 class CreateProjectImages extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      projectImages:[]
+    }
+
+  }
+
 
   tabBarOnPress(){
     
@@ -57,20 +66,56 @@ class CreateProjectImages extends Component {
   ////////////////////////
   // Callbacks
   ////////////////////////
+    //Handles profile image button press
+  _onAddImagePress(){
 
+    ImagePicker.openPicker({
+      width: 300,
+      height: 200,
+      cropping: 300
+    }).then(image => {
+      let source = { uri: image.path };
+      // this.setState({
+      //   profileImageData: {
+      //     uri: image.path,
+      //     mime: image.mime
+      //   },
+      //   profileImage: source,
+      //   profileImageValid: PROFILE_IMAGE_TRUE_STATE
+      // });
+      
+      this.setState(function(previousState){
+        previousState.projectImages[previousState.projectImages.length] = source;
+        return previousState;
+      })
+    }).catch(error => {
+      console.log(error);
+    });
+
+  }
 
   ////////////////////////
   // Screen UI
   ////////////////////////
 
   render() {
+    console.log(this.state);
     return (
-     <ScrollView style={CommonStyles.container}>
-     <Text> Create Project Images</Text>
+     <ScrollView style={CommonStyles.container} >
+      <TouchableOpacity onPress={()=> this._onAddImagePress()}>
+       <View><Text>Add Image</Text></View>
+      </TouchableOpacity>
+     <View style={{flex: 1, flexDirection: "row"}}>
+      {this.state.projectImages.map(function(image){
+       console.log(image);
+       return (<Image style={{width: 100, height: 100}} key={1} source={image}/>);
+      })}
+     </View>
      </ScrollView>
     );
   }
 }
+
 
 ////////////////////////
 // Screen Styles
@@ -94,7 +139,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+    isErrored: state.session.isErrored,
   };
 }
 
