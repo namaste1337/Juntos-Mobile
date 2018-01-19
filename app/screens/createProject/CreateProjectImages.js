@@ -101,17 +101,15 @@ class CreateProjectImages extends Component {
   render() {
     console.log(this.state);
     return (
-     <ScrollView style={CommonStyles.container} >
+     <View style={CommonStyles.container} flexDirection={"row"} style={{flexWrap:"wrap"}}>
       <TouchableOpacity onPress={()=> this._onAddImagePress()}>
        <View><Text>Add Image</Text></View>
       </TouchableOpacity>
-     <View style={{flex: 1, flexDirection: "row"}}>
       {this.state.projectImages.map(function(image){
        console.log(image);
        return (<Image style={{width: 100, height: 100}} key={1} source={image}/>);
       })}
      </View>
-     </ScrollView>
     );
   }
 }
