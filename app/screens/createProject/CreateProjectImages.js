@@ -32,12 +32,13 @@ import {accountLogout} from "./../../actions/account-actions.js";
 // Imports Custom Components
 ///////////////////////////////
 
-import PrimaryButton from './../../components/PrimaryButton';
+import PrimaryButton from "./../../components/PrimaryButton";
+import ImageCardView from "./../../components/ImageCardView";
 
 ////////////////////////
 // Constants
 ////////////////////////
-const screenCenter                  = Dimensions.get('window').width/2;
+const {width, height}                  = Dimensions.get('window');
 
 class CreateProjectImages extends Component {
 
@@ -101,19 +102,20 @@ class CreateProjectImages extends Component {
   render() {
     console.log(this.state);
     return (
-     <View style={CommonStyles.container} flexDirection={"row"} style={{flexWrap:"wrap"}}>
+     <View style={CommonStyles.container}>
       <TouchableOpacity onPress={()=> this._onAddImagePress()}>
        <View><Text>Add Image</Text></View>
       </TouchableOpacity>
-      {this.state.projectImages.map(function(image){
-       console.log(image);
-       return (<Image style={{width: 100, height: 100}} key={1} source={image}/>);
-      })}
+      <View style={styles.imagesWrapper}>
+        {this.state.projectImages.map(function(image){
+         console.log(image);
+         return (<ImageCardView source={image} />);
+        })}
+      </View>
      </View>
     );
   }
 }
-
 
 ////////////////////////
 // Screen Styles
@@ -127,7 +129,14 @@ const styles = StyleSheet.create({
   tabBarIcon:{
     width: 25,
     height: 25
-  }
+  },
+  imagesWrapper:{
+    flexDirection: "row",
+    flexWrap: "wrap",
+    paddingLeft: 7.5,
+    paddingVertical: 15
+  },
+
 });
 
 ////////////////////////
