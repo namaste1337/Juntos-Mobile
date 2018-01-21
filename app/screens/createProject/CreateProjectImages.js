@@ -20,7 +20,7 @@ View
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../../common/styles.js"
+import CommonStyles, {COLORS, FONTS} from "../../common/styles.js"
 
 ////////////////////////
 // Actions
@@ -34,11 +34,13 @@ import {accountLogout} from "./../../actions/account-actions.js";
 
 import PrimaryButton from "./../../components/PrimaryButton";
 import ImageCardView from "./../../components/ImageCardView";
+import CardView from "./../../components/CardView";
 
 ////////////////////////
 // Constants
 ////////////////////////
 const {width, height}                  = Dimensions.get('window');
+const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
 
 class CreateProjectImages extends Component {
 
@@ -53,15 +55,6 @@ class CreateProjectImages extends Component {
 
   tabBarOnPress(){
     
-  }
-
-
-  ////////////////////////
-  // Navigation Options
-  ////////////////////////
-
-  static navigationOptions = {
-    headerRight: <TouchableOpacity><Text>Next</Text></TouchableOpacity>,
   }
 
   ////////////////////////
@@ -103,14 +96,15 @@ class CreateProjectImages extends Component {
     console.log(this.state);
     return (
      <View style={CommonStyles.container}>
-      <TouchableOpacity onPress={()=> this._onAddImagePress()}>
-       <View><Text>Add Image</Text></View>
-      </TouchableOpacity>
       <View style={styles.imagesWrapper}>
         {this.state.projectImages.map(function(image){
          console.log(image);
          return (<ImageCardView source={image} />);
         })}
+        <CardView style={styles.addImageCardView} onPress={()=> this._onAddImagePress()}>
+          <Image style={styles.addImageIcon} source={imageAddButton} />
+          <Text style={styles.addImageText}>Add Image</Text>
+        </CardView>
       </View>
      </View>
     );
@@ -136,6 +130,31 @@ const styles = StyleSheet.create({
     paddingLeft: 7.5,
     paddingVertical: 15
   },
+
+  ////////////////////////
+  // Add Image 
+  ////////////////////////
+
+  addImageCardView:{
+    width: 80, 
+    height: 100,
+    backgroundColor: COLORS.PRIMARY,
+    borderWidth: 1,
+    borderColor: "#FFFFFF",
+    borderStyle: "dashed",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  addImageIcon:{
+    height: 40,
+    width: 40
+  },
+  addImageText: {
+    fontSize: 12,
+    color: COLORS.WHITE,
+    fontFamily: FONTS.PRIMARY,
+  }
 
 });
 

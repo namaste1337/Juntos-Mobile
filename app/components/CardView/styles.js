@@ -26,7 +26,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 1,
     marginLeft: 5,
-    marginTop: 5
+    marginTop: 5,
 	}
 
 });
