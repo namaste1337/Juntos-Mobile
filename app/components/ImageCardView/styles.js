@@ -24,7 +24,7 @@ export default StyleSheet.create({
 
 	imageCardView:{
 		width: (width-43)/3, 
-    height: width/4}
+    height: width/4
 	}
 
 });
