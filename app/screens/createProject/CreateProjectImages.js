@@ -41,6 +41,7 @@ import CardView from "./../../components/CardView";
 ////////////////////////
 const {width, height}                  = Dimensions.get('window');
 const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
+const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project"
 
 class CreateProjectImages extends Component {
 
@@ -96,15 +97,22 @@ class CreateProjectImages extends Component {
     console.log(this.state);
     return (
      <View style={CommonStyles.container}>
-      <View style={styles.imagesWrapper}>
-        {this.state.projectImages.map(function(image){
-         console.log(image);
-         return (<ImageCardView source={image} />);
-        })}
-        <CardView style={styles.addImageCardView} onPress={()=> this._onAddImagePress()}>
-          <Image style={styles.addImageIcon} source={imageAddButton} />
-          <Text style={styles.addImageText}>Add Image</Text>
-        </CardView>
+      <ScrollView style={styles.scrollViewWrapper}>
+        <View style={styles.imagesWrapper}>
+          {this.state.projectImages.map(function(image, key){
+           console.log(image);
+           return (<ImageCardView key={key} source={image} style={styles.imageCard} />);
+          })}
+          <CardView style={styles.addImageCardView} onPress={()=> this._onAddImagePress()}>
+            <Image style={styles.addImageIcon} source={imageAddButton} />
+            <Text style={styles.addImageText}>Add Image</Text>
+          </CardView>
+        </View>
+      </ScrollView>
+      <View style={CommonStyles.buttonFixedWrapper}> 
+        <PrimaryButton style={CommonStyles.buttonFixedBottom} 
+        onPress={() => this._onNexButtonPress()} 
+        buttonText={PREVIEW_PROJECT_BUTTON_STRING}/>
       </View>
      </View>
     );
@@ -132,19 +140,29 @@ const styles = StyleSheet.create({
   },
 
   ////////////////////////
+  // Image Card
+  ////////////////////////
+
+  imageCard:{
+    marginHorizontal: 5,
+    marginVertical: 5
+  },
+
+  ////////////////////////
   // Add Image 
   ////////////////////////
 
   addImageCardView:{
-    width: 80, 
-    height: 100,
+    width: (width-43)/3, 
+    height: width/4,
     backgroundColor: COLORS.PRIMARY,
     borderWidth: 1,
     borderColor: "#FFFFFF",
     borderStyle: "dashed",
-    borderRadius: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginVertical: 5,
+    marginHorizontal: 5
   },
   addImageIcon:{
     height: 40,
