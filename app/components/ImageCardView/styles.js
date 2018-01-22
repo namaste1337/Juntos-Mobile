@@ -12,21 +12,16 @@ import {
 FONTS,
 COLORS,
 } from "./../../common/styles";
+const {width, height} = Dimensions.get('window');
 ////////////////////////
 // Styles
 ////////////////////////
   
 export default StyleSheet.create({
 
-	cardViewWrapper:{
-		shadowColor: "#000",
-    shadowOffset: {
-      height: 1
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 1,
-    marginLeft: 5,
-    marginTop: 5
+	imageCardView:{
+		width: (width-43)/3, 
+    height: width/4}
 	}
 
 });
