@@ -221,10 +221,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  tabBarIcon:{
-    width: 25,
-    height: 25
-  },
+  
   imagesWrapper:{
     flexDirection: "row",
     flexWrap: "wrap",
@@ -240,7 +237,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 5
   },
-  // 10 + 40
   cardImage:{
     width: IMAGE_GRID_PLACEMENT,
     height: width/4
