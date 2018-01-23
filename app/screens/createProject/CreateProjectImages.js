@@ -47,9 +47,13 @@ const CAMERA_OPTIONS_STRING             = "Camera";
 const GALLERY_OPTIONS_STRING            = "Gallery";
 const REMOVE_OPTIONS_STRING             = "Remove";
 // Properties
-const MEDIA_OPTIONS                     = { width: 400, height: 300, cropping: true }
+const MEDIA_OPTIONS_PROPERTY            = { width: 400, height: 300, cropping: true }
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER          = 45;
+const CANCEL_BUTTON_INDEX_NUMBER        = 0;
+const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 1;
+const OPEN_CAMERA_BUTTON_INDEX_NUMBER   = 1;
+const IMAGE_DELETE_COUNT_NUMBER         = 1;
 // The image grid placement takes into account the image grid offset
 // the image grid offset is calculated from the the padding of the parent
 // view component and the margin of each imageCard.
@@ -80,7 +84,7 @@ class CreateProjectImages extends Component {
 
     ActionSheetIOS.showActionSheetWithOptions({
       options: [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING],
-      cancelButtonIndex: 0,
+      cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
     },
     (buttonIndex) => {
       this._openMediaType(buttonIndex);
@@ -93,11 +97,11 @@ class CreateProjectImages extends Component {
 
     ActionSheetIOS.showActionSheetWithOptions({
       options: [CANCEL_OPTIONS_STRING, REMOVE_OPTIONS_STRING],
-      destructiveButtonIndex: 1,
-      cancelButtonIndex: 0,
+      destructiveButtonIndex: DESTRUCTIVE_BUTTON_INDEX_NUMBER,
+      cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
     },
     (buttonIndex) => {
-      if (buttonIndex === 1) { 
+      if (buttonIndex === DESTRUCTIVE_BUTTON_INDEX_NUMBER) { 
        this._removeImageByIndex(imageIndex);
       }
     });
@@ -108,7 +112,7 @@ class CreateProjectImages extends Component {
   _removeImageByIndex(imageIndex){
 
     this.setState(function(previousState){
-        previousState.projectImages.splice(imageIndex, 1);
+        previousState.projectImages.splice(imageIndex, IMAGE_DELETE_COUNT_NUMBER);
         return previousState;
     });
 
@@ -117,7 +121,7 @@ class CreateProjectImages extends Component {
   // Opens the image media gallery
   _openGallery(){
 
-    ImagePicker.openPicker(MEDIA_OPTIONS).then(image => {
+    ImagePicker.openPicker(MEDIA_OPTIONS_PROPERTY).then(image => {
       this._processImage(image);
     })
 
@@ -126,7 +130,7 @@ class CreateProjectImages extends Component {
   // Opens the camera
   _openCamera(){
 
-    ImagePicker.openCamera(MEDIA_OPTIONS).then(image => {
+    ImagePicker.openCamera(MEDIA_OPTIONS_PROPERTY).then(image => {
       this._processImage(image);
     });
 
@@ -152,7 +156,7 @@ class CreateProjectImages extends Component {
   // Handles opening the selected media type
   _openMediaType(buttonIndex){
 
-    if(buttonIndex == 1){
+    if(buttonIndex == OPEN_CAMERA_BUTTON_INDEX_NUMBER){
       this._openCamera();
     }else{
       this._openGallery();
