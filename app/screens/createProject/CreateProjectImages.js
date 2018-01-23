@@ -8,7 +8,6 @@ import {bindActionCreators, connect} from 'react-redux';
 import { 
 Text, 
 Dimensions,
-ScrollView,
 Image,
 StyleSheet,
 TouchableOpacity,
@@ -105,7 +104,7 @@ class CreateProjectImages extends Component {
     console.log(this.state);
     return (
      <View style={CommonStyles.container}>
-      <ScrollView style={styles.scrollViewWrapper}>
+      <View style={styles.scrollViewWrapper}>
         <View style={styles.imagesWrapper}>
           {this.state.projectImages.map(function(image, key){
            console.log(image, key);
@@ -119,7 +118,7 @@ class CreateProjectImages extends Component {
             <Text style={styles.addImageText}>Add Image</Text>
           </CardView>
         </View>
-      </ScrollView>
+      </View>
       <View style={CommonStyles.buttonFixedWrapper}> 
         <PrimaryButton style={CommonStyles.buttonFixedBottom} 
         onPress={() => this._onNexButtonPress()} 
