@@ -37,23 +37,23 @@ import CardView from "./../../components/CardView";
 ////////////////////////
 // Constants
 ////////////////////////
-const {width, height}                  = Dimensions.get('window');
+const {width, height}                   = Dimensions.get('window');
 // Images
-const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
+const imageAddButton                    = require("./../../assets/createProject/addImageIcon.png");
 // Strings
-const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project";
-const CANCEL_OPTIONS_STRING            = "Cancel";
-const CAMERA_OPTIONS_STRING            = "Camera";
-const GALLERY_OPTIONS_STRING           = "Gallery";
-const REMOVE_OPTIONS_STRING            = "Remove";
+const PREVIEW_PROJECT_BUTTON_STRING     = "Preview Project";
+const CANCEL_OPTIONS_STRING             = "Cancel";
+const CAMERA_OPTIONS_STRING             = "Camera";
+const GALLERY_OPTIONS_STRING            = "Gallery";
+const REMOVE_OPTIONS_STRING             = "Remove";
 // Properties
-const MEDIA_OPTIONS                    = { width: 400, height: 300, cropping: true }
+const MEDIA_OPTIONS                     = { width: 400, height: 300, cropping: true }
 // Numbers
-const IMAGE_GRID_OFFSET_NUMBER                = 45;
+const IMAGE_GRID_OFFSET_NUMBER          = 45;
 // The image grid placement takes into account the image grid offset
 // the image grid offset is calculated from the the padding of the parent
 // view component and the margin of each imageCard.
-const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET_NUMBER)/3;
+const IMAGE_GRID_PLACEMENT              = (width-IMAGE_GRID_OFFSET_NUMBER)/3;
 
 class CreateProjectImages extends Component {
 
