@@ -41,7 +41,7 @@ const {width, height}                  = Dimensions.get('window');
 // Images
 const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
 // Strings
-const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project"
+const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project";
 const CANCEL_OPTIONS_STRING            = "Cancel";
 const CAMERA_OPTIONS_STRING            = "Camera";
 const GALLERY_OPTIONS_STRING           = "Gallery";
@@ -106,9 +106,9 @@ class CreateProjectImages extends Component {
   _removeImageByIndex(imageIndex){
 
     this.setState(function(previousState){
-        previousState.projectImages.splice(imageIndex, 1)
+        previousState.projectImages.splice(imageIndex, 1);
         return previousState;
-    })
+    });
 
   }
 
@@ -134,7 +134,7 @@ class CreateProjectImages extends Component {
       cropping: true
     }).then(image => {
       this._processImage(image);
-    })
+    });
 
   }
 
@@ -146,7 +146,7 @@ class CreateProjectImages extends Component {
     this.setState(function(previousState){
       previousState.projectImages[previousState.projectImages.length] = source;
       return previousState;
-    })
+    });
 
   }
 
