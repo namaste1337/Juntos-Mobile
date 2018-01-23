@@ -2,7 +2,7 @@
 // Imports
 ////////////////////////
 
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import {bindActionCreators, connect} from 'react-redux';
 import { 
@@ -51,7 +51,13 @@ const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET)/3;
 
 class CreateProjectImages extends Component {
 
+
+  ////////////////////////
+  // Constructor
+  ////////////////////////
+
   constructor(props){
+
     super(props);
     this.state = {
       projectImages:[]
@@ -59,6 +65,11 @@ class CreateProjectImages extends Component {
 
   }
 
+  ////////////////////////
+  // Methods
+  ////////////////////////
+
+  // Displays an action sheet for the available media types
   _displayGalleryCameraMenu(){
 
     ActionSheetIOS.showActionSheetWithOptions({
