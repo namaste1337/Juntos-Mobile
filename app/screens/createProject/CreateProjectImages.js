@@ -42,12 +42,12 @@ const {width, height}                  = Dimensions.get('window');
 const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
 // Strings
 const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project"
-// Integers
-const IMAGE_GRID_OFFSET                = 45;
+// Numbers
+const IMAGE_GRID_OFFSET_NUMBER                = 45;
 // The image grid placement takes into account the image grid offset
 // the image grid offset is calculated from the the padding of the parent
 // view component and the margin of each imageCard.
-const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET)/3;
+const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET_NUMBER)/3;
 
 class CreateProjectImages extends Component {
 
