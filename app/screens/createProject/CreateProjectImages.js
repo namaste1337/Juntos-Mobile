@@ -46,6 +46,8 @@ const CANCEL_OPTIONS_STRING            = "Cancel";
 const CAMERA_OPTIONS_STRING            = "Camera";
 const GALLERY_OPTIONS_STRING           = "Gallery";
 const REMOVE_OPTIONS_STRING            = "Remove";
+// Properties
+const MEDIA_OPTIONS                    = { width: 400, height: 300, cropping: true }
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER                = 45;
 // The image grid placement takes into account the image grid offset
@@ -115,11 +117,7 @@ class CreateProjectImages extends Component {
   // Opens the image media gallery
   _openGallery(){
 
-    ImagePicker.openPicker({
-      width: 400,
-      height: 300,
-      cropping: true
-    }).then(image => {
+    ImagePicker.openPicker(MEDIA_OPTIONS).then(image => {
       this._processImage(image);
     })
 
@@ -128,11 +126,7 @@ class CreateProjectImages extends Component {
   // Opens the camera
   _openCamera(){
 
-    ImagePicker.openCamera({
-      width: 400,
-      height: 300,
-      cropping: true
-    }).then(image => {
+    ImagePicker.openCamera(MEDIA_OPTIONS).then(image => {
       this._processImage(image);
     });
 
