@@ -10,7 +10,8 @@ Text,
 Dimensions,
 Image,
 StyleSheet,
-View
+View,
+ActionSheetIOS
 } from 'react-native';
 
 //////////////////////////////
@@ -58,9 +59,45 @@ class CreateProjectImages extends Component {
 
   }
 
+  _displayGalleryCameraMenu(){
 
-  tabBarOnPress(){
-    
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: ["Cancel","Camera", "Gallery"],
+      cancelButtonIndex: 0,
+    },
+    (buttonIndex) => {
+      if (buttonIndex === 1) { 
+      
+      }
+    });
+
+  }
+
+  _displayRemoveImageMenu(imageIndex){
+
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: ["Cancel", "Remove"],
+      destructiveButtonIndex: 1,
+      cancelButtonIndex: 0,
+    },
+    (buttonIndex) => {
+      if (buttonIndex === 1) { 
+       this._removeImageByIndex(imageIndex);
+      }
+    });
+
+  }
+
+  _removeImageByIndex(imageIndex){
+    this.setState(function(previousState){
+        previousState.projectImages.splice(imageIndex, 1)
+        return previousState;
+    })
+  }
+
+  _onCardImagePress(imageIndex){
+    this._displayRemoveImageMenu(imageIndex)
+
   }
 
   ////////////////////////
@@ -96,10 +133,9 @@ class CreateProjectImages extends Component {
      <View style={CommonStyles.container}>
       <View style={styles.scrollViewWrapper}>
         <View style={styles.imagesWrapper}>
-          {this.state.projectImages.map(function(image, key){
-           console.log(image, key);
+          {this.state.projectImages.map((image, index) => {
            return (
-            <CardView style={styles.imageCard}>
+            <CardView key={index} style={styles.imageCard} onPress={()=> this._onCardImagePress(index)}>
               <Image style={styles.cardImage} source={image}/>
             </CardView>);
           })}
