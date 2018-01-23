@@ -42,6 +42,10 @@ const {width, height}                  = Dimensions.get('window');
 const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
 // Strings
 const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project"
+const CANCEL_OPTIONS_STRING            = "Cancel";
+const CAMERA_OPTIONS_STRING            = "Camera";
+const GALLERY_OPTIONS_STRING           = "Gallery";
+const REMOVE_OPTIONS_STRING            = "Remove";
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER                = 45;
 // The image grid placement takes into account the image grid offset
@@ -73,7 +77,7 @@ class CreateProjectImages extends Component {
   _displayGalleryCameraMenu(){
 
     ActionSheetIOS.showActionSheetWithOptions({
-      options: ["Cancel","Camera", "Gallery"],
+      options: [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING],
       cancelButtonIndex: 0,
     },
     (buttonIndex) => {
@@ -86,7 +90,7 @@ class CreateProjectImages extends Component {
   _displayRemoveImageMenu(imageIndex){
 
     ActionSheetIOS.showActionSheetWithOptions({
-      options: ["Cancel", "Remove"],
+      options: [CANCEL_OPTIONS_STRING, REMOVE_OPTIONS_STRING],
       destructiveButtonIndex: 1,
       cancelButtonIndex: 0,
     },
