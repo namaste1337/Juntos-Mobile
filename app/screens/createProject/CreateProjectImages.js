@@ -215,7 +215,7 @@ class CreateProjectImages extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.WHITE,
   },
   tabBarIcon:{
     width: 25,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     height: width/4,
     backgroundColor: COLORS.PRIMARY,
     borderWidth: 1,
-    borderColor: "#FFFFFF",
+    borderColor: COLORS.WHITE,
     borderStyle: "dashed",
     alignItems: "center",
     justifyContent: "center",
