@@ -221,17 +221,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.WHITE,
   },
-  
+
+  ////////////////////////
+  // Image Card
+  ////////////////////////
+
   imagesWrapper:{
     flexDirection: "row",
     flexWrap: "wrap",
     paddingLeft: 7.5,
     paddingVertical: 15
   },
-
-  ////////////////////////
-  // Image Card
-  ////////////////////////
 
   imageCard:{
     marginHorizontal: 5,
