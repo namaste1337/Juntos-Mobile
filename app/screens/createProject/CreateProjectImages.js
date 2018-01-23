@@ -111,30 +111,26 @@ class CreateProjectImages extends Component {
   // Opens the image media gallery
   _openGallery(){
 
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
+    ImagePicker.openPicker({
+      width: 400,
+      height: 300,
       cropping: true
     }).then(image => {
       this._processImage(image);
-    }).catch(error => {
-      console.log(error);
-    });
+    })
 
   }
 
   // Opens the camera
   _openCamera(){
 
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
+    ImagePicker.openCamera({
+      width: 400,
+      height: 300,
       cropping: true
     }).then(image => {
       this._processImage(image);
-    }).catch(error => {
-      console.log(error);
-    });
+    })
 
   }
 
@@ -159,9 +155,9 @@ class CreateProjectImages extends Component {
   _openMediaType(buttonIndex){
 
     if(buttonIndex == 1){
-      this._openGallery();
-    }else{
       this._openCamera();
+    }else{
+      this._openGallery();
     }
 
   }
