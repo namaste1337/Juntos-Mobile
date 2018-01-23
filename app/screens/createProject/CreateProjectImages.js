@@ -33,15 +33,23 @@ import {accountLogout} from "./../../actions/account-actions.js";
 ///////////////////////////////
 
 import PrimaryButton from "./../../components/PrimaryButton";
-import ImageCardView from "./../../components/ImageCardView";
 import CardView from "./../../components/CardView";
 
 ////////////////////////
 // Constants
 ////////////////////////
 const {width, height}                  = Dimensions.get('window');
+// Images
 const imageAddButton                   = require("./../../assets/createProject/addImageIcon.png");
+// Strings
 const PREVIEW_PROJECT_BUTTON_STRING    = "Preview Project"
+// Integers
+const IMAGE_GRID_OFFSET                = 45;
+// The image grid placement takes into account the image grid offset
+// the image grid offset is calculated from the the padding of the parent
+// view component and the margin of each imageCard.
+const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET)/3;
+
 
 class CreateProjectImages extends Component {
 
@@ -100,8 +108,11 @@ class CreateProjectImages extends Component {
       <ScrollView style={styles.scrollViewWrapper}>
         <View style={styles.imagesWrapper}>
           {this.state.projectImages.map(function(image, key){
-           console.log(image);
-           return (<ImageCardView key={key} source={image} style={styles.imageCard} />);
+           console.log(image, key);
+           return (
+            <CardView style={styles.imageCard}>
+              <Image style={styles.cardImage} source={image}/>
+            </CardView>);
           })}
           <CardView style={styles.addImageCardView} onPress={()=> this._onAddImagePress()}>
             <Image style={styles.addImageIcon} source={imageAddButton} />
@@ -147,13 +158,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 5
   },
+  // 10 + 40
+  cardImage:{
+    width: IMAGE_GRID_PLACEMENT,
+    height: width/4
+  },
 
   ////////////////////////
   // Add Image 
   ////////////////////////
 
   addImageCardView:{
-    width: (width-43)/3, 
+    width: IMAGE_GRID_PLACEMENT, 
     height: width/4,
     backgroundColor: COLORS.PRIMARY,
     borderWidth: 1,
