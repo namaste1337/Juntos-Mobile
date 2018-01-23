@@ -66,13 +66,12 @@ class CreateProjectImages extends Component {
       cancelButtonIndex: 0,
     },
     (buttonIndex) => {
-      if (buttonIndex === 1) { 
-      
-      }
+      this._openMediaType(buttonIndex);
     });
 
   }
 
+  // Display an action sheet that allows for image removal
   _displayRemoveImageMenu(imageIndex){
 
     ActionSheetIOS.showActionSheetWithOptions({
@@ -88,38 +87,85 @@ class CreateProjectImages extends Component {
 
   }
 
+  // Removes an image by inded from the projectImages state
   _removeImageByIndex(imageIndex){
+
     this.setState(function(previousState){
         previousState.projectImages.splice(imageIndex, 1)
         return previousState;
     })
-  }
-
-  _onCardImagePress(imageIndex){
-    this._displayRemoveImageMenu(imageIndex)
 
   }
+
+  // Opens the image media gallery
+  _openGallery(){
+
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      this._processImage(image);
+    }).catch(error => {
+      console.log(error);
+    });
+
+  }
+
+  // Opens the camera
+  _openCamera(){
+
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      this._processImage(image);
+    }).catch(error => {
+      console.log(error);
+    });
+
+  }
+
+  // Process a newly selected image to be stored on the projectImage state
+  _processImage(imageSource){
+
+    let source = { uri: imageSource.path };
+
+    this.setState(function(previousState){
+      previousState.projectImages[previousState.projectImages.length] = source;
+      return previousState;
+    })
+
+  }
+
 
   ////////////////////////
   // Callbacks
   ////////////////////////
 
-  //Handles profile image button press
+  // Handles opening the selected media type
+  _openMediaType(buttonIndex){
+
+    if(buttonIndex == 1){
+      this._openGallery();
+    }else{
+      this._openCamera();
+    }
+
+  }
+
+  // Handles on image card press
+  _onCardImagePress(imageIndex){
+
+    this._displayRemoveImageMenu(imageIndex);
+
+  }
+
+  //Handles add image button press
   _onAddImagePress(){
 
-    ImagePicker.openPicker({
-      width: 300,
-      height: 200,
-      cropping: 300
-    }).then(image => {
-      let source = { uri: image.path };     
-      this.setState(function(previousState){
-        previousState.projectImages[previousState.projectImages.length] = source;
-        return previousState;
-      })
-    }).catch(error => {
-      console.log(error);
-    });
+    this._displayGalleryCameraMenu();
 
   }
 
