@@ -4,7 +4,7 @@
 
 import React,{Component} from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
-import {bindActionCreators, connect} from 'react-redux';
+import {connect} from 'react-redux';
 import { 
 Text, 
 Dimensions,
