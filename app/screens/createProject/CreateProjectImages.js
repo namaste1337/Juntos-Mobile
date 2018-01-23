@@ -10,7 +10,6 @@ Text,
 Dimensions,
 Image,
 StyleSheet,
-TouchableOpacity,
 View
 } from 'react-native';
 
@@ -49,7 +48,6 @@ const IMAGE_GRID_OFFSET                = 45;
 // view component and the margin of each imageCard.
 const IMAGE_GRID_PLACEMENT             = (width-IMAGE_GRID_OFFSET)/3;
 
-
 class CreateProjectImages extends Component {
 
   constructor(props){
@@ -68,7 +66,8 @@ class CreateProjectImages extends Component {
   ////////////////////////
   // Callbacks
   ////////////////////////
-    //Handles profile image button press
+
+  //Handles profile image button press
   _onAddImagePress(){
 
     ImagePicker.openPicker({
@@ -76,16 +75,7 @@ class CreateProjectImages extends Component {
       height: 200,
       cropping: 300
     }).then(image => {
-      let source = { uri: image.path };
-      // this.setState({
-      //   profileImageData: {
-      //     uri: image.path,
-      //     mime: image.mime
-      //   },
-      //   profileImage: source,
-      //   profileImageValid: PROFILE_IMAGE_TRUE_STATE
-      // });
-      
+      let source = { uri: image.path };     
       this.setState(function(previousState){
         previousState.projectImages[previousState.projectImages.length] = source;
         return previousState;
