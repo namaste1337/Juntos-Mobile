@@ -43,7 +43,7 @@ class  ImageCardView extends Component {
 
     return(
       <View>
-        <CardView style={this.props.style}>
+        <CardView style={[this.props.style, this.props.style]}>
           <Image style={styles.imageCardView} source={this.props.source}/>
         </CardView>
       </View>
