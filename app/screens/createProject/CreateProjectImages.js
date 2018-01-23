@@ -37,7 +37,7 @@ import CardView from "./../../components/CardView";
 ////////////////////////
 // Constants
 ////////////////////////
-const {width, height}                   = Dimensions.get('window');
+
 // Images
 const imageAddButton                    = require("./../../assets/createProject/addImageIcon.png");
 // Strings
@@ -46,14 +46,16 @@ const CANCEL_OPTIONS_STRING             = "Cancel";
 const CAMERA_OPTIONS_STRING             = "Camera";
 const GALLERY_OPTIONS_STRING            = "Gallery";
 const REMOVE_OPTIONS_STRING             = "Remove";
-// Properties
-const MEDIA_OPTIONS_PROPERTY            = { width: 400, height: 300, cropping: true }
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER          = 45;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
 const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 1;
 const OPEN_CAMERA_BUTTON_INDEX_NUMBER   = 1;
 const IMAGE_DELETE_COUNT_NUMBER         = 1;
+// Properties
+const MEDIA_OPTIONS_PROPERTY            = { width: 400, height: 300, cropping: true }
+// Device
+const {width, height}                   = Dimensions.get('window');
 // The image grid placement takes into account the image grid offset
 // the image grid offset is calculated from the the padding of the parent
 // view component and the margin of each imageCard.
@@ -72,6 +74,35 @@ class CreateProjectImages extends Component {
     this.state = {
       projectImages:[]
     }
+
+  }
+
+  ////////////////////////
+  // Callbacks
+  ////////////////////////
+
+  // Handles opening the selected media type
+  _openMediaType(buttonIndex){
+
+    if(buttonIndex == OPEN_CAMERA_BUTTON_INDEX_NUMBER){
+      this._openCamera();
+    }else{
+      this._openGallery();
+    }
+
+  }
+
+  // Handles on image card press
+  _onCardImagePress(imageIndex){
+
+    this._displayRemoveImageMenu(imageIndex);
+
+  }
+
+  //Handles add image button press
+  _onAddImagePress(){
+
+    this._displayGalleryCameraMenu();
 
   }
 
@@ -145,36 +176,6 @@ class CreateProjectImages extends Component {
       previousState.projectImages[previousState.projectImages.length] = source;
       return previousState;
     });
-
-  }
-
-
-  ////////////////////////
-  // Callbacks
-  ////////////////////////
-
-  // Handles opening the selected media type
-  _openMediaType(buttonIndex){
-
-    if(buttonIndex == OPEN_CAMERA_BUTTON_INDEX_NUMBER){
-      this._openCamera();
-    }else{
-      this._openGallery();
-    }
-
-  }
-
-  // Handles on image card press
-  _onCardImagePress(imageIndex){
-
-    this._displayRemoveImageMenu(imageIndex);
-
-  }
-
-  //Handles add image button press
-  _onAddImagePress(){
-
-    this._displayGalleryCameraMenu();
 
   }
 
