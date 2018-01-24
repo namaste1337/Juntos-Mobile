@@ -14,6 +14,7 @@ import {NavigationActions} from "react-navigation";
 export const ProjectActions = {
 	POPULATE_TEMP_DESCRIPTION: "POPULATE_TEMP_DESCRIPTION",
 	POPULATE_TEMP_DETAILS: "POPULATE_TEMP_DETAILS",
+	POPULATE_TEMP_IMAGES: "POPULATE_TEMP_IMAGES"
 }
 
 ////////////////////////
@@ -89,8 +90,16 @@ export function populateTempDetails(startDate, endDate, foodProvided, currentSta
 
 // Action handles populating the temp image to the stpre project.tempProject.
 // This function is usually called when a new project is being created.
-export function populateTempImage(projectImageArray){
+export function populateTempImage(imageArray){
 
+	let data = {};
+
+	date.images = imageArray
+
+	return{
+		type: ProjectActions.POPULATE_TEMP_IMAGES,
+		payload: data;
+	}
 
 }
 
