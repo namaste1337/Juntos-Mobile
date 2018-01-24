@@ -98,7 +98,7 @@ export function populateTempImage(imageArray){
 
 	return{
 		type: ProjectActions.POPULATE_TEMP_IMAGES,
-		payload: data;
+		payload: data
 	}
 
 }
