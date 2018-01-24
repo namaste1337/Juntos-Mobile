@@ -20,12 +20,8 @@ ActionSheetIOS
 
 // Common styles
 import CommonStyles, {COLORS, FONTS} from "../../common/styles.js"
-
-////////////////////////
-// Actions
-////////////////////////
-
-import {accountLogout} from "./../../actions/account-actions.js";
+// Conditional rendering
+import {renderIf} from "./../../common/components";
 
 //////////////////////////////
 // Imports Custom Components
@@ -33,6 +29,12 @@ import {accountLogout} from "./../../actions/account-actions.js";
 
 import PrimaryButton from "./../../components/PrimaryButton";
 import CardView from "./../../components/CardView";
+
+////////////////////////
+// Actions
+////////////////////////
+
+import {accountLogout} from "./../../actions/account-actions.js";
 
 ////////////////////////
 // Constants
@@ -51,7 +53,7 @@ const IMAGE_GRID_OFFSET_NUMBER          = 45;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
 const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 1;
 const OPEN_CAMERA_BUTTON_INDEX_NUMBER   = 1;
-const IMAGE_DELETE_COUNT_NUMBER         = 1;
+const IMAGE_DELETE_COUNT_NUMBER         = 1; 
 // Properties
 const MEDIA_OPTIONS_PROPERTY            = { width: 400, height: 300, cropping: true }
 // Device
@@ -72,7 +74,8 @@ class CreateProjectImages extends Component {
 
     super(props);
     this.state = {
-      projectImages:[]
+      projectImages:[],
+      imagesValid: true,
     }
 
   }
@@ -106,9 +109,46 @@ class CreateProjectImages extends Component {
 
   }
 
+  _onPreviewImageButtonPress(){
+
+    let isValid = this._validate();
+
+    if(isValid){
+    
+    }
+    
+  }
+
   ////////////////////////
   // Methods
   ////////////////////////
+
+  // Handles all validation for required fields
+  _validate(){
+
+    let isValid = true;
+
+    isValid = this._validateRequiredImages();
+
+    if(!isValid)
+      return isValid;
+
+    return isValid;
+
+  }
+
+  // Validates for required image count
+  _validateRequiredImages(){
+
+    let valid = (this.state.projectImages.length > 0);
+    // Update the imagesValid state
+    this.setState({
+      imagesValid: valid
+    });
+    
+    return valid;
+
+  }
 
   // Displays an action sheet for the available media types
   _displayGalleryCameraMenu(){
@@ -187,6 +227,7 @@ class CreateProjectImages extends Component {
     console.log(this.state);
     return (
      <View style={CommonStyles.container}>
+     {renderIf(!this.state.imagesValid, <View style={styles.validationTextWrapper}><Text style={styles.validationText}> You must add 1 image to your project</Text></View>)}
       <View style={styles.scrollViewWrapper}>
         <View style={styles.imagesWrapper}>
           {this.state.projectImages.map((image, index) => {
@@ -203,7 +244,7 @@ class CreateProjectImages extends Component {
       </View>
       <View style={CommonStyles.buttonFixedWrapper}> 
         <PrimaryButton style={CommonStyles.buttonFixedBottom} 
-        onPress={() => this._onNexButtonPress()} 
+        onPress={() => this._onPreviewImageButtonPress()} 
         buttonText={PREVIEW_PROJECT_BUTTON_STRING}/>
       </View>
      </View>
@@ -265,6 +306,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: COLORS.WHITE,
     fontFamily: FONTS.PRIMARY,
+  },
+
+  ////////////////////////
+  // Validation
+  ////////////////////////
+
+  validationTextWrapper:{
+    paddingTop: 10,
+    alignItems: "center"
+  },
+
+  validationText:{
+    fontFamily: FONTS.PRIMARY,
+    color: COLORS.RED,
+    fontSize: 12
   }
 
 });
