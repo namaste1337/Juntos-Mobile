@@ -90,11 +90,11 @@ export function populateTempDetails(startDate, endDate, foodProvided, currentSta
 
 // Action handles populating the temp image to the stpre project.tempProject.
 // This function is usually called when a new project is being created.
-export function populateTempImage(imageArray){
+export function populateTempImages(imageArray){
 
 	let data = {};
 
-	date.images = imageArray
+	data.images = imageArray
 
 	return{
 		type: ProjectActions.POPULATE_TEMP_IMAGES,
