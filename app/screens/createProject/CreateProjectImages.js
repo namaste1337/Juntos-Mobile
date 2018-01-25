@@ -34,7 +34,7 @@ import CardView from "./../../components/CardView";
 // Actions
 ////////////////////////
 
-import {accountLogout} from "./../../actions/account-actions.js";
+import {populateTempImages} from "./../../actions/project-actions.js";
 
 ////////////////////////
 // Constants
@@ -114,9 +114,9 @@ class CreateProjectImages extends Component {
     let isValid = this._validate();
 
     if(isValid){
-    
+      this.props.populateTempImages(this.state.projectImages);
     }
-    
+
   }
 
   ////////////////////////
@@ -331,14 +331,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored,
+    project: state.project
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(accountLogout())
+    populateTempImages: (imagesArray) => dispatch(populateTempImages(imagesArray))
   };
 }
 
