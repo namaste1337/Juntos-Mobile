@@ -14,16 +14,20 @@ export default function session(
             }
       		});
       case ProjectActions.POPULATE_TEMP_DETAILS:
-        let newState = Object.assign(state);
-        let tempProject = Object.assign(newState.tempProject,{
-              startDate: action.payload.startDate,
-              endDate: action.payload.endDate,
-              foodProvided: action.payload.foodProvided,
-              currentStatus: action.payload.currentStatus,
-              projectType: action.payload.projectType
-            });
-        newState.tempProject = tempProject;
-        return newState;
+        return (function () {
+          let newState = Object.assign(state);
+          let tempProject = Object.assign(newState.tempProject,{
+                startDate: action.payload.startDate,
+                endDate: action.payload.endDate,
+                foodProvided: action.payload.foodProvided,
+                currentStatus: action.payload.currentStatus,
+                projectType: action.payload.projectType
+              });
+          newState.tempProject = tempProject;
+          return newState;
+        })();
+      case ProjectActions.POPULATE_TEMP_IMAGES: 
+
     default:
       return state;
 	}
