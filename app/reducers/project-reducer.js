@@ -27,9 +27,18 @@ export default function session(
           return newState;
         })();
       case ProjectActions.POPULATE_TEMP_IMAGES: 
-
+        return (function(){
+          let newState = Object.assign(state);
+          let tempProject = Object.assign(newState.tempProject,{
+            images: action.payload.images
+          })
+          newState.tempProject = tempProject;
+          return newState;
+        })();
     default:
       return state;
 	}
-
 }
+
+
+
