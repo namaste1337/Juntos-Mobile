@@ -35,6 +35,7 @@ import {navigateToCreateProject} from "./../actions/project-actions.js";
 
 import PrimaryButton from "./../components/PrimaryButton";
 import ProjectCarousel from "./../components/ProjectCarousel";
+import ProjectPoster from "./../components/ProjectPoster";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
 
@@ -286,15 +287,23 @@ class Projects extends Component {
           <ProjectCarousel 
             ref={ref => this._projectCarousel = ref}
             data={TEMP_DATA} 
-            onPageChangeEnd={page=> this._onPageChangeEnd(page)}/>
+            onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
+          {TEMP_DATA.map(data => 
+            <ProjectPoster 
+              key={data.id} 
+              data={data} />
+          )}
+          </ProjectCarousel>
         </View>
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.goToCreateProject() }/>
-        </View>
+        </View> 
       </View>
     );
   }
 }
+
+  // onLoadEnd={ () => !this.state.scrollViewBounced && this._bounceScrollView() }
 
 ////////////////////////
 // Screen Styles
