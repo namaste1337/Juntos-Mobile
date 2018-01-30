@@ -63,17 +63,8 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
 /////////////////////////
   /* 
   
-  // Required props
+  // Optional props
 
-  data: type data (Array) [
-    {
-      id: Number,
-      image: String,
-      title: String,
-      description: String,
-      distance: String
-    }
-  ]
   onPageChangeEnd: type function(page),
   passes back project carousel current page
   as the first parameter of the callback. 
@@ -164,7 +155,7 @@ class ProjectCarousel extends Component {
     let currentPage     = Math.ceil(currentOffset/scrollViewWidth);
 
     // Set the current active indicator if it is within bounds
-    if(currentPage < this.props.data.length)
+    if(currentPage < this.props.children.length)
       this._setActivePageIndicator(currentPage);
 
     // Validate that the onPageChangeEnd prop
@@ -226,12 +217,12 @@ class ProjectCarousel extends Component {
   }
 
   render(){
-
+    console.log(this.props.children);
     return (
       <View>
         <View style={styles.carouselIndicatorWrapper}>
-          {this.props.data.map(data =>
-            <View key={data.id + PAGER_SUFFIX_KEY} 
+          {this.props.children.map((data, index) =>
+            <View key={index} 
               ref={this._setPagerIndicatorRefs}
               style={styles.carouselIndicatorInactive}>
             </View>)
@@ -248,18 +239,6 @@ class ProjectCarousel extends Component {
       </View>
     )
   }
-
-}
-
-
-////////////////////////
-// Prop Type Checks
-////////////////////////
-
-ProjectCarousel.propTypes = {
-  //Prop validation definitions for custom props
-  data: PropTypes.array.isRequired,
-  onPageChangeEnd: PropTypes.func.isRequired
 
 }
 
