@@ -34,8 +34,8 @@ import {navigateToCreateProject} from "./../actions/project-actions.js";
 /////////////////////////////
 
 import PrimaryButton from "./../components/PrimaryButton";
-import ProjectCarousel from "./../components/ProjectCarousel";
-import ProjectPoster from "./../components/ProjectPoster";
+import Carousel from "./../components/Carousel";
+import Poster from "./../components/Poster";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
 
@@ -284,16 +284,16 @@ class Projects extends Component {
         </MapView.Animated>
 
         <View>
-          <ProjectCarousel 
+          <Carousel 
             ref={ref => this._projectCarousel = ref}
             data={TEMP_DATA} 
             onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
           {TEMP_DATA.map(data => 
-            <ProjectPoster 
+            <Poster 
               key={data.id} 
               data={data} />
           )}
-          </ProjectCarousel>
+          </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.goToCreateProject() }/>
