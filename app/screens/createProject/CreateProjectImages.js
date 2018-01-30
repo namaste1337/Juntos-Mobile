@@ -34,7 +34,7 @@ import CardView from "./../../components/CardView";
 // Actions
 ////////////////////////
 
-import {populateTempImages} from "./../../actions/project-actions.js";
+import {populateTempImages, navigateToProjectDetails} from "./../../actions/project-actions.js";
 
 ////////////////////////
 // Constants
@@ -115,7 +115,14 @@ class CreateProjectImages extends Component {
 
     if(isValid){
       this.props.populateTempImages(this.state.projectImages);
+
+      // Navigation to Project details screen and display a 
+      // preview.
+      this.props.navigateToProjectDetails()
+
     }
+
+
 
   }
 
@@ -337,7 +344,8 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    populateTempImages: (imagesArray) => dispatch(populateTempImages(imagesArray))
+    populateTempImages: (imagesArray) => dispatch(populateTempImages(imagesArray)),
+    navigateToProjectDetails: () => dispatch(navigateToProjectDetails())
   };
 }
 
