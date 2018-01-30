@@ -40,7 +40,7 @@ export function navigateToCreateProject(){
 }
 
 // Action handles navigating to the create project details screen.
-export function navigateToProjectDetails(){
+export function navigateToCreateProjectDetails(){
 
  return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_DETAILS});
 
