@@ -1,4 +1,4 @@
-// Styles for ProjectCarousel Component
+// Styles for Carousel Component
 
 ////////////////////////
 // Import Modules

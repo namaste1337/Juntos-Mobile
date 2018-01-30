@@ -64,7 +64,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   as the first parameter of the callback. 
   */
 
-class ProjectCarousel extends Component {
+class Carousel extends Component {
 
 
   ////////////////////////
@@ -236,5 +236,5 @@ class ProjectCarousel extends Component {
 
 }
 
-export default ProjectCarousel;
+export default Carousel;
 
