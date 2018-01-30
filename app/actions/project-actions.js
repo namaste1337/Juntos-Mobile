@@ -25,7 +25,8 @@ export const ProjectActions = {
 const PROJECT_NAVIGATION_ROUTES ={
 	CREATE_PROJECT_DESCRIPTION: "CreateProjectDescription",
 	CREATE_PROJECT_DETAILS: "CreateProjectDetails",
-	CREATE_PROJECT_IMAGES: "CreateProjectImages"
+	CREATE_PROJECT_IMAGES: "CreateProjectImages",
+	PROJECT_DETAILS: "ProjectDetails"
 }
 
 ////////////////////////
@@ -50,6 +51,13 @@ export function navigateToCreateProjectDetails(){
 export function navigateToProjectImages(){
 
  return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_IMAGES});
+
+}
+
+// Action handles navigating to the project details screen.
+export function navigateToProjectDetails(){
+
+ return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.PROJECT_DETAILS});
 
 }
 
