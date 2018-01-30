@@ -26,7 +26,7 @@ import {COLORS} from "./../../common/styles";
 
 import {
 populateTempDescription,
-navigateToProjectDetails
+navigateToCreateProjectDetails
 } from "./../../actions/project-actions";
 
 //////////////////////////////
@@ -115,7 +115,7 @@ class CreateProjectDescription extends Component {
       this.props.populateTempDescription(projectName, projectLocation, projectDescription);
       
       // Navigate to next view to continue the create project sequence
-      this.props.navigateToProjectDetails();
+      this.props.navigateToCreateProjectDetails();
 
     }
 
@@ -278,7 +278,7 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     populateTempDescription: (projectName, projectLocation, projectDescription) => dispatch(populateTempDescription(projectName, projectLocation, projectDescription)),
-    navigateToProjectDetails: () => dispatch(navigateToProjectDetails())
+    navigateToCreateProjectDetails: () => dispatch(navigateToCreateProjectDetails())
   };
 }
 
