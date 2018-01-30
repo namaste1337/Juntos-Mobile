@@ -47,7 +47,7 @@ const TEMPORARY_IMAGE       = require("./../../assets/projects/tempImage.png");
 
   */
 
-class  ProjectPoster extends Component {
+class  Poster extends Component {
 
   ////////////////////////
   // Methods
@@ -83,10 +83,10 @@ class  ProjectPoster extends Component {
 // Prop Type Checks
 ////////////////////////
 
-ProjectPoster.propTypes = {
+Poster.propTypes = {
   //Prop validation definitions for custom props
   data: PropTypes.object.isRequired
 }
 
-export default ProjectPoster;
+export default Poster;
 
