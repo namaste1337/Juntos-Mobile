@@ -23,12 +23,6 @@ import PropTypes from "prop-types";
 import {renderIf} from "./../../common/components";
 import {deviceProperties} from "./../../common/device";
 
-//////////////////////////////
-// Imports Custom Components
-//////////////////////////////
-
-import ProjectPoster from "./../ProjectPoster";
-
 ////////////////////////
 // Import Styles
 ////////////////////////
