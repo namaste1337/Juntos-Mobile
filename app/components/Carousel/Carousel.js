@@ -66,7 +66,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   Description: Toggles pageindicator
   Default: false
   =========================
-  onPageChangeEnd: type function(page),
+  onPageChangeEnd(page): type function callback
   Description: Passes back project carousel current page
   as the first parameter of the callback. 
 
@@ -278,7 +278,7 @@ export default Carousel;
   }
   Description: Poster header values
   =========================
-  onLoadEnd(currentPage): type function (callback)
+  onLoadEnd(currentPage): type function callback
   Description: Called when background image has finished loading
 
   */
