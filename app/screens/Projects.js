@@ -34,8 +34,7 @@ import {navigateToCreateProject} from "./../actions/project-actions.js";
 /////////////////////////////
 
 import PrimaryButton from "./../components/PrimaryButton";
-import Carousel from "./../components/Carousel";
-import Poster from "./../components/Poster";
+import Carousel, {Poster} from "./../components/Carousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
 

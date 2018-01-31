@@ -33,6 +33,8 @@ import styles from "./styles";
 // Constants
 ////////////////////////
 
+// Images
+const TEMPORARY_IMAGE       = require("./../../assets/projects/tempImage.png");
 // Key Suffixes
 const PAGER_SUFFIX_KEY                      = "-pager";
 // Properties
@@ -237,4 +239,72 @@ class Carousel extends Component {
 }
 
 export default Carousel;
+
+
+////////////////////////
+// Component
+/////////////////////////
+
+  /* 
+  
+  // Required props
+
+  data: type posterData (object) {
+      id: Number,
+      image: String,
+      title: String,
+      description: String,
+      distance: String
+    }
+  
+  // Optional props
+  
+  onLoadEnd: type function
+
+  */
+
+class  Poster extends Component {
+
+  ////////////////////////
+  // Methods
+  ////////////////////////
+
+  render(){
+
+    return (
+
+      <ImageBackground style={styles.carouselTempImage} source={TEMPORARY_IMAGE}>
+        <ImageBackground 
+        source={{uri: this.props.data.image}} 
+        style={styles.carouselImage}
+        onLoadEnd={this.props.onLoadEnd} >
+          <View style={styles.carouselTextView}>
+            <View style={styles.carouselFirstLineTextWrapper}>
+              <Text style={styles.carouselTitleText}> {this.props.data.title} </Text>
+              <Text style={styles.carouselDistanceText}> {this.props.data.distance}  </Text>
+            </View>
+            <View>
+              <Text style={styles.carouselDescriptionText}> {this.props.data.description}  </Text>
+            </View>
+          </View>
+        </ImageBackground>
+      </ImageBackground>
+
+    );
+  }
+}
+
+
+////////////////////////
+// Prop Type Checks
+////////////////////////
+
+Poster.propTypes = {
+  //Prop validation definitions for custom props
+  data: PropTypes.object.isRequired
+}
+
+export {Poster};
+
+
 
