@@ -270,7 +270,7 @@ export default Carousel;
 class  Poster extends Component {
 
   ////////////////////////
-  // Methods
+  // Private Methods
   ////////////////////////
 
   // Handles rendering the optional poster header
@@ -291,6 +291,11 @@ class  Poster extends Component {
       return null;
     }
   }
+
+
+  ////////////////////////
+  // Methods
+  ////////////////////////
 
   render(){ 
 
