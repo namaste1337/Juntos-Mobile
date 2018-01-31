@@ -61,14 +61,24 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   
   // Optional props
 
+  pageIndicator: type Bool
+  Description: Toggles pageindicator
+
   onPageChangeEnd: type function(page),
-  passes back project carousel current page
+  Description: Passes back project carousel current page
   as the first parameter of the callback. 
 
   */
 
 class Carousel extends Component {
 
+  ////////////////////////
+  // Default Props
+  ////////////////////////
+  static defaultProps = {
+    ...Component.defaultProps,
+    pageIndicator: false
+  }
 
   ////////////////////////
   // Constructor
@@ -128,17 +138,6 @@ class Carousel extends Component {
   }
 
   ////////////////////////
-  // Lifecycle
-  ////////////////////////
-
-  componentDidMount(){
-
-    // Set the intial active page indicator
-    this._setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY);
-
-  }
-
-  ////////////////////////
   // Callbacks
   ////////////////////////
 
@@ -192,6 +191,27 @@ class Carousel extends Component {
   }
 
   ////////////////////////
+  // Private Methods
+  ////////////////////////
+
+  _pageIndicator = (props) => {
+    if(props.pageIndicator){
+      return (
+        <View style={styles.carouselIndicatorWrapper} onLayout={ ()=> this._setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY) }>
+          {props.children.map((data, index) =>
+            <View key={index} 
+              ref={this._setPagerIndicatorRefs}
+              style={styles.carouselIndicatorInactive}>
+            </View>)
+          }
+        </View>
+      );
+    }else{
+      return null;
+    }
+  }
+
+  ////////////////////////
   // Methods
   ////////////////////////
 
@@ -217,14 +237,7 @@ class Carousel extends Component {
     console.log(this.props.children);
     return (
       <View>
-        <View style={styles.carouselIndicatorWrapper}>
-          {this.props.children.map((data, index) =>
-            <View key={index} 
-              ref={this._setPagerIndicatorRefs}
-              style={styles.carouselIndicatorInactive}>
-            </View>)
-          }
-        </View>
+        <this._pageIndicator children={this.props.children}/>
         <ScrollView 
         ref={ref => this._scrollView = ref}
         scrollEventThrottle={SCROLL_VIEW_EVENT_THROTTILE_PROPERTY} 
