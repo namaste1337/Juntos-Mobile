@@ -63,6 +63,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
 
   pageIndicator: type Bool
   Description: Toggles pageindicator
+  Default: false
 
   onPageChangeEnd: type function(page),
   Description: Passes back project carousel current page
