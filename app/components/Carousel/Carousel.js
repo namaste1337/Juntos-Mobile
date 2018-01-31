@@ -58,13 +58,14 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
 // Component
 /////////////////////////
   /* 
-  
-  // Optional props
 
+  ~~~~~~~~~~~~~~~~~~~
+  Optional props
+  ~~~~~~~~~~~~~~~~~~~
   pageIndicator: type Bool
   Description: Toggles pageindicator
   Default: false
-
+  =========================
   onPageChangeEnd: type function(page),
   Description: Passes back project carousel current page
   as the first parameter of the callback. 
@@ -262,20 +263,21 @@ export default Carousel;
 
   /* 
   
-  // Required props
-
+  ~~~~~~~~~~~~~~~~~~~
+  Required props
+  ~~~~~~~~~~~~~~~~~~~
   source: type String,
   Description: Image background source
-  
-  // Optional props
-
+  ~~~~~~~~~~~~~~~~~~~
+  Optional props
+  ~~~~~~~~~~~~~~~~~~~
   data: type object {
     title: String,
     description: String,
     distance: String
   }
   Description: Poster header values
-
+  =========================
   onLoadEnd(currentPage): type function (callback)
   Description: Called when background image has finished loading
 
