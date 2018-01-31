@@ -64,6 +64,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   onPageChangeEnd: type function(page),
   passes back project carousel current page
   as the first parameter of the callback. 
+
   */
 
 class Carousel extends Component {
@@ -249,17 +250,20 @@ export default Carousel;
   
   // Required props
 
-  data: type posterData (object) {
-      id: Number,
-      image: String,
-      title: String,
-      description: String,
-      distance: String
-    }
+  source: type String,
+  Description: Image background source
   
   // Optional props
-  
-  onLoadEnd: type function
+
+  data: type object {
+    title: String,
+    description: String,
+    distance: String
+  }
+  Description: Poster header values
+
+  onLoadEnd(currentPage): type function (callback)
+  Description: Called when background image has finished loading
 
   */
 
@@ -269,24 +273,35 @@ class  Poster extends Component {
   // Methods
   ////////////////////////
 
-  render(){
+  // Handles rendering the optional poster header
+  _header(props){
+    if(props.data != undefined)
+      return (
+        <View style={styles.carouselTextView}>
+          <View style={styles.carouselFirstLineTextWrapper}>
+            <Text style={styles.carouselTitleText}> {props.data.title} </Text>
+            <Text style={styles.carouselDistanceText}> {props.data.distance}  </Text>
+          </View>
+          <View>
+            <Text style={styles.carouselDescriptionText}> {props.data.description}  </Text>
+          </View>
+        </View>
+      );
+    else{
+      return null;
+    }
+  }
+
+  render(){ 
 
     return (
 
       <ImageBackground style={styles.carouselTempImage} source={TEMPORARY_IMAGE}>
         <ImageBackground 
-        source={{uri: this.props.data.image}} 
+        source={{uri: this.props.source}} 
         style={styles.carouselImage}
         onLoadEnd={this.props.onLoadEnd} >
-          <View style={styles.carouselTextView}>
-            <View style={styles.carouselFirstLineTextWrapper}>
-              <Text style={styles.carouselTitleText}> {this.props.data.title} </Text>
-              <Text style={styles.carouselDistanceText}> {this.props.data.distance}  </Text>
-            </View>
-            <View>
-              <Text style={styles.carouselDescriptionText}> {this.props.data.description}  </Text>
-            </View>
-          </View>
+          <this._header data={this.props.data} />
         </ImageBackground>
       </ImageBackground>
 
@@ -294,14 +309,13 @@ class  Poster extends Component {
   }
 }
 
-
 ////////////////////////
 // Prop Type Checks
 ////////////////////////
 
 Poster.propTypes = {
   //Prop validation definitions for custom props
-  data: PropTypes.object.isRequired
+  source: PropTypes.string.isRequired
 }
 
 export {Poster};
