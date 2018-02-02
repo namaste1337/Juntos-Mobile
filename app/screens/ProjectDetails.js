@@ -107,8 +107,8 @@ class ProjectDetails extends Component {
               <Image style={styles.userImage} source={{uri: TEMP_DATA.user.profileImage}} />
             </View>
             <View style={styles.headerTopRight}>
-               <Text style={styles.projectTitle}>Tiny Kitchen, Tool Shed, and Backroom</Text>
-  
+              <Text>SustainableNomad</Text>
+              <Text style={styles.projectTitle}>Tiny Kitchen, Tool Shed, and Backroom</Text>
             </View>
           </View>
           <View style={styles.projectHeaderBottom}>
@@ -121,6 +121,10 @@ class ProjectDetails extends Component {
           </View>
         </View>
       </View>
+      <View style={styles.descriptionWrapper}>
+        <Text style={styles.descriptionHeader}>About</Text>
+        <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae libero ante. Ut turpis ex, scelerisque eu iaculis vel, porta vitae velit. Maecenas semper quam eros, non malesuada tellus placerat ut. Phasellus est orci, sodales quis neque at, maximus pharetra arcu. In a nibh lacus. Suspendisse nec urna a nulla vehicula interdum quis at justo. Praesent dui nisi, pulvinar ut massa ut, condimentum sollicitudin odio. Aliquam a venenatis ligula, a dapibus turpis. In id convallis dolor. Morbi tellus enim, scelerisque non tellus eu, pulvinar pulvinar nisi. Nunc justo orci, lobortis sit amet odio a, elementum fermentum eros. Duis ornare, tellus sit amet lobortis scelerisque, est lorem blandit diam, id faucibus eros nisl nec turpis. Fusce egestas neque varius pellentesque euismod. Mauris odio tellus, tempor id molestie in, bibendum ut quam. </Text>
+      </View>
      </ScrollView>
     );
   }
@@ -132,11 +136,6 @@ class ProjectDetails extends Component {
 
 const styles = StyleSheet.create({
 
-  userImage:{
-    width: 50,
-    height: 50,
-    borderRadius: 25
-  },
   header:{
     margin: 20,
     borderBottomColor: COLORS.LIGHT_GREY,
@@ -170,6 +169,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     justifyContent: "center",
   },
+    userImage:{
+    width: 50,
+    height: 50,
+    borderRadius: 25
+  },
   projectTitle:{
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.BOLD,
@@ -186,6 +190,19 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     tintColor: COLORS.DARK_GREY
+  },
+  descriptionWrapper:{
+    marginLeft: 20,
+    marginRight: 20
+  },
+  descriptionHeader:{
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.REGULAR,
+    fontSize: 18,
+    paddingBottom: 10,
+  },
+  descriptionText:{
+    fontFamily: FONTS.PRIMARY
   }
 
 });
