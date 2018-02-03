@@ -94,37 +94,54 @@ class ProjectDetails extends Component {
   render() {
 
     return (
-     <ScrollView style={{flex: 1, backgroundColor: "#FFF"}}>
-      <View>
+     <ScrollView style={CommonStyles.container}>
         <Carousel>
          {TEMP_DATA.images.map((imageSource, index) => 
            <Poster source={imageSource} key={index}/>
          )}
         </Carousel>
-        <View style={styles.header}>
-          <View style={styles.projectHeaderTop}>
-            <View style={styles.headerTopLeft}>
-              <Image style={styles.userImage} source={{uri: TEMP_DATA.user.profileImage}} />
+        <View style={styles.contentWrapper}>
+
+          <View style={styles.headerWrapper}>
+            <View style={styles.projectHeaderTop}>
+              <View style={styles.headerTopLeft}>
+                <Image style={styles.userImage} source={{uri: TEMP_DATA.user.profileImage}} />
+              </View>
+              <View style={styles.headerTopRight}>
+                <Text>SustainableNomad</Text>
+                <Text style={styles.projectTitle}>Tiny Kitchen, Tool Shed, and Backroom</Text>
+              </View>
             </View>
-            <View style={styles.headerTopRight}>
-              <Text>SustainableNomad</Text>
-              <Text style={styles.projectTitle}>Tiny Kitchen, Tool Shed, and Backroom</Text>
+            <View style={styles.projectHeaderBottom}>
+              <View style={styles.headerBottomLeft}>
+                <Image style={styles.mapIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+              </View>
+              <View style={styles.headerBottomRight}>
+                <Text style={styles.projectAddress}>5441 Makati Circle, San Jose, Ca 95123</Text>
+              </View>
             </View>
           </View>
-          <View style={styles.projectHeaderBottom}>
-            <View style={styles.headerBottomLeft}>
-              <Image style={styles.mapIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+
+          <View style={styles.detailsWrapper}>
+            <View style={styles.detail}>
+              <View style={styles.detailIconWrapper}>
+                <Image style={styles.detailIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+              </View>
+              <View style={styles.detailTextWrapper}>
+              </View>
             </View>
-            <View style={styles.headerBottomRight}>
-              <Text style={styles.projectAddress}>5441 Makati Circle, San Jose, Ca 95123</Text>
+            <View style={styles.detail}>
+              <View style={styles.detailIconWrapper}>
+                <Image style={styles.detailIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+              </View>
             </View>
+          </View>
+
+          <View style={styles.descriptionWrapper}>
+            <Text style={styles.descriptionHeader}>About</Text>
+            <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae libero ante. Ut turpis ex, scelerisque eu iaculis vel, porta vitae velit. Maecenas semper quam eros, non malesuada tellus placerat ut. Phasellus est orci, sodales quis neque at, maximus pharetra arcu. In a nibh lacus. Suspendisse nec urna a nulla vehicula interdum quis at justo. Praesent dui nisi, pulvinar ut massa ut, condimentum sollicitudin odio. Aliquam a venenatis ligula, a dapibus turpis. In id convallis dolor. Morbi tellus enim, scelerisque non tellus eu, pulvinar pulvinar nisi. Nunc justo orci, lobortis sit amet odio a, elementum fermentum eros. Duis ornare, tellus sit amet lobortis scelerisque, est lorem blandit diam, id faucibus eros nisl nec turpis. Fusce egestas neque varius pellentesque euismod. Mauris odio tellus, tempor id molestie in, bibendum ut quam. </Text>
           </View>
         </View>
-      </View>
-      <View style={styles.descriptionWrapper}>
-        <Text style={styles.descriptionHeader}>About</Text>
-        <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae libero ante. Ut turpis ex, scelerisque eu iaculis vel, porta vitae velit. Maecenas semper quam eros, non malesuada tellus placerat ut. Phasellus est orci, sodales quis neque at, maximus pharetra arcu. In a nibh lacus. Suspendisse nec urna a nulla vehicula interdum quis at justo. Praesent dui nisi, pulvinar ut massa ut, condimentum sollicitudin odio. Aliquam a venenatis ligula, a dapibus turpis. In id convallis dolor. Morbi tellus enim, scelerisque non tellus eu, pulvinar pulvinar nisi. Nunc justo orci, lobortis sit amet odio a, elementum fermentum eros. Duis ornare, tellus sit amet lobortis scelerisque, est lorem blandit diam, id faucibus eros nisl nec turpis. Fusce egestas neque varius pellentesque euismod. Mauris odio tellus, tempor id molestie in, bibendum ut quam. </Text>
-      </View>
      </ScrollView>
     );
   }
@@ -136,8 +153,15 @@ class ProjectDetails extends Component {
 
 const styles = StyleSheet.create({
 
-  header:{
-    margin: 20,
+  contentWrapper:{
+    margin: 20
+  },
+
+  ////////////////////////
+  // HEADER
+  ////////////////////////
+
+  headerWrapper:{
     borderBottomColor: COLORS.LIGHT_GREY,
     borderBottomWidth: 0.5,
     paddingBottom: 15
@@ -191,19 +215,50 @@ const styles = StyleSheet.create({
     height: 25,
     tintColor: COLORS.DARK_GREY
   },
+
+  ////////////////////////
+  // Details
+  ////////////////////////
+
+  detailsWrapper:{
+    flexDirection: "row",
+    borderBottomColor: COLORS.LIGHT_GREY,
+    borderBottomWidth: 0.5,
+  },
+
+  detail:{
+    flex: 1
+  },
+
+  detailIconWrapper:{
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: '#000000',
+    borderWidth: 1
+  },
+
+  detailIcon:{
+    width: 30,
+    height: 30
+  },
+
+  ////////////////////////
+  // Description
+  ////////////////////////
+
   descriptionWrapper:{
-    marginLeft: 20,
-    marginRight: 20
   },
   descriptionHeader:{
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.REGULAR,
     fontSize: 18,
-    paddingBottom: 10,
+    paddingBottom: 5,
   },
   descriptionText:{
     fontFamily: FONTS.PRIMARY
   }
+
+
 
 });
 
