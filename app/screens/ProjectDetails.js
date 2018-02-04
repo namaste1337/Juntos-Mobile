@@ -13,6 +13,7 @@ StyleSheet,
 TouchableOpacity,
 View
 } from 'react-native';
+import MapView from 'react-native-maps';
 import { NavigationActions } from 'react-navigation'
 
 //////////////////////////////
@@ -21,6 +22,10 @@ import { NavigationActions } from 'react-navigation'
 
 // Common styles
 import CommonStyles, {FONTS, COLORS, FONT_WEIGHT} from "../common/styles.js"
+import {
+deviceTypes, 
+deviceProperties
+} from "./../common/device";
 
 ////////////////////////
 // Actions
@@ -39,10 +44,17 @@ import Carousel, {Poster} from './../components/Carousel';
 ////////////////////////
 // Constants
 ////////////////////////
-const screenCenter                  = Dimensions.get('window').width/2;
-const PROJECT_TABBAR_ICON_IMAGE     = require('./../assets/tabbar/settings_icon.png');
-const PROJECT_MAP_ICON_IMAGE         = require('./../assets/projects/map_icon.png');
-
+const screenCenter                        = Dimensions.get('window').width/2;
+const PROJECT_START_ICON_IMAGE            = require("./../assets/projects/project_start_icon.png");
+const PROJECT_END_ICON_IMAGE              = require("./../assets/projects/project_end_icon.png");
+const CURRENT_STATUS_ICON_IMAGE           = require("./../assets/projects/current_status_icon.png");
+const PROJECT_TYPE_ICON_IMAGE             = require("./../assets/projects/project_type_icon.png");
+const FOOD_PROVIDED_ICON_IMAGE            = require("./../assets/projects/food_provided_icon.png");
+const PROJECT_MAP_ICON_IMAGE              = require("./../assets/projects/map_icon.png");
+const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
+const ASPECT_RATIO_NUMBER                 = deviceProperties.width / deviceProperties.height;
+const LATITUDE_DELTA_NUMBER               = 0.0900;
+const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
 
 const TEMP_DATA = {
   user: {
@@ -122,26 +134,73 @@ class ProjectDetails extends Component {
             </View>
           </View>
 
-          <View style={styles.detailsWrapper}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.detailsWrapper}>
             <View style={styles.detail}>
               <View style={styles.detailIconWrapper}>
-                <Image style={styles.detailIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+                <Image style={styles.detailIcon}source={PROJECT_START_ICON_IMAGE}/>
               </View>
               <View style={styles.detailTextWrapper}>
+                <Text style={styles.detailTextHeader}>Project Start</Text>
+                <Text style={styles.detailTextData}>02-24-19</Text>
               </View>
             </View>
             <View style={styles.detail}>
               <View style={styles.detailIconWrapper}>
-                <Image style={styles.detailIcon}source={PROJECT_MAP_ICON_IMAGE}/>
+                <Image style={styles.detailIcon}source={PROJECT_END_ICON_IMAGE}/>
+              </View>
+              <View style={styles.detailTextWrapper}>
+                <Text style={styles.detailTextHeader}>Project End</Text>
+                <Text style={styles.detailTextData}>03-24-19</Text>
               </View>
             </View>
-          </View>
-
+            <View style={styles.detail}>
+              <View style={styles.detailIconWrapper}>
+                <Image style={styles.detailIcon}source={CURRENT_STATUS_ICON_IMAGE}/>
+              </View>
+              <View style={styles.detailTextWrapper}>
+                <Text style={styles.detailTextHeader}>Current Status</Text>
+                <Text style={styles.detailTextData}>Planning</Text>
+              </View>
+            </View>
+            <View style={styles.detail}>
+              <View style={styles.detailIconWrapper}>
+                <Image style={styles.detailIcon}source={PROJECT_TYPE_ICON_IMAGE}/>
+              </View>
+              <View style={styles.detailTextWrapper}>
+                <Text style={styles.detailTextHeader}>Project Type</Text>
+                <Text style={styles.detailTextData}>Volunteer</Text>
+              </View>
+            </View>
+            <View style={styles.detail}>
+              <View style={styles.detailIconWrapper}>
+                <Image style={styles.detailIcon}source={FOOD_PROVIDED_ICON_IMAGE}/>
+              </View>
+              <View style={styles.detailTextWrapper}>
+                <Text style={styles.detailTextHeader}>Food Provided</Text>
+                <Text style={styles.detailTextData}>Yes</Text>
+              </View>
+            </View>
+          </ScrollView>
           <View style={styles.descriptionWrapper}>
-            <Text style={styles.descriptionHeader}>About</Text>
+            <Text style={styles.sectionHeader}>About</Text>
             <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae libero ante. Ut turpis ex, scelerisque eu iaculis vel, porta vitae velit. Maecenas semper quam eros, non malesuada tellus placerat ut. Phasellus est orci, sodales quis neque at, maximus pharetra arcu. In a nibh lacus. Suspendisse nec urna a nulla vehicula interdum quis at justo. Praesent dui nisi, pulvinar ut massa ut, condimentum sollicitudin odio. Aliquam a venenatis ligula, a dapibus turpis. In id convallis dolor. Morbi tellus enim, scelerisque non tellus eu, pulvinar pulvinar nisi. Nunc justo orci, lobortis sit amet odio a, elementum fermentum eros. Duis ornare, tellus sit amet lobortis scelerisque, est lorem blandit diam, id faucibus eros nisl nec turpis. Fusce egestas neque varius pellentesque euismod. Mauris odio tellus, tempor id molestie in, bibendum ut quam. </Text>
           </View>
+          <View style={styles.mapViewWrapper}>
+            <Text style={styles.sectionHeader}>Location</Text>
+            <MapView 
+            style={{width: "100%", height: 200}}
+            showsUserLocation={true}
+            region={{ latitude: 37.20 , longitude: -121.25, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
+              <MapView.Marker
+              identifier={"masdas"}
+              key={1} 
+              image={MAP_MARKER_IMAGE}
+              coordinate={{ latitude: 37.20 , longitude: -121.25}}/>
+            </MapView>
+            <Text style={styles.mapViewAddress}>5441 Makati Circle, San Jose, Ca 95123</Text>
+          </View>
         </View>
+
      </ScrollView>
     );
   }
@@ -224,22 +283,47 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottomColor: COLORS.LIGHT_GREY,
     borderBottomWidth: 0.5,
+    padding: 10
   },
 
   detail:{
-    flex: 1
+    flexDirection: "row",
+    paddingRight: 10
   },
 
   detailIconWrapper:{
     justifyContent: "center",
     alignItems: "center",
-    borderColor: '#000000',
-    borderWidth: 1
   },
 
   detailIcon:{
     width: 30,
-    height: 30
+    height: 30,
+    tintColor: COLORS.DARK_GREY
+  },
+
+  detailTextWrapper:{
+    paddingLeft: 10,
+  },
+
+  detailTextHeader:{
+    color: COLORS.PRIMARY,
+    fontWeight: FONT_WEIGHT.BOLD
+  },
+  detailTextData:{
+    fontWeight: FONT_WEIGHT.LIGHT
+  },
+
+  ////////////////////////
+  // Section Header
+  ////////////////////////
+
+  sectionHeader:{
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.REGULAR,
+    color: COLORS.PRIMARY,
+    fontSize: 18,
+    paddingVertical: 10,
   },
 
   ////////////////////////
@@ -247,17 +331,29 @@ const styles = StyleSheet.create({
   ////////////////////////
 
   descriptionWrapper:{
-  },
-  descriptionHeader:{
-    fontFamily: FONTS.PRIMARY,
-    fontWeight: FONT_WEIGHT.REGULAR,
-    fontSize: 18,
-    paddingBottom: 5,
+    paddingBottom: 15,
+    borderBottomColor: COLORS.LIGHT_GREY,
+    borderBottomWidth: 0.3,
   },
   descriptionText:{
     fontFamily: FONTS.PRIMARY
-  }
+  },
 
+  ////////////////////////
+  // Map
+  ////////////////////////
+
+  mapViewWrapper:{
+    paddingBottom: 15,
+    borderBottomColor: COLORS.LIGHT_GREY,
+    borderBottomWidth: 0.3,
+  },
+
+  mapViewAddress:{
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT,
+    paddingTop: 15
+  }
 
 
 });
