@@ -188,7 +188,7 @@ class ProjectDetails extends Component {
           <View style={styles.mapViewWrapper}>
             <Text style={styles.sectionHeader}>Location</Text>
             <MapView 
-            style={{width: "100%", height: 200}}
+            style={styles.mapView}
             showsUserLocation={true}
             region={{ latitude: 37.20 , longitude: -121.25, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
               <MapView.Marker
@@ -348,6 +348,11 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.LIGHT_GREY,
     borderBottomWidth: 0.3,
   },
+
+  mapView:{
+    width: "100%", 
+    height: 200 
+  }
 
   mapViewAddress:{
     fontFamily: FONTS.PRIMARY,
