@@ -69,12 +69,6 @@ const TEMP_DATA = {
 
 class ProjectDetails extends Component {
 
-
-  tabBarOnPress(){
-    
-  }
-
-
   ////////////////////////
   // Navigation Options
   ////////////////////////
@@ -104,12 +98,12 @@ class ProjectDetails extends Component {
   ////////////////////////
 
   render() {
-
+    console.log(this.props.tempProject);
     return (
      <ScrollView style={CommonStyles.container}>
         <Carousel>
-         {TEMP_DATA.images.map((imageSource, index) => 
-           <Poster source={imageSource} key={index}/>
+         {this.props.tempProject.images.map((imageSource, index) => 
+           <Poster source={imageSource.uri} key={index}/>
          )}
         </Carousel>
         <View style={styles.contentWrapper}>
@@ -121,7 +115,7 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.headerTopRight}>
                 <Text>SustainableNomad</Text>
-                <Text style={styles.projectTitle}>Tiny Kitchen, Tool Shed, and Backroom</Text>
+                <Text style={styles.projectTitle}>{this.props.tempProject.name}</Text>
               </View>
             </View>
             <View style={styles.projectHeaderBottom}>
@@ -129,7 +123,7 @@ class ProjectDetails extends Component {
                 <Image style={styles.mapIcon}source={PROJECT_MAP_ICON_IMAGE}/>
               </View>
               <View style={styles.headerBottomRight}>
-                <Text style={styles.projectAddress}>5441 Makati Circle, San Jose, Ca 95123</Text>
+                <Text style={styles.projectAddress}>{this.props.tempProject.location.address}</Text>
               </View>
             </View>
           </View>
@@ -141,7 +135,7 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.detailTextWrapper}>
                 <Text style={styles.detailTextHeader}>Project Start</Text>
-                <Text style={styles.detailTextData}>02-24-19</Text>
+                <Text style={styles.detailTextData}>{this.props.tempProject.startDate}</Text>
               </View>
             </View>
             <View style={styles.detail}>
@@ -150,7 +144,7 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.detailTextWrapper}>
                 <Text style={styles.detailTextHeader}>Project End</Text>
-                <Text style={styles.detailTextData}>03-24-19</Text>
+                <Text style={styles.detailTextData}>{this.props.tempProject.endDate}</Text>
               </View>
             </View>
             <View style={styles.detail}>
@@ -159,7 +153,7 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.detailTextWrapper}>
                 <Text style={styles.detailTextHeader}>Current Status</Text>
-                <Text style={styles.detailTextData}>Planning</Text>
+                <Text style={styles.detailTextData}>{this.props.tempProject.currentStatus}</Text>
               </View>
             </View>
             <View style={styles.detail}>
@@ -168,7 +162,7 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.detailTextWrapper}>
                 <Text style={styles.detailTextHeader}>Project Type</Text>
-                <Text style={styles.detailTextData}>Volunteer</Text>
+                <Text style={styles.detailTextData}>{this.props.tempProject.projectType}</Text>
               </View>
             </View>
             <View style={styles.detail}>
@@ -177,27 +171,27 @@ class ProjectDetails extends Component {
               </View>
               <View style={styles.detailTextWrapper}>
                 <Text style={styles.detailTextHeader}>Food Provided</Text>
-                <Text style={styles.detailTextData}>Yes</Text>
+                <Text style={styles.detailTextData}>{this.props.tempProject.foodProvided}</Text>
               </View>
             </View>
           </ScrollView>
           <View style={styles.descriptionWrapper}>
             <Text style={styles.sectionHeader}>About</Text>
-            <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae libero ante. Ut turpis ex, scelerisque eu iaculis vel, porta vitae velit. Maecenas semper quam eros, non malesuada tellus placerat ut. Phasellus est orci, sodales quis neque at, maximus pharetra arcu. In a nibh lacus. Suspendisse nec urna a nulla vehicula interdum quis at justo. Praesent dui nisi, pulvinar ut massa ut, condimentum sollicitudin odio. Aliquam a venenatis ligula, a dapibus turpis. In id convallis dolor. Morbi tellus enim, scelerisque non tellus eu, pulvinar pulvinar nisi. Nunc justo orci, lobortis sit amet odio a, elementum fermentum eros. Duis ornare, tellus sit amet lobortis scelerisque, est lorem blandit diam, id faucibus eros nisl nec turpis. Fusce egestas neque varius pellentesque euismod. Mauris odio tellus, tempor id molestie in, bibendum ut quam. </Text>
+            <Text style={styles.descriptionText}>{this.props.tempProject.description}</Text>
           </View>
           <View style={styles.mapViewWrapper}>
             <Text style={styles.sectionHeader}>Location</Text>
             <MapView 
             style={styles.mapView}
             showsUserLocation={true}
-            region={{ latitude: 37.20 , longitude: -121.25, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
+            region={{ latitude: this.props.tempProject.location.coordinates.lat , longitude: this.props.tempProject.location.coordinates.lng, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
               <MapView.Marker
               identifier={"masdas"}
               key={1} 
               image={MAP_MARKER_IMAGE}
-              coordinate={{ latitude: 37.20 , longitude: -121.25}}/>
+              coordinate={{ latitude: this.props.tempProject.location.coordinates.lat , longitude: this.props.tempProject.location.coordinates.lng}}/>
             </MapView>
-            <Text style={styles.mapViewAddress}>5441 Makati Circle, San Jose, Ca 95123</Text>
+            <Text style={styles.mapViewAddress}>{this.props.tempProject.location.address}</Text>
           </View>
         </View>
 
@@ -352,7 +346,7 @@ const styles = StyleSheet.create({
   mapView:{
     width: "100%", 
     height: 200 
-  }
+  },
 
   mapViewAddress:{
     fontFamily: FONTS.PRIMARY,
@@ -369,8 +363,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+    tempProject: state.project.tempProject
   };
 }
 
