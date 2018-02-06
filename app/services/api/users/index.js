@@ -10,7 +10,7 @@ import Common from "./../common";
 ///////////////////////////
 
 // End points
-const USERS_END_POINT = "/users";
+const USERS_END_POINT = "/user";
 
 ///////////////////////////
 // Functions
