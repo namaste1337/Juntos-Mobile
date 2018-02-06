@@ -47,10 +47,12 @@ import PrimaryButton from "./../components/PrimaryButton";
 const profilePlaceholder                        = require("./../assets/signup/profile_image_placeholder.png");
 const imageAddButton                            = require("./../assets/signup/plus_button.png");
 //Strings
+const USER_NAME_PLACEHOLDER_STRING              = "Username";
 const EMAIL_FIELD_PLACEHOLDER_STRING            = "E-mail";
 const PASSWORD_FIELD_PLACEHOLDER_STRING         = "Password";
 const CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING = "Confirm Password";
 const SIGNUP_BUTTON_STRING                      = "Sign Up";
+const USER_NAME_VALIDATION_MESSAGE_STRING       = "Username is required"
 const EMAIL_VALIDATION_MESSAGE_STRING           = "E-mail is invalid";
 const PASSWORD_VALIDATION_MESSAGE_STRING        = "Password is invalid or does not match";
 //Properties
@@ -63,6 +65,8 @@ const IMAGE_PICKER_WIDTH                        = 400;
 const IMAGE_PICKER_HEIGHT                       = 400;
 const IMAGE_PICKER_CROPPING                     = true;
 //States
+const USERNAME_VALIDATION_TRUE_STATE            = true;
+const USERNAME_VALIDATION_FALSE_STATE           = false;
 const EMAIL_VALIDATION_TRUE_STATE               = true;
 const EMAIL_VALIDATION_FALSE_STATE              = false;
 const PASSWORD_VALIDATION_TRUE_STATE            = true;
@@ -80,12 +84,14 @@ class Signup extends Component {
   constructor(props){
     super(props);
     this.state = { 
+      usernameField: "",
       emailField: "",
       passwordField: "",
       confirmPasswordField: "",
       bioField: "",
       profileImage: null,
       profileImageData: {},
+      usernameIsValid: USERNAME_VALIDATION_TRUE_STATE,
       emailIsValid: EMAIL_VALIDATION_TRUE_STATE,
       confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE,
       profileImageValid: PROFILE_IMAGE_TRUE_STATE
@@ -139,6 +145,18 @@ class Signup extends Component {
   ////////////////////
   // Private Methods
   ////////////////////
+
+  _validateUsername(username){
+    console.log(username)
+    if(username == ""){
+      this.setState({usernameIsValid: USERNAME_VALIDATION_FALSE_STATE})
+      return false;
+    }else{
+      this.setState({usernameIsValid: USERNAME_VALIDATION_TRUE_STATE})
+      return true;
+    }
+  
+  }
 
   // Handles email validation, returns false if invlalid
   _validateEmail(email){
@@ -201,11 +219,16 @@ class Signup extends Component {
 
     let isValid         = true;
     // Fields
+    let username        = this.state.usernameField;
     let email           = this.state.emailField;
     let password        = this.state.passwordField
     let confirmPassword = this.state.confirmPasswordField
     let bio             = this.state.bioField;
 
+    //Validate username
+    isValid = this._validateUsername(username)
+    if(!isValid)
+      return isValid;
     // Validate email
     isValid = this._validateEmail(email);
     if(!isValid)
@@ -242,6 +265,13 @@ class Signup extends Component {
               Please select an image for your profile. This image will be shown to other users on the platform.
             </Text>
           </View>
+          <PrimaryTextInput
+            onChangeText={usernameField => this.setState({usernameField})} 
+            placeholder={USER_NAME_PLACEHOLDER_STRING}
+            returnKeyType={RETURN_KEY_TYPE} 
+            keyboardType={DEFAULT_KEYBOARD_TYPE}
+            valid={this.state.usernameIsValid}
+            validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} />
           <PrimaryTextInput
             onChangeText={emailField => this.setState({emailField})} 
             placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
