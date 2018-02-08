@@ -14,7 +14,8 @@ export default function session(
 		case AccountActions.ACCOUNT_SUCCESS:
 			return Object.assign({}, state, {
         		isLoggedIn: action.payload.isLoggedIn,
-        		isFetching: action.payload.isFetching
+        		isFetching: action.payload.isFetching,
+            user: action.payload.user
       		});
       	case AccountActions.ACCOUNT_ERROR:
       		return Object.assign({}, state, {

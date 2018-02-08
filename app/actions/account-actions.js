@@ -55,7 +55,7 @@ function accountError(bool){
 }
 
 // Handles account success state 
-function accountSuccess(isFetchingBool, isLoggedInBool){
+function accountSuccess(isFetchingBool, isLoggedInBool, user){
 
   // Update sign in state to true 
   setLoginState("true");
@@ -64,7 +64,8 @@ function accountSuccess(isFetchingBool, isLoggedInBool){
 		type: AccountActions.ACCOUNT_SUCCESS,
 		payload: {
 			isFetching: isFetchingBool,
-			isLoggedIn: isLoggedInBool
+			isLoggedIn: isLoggedInBool,
+      user
 		}	
 	}
 
@@ -124,7 +125,8 @@ export function accountLogin(email, password){
   	// Begin login sequence
   	login(email, password).then(response =>{
       // Account Success
-      dispatch(accountSuccess(true, true));
+      let user = response.data.user.local;
+      dispatch(accountSuccess(true, true, user));
       dispatch(redirectToSignedIn());
   	})
   	.catch(error =>{ 
@@ -138,18 +140,19 @@ export function accountLogin(email, password){
 };
 
 //Handles server request for signup
-export function accountSignup(email, password, profileImagePath, imageMime){
+export function accountSignup(username, email, password, profileImagePath, imageMime){
 	return dispatch => {
 		//show spinner 
 		dispatch(accountProcessing(true));
 		//Begin signup sequence
     imageUpload(profileImagePath, imageMime).then( response => {
         let profileImageName = response.data[0];
-        return signUp(email, password, profileImageName);
+        return signUp(username, email, password, profileImageName);
     })
-		.then(() => {
+		.then((response) => {
+      let user = response.data.user.local;
       // Account sign up success
-      dispatch(accountSuccess(true, true));
+      dispatch(accountSuccess(true, true, user));
       dispatch(redirectToSignedIn());
     })
     .catch(error => { 
