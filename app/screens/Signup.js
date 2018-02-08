@@ -371,7 +371,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    accountSignup: (email, password, profileImagePath, imageMime) => dispatch(accountSignup(email, password, profileImagePath, imageMime))
+    accountSignup: (username, email, password, profileImagePath, imageMime) => dispatch(accountSignup(username, email, password, profileImagePath, imageMime))
   };
 }
 
