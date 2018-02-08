@@ -138,7 +138,7 @@ class Signup extends Component {
   //Handles sign up button press
   _onSignUpbuttonPress(){
     if(this._validateFields())
-      this.props.accountSignup(this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
+      this.props.accountSignup(this.state.usernameField, this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
   }
 
 
@@ -146,8 +146,9 @@ class Signup extends Component {
   // Private Methods
   ////////////////////
 
+  // Handles username validation, return false if invalid
   _validateUsername(username){
-    console.log(username)
+
     if(username == ""){
       this.setState({usernameIsValid: USERNAME_VALIDATION_FALSE_STATE})
       return false;
