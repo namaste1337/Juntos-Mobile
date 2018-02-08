@@ -67,7 +67,7 @@ const TEMP_DATA = [
     id: 1,
     image: "https://www.burney-falls.com/wp-content/uploads/2012/06/burney-cabin-m.jpg",
     title: "Wooden Home",
-    description: "Beautiful home on the prerrie",
+    description:"awesome",
     distance: "5 miles",
     lat: 37.27,
     long: -121.90
@@ -284,14 +284,15 @@ class Projects extends Component {
 
         <View>
           <Carousel 
-            ref={ref => this._projectCarousel = ref}
-            data={TEMP_DATA} 
-            onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-          {TEMP_DATA.map(data => 
-            <Poster 
-              key={data.id} 
-              data={data} />
-          )}
+          ref={ref => this._projectCarousel = ref}
+          pageIndicator={true}
+          onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
+            {TEMP_DATA.map(data => 
+              <Poster 
+                source={data.image}
+                data={data}
+                key={data.id} />
+            )}
           </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
