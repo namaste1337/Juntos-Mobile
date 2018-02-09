@@ -10,7 +10,7 @@ import {NavigationActions} from "react-navigation";
 // Import services
 /////////////////////////
 
-import {login} from "./../services/api/sessions";
+import {login, ping} from "./../services/api/sessions";
 import {signUp} from "./../services/api/users";
 import {imageUpload} from "./../services/api/uploads";
 
@@ -51,6 +51,18 @@ function accountError(bool){
 		type: AccountActions.ACCOUNT_ERROR,
 		payload: bool
 	}
+
+}
+
+// Updates the currently logged in user data
+function accountUpdateUser(user){
+
+  return {
+    type: AccountActions.ACCOUNT_SUCCESS,
+    payload:{
+      user
+    }
+  }
 
 }
 
@@ -116,6 +128,17 @@ export function accountLogout(){
 ////////////////////////
 // Thunks Functions
 ////////////////////////
+
+// Handles server call to ping for active session
+export function accountPing(){
+  return (dispatch) => {
+    ping().then(function(response){
+      console.log(response)
+      let user = response.data;
+      dispatch(accountUpdateUser(user));
+    })
+  }
+}
 
 // Handles server call for login request
 export function accountLogin(email, password){

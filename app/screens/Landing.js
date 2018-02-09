@@ -17,7 +17,7 @@ from 'react-native';
 // Imports actions
 ///////////////////////////////
 
-import { redirectToSignedIn, redirectToSignedOut } from '../actions/account-actions';
+import { redirectToSignedIn, redirectToSignedOut, accountPing } from '../actions/account-actions';
 
 //////////////////////////////
 // Imports Common Files
@@ -50,6 +50,8 @@ class LandingView extends Component {
          let isSignedIn = value;
          if(isSignedIn === "true" || isSignedIn === "undefined"){
           this.props.redirectToSignedIn();
+          // Check if the users session is still valid
+          this.props.accountPing();
          }else{
           this.props.redirectToSignedOut();
          }
@@ -112,7 +114,8 @@ function matchDistpatchToProps(dispatch){
 
   return bindActionCreators({
     redirectToSignedIn: redirectToSignedIn,
-    redirectToSignedOut: redirectToSignedOut
+    redirectToSignedOut: redirectToSignedOut,
+    accountPing: accountPing
   }, dispatch);
   
 }

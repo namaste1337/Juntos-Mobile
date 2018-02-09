@@ -36,3 +36,10 @@ export function logout(){
 	return Services.fetchApi(SESSIONS_END_POINT, null, Common.DELETE_METHOD);
 
 }
+
+// Handles pinging the server if the current user session is active
+export function ping(){
+
+	return Services.fetchApi(SESSIONS_END_POINT, {}, Common.GET_METHOD)
+
+}
