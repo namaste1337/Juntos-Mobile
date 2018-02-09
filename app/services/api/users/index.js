@@ -17,9 +17,10 @@ const USERS_END_POINT = "/users";
 ///////////////////////////
 
 // Handles sign up request
-export function signUp(email, password, profileImageName){
+export function signUp(username, email, password, profileImageName){
 
 	let payload = {
+		username,
 		email,
 		password,
 		profileImageName
