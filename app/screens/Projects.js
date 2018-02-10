@@ -190,9 +190,11 @@ class Projects extends Component {
       longitudeDelta: LONGITUDE_DELTA_NUMBER
     });
 
-    // Animate to the region
-    this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
-    this.setState({region});
+    // _animateTo is fired asynchronously
+    if(this._map != null){
+      this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
+      this.setState({region});
+    }
   }
 
   ////////////////////////
@@ -251,7 +253,6 @@ class Projects extends Component {
       let coord = TEMP_DATA[0]; 
       this._animateTo(coord.lat, coord.long);
     }, error => {
-
       console.log(error);
 
     }, {
