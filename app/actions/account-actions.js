@@ -134,7 +134,7 @@ export function accountPing(){
   return (dispatch) => {
     ping().then(function(response){
       console.log(response)
-      let user = response.data;
+      let user = response.data.local;
       dispatch(accountUpdateUser(user));
     })
   }
