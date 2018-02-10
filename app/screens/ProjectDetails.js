@@ -108,7 +108,7 @@ class ProjectDetails extends Component {
         <View style={styles.contentWrapper}>
 
           <View style={styles.headerWrapper}>
-            <View style={styles.projectHeaderTop}>
+            <View style={styles.projectHeader}>
               <View style={styles.headerTopLeft}>
                 <Image style={styles.userImage} source={{uri: this.props.currentUser.profile.images[0]}} />
               </View>
@@ -117,7 +117,7 @@ class ProjectDetails extends Component {
                 <Text style={styles.projectTitle}>{this.props.tempProject.name}</Text>
               </View>
             </View>
-            <View style={styles.projectHeaderBottom}>
+            <View style={styles.projectHeader}>
               <View style={styles.headerBottomLeft}>
                 <Image style={styles.mapIcon}source={PROJECT_MAP_ICON_IMAGE}/>
               </View>
@@ -218,10 +218,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     paddingBottom: 15
   },
-  projectHeaderTop:{
-    flexDirection: "row",
-  },
-  projectHeaderBottom:{
+  projectHeader:{
     flexDirection: "row"
   },
   headerTopLeft:{
