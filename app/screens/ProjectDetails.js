@@ -98,7 +98,6 @@ class ProjectDetails extends Component {
   ////////////////////////
 
   render() {
-    console.log(this.props.tempProject);
     return (
      <ScrollView style={CommonStyles.container}>
         <Carousel>
@@ -111,10 +110,10 @@ class ProjectDetails extends Component {
           <View style={styles.headerWrapper}>
             <View style={styles.projectHeaderTop}>
               <View style={styles.headerTopLeft}>
-                <Image style={styles.userImage} source={{uri: TEMP_DATA.user.profileImage}} />
+                <Image style={styles.userImage} source={{uri: this.props.currentUser.profile.images[0]}} />
               </View>
               <View style={styles.headerTopRight}>
-                <Text>SustainableNomad</Text>
+                <Text>{this.props.currentUser.username}</Text>
                 <Text style={styles.projectTitle}>{this.props.tempProject.name}</Text>
               </View>
             </View>
@@ -363,7 +362,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    tempProject: state.project.tempProject
+    tempProject: state.project.tempProject,
+    currentUser: state.session.user
   };
 }
 
