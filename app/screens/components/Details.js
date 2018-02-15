@@ -10,10 +10,14 @@ Dimensions,
 ScrollView,
 Image,
 StyleSheet,
-View
+View,
+Modal,
+TouchableWithoutFeedback,
+TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
 import PropTypes from "prop-types";
+import ImageViewer from 'react-native-image-zoom-viewer';
 
 //////////////////////////////
 // Imports Custom Components
@@ -117,15 +121,53 @@ Default: none
 class  Details extends Component {
 
   ////////////////////////
+  // Constructor
+  ////////////////////////
+
+  constructor(props){
+    super(props);
+    this.state = {
+      imageViewerVisability: false,
+      currentPage: 0
+    };
+  }
+
+  ////////////////////////
+  // Callback
+  ////////////////////////
+
+  onPageChangeEnd(currentPage){
+    console.log("Current Page: " + currentPage);
+    this.setState({
+      currentPage
+    })
+  }
+
+  onImageTap(){
+    console.log("On Image Tap");
+    this.setState({
+      imageViewerVisability: true
+    })
+  }
+
+  closeImageViewModal(){
+    this.setState({
+      imageViewerVisability: false
+    })
+  }
+
+  ////////////////////////
   // Screen UI
   ////////////////////////
 
   render() {
     return (
      <ScrollView style={CommonStyles.container}>
-        <Carousel>
+        <Carousel onPageChangeEnd={currentPage => this.onPageChangeEnd(currentPage)}>
          {this.props.images.map((imageSource, index) => 
-           <Poster source={imageSource.uri} key={index}/>
+          <TouchableOpacity key={index} onPress={()=> this.onImageTap()}>
+           <Poster source={imageSource.url} key={index}/>
+          </TouchableOpacity>
          )}
         </Carousel>
         <View style={styles.contentWrapper}>
@@ -213,6 +255,10 @@ class  Details extends Component {
             <Text style={styles.mapViewAddress}>{this.props.location.address}</Text>
           </View>
         </View>
+        <Modal visible={this.state.imageViewerVisability} transparent={true}>
+
+          <ImageViewer imageUrls={this.props.images} renderHeader={() =>  <TouchableOpacity onPress={()=> console.log("Cancel")}><Text style={{color: "orange", position: "absolute", top: 30, fontSize: 30}}>Close</Text></TouchableOpacity>}/>
+        </Modal>
      </ScrollView>
     );
   }
