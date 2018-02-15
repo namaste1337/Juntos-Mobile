@@ -17,7 +17,6 @@ TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
 import PropTypes from "prop-types";
-import ImageViewer from 'react-native-image-zoom-viewer';
 
 //////////////////////////////
 // Imports Custom Components
@@ -255,10 +254,6 @@ class  Details extends Component {
             <Text style={styles.mapViewAddress}>{this.props.location.address}</Text>
           </View>
         </View>
-        <Modal visible={this.state.imageViewerVisability} transparent={true}>
-
-          <ImageViewer imageUrls={this.props.images} renderHeader={() =>  <TouchableOpacity onPress={()=> console.log("Cancel")}><Text style={{color: "orange", position: "absolute", top: 30, fontSize: 30}}>Close</Text></TouchableOpacity>}/>
-        </Modal>
      </ScrollView>
     );
   }

@@ -3603,16 +3603,6 @@ react-native-image-crop-picker@^0.18.1:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.18.1.tgz#ebdbe72def5afb6c69aa6e2ad72fd3a7de8ee408"
 
-react-native-image-pan-zoom@^2.0.16:
-  version "2.0.16"
-  resolved "https://registry.yarnpkg.com/react-native-image-pan-zoom/-/react-native-image-pan-zoom-2.0.16.tgz#84cf96b530da73141d25f10e1ee26c862444d4d2"
-
-react-native-image-zoom-viewer@^2.0.19:
-  version "2.0.19"
-  resolved "https://registry.yarnpkg.com/react-native-image-zoom-viewer/-/react-native-image-zoom-viewer-2.0.19.tgz#7d247c7e013bffbbbc94be3e37591a6f3618ca0b"
-  dependencies:
-    react-native-image-pan-zoom "^2.0.16"
-
 react-native-maps@^0.20.1:
   version "0.20.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.20.1.tgz#b5247a9a26446b2e1ffc3f680db8ba6ccc960096"
