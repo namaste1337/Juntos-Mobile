@@ -1,15 +1,85 @@
 PODS:
   - QBImagePickerController (3.4.0)
+  - React (0.53.0):
+    - React/Core (= 0.53.0)
+  - react-native-maps (0.20.1):
+    - React
+  - React/BatchedBridge (0.53.0):
+    - React/Core
+    - React/cxxreact_legacy
+  - React/Core (0.53.0):
+    - yoga (= 0.53.0.React)
+  - React/cxxreact_legacy (0.53.0):
+    - React/jschelpers_legacy
+    - React/jsinspector_legacy
+  - React/DevSupport (0.53.0):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.53.0)
+  - React/jschelpers_legacy (0.53.0)
+  - React/jsinspector_legacy (0.53.0)
+  - React/RCTActionSheet (0.53.0):
+    - React/Core
+  - React/RCTAnimation (0.53.0):
+    - React/Core
+  - React/RCTBlob (0.53.0):
+    - React/Core
+  - React/RCTGeolocation (0.53.0):
+    - React/Core
+  - React/RCTImage (0.53.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.53.0):
+    - React/Core
+  - React/RCTNetwork (0.53.0):
+    - React/Core
+  - React/RCTSettings (0.53.0):
+    - React/Core
+  - React/RCTText (0.53.0):
+    - React/Core
+  - React/RCTVibration (0.53.0):
+    - React/Core
+  - React/RCTWebSocket (0.53.0):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
   - RSKImageCropper (1.6.1)
+  - yoga (0.53.0.React)
 
 DEPENDENCIES:
   - QBImagePickerController
+  - react-native-maps (from `../node_modules/react-native-maps`)
+  - React/BatchedBridge (from `../node_modules/react-native`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
   - RSKImageCropper
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  react-native-maps:
+    :path: ../node_modules/react-native-maps
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  React: 6a94a44468604816ad2fd3bae908b2ebbab0f95d
+  react-native-maps: 6ab4fa4f78e88824ec300de0eb412f0556b6a84b
   RSKImageCropper: 0df8c99e77a8ea7ca7a8b83ef468556f31584254
+  yoga: 36cb943786c0587f19094c593b5683074d679c46
 
-PODFILE CHECKSUM: aa1d9d51ae44d74a66b8e7a78701cc0bc8568c52
+PODFILE CHECKSUM: 0affb4ac4041491299c9d1951cf09d9c7a990cba
 
 COCOAPODS: 1.2.0
