@@ -31,6 +31,8 @@ target 'Juntos' do
   pod 'react-native-maps', path: rn_maps_path
   
 
+  pod 'Picker', :path => '../node_modules/react-native-picker'
+
 end
 
 
