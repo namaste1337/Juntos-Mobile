@@ -17,11 +17,11 @@ export default function session(
         return (function () {
           let newState = Object.assign(state);
           let tempProject = Object.assign(newState.tempProject,{
-                startDate: action.payload.startDate,
-                endDate: action.payload.endDate,
-                foodProvided: action.payload.foodProvided,
-                currentStatus: action.payload.currentStatus,
-                projectType: action.payload.projectType
+                start_date: action.payload.startDate,
+                end_date: action.payload.endDate,
+                food_provided: action.payload.foodProvided,
+                current_status: action.payload.currentStatus,
+                type: action.payload.projectType
               });
           newState.tempProject = tempProject;
           return newState;
