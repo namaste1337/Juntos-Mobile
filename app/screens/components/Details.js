@@ -51,6 +51,9 @@ const MAP_MARKER_IMAGE                    = require("./../../assets/projects/map
 const ASPECT_RATIO_NUMBER                 = deviceProperties.width / deviceProperties.height;
 const LATITUDE_DELTA_NUMBER               = 0.0900;
 const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
+// Properties 
+const SCROLL_VIEW_HORIZONTAL_PROPERTY = true;
+const SHOW_USER_LOCATION_PROPERTY = true;
 
 ////////////////////////
 // Component
@@ -151,7 +154,7 @@ class  Details extends Component {
               </View>
             </View>
           </View>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.detailsWrapper}>
+          <ScrollView horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY} showsHorizontalScrollIndicator={false} style={styles.detailsWrapper}>
             <View style={styles.detail}>
               <View style={styles.detailIconWrapper}>
                 <Image style={styles.detailIcon}source={PROJECT_START_ICON_IMAGE}/>
@@ -206,7 +209,7 @@ class  Details extends Component {
             <Text style={styles.sectionHeader}>Location</Text>
             <MapView 
             style={styles.mapView}
-            showsUserLocation={true}
+            showsUserLocation={SHOW_USER_LOCATION_PROPERTY}
             region={{ latitude: this.props.location.coordinates.lat , longitude: this.props.location.coordinates.lng, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
               <MapView.Marker
               identifier={this.props.location.address}
