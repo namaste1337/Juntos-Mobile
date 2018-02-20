@@ -165,7 +165,7 @@ class  Details extends Component {
         <Carousel onPageChangeEnd={currentPage => this.onPageChangeEnd(currentPage)}>
          {this.props.images.map((imageSource, index) => 
           <TouchableOpacity key={index} onPress={()=> this.onImageTap()}>
-           <Poster source={imageSource.url} key={index}/>
+           <Poster source={imageSource.uri} key={index}/>
           </TouchableOpacity>
          )}
         </Carousel>
