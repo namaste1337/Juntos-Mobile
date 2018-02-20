@@ -120,18 +120,6 @@ Default: none
 class  Details extends Component {
 
   ////////////////////////
-  // Constructor
-  ////////////////////////
-
-  constructor(props){
-    super(props);
-    this.state = {
-      imageViewerVisability: false,
-      currentPage: 0
-    };
-  }
-
-  ////////////////////////
   // Screen UI
   ////////////////////////
 
