@@ -142,19 +142,6 @@ class  Details extends Component {
     })
   }
 
-  onImageTap(){
-    console.log("On Image Tap");
-    this.setState({
-      imageViewerVisability: true
-    })
-  }
-
-  closeImageViewModal(){
-    this.setState({
-      imageViewerVisability: false
-    })
-  }
-
   ////////////////////////
   // Screen UI
   ////////////////////////
@@ -164,9 +151,7 @@ class  Details extends Component {
      <ScrollView style={CommonStyles.container}>
         <Carousel onPageChangeEnd={currentPage => this.onPageChangeEnd(currentPage)}>
          {this.props.images.map((imageSource, index) => 
-          <TouchableOpacity key={index} onPress={()=> this.onImageTap()}>
            <Poster source={imageSource.uri} key={index}/>
-          </TouchableOpacity>
          )}
         </Carousel>
         <View style={styles.contentWrapper}>
