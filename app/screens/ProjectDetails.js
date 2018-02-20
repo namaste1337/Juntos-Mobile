@@ -56,11 +56,11 @@ class ProjectDetails extends Component {
       <Details
       images={this.props.tempProject.images}
       projectName={this.props.tempProject.name}
-      startDate={this.props.tempProject.startDate}
-      endDate={this.props.tempProject.endDate}
-      currentStatus={this.props.tempProject.currentStatus}
-      projectType={this.props.tempProject.projectType}
-      foodProvided={this.props.tempProject.foodProvided}
+      startDate={this.props.tempProject.start_date}
+      endDate={this.props.tempProject.end_date}
+      currentStatus={this.props.tempProject.current_status}
+      projectType={this.props.tempProject.type}
+      foodProvided={this.props.tempProject.food_provided}
       description={this.props.tempProject.description}
       user={this.props.currentUser}
       location={this.props.tempProject.location}/>
