@@ -136,7 +136,6 @@ class  Details extends Component {
   ////////////////////////
 
   onPageChangeEnd(currentPage){
-    console.log("Current Page: " + currentPage);
     this.setState({
       currentPage
     })
