@@ -132,23 +132,13 @@ class  Details extends Component {
   }
 
   ////////////////////////
-  // Callback
-  ////////////////////////
-
-  onPageChangeEnd(currentPage){
-    this.setState({
-      currentPage
-    })
-  }
-
-  ////////////////////////
   // Screen UI
   ////////////////////////
 
   render() {
     return (
      <ScrollView style={CommonStyles.container}>
-        <Carousel onPageChangeEnd={currentPage => this.onPageChangeEnd(currentPage)}>
+        <Carousel>
          {this.props.images.map((imageSource, index) => 
            <Poster source={imageSource.uri} key={index}/>
          )}
