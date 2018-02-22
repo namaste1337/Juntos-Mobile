@@ -1,10 +1,16 @@
-// This file host actions related to viewing and created a project
-
+//This file host actions related to viewing and created a project
 ////////////////////////
 // Import Modules
 ////////////////////////
 
 import {NavigationActions} from "react-navigation";
+
+/////////////////////////
+// Import services
+/////////////////////////
+
+import {createProject} from "./../services/api/projects";
+import {imageUpload} from "./../services/api/uploads";
 
 ////////////////////////
 // Action Types
@@ -114,3 +120,29 @@ export function populateTempImages(imageArray){
 export function clearTempProject(){
 
 }
+
+////////////////////////
+// Thunks Functions
+////////////////////////
+
+// Handles creating a new project 
+export function createNewProject(projectObject){
+
+	let images = projectObject.images;
+
+	return dispatch => {
+   // Upload the images first
+	 imageUpload(images).then( response => {
+        let imagesArray = response.data
+        projectObject.images = imagesArray;
+        return createProject(projectObject);
+      }).then(response => {
+      	// Segue back to the root screen
+        console.log(response);
+    });
+  }
+
+}
+
+
+
