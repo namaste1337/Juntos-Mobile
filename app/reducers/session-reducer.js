@@ -21,7 +21,7 @@ function mutateUser(userObject){
 
   let user = userObject;
   // Append the remote location of the user
-  user.profile.images[0] = Settings.IMAGE_SERVER + Settings.PROFILE_IMAGE_PATH + user.profile.images[0];
+  user.profile.images[0] = Settings.IMAGE_SERVER + Settings.IMAGE_PATH + user.profile.images[0];
 
   return user;
 
