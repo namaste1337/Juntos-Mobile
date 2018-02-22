@@ -53,6 +53,7 @@ function getImageExtension(mimeType){
 // Handles image uploads
 export function imageUpload(imagesArray){
 
+  // Create new data object to store image data
   let data = new FormData();
 
   imagesArray.map(imageObject => {
@@ -63,7 +64,7 @@ export function imageUpload(imagesArray){
     // Will use the unix time stamp as the image name
     let name = (Math.floor(Date.now()/1000)).toString() + imageFileExtension;
     
-    // Create new data object to store image data
+    // Append the image data
     data.append(IMAGE_DATA_TYPE,{
      uri: imageObject.uri,
      name,
