@@ -165,10 +165,16 @@ export function accountLogin(email, password){
 //Handles server request for signup
 export function accountSignup(username, email, password, profileImagePath, imageMime){
 	return dispatch => {
-		//show spinner 
+		// Show spinner 
 		dispatch(accountProcessing(true));
-		//Begin signup sequence
-    imageUpload(profileImagePath, imageMime).then( response => {
+		// Begin signup sequence
+    // Image upload expects and array
+    let imageArray = [];
+    imageArray.push({
+      uri: profileImagePath,
+      mimeType: imageMime
+    }) 
+    imageUpload(imageArray).then( response => {
         let profileImageName = response.data[0];
         return signUp(username, email, password, profileImageName);
     })
