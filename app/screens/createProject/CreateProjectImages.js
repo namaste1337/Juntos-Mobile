@@ -217,7 +217,7 @@ class CreateProjectImages extends Component {
   // Process a newly selected image to be stored on the projectImage state
   _processImage(imageSource){
 
-    let source = { uri: imageSource.path };
+    let source = { uri: imageSource.path, mimeType: imageSource.mime};
 
     this.setState(function(previousState){
       previousState.projectImages[previousState.projectImages.length] = source;
