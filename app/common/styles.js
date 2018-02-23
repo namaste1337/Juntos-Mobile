@@ -15,7 +15,7 @@ import {
 const { height } = Dimensions.get("window"); // Move to common/device.js
 // Primary Styles - Fonts
 export const FONTS = {
-  PRIMARY: "Roboto-Light"
+  PRIMARY: "Arial"
 }
 // Primary Styles - Colors
 export const COLORS = {
@@ -52,6 +52,15 @@ export default StyleSheet.create({
   },
   contentWrapper: {
     paddingHorizontal: 10,
+  },
+
+  /////////////////////////
+  //  Header Buttons
+  /////////////////////////
+
+  headerTextButton:{
+    marginRight: 10,
+    color: COLORS.PRIMARY
   },
 
   /////////////////////////
