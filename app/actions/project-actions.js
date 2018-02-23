@@ -139,7 +139,9 @@ export function createNewProject(projectObject){
       }).then(response => {
       	// Segue back to the root screen
         console.log(response);
-    });
+    }).catch(error => {
+       console.log(error);
+    })
   }
 
 }
