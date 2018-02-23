@@ -12,6 +12,13 @@ View
 } from 'react-native';
 import { NavigationActions } from 'react-navigation'
 
+//////////////////////////////
+// Imports Common Files
+///////////////////////////////
+
+// Common styles
+import CommonStyles from "./../common/styles.js"
+
 ////////////////////////////
 // Import Screen Components
 ////////////////////////////
@@ -22,6 +29,14 @@ import Details from "./components/Details";
 // Actions
 ////////////////////////
 
+import {createNewProject, resetProjectNavigation} from "../actions/project-actions";
+
+////////////////////////
+// Constants
+////////////////////////
+
+//Strings
+const SAVE_STRING = "Save";
 
 class ProjectDetails extends Component {
 
@@ -29,22 +44,37 @@ class ProjectDetails extends Component {
   // Navigation Options
   ////////////////////////
 
-  static navigationOptions = {
-    headerRight: <TouchableOpacity><Text>Done</Text></TouchableOpacity>,
+  static navigationOptions = ({navigation}) => {
+
+    const params = navigation.state.params || {};
+
+    return {
+      headerRight: (
+        <TouchableOpacity onPress={() => params.onSubmit()}>
+          <Text style={CommonStyles.headerTextButton}>{SAVE_STRING}</Text>
+        </TouchableOpacity>
+      ),
+    }
+
+  }
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  componentWillMount(){
+    this.props.navigation.setParams({ onSubmit: this._onSubmit });
   }
 
   ////////////////////////
   // Callbacks
   ////////////////////////
 
-  _onSubmit(){
-    const resetAction = NavigationActions.reset({
-    index: 0,
-    actions: [
-      NavigationActions.navigate({ routeName: 'Root'})
-    ]
-    })
-    this.props.navigation.dispatch(resetAction)
+  // Handles saving the project to the server
+  // and reseting the navigation back to the root screen
+  _onSubmit = () => {
+    this.props.createNewProject(this.props.tempProject);
+    this.props.resetProjectNavigation();
   }
 
   ////////////////////////
@@ -82,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    createNewProject: projectObject => dispatch(createNewProject(projectObject))
+    createNewProject: projectObject => dispatch(createNewProject(projectObject)),
+    resetProjectNavigation : () => dispatch(resetProjectNavigation())
   };
 }
 
