@@ -1,4 +1,5 @@
-//This file host actions related to viewing and created a project
+// This file host actions related to viewing, 
+// updating and createing a project
 ////////////////////////
 // Import Modules
 ////////////////////////
@@ -131,6 +132,8 @@ export function clearTempProject(){
 
 }
 
+// Handles reseting the navigation back to 
+// the root view once a project is saved
 export function resetProjectNavigation(){
 
  return NavigationActions.reset({
