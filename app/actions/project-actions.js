@@ -35,6 +35,16 @@ const PROJECT_NAVIGATION_ROUTES ={
 	PROJECT_DETAILS: "ProjectDetails"
 }
 
+
+////////////////////////
+// Constants
+////////////////////////
+
+// String
+const ROOT_STRING             = "Root";
+// Numbers
+const ROOT_VIEW_INDEX_NUMBER  = 0;
+
 ////////////////////////
 // Action Creators
 ////////////////////////
@@ -118,6 +128,17 @@ export function populateTempImages(imageArray){
 }
 
 export function clearTempProject(){
+
+}
+
+export function resetProjectNavigation(){
+
+ return NavigationActions.reset({
+    index: ROOT_VIEW_INDEX_NUMBER,
+    actions: [
+      NavigationActions.navigate({ routeName: ROOT_STRING})
+    ]
+  });
 
 }
 
