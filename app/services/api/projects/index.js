@@ -18,8 +18,7 @@ const PROJECTS_END_POINT = "/projects";
 
 // Handles getting all projects
 export function createProject(projectObject){
-	console.log("Calling creaProject service");
-	console.log(projectObject)
+
 	return Services.fetchApi(PROJECTS_END_POINT, projectObject, Common.POST_METHOD);
 
 }
