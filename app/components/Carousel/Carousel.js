@@ -271,12 +271,14 @@ export default Carousel;
   ~~~~~~~~~~~~~~~~~~~
   Optional props
   ~~~~~~~~~~~~~~~~~~~
-  data: type object {
-    title: String,
-    description: String,
-    distance: String
-  }
-  Description: Poster header values
+  title: type String,
+  Description: Title to be displayed for the poster
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  description: type String,
+  Description: Description to be displayed for the poster
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  distance: type String
+  Description: Distance to be displayerd for th poster
   =========================
   onLoadEnd(currentPage): type function callback
   Description: Called when background image has finished loading
@@ -291,15 +293,15 @@ class  Poster extends Component {
 
   // Handles rendering the optional poster header
   _header(props){
-    if(props.data != undefined)
+    if(props.title != undefined || props.distance != undefined || props.description != undefined  )
       return (
         <View style={styles.carouselTextView}>
           <View style={styles.carouselFirstLineTextWrapper}>
-            <Text style={styles.carouselTitleText}> {props.data.title} </Text>
-            <Text style={styles.carouselDistanceText}> {props.data.distance}  </Text>
+            <Text style={styles.carouselTitleText}> {props.title} </Text>
+            <Text style={styles.carouselDistanceText}> {props.distance}  </Text>
           </View>
           <View>
-            <Text style={styles.carouselDescriptionText}> {props.data.description}  </Text>
+            <Text style={styles.carouselDescriptionText}> {props.description}  </Text>
           </View>
         </View>
       );
@@ -322,7 +324,9 @@ class  Poster extends Component {
         source={{uri: this.props.source}} 
         style={styles.carouselImage}
         onLoadEnd={this.props.onLoadEnd} >
-          <this._header data={this.props.data} />
+          <this._header title={this.props.title} 
+          description={this.props.description} 
+          distance={this.props.distance}  />
         </ImageBackground>
       </ImageBackground>
 
