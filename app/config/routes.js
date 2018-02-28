@@ -8,21 +8,21 @@
 import { 
   StackNavigator, 
   TabNavigator,
-} from 'react-navigation'
+} from "react-navigation"
 
 ////////////////////////
 // Imports Screen
 ////////////////////////
 
 // Import Screens
-import LandingView              from '../screens/Landing';
-import LoginView                from '../screens/LogIn';
-import SignUpView               from '../screens/Signup';
-import ForgotPassword           from '../screens/ForgotPassword';
-import Projects                 from '../screens/Projects';
-import Profile                  from '../screens/Profile';
-import Messages                 from '../screens/Messages';
-import Settings                 from '../screens/Settings';
+import LandingView              from "../screens/Landing";
+import LoginView                from "../screens/LogIn";
+import SignUpView               from "../screens/Signup";
+import ForgotPassword           from "../screens/ForgotPassword";
+import Projects                 from "../screens/Projects";
+import Profile                  from "../screens/Profile";
+import Messages                 from "../screens/Messages";
+import Settings                 from "../screens/Settings";
 import CreateProjectDescription from "../screens/createProject/CreateProjectDescription";
 import CreateProjectDetails     from "../screens/createProject/CreateProjectDetails";
 import CreateProjectImages      from "../screens/createProject/CreateProjectImages";
@@ -34,8 +34,8 @@ import CreateProjectPreview     from "../screens/createProject/CreateProjectPrev
 ////////////////////////
 
 // Import header options
-import StackNavigationOptions from '../config/stackNavigation';
-import TabbarNavigationOptions from '../config/tabBarNavigation';
+import StackNavigationOptions from "../config/stackNavigation";
+import TabbarNavigationOptions from "../config/tabBarNavigation";
 
 ////////////////////////
 // Constants
