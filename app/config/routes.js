@@ -20,13 +20,13 @@ import LoginView                from '../screens/LogIn';
 import SignUpView               from '../screens/Signup';
 import ForgotPassword           from '../screens/ForgotPassword';
 import Projects                 from '../screens/Projects';
-import ProjectDetails           from '../screens/ProjectDetails';
 import Profile                  from '../screens/Profile';
 import Messages                 from '../screens/Messages';
 import Settings                 from '../screens/Settings';
 import CreateProjectDescription from "../screens/createProject/CreateProjectDescription";
 import CreateProjectDetails     from "../screens/createProject/CreateProjectDetails";
 import CreateProjectImages      from "../screens/createProject/CreateProjectImages";
+import CreateProjectPreview     from "../screens/createProject/CreateProjectPreview";
 
 
 ////////////////////////
@@ -106,10 +106,10 @@ const RootRoutes = StackNavigator({
       title: CREATE_PROJECT_IMAGES_TITLE_STRING,
     })
   },
-  ProjectDetails: { 
-    screen: ProjectDetails,
+  CreateProjectPreview: { 
+    screen: CreateProjectPreview,
     navigationOptions: ({navigation}) => ({
-      title: CREATE_PROJECT_DETAILS_TITLE_STRING,
+      title: CREATE_PROJECT_PREVIEW_TITLE_STRING,
     })
   },
   Landing: { 

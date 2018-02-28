@@ -33,7 +33,7 @@ const PROJECT_NAVIGATION_ROUTES ={
 	CREATE_PROJECT_DESCRIPTION: "CreateProjectDescription",
 	CREATE_PROJECT_DETAILS: "CreateProjectDetails",
 	CREATE_PROJECT_IMAGES: "CreateProjectImages",
-	PROJECT_DETAILS: "ProjectDetails"
+	CREATE_PROJECT_PREVIEW: "CreateProjectPreview"
 }
 
 
@@ -74,7 +74,7 @@ export function navigateToProjectImages(){
 // Action handles navigating to the project details screen.
 export function navigateToProjectDetails(){
 
- return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.PROJECT_DETAILS});
+ return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_PREVIEW});
 
 }
 

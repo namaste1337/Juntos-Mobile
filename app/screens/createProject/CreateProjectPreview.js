@@ -17,19 +17,19 @@ import { NavigationActions } from 'react-navigation'
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "./../common/styles.js"
+import CommonStyles from "./../../common/styles.js"
 
 ////////////////////////////
 // Import Screen Components
 ////////////////////////////
 
-import Details from "./components/Details";
+import Details from "./../components/Details";
 
 ////////////////////////
 // Actions
 ////////////////////////
 
-import {createNewProject, resetProjectNavigation} from "../actions/project-actions";
+import {createNewProject, resetProjectNavigation} from "./../../actions/project-actions";
 
 ////////////////////////
 // Constants
