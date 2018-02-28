@@ -22,7 +22,7 @@ import CommonStyles from "./../../common/styles.js"
 // Actions
 ////////////////////////
 
-import {populateTempDetails, navigateToProjectImages} from "./../../actions/project-actions.js";
+import {populateTempDetails, navigateToCreateProjectImages} from "./../../actions/project-actions.js";
 
 //////////////////////////////
 // Imports Custom Components
@@ -197,7 +197,7 @@ class CreateProjectDetails extends Component {
         );
 
         // Navigate to the next screen
-        this.props.navigateToProjectImages();
+        this.props.navigateToCreateProjectImages();
 
     }
       
@@ -370,7 +370,7 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     populateTempDetails: (startDate, endDate, foodProvided, currentStatus, projectType) => dispatch(populateTempDetails(startDate, endDate, foodProvided, currentStatus, projectType)),
-    navigateToProjectImages: () => dispatch(navigateToProjectImages())
+    navigateToCreateProjectImages: () => dispatch(navigateToCreateProjectImages())
   };
 }
 

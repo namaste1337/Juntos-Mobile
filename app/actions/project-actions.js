@@ -51,7 +51,7 @@ const ROOT_VIEW_INDEX_NUMBER  = 0;
 ////////////////////////
 
 // Action handles navigating to the create project description screen.
-export function navigateToCreateProject(){
+export function navigateToCreateProjectDescription(){
 
  return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_DESCRIPTION});
 
@@ -65,14 +65,14 @@ export function navigateToCreateProjectDetails(){
 }
 
 // Action handles navigating to the create project images screen.
-export function navigateToProjectImages(){
+export function navigateToCreateProjectImages(){
 
  return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_IMAGES});
 
 }
 
-// Action handles navigating to the project details screen.
-export function navigateToProjectDetails(){
+// Action handles navigating to the create project preivew screen.
+export function navigateToCreateProjectPreview(){
 
  return NavigationActions.navigate({routeName: PROJECT_NAVIGATION_ROUTES.CREATE_PROJECT_PREVIEW});
 

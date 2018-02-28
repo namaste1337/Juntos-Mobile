@@ -27,7 +27,7 @@ import CommonStyles, {COLORS} from "../common/styles"
 // Actions
 ////////////////////////
 
-import {navigateToCreateProject} from "./../actions/project-actions.js";
+import {navigateToCreateProjectDescription} from "./../actions/project-actions.js";
 
 /////////////////////////////
 // Import Custom Components
@@ -297,7 +297,7 @@ class Projects extends Component {
           </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
-          <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.goToCreateProject() }/>
+          <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.navigateToCreateProjectDescription() }/>
         </View> 
       </View>
     );
@@ -354,7 +354,7 @@ const mapStateToProps = (state) => {
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    goToCreateProject: () => dispatch(navigateToCreateProject())
+    navigateToCreateProjectDescription: () => dispatch(navigateToCreateProjectDescription())
   };
 }
 
