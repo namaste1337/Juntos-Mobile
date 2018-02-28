@@ -239,7 +239,7 @@ class Carousel extends Component {
     console.log(this.props.children);
     return (
       <View>
-        <this._pageIndicator children={this.props.children}/>
+        <this._pageIndicator pageIndicator={this.props.pageIndicator} children={this.props.children}/>
         <ScrollView 
         ref={ref => this._scrollView = ref}
         scrollEventThrottle={SCROLL_VIEW_EVENT_THROTTILE_PROPERTY} 
