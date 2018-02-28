@@ -4,6 +4,7 @@
 
 import Services from "./../";
 import Common from "./../common";
+import Chance from "chance";
 
 ///////////////////////////
 // Constants
@@ -62,7 +63,7 @@ export function imageUpload(imagesArray){
     let imageFileExtension = getImageExtension(imageObject.mimeType);
     
     // Will use the unix time stamp as the image name
-    let name = (Math.floor(Date.now()/1000)).toString() + imageFileExtension;
+    let name = new Chance().guid() + imageFileExtension;
     
     // Append the image data
     data.append(IMAGE_DATA_TYPE,{
