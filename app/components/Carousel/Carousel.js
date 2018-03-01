@@ -197,7 +197,7 @@ class Carousel extends Component {
   ////////////////////////
 
   _pageIndicator = (props) => {
-    if(props.pageIndicator){
+    if(props.pageIndicator && props.children){
       return (
         <View style={styles.carouselIndicatorWrapper} onLayout={ ()=> this._setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY) }>
           {props.children.map((data, index) =>
@@ -246,7 +246,10 @@ class Carousel extends Component {
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
         pagingEnabled={SCROLL_VIEW_PAGING_PROPERTY} 
         horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY}>
-          {this.props.children}
+
+          {this.props.children != undefined &&
+            this.props.children
+          }
         </ScrollView>
       </View>
     )

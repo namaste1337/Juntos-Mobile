@@ -27,7 +27,7 @@ import CommonStyles, {COLORS} from "../common/styles"
 // Actions
 ////////////////////////
 
-import {navigateToCreateProjectDescription} from "./../actions/project-actions.js";
+import {navigateToCreateProjectDescription, getProjects} from "./../actions/project-actions.js";
 
 /////////////////////////////
 // Import Custom Components
@@ -38,11 +38,6 @@ import Carousel, {Poster} from "./../components/Carousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
 
-////////////////////////
-// Import Services
-////////////////////////
-
-import {getProjects} from "./../services/api/projects";
 
 ////////////////////////
 // Constants
@@ -62,81 +57,6 @@ const GPS_HIGH_ACCURACY_BOOL              = true;
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
 const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_project_button.png")
-const TEMP_DATA = [
-  {
-    id: 1,
-    image: "https://www.burney-falls.com/wp-content/uploads/2012/06/burney-cabin-m.jpg",
-    title: "Wooden Home",
-    description:"awesome",
-    distance: "5 miles",
-    lat: 37.27,
-    long: -121.90
-  },
-  {
-    id: 2,
-    image: "https://odis.homeaway.com/odis/listing/2878aa26-7de3-4e26-95c0-41db54dde043.c10.jpg",
-    title: "Stone Home",
-    description: "Beautiful home on the prerrie",
-    lat: 37.29,
-    long: -121.85
-  },
-  {
-    id: 3,
-    image: "https://i.pinimg.com/736x/a9/43/4c/a9434cb6118f9ff113e9417b1add0f9c--wood-cottage-cottage-in-the-woods.jpg",
-    title: "Recylced Home",
-    lat: 37.24,
-    long: -121.85
-  },
-  {
-    id: 4,
-    image: "https://www.centuryhomesph.com/wp-content/uploads/2015/05/Sustainable-homes-uk.jpg",
-    title: "Natural Home",
-    lat: 37.22,
-    long: -121.78
-  },
-  {
-    id: 5,
-    image: "https://www.ignant.com/wp-content/uploads/2014/09/BuildingBetter_Sustainable_homes_01.jpg",
-    title: "Natural Home",
-    lat: 37.35,
-    long: -121.78
-  },
-  {
-    id: 6,
-    image: "https://cdn.trendir.com/wp-content/uploads/old/house-design/2015/06/22/sustainable-shipping-container-house-1.jpg",
-    title: "Natural Home",
-    lat: 37.40,
-    long: -121.78
-  },
-  {
-    id: 7,
-    image: "https://img.newatlas.com/top_sustainable_homes_2014-5.jpg?auto=format%2Ccompress&fit=max&h=670&q=60&w=1000&s=78310804011f3650cba83bd81eb120f7",
-    title: "Natural Home",
-    lat: 37.36,
-    long: -121.20
-  },
-  {
-    id: 8,
-    image: "https://hometipsforwomen.com/wp-content/uploads/2014/09/solar-roof-panels-600.jpg",
-    title: "Natural Home",
-    lat: 37.20,
-    long: -121.25
-  },
-  {
-    id: 9,
-    image: "https://www.goodhouseidea.com/wp-content/uploads/2017/08/living-home-c6.1-1.jpg",
-    title: "Wooden Home",
-    lat: 37.27,
-    long: -121.80
-  },
-  {
-    id: 10,
-    image: "https://teamnacl.com/wp-content/uploads/2017/06/self-sustainable-homes-for-sale-in-arizonaself-homesteadself-europe-homesteading-videos-homesteads-960x640.jpg",
-    title: "Stone Home",
-    lat: 37.29,
-    long: -121.70
-  },
-]
 
 class Projects extends Component {
 
@@ -207,10 +127,11 @@ class Projects extends Component {
 
     // Check if the currentPage is within bounds of
     // of the temp coordinate length
-    if(page < TEMP_DATA.length){
-      let coord = TEMP_DATA[page];
-      let long  = coord.lat;
-      let lat   = coord.long;
+    if(page < this.props.projectData.length){
+      let project = this.props.projectData[page];
+      let coords  = project.location.loc.coordinates;
+      let long    = coords[1];
+      let lat     = coords[0];
 
       this._animateTo(long, lat);
     }
@@ -238,26 +159,37 @@ class Projects extends Component {
   ////////////////////////
   // Life Cycle
   ////////////////////////
+
+  componentWillMount(){
+    this.props.getProjects();
+  }
   
   // Handles login for Map onMapReady callback
   // for the map component
   componentDidMount(){
+    // Retrieve the project data from the server
     console.log("Component Did Mount");
+    console.log(this.props.projectData);
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
       navigator.geolocation.requestAuthorization();
     // Get the users current location
     navigator.geolocation.getCurrentPosition(data => {
-      // Get coordinated of first project
-      let coord = TEMP_DATA[0]; 
-      this._animateTo(coord.lat, coord.long);
+      // Get coordinate of first project and animate
+      // let project  = this.props.projectData[0];
+      // let coords   = project.location.loc.coordinates;
+      // console.log(coords);
+      // let long     = coords[1];
+      // let lat      = coords[0]; 
+      // this._animateTo(lat, long);
     }, error => {
       console.log(error);
 
     }, {
       enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
     });
+
   }
 
   ////////////////////////
@@ -273,13 +205,16 @@ class Projects extends Component {
         showsUserLocation
         style={styles.map}
         >
-          {TEMP_DATA.map(coord => 
-            <MapView.Marker.Animated
-            identifier={coord.id.toString()}
-            key={coord.id} 
-            image={MAP_MARKER_IMAGE}
-            coordinate={{ latitude: coord.lat , longitude: coord.long }}
-            onPress={e => this._onMarkerPressed(e)}/>)}
+          {this.props.projectData != undefined &&
+            this.props.projectData.map(project => 
+              <MapView.Marker.Animated
+              identifier={project.project_id.toString()}
+              key={project.project_id.toString()} 
+              image={MAP_MARKER_IMAGE}
+              coordinate={{ latitude: project.location.loc.coordinates[0] , longitude: project.location.loc.coordinates[1] }}
+              onPress={e => this._onMarkerPressed(e)}/>
+            )
+         }
              
         </MapView.Animated>
 
@@ -288,11 +223,14 @@ class Projects extends Component {
           ref={ref => this._projectCarousel = ref}
           pageIndicator={true}
           onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-            {TEMP_DATA.map(data => 
+            {this.props.projectData != undefined &&
+              this.props.projectData.map(project => 
               <Poster 
-                source={data.image}
-                data={data}
-                key={data.id} />
+                source={project.images[0]}
+                title={"test"}
+                description={"description"}
+                distance={"how far"}
+                key={project.project_id} />
             )}
           </Carousel>
         </View>
@@ -348,13 +286,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    // Props go here
+    projectData: state.project.data
   };
 }
 
 const mapDistpatchToProps = (dispatch) => {
   return {
-    navigateToCreateProjectDescription: () => dispatch(navigateToCreateProjectDescription())
+    navigateToCreateProjectDescription: () => dispatch(navigateToCreateProjectDescription()),
+    getProjects: () => dispatch(getProjects())
   };
 }
 

@@ -10,7 +10,7 @@ import {NavigationActions} from "react-navigation";
 // Import services
 /////////////////////////
 
-import {createProject} from "./../services/api/projects";
+import {createProject, getAllProjects} from "./../services/api/projects";
 import {imageUpload} from "./../services/api/uploads";
 
 ////////////////////////
@@ -21,7 +21,8 @@ import {imageUpload} from "./../services/api/uploads";
 export const ProjectActions = {
 	POPULATE_TEMP_DESCRIPTION: "POPULATE_TEMP_DESCRIPTION",
 	POPULATE_TEMP_DETAILS: "POPULATE_TEMP_DETAILS",
-	POPULATE_TEMP_IMAGES: "POPULATE_TEMP_IMAGES"
+	POPULATE_TEMP_IMAGES: "POPULATE_TEMP_IMAGES",
+	POPULATE_PROJECTS: "PopulateProjects"
 }
 
 ////////////////////////
@@ -145,9 +146,33 @@ export function resetProjectNavigation(){
 
 }
 
+function populateProjectsData(projects){
+
+	return {
+		type: ProjectActions.POPULATE_PROJECTS,
+		payload: projects
+	};
+
+}
+
 ////////////////////////
 // Thunks Functions
 ////////////////////////
+
+// Handles request to fetch all projects
+export function getProjects(){
+
+	return dispatch => {
+
+		getAllProjects().then(projects => {
+			dispatch(populateProjectsData(projects));
+		}).catch(error => {
+			console.error(error);
+		});
+
+	}
+
+}
 
 // Handles creating a new project 
 export function createNewProject(projectObject){

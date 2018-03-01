@@ -24,13 +24,8 @@ export function createProject(projectObject){
 }
 
 // Handles getting all projects
-export function getProjects(){
+export function getAllProjects(){
 
-	console.log()
-	let payload = {
-		cake: "",
-	}
-
-	return Services.fetchApi(PROJECTS_END_POINT, payload, Common.GET_METHOD);
+	return Services.fetchApi(PROJECTS_END_POINT, {}, Common.GET_METHOD);
 
 }
