@@ -9,6 +9,7 @@
 	"dependencies": {
 		"chance": "^1.0.13",
 		"create-react-class": "^15.6.2",
+		"ios-deploy": "^1.9.2",
 		"react": "16.2.0",
 		"react-native": "0.53.0",
 		"react-native-cli": "^2.0.1",
