@@ -74,10 +74,9 @@ export default function project(
           return newState;
         })();
       case ProjectActions.POPULATE_PROJECTS:
-        return(function(){
-          state.data = mutateProjectData(action.payload.data);
-          return state; 
-        })()
+        return Object.assign({}, state, {
+          data: mutateProjectData(action.payload.data)
+        });
     default:
       return state;
 	}
