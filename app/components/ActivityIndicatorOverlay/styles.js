@@ -34,8 +34,8 @@ export default StyleSheet.create({
     top: 0,
     opacity: 0.5,
     backgroundColor: COLORS.BLACK,
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
+    width: "100%",
+    height: "100%"
   },  
  centering: {  
     flex: 1,
