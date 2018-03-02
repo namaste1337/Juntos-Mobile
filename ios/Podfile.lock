@@ -1,4 +1,9 @@
 PODS:
+  - Picker (4.3.2):
+    - Picker/Core (= 4.3.2)
+    - React
+  - Picker/Core (4.3.2):
+    - React
   - QBImagePickerController (3.4.0)
   - React (0.53.0):
     - React/Core (= 0.53.0)
@@ -47,6 +52,7 @@ PODS:
   - yoga (0.53.0.React)
 
 DEPENDENCIES:
+  - Picker (from `../node_modules/react-native-picker`)
   - QBImagePickerController
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/BatchedBridge (from `../node_modules/react-native`)
@@ -66,6 +72,8 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
+  Picker:
+    :path: ../node_modules/react-native-picker
   React:
     :path: ../node_modules/react-native
   react-native-maps:
@@ -74,12 +82,13 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
+  Picker: 0c9f8933f15202767be28f3b2a96e0eee20300c3
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 6a94a44468604816ad2fd3bae908b2ebbab0f95d
   react-native-maps: 6ab4fa4f78e88824ec300de0eb412f0556b6a84b
   RSKImageCropper: 0df8c99e77a8ea7ca7a8b83ef468556f31584254
   yoga: 36cb943786c0587f19094c593b5683074d679c46
 
-PODFILE CHECKSUM: 0affb4ac4041491299c9d1951cf09d9c7a990cba
+PODFILE CHECKSUM: b3cc238718d333ea6f43c12ca32b94f1fe9dddb7
 
 COCOAPODS: 1.2.0
