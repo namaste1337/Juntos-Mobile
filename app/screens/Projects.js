@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Image,
   Platform,
+  Text
 } from 'react-native';
 
 /////////////////////////////
@@ -34,7 +35,7 @@ import {navigateToCreateProjectDescription, getProjects} from "./../actions/proj
 /////////////////////////////
 
 import PrimaryButton from "./../components/PrimaryButton";
-import Carousel, {Poster} from "./../components/Carousel";
+import Carousel, {Poster, Indicator} from "./../components/Carousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
 
@@ -127,14 +128,17 @@ class Projects extends Component {
 
     // Check if the currentPage is within bounds of
     // of the temp coordinate length
-    if(page < this.props.projectData.length){
-      let project = this.props.projectData[page];
+    if(page < this.props.project.data.length){
+      let project = this.props.project.data[page];
       let coords  = project.location.loc.coordinates;
       let long    = coords[1];
       let lat     = coords[0];
 
       this._animateTo(long, lat);
     }
+
+    // Set the carousel indicator the corresponding page
+    this.carouselIndicator.setActivePageIndicator(page);
 
   }
 
@@ -169,7 +173,7 @@ class Projects extends Component {
   componentDidMount(){
     // Retrieve the project data from the server
     console.log("Component Did Mount");
-    console.log(this.props.projectData);
+    console.log(this.props.project.data);
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
@@ -196,8 +200,42 @@ class Projects extends Component {
   // Screen UI
   ////////////////////////
 
-  render() {
+  _renderCarousel = (props) => {
+    if (props.projectData.data.length > 0){
+      return (
+          props.projectData.data.map(project => 
+             <Poster 
+              source={project.images[0]}
+              title={project.name}
+              description={project.description}
+              distance={"how far"}
+              key={project.project_id}/>
+          )
+        );
+    }
+    else{
+      return (<ActivityIndicatorOverlay isFetching={true}/>);
+    }
+  }
 
+  _renderMarkers = (props) =>{
+    if(props.project.data.length > 0){
+      return(
+        props.project.data.map(project => 
+          <MapView.Marker.Animated
+          identifier={project.project_id.toString()}
+          key={project.project_id.toString()} 
+          image={MAP_MARKER_IMAGE}
+          coordinate={{ latitude: project.location.loc.coordinates[1] , longitude: project.location.loc.coordinates[0] }}
+          onPress={e => this._onMarkerPressed(e)}/>
+        )
+      )
+    }else{
+      return null;
+    }
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <MapView.Animated
@@ -205,34 +243,19 @@ class Projects extends Component {
         showsUserLocation
         style={styles.map}
         >
-          {this.props.projectData != undefined &&
-            this.props.projectData.map(project => 
-              <MapView.Marker.Animated
-              identifier={project.project_id.toString()}
-              key={project.project_id.toString()} 
-              image={MAP_MARKER_IMAGE}
-              coordinate={{ latitude: project.location.loc.coordinates[0] , longitude: project.location.loc.coordinates[1] }}
-              onPress={e => this._onMarkerPressed(e)}/>
-            )
-         }
-             
+          <this._renderMarkers project={this.props.project} />
         </MapView.Animated>
 
-        <View>
-          <Carousel 
+        <View style={{height: 180}}>
+        {this.props.project.data.length > 0 &&
+        <Indicator children={this.props.project.data} ref={ref=> this.carouselIndicator = ref}/>
+        }
+        <Carousel 
           ref={ref => this._projectCarousel = ref}
           pageIndicator={true}
           onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-            {this.props.projectData != undefined &&
-              this.props.projectData.map(project => 
-              <Poster 
-                source={project.images[0]}
-                title={"test"}
-                description={"description"}
-                distance={"how far"}
-                key={project.project_id} />
-            )}
-          </Carousel>
+          <this._renderCarousel projectData={this.props.project} />
+        </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.navigateToCreateProjectDescription() }/>
@@ -286,7 +309,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    projectData: state.project.data
+    project: state.project
   };
 }
 

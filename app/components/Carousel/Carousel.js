@@ -62,10 +62,6 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   ~~~~~~~~~~~~~~~~~~~
   Optional props
   ~~~~~~~~~~~~~~~~~~~
-  pageIndicator: type Bool
-  Description: Toggles pageindicator
-  Default: false
-  =========================
   onPageChangeEnd(page): type function callback
   Description: Passes back project carousel current page
   as the first parameter of the callback. 
@@ -87,55 +83,11 @@ class Carousel extends Component {
   ////////////////////////
 
   constructor(props){
-
     super(props)
     this.state = {
       // Initial state definitions
-      pageIndicators: [],
-      lastActiveIndicator: null,
       scrollViewBounced: SCROLL_VIEW_BOUNCED_FALSE_BOOL
     }
-    // Caveat: If the ref callback is set inline the refs will get called 
-    // twice during updates. Because a new instance of the function is created
-    // with each render, React needs to clear the old ref and set up the new 
-    // one. You can avoid this be defining the ref callback as a bound method
-    // on the class, but not that it shouldn't matter in most cases.
-    // We bind the setPagerIndicator to allow the pageIndicator refs
-    // to only be set once. 
-    this._setPagerIndicatorRefs = this._setPagerIndicatorRefs.bind(this);
-
-  }
-
-  ////////////////////////
-  // Setters & Getters
-  ////////////////////////
-
-  // Sets the active page indicator for 
-  // the paging scroll view.
-  _setActivePageIndicator(page){
-
-    // Get the indicator in regards to the page
-    let pageIndicator = this.state.pageIndicators[page];
-        
-    // First indicator is affected by this logic.
-    if(pageIndicator != this.state.lastActiveIndicator){
-      // Set the current page indicator to active
-      pageIndicator.setNativeProps({style: styles.carouselIndicatorActive});
-  
-      // Set the last page indicator to 
-      if(this.state.lastActiveIndicator != null)
-        this.state.lastActiveIndicator.setNativeProps({style: styles.carouselIndicatorInactive});
-  
-      // Set the last active indicator
-      this.state.lastActiveIndicator = pageIndicator;
-    }
-
-  }
-
-  // Sets a ref for a page indicator to the pageIndicators state object
-  _setPagerIndicatorRefs(ref){
-
-    this.state.pageIndicators[this.state.pageIndicators.length] = ref
 
   }
 
@@ -151,10 +103,6 @@ class Carousel extends Component {
     let scrollViewWidth = currentEvent.layoutMeasurement.width;
     let currentOffset   = currentEvent.contentOffset.x;
     let currentPage     = Math.ceil(currentOffset/scrollViewWidth);
-
-    // Set the current active indicator if it is within bounds
-    if(currentPage < this.props.children.length)
-      this._setActivePageIndicator(currentPage);
 
     // Validate that the onPageChangeEnd prop
     // had been set
@@ -193,27 +141,6 @@ class Carousel extends Component {
   }
 
   ////////////////////////
-  // Private Methods
-  ////////////////////////
-
-  _pageIndicator = (props) => {
-    if(props.pageIndicator && props.children){
-      return (
-        <View style={styles.carouselIndicatorWrapper} onLayout={ ()=> this._setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY) }>
-          {props.children.map((data, index) =>
-            <View key={index} 
-              ref={this._setPagerIndicatorRefs}
-              style={styles.carouselIndicatorInactive}>
-            </View>)
-          }
-        </View>
-      );
-    }else{
-      return null;
-    }
-  }
-
-  ////////////////////////
   // Methods
   ////////////////////////
 
@@ -224,8 +151,6 @@ class Carousel extends Component {
     
     // Get the x coordinate of the requested page
     let pageXPosition = deviceProperties.width * page;
-    // Set the activity indicator to the requested page
-    this._setActivePageIndicator(page);
     // Animate scroll the carousel to the requested page
     this._scrollView.scrollTo({
         x: pageXPosition, 
@@ -236,17 +161,14 @@ class Carousel extends Component {
   }
 
   render(){
-    console.log(this.props.children);
     return (
       <View>
-        <this._pageIndicator pageIndicator={this.props.pageIndicator} children={this.props.children}/>
         <ScrollView 
         ref={ref => this._scrollView = ref}
         scrollEventThrottle={SCROLL_VIEW_EVENT_THROTTILE_PROPERTY} 
         onMomentumScrollEnd={event=> this._onScrollDidEnd(event)} 
         pagingEnabled={SCROLL_VIEW_PAGING_PROPERTY} 
         horizontal={SCROLL_VIEW_HORIZONTAL_PROPERTY}>
-
           {this.props.children != undefined &&
             this.props.children
           }
@@ -348,5 +270,81 @@ Poster.propTypes = {
 
 export {Poster};
 
+
+
+class  Indicator extends Component {
+
+  ////////////////////////
+  // Constructor
+  ////////////////////////
+
+  constructor(props){
+    super(props)
+    this.state = {
+      // Initial state definitions
+      pageIndicators: [],
+      lastActiveIndicator: null,
+    }
+    // Caveat: If the ref callback is set inline the refs will get called 
+    // twice during updates. Because a new instance of the function is created
+    // with each render, React needs to clear the old ref and set up the new 
+    // one. You can avoid this be defining the ref callback as a bound method
+    // on the class, but not that it shouldn't matter in most cases.
+    // We bind the setPagerIndicator to allow the pageIndicator refs
+    // to only be set once. 
+    this._setPagerIndicatorRefs = this._setPagerIndicatorRefs.bind(this);
+
+  }
+
+
+  ////////////////////////
+  // Setters & Getters
+  ////////////////////////
+
+  // Sets the active page indicator for 
+  // the paging scroll view.
+  setActivePageIndicator(page){
+
+    // Get the indicator in regards to the page
+    let pageIndicator = this.state.pageIndicators[page];
+        
+    // First indicator is affected by this logic.
+    if(pageIndicator != this.state.lastActiveIndicator){
+      // Set the current page indicator to active
+      pageIndicator.setNativeProps({style: styles.carouselIndicatorActive});
+  
+      // Set the last page indicator to 
+      if(this.state.lastActiveIndicator != null)
+        this.state.lastActiveIndicator.setNativeProps({style: styles.carouselIndicatorInactive});
+  
+      // Set the last active indicator
+      this.state.lastActiveIndicator = pageIndicator;
+    }
+
+  }
+
+  // Sets a ref for a page indicator to the pageIndicators state object
+  _setPagerIndicatorRefs(ref){
+
+    this.state.pageIndicators[this.state.pageIndicators.length] = ref
+
+  }
+
+  render(){
+    return(
+      <View style={styles.carouselIndicatorWrapper} onLayout={ ()=> this.setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY) }>
+        {this.props.children.map((data, index) =>
+          <View key={index} 
+            ref={this._setPagerIndicatorRefs}
+            style={styles.carouselIndicatorInactive}>
+          </View>)
+        }
+    </View>
+    )
+  }
+
+}
+
+export {Indicator};
 
 
