@@ -330,6 +330,10 @@ class  Indicator extends Component {
 
   }
 
+  ////////////////////////
+  // Methods
+  ////////////////////////
+
   render(){
     return(
       <View style={styles.carouselIndicatorWrapper} onLayout={ ()=> this.setActivePageIndicator(SCROLL_VIEW_INIAL_PAGE_PROPERTY) }>
