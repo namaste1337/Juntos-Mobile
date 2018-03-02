@@ -21,19 +21,12 @@ import Settings from "./../config/settings";
 // project image before sending to the store
 function mutateProjectData(projectData){
 
-  console.log(projectData);
-
   // Add the image server path to all images in each project
   projectData.map(project => {
-    console.log(project)
     project.images.map((image, index) => {
-      console.log(image, index)
       project.images[index] = Settings.IMAGE_SERVER + Settings.IMAGE_PATH + image; 
-      console.log( project.images[index]);
     })
-  })
-
-  console.log(projectData);
+  });
 
   return projectData;
 
