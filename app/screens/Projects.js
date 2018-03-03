@@ -98,7 +98,7 @@ class Projects extends Component {
   }
 
   ////////////////////////
-  // Helper Method
+  // Private Methods
   ////////////////////////
 
   // Handles animating the maps
