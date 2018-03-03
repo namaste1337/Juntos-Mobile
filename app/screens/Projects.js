@@ -63,7 +63,6 @@ class Projects extends Component {
 
 
   _onAddIconPress(event){
-    console.log("Add Icon Press");
 
   }
 
@@ -152,7 +151,6 @@ class Projects extends Component {
     let event = e.nativeEvent;
     let page  = parseInt(event.id);
     // Scroll to the page
-    console.log(page);
     this._projectCarousel.goToPage(page);
 
   }
@@ -182,13 +180,9 @@ class Projects extends Component {
       navigator.geolocation.requestAuthorization();
     // Get the users current location
     navigator.geolocation.getCurrentPosition(data => {
-      console.log("Current Position Data: ");
-      console.log(data);
-
       this.props.getProjects();
     }, error => {
-      console.log(error);
-
+      console.error(error);
     }, {
       enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
     });
