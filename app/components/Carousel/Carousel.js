@@ -69,7 +69,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   Public Methods
   ~~~~~~~~~~~~~~~~~~~
   Method: goToPage(page)
-  Description: goToPage allows you the set the active page indicator
+  Description: goToPage allows navigation to an item in the carousel
   params:
     Page - (type Number): The page indicator to activate
 
