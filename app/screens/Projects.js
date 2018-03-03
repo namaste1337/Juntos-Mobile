@@ -53,6 +53,7 @@ const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
 // Properties
 const REGION_ANIMATION_DURATION_PROPERTY  = 500;
 // Bools
+const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
@@ -243,16 +244,16 @@ class Projects extends Component {
           <this._renderMarkers projects={this.props.projects} />
         </MapView.Animated>
 
-        <View style={{height: 210}}>
-        {this.props.projects.length > 0 &&
-        <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
-        }
-        <Carousel 
-          ref={ref => this._projectCarousel = ref}
-          pageIndicator={true}
-          onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-          <this._renderCarouselPosters projects={this.props.projects} />
-        </Carousel>
+        <View style={styles.crouselWrapper}>
+          {this.props.projects.length > 0 &&
+          <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
+          }
+          <Carousel 
+            ref={ref => this._projectCarousel = ref}
+            pageIndicator={PAGE_INDICATOR_BOOL}
+            onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
+            <this._renderCarouselPosters projects={this.props.projects} />
+          </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.navigateToCreateProjectDescription() }/>
@@ -297,6 +298,9 @@ const styles = StyleSheet.create({
       height: 10
     },
     shadowRadius: 10
+  },
+  crouselWrapper:{
+    height: 210
   }
 });
 
