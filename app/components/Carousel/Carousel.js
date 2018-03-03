@@ -206,6 +206,8 @@ export default Carousel;
   Description: Distance to be displayerd for th poster
   =========================
   onLoadEnd(currentPage): type function callback
+  params: 
+    currentPage - (type Number): A number representing the current visible page 
   Description: Called when background image has finished loading
 
   */
@@ -270,7 +272,16 @@ Poster.propTypes = {
 
 export {Poster};
 
+  /* 
+  ~~~~~~~~~~~~~~~~~~~
+  Public Methods
+  ~~~~~~~~~~~~~~~~~~~
+  Method: setActivePageIndicator(page)
+  Description: Public methods that allows you the set the active page indicator
+  params:
+    Page - (type Number): The page indicator to activate
 
+  */
 
 class  Indicator extends Component {
 
@@ -322,6 +333,10 @@ class  Indicator extends Component {
     }
 
   }
+
+  ////////////////////////
+  // Private Methods
+  ////////////////////////
 
   // Sets a ref for a page indicator to the pageIndicators state object
   _setPagerIndicatorRefs(ref){
