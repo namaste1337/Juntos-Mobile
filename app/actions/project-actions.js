@@ -146,6 +146,7 @@ export function resetProjectNavigation(){
 
 }
 
+// Handles populating the store project data evelope
 function populateProjectsData(projects){
 
 	return {
