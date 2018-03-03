@@ -111,11 +111,8 @@ class Projects extends Component {
       longitudeDelta: LONGITUDE_DELTA_NUMBER
     });
 
-    // _animateTo is fired asynchronously
-    if(this._map != null){
-      this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
-      this.setState({region});
-    }
+    this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
+   
   }
 
   ////////////////////////
@@ -128,8 +125,8 @@ class Projects extends Component {
 
     // Check if the currentPage is within bounds of
     // of the temp coordinate length
-    if(page < this.props.project.data.length){
-      let project = this.props.project.data[page];
+    if(page < this.props.projects.length){
+      let project = this.props.projects[page];
       let coords  = project.location.loc.coordinates;
       let long    = coords[1];
       let lat     = coords[0];
@@ -138,7 +135,7 @@ class Projects extends Component {
     }
 
     // Set the carousel indicator the corresponding page
-    this.carouselIndicator.setActivePageIndicator(page);
+    this._carouselIndicator.setActivePageIndicator(page);
 
   }
 
@@ -151,11 +148,11 @@ class Projects extends Component {
     // Determine the page for the marker.
     // The marker page is determined by
     // the assined indentifier props
-    // for each marker.n
+    // for each marker.
     let event = e.nativeEvent;
-    let id    = Number(event.id);
-    let page  = id - 1;
+    let page  = parseInt(event.id);
     // Scroll to the page
+    console.log(page);
     this._projectCarousel.goToPage(page);
 
   }
@@ -164,29 +161,31 @@ class Projects extends Component {
   // Life Cycle
   ////////////////////////
 
-  componentWillMount(){
-    this.props.getProjects();
+  componentDidUpdate(){
+    // Retrieve the project data from the server
+
+    let project   = this.props.projects[0];
+    let location  = project.location.loc.coordinates;
+    let lat       = location[0];
+    let lng       = location[1];
+
+    this._animateTo(lng, lat);
+
   }
   
   // Handles login for Map onMapReady callback
   // for the map component
   componentDidMount(){
-    // Retrieve the project data from the server
-    console.log("Component Did Mount");
-    console.log(this.props.project.data);
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
       navigator.geolocation.requestAuthorization();
     // Get the users current location
     navigator.geolocation.getCurrentPosition(data => {
-      // Get coordinate of first project and animate
-      // let project  = this.props.projectData[0];
-      // let coords   = project.location.loc.coordinates;
-      // console.log(coords);
-      // let long     = coords[1];
-      // let lat      = coords[0]; 
-      // this._animateTo(lat, long);
+      console.log("Current Position Data: ");
+      console.log(data);
+
+      this.props.getProjects();
     }, error => {
       console.log(error);
 
@@ -200,10 +199,12 @@ class Projects extends Component {
   // Screen UI
   ////////////////////////
 
-  _renderCarousel = (props) => {
-    if (props.projectData.data.length > 0){
+  // Handles rendering the carousel posters if data is available 
+  // else an activity indicator is shown.
+  _renderCarouselPosters = (props) => {
+    if (props.projects.length > 0){
       return (
-          props.projectData.data.map(project => 
+          props.projects.map(project => 
              <Poster 
               source={project.images[0]}
               title={project.name}
@@ -218,12 +219,14 @@ class Projects extends Component {
     }
   }
 
+  // Handles rendering the map markers
   _renderMarkers = (props) =>{
-    if(props.project.data.length > 0){
+    if(props.projects.length > 0){
+      let projects = props.projects;
       return(
-        props.project.data.map(project => 
+        projects.map(project => 
           <MapView.Marker.Animated
-          identifier={project.project_id.toString()}
+          identifier={projects.indexOf(project).toString()}
           key={project.project_id.toString()} 
           image={MAP_MARKER_IMAGE}
           coordinate={{ latitude: project.location.loc.coordinates[1] , longitude: project.location.loc.coordinates[0] }}
@@ -243,18 +246,18 @@ class Projects extends Component {
         showsUserLocation
         style={styles.map}
         >
-          <this._renderMarkers project={this.props.project} />
+          <this._renderMarkers projects={this.props.projects} />
         </MapView.Animated>
 
-        <View style={{height: 180}}>
-        {this.props.project.data.length > 0 &&
-        <Indicator children={this.props.project.data} ref={ref=> this.carouselIndicator = ref}/>
+        <View style={{height: 210}}>
+        {this.props.projects.length > 0 &&
+        <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
         }
         <Carousel 
           ref={ref => this._projectCarousel = ref}
           pageIndicator={true}
           onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-          <this._renderCarousel projectData={this.props.project} />
+          <this._renderCarouselPosters projects={this.props.projects} />
         </Carousel>
         </View>
         <View style={styles.addButtonWrapper}>
@@ -309,7 +312,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    project: state.project
+    projects: state.project.data
   };
 }
 
