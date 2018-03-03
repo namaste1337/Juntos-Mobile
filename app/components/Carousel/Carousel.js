@@ -65,6 +65,13 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   onPageChangeEnd(page): type function callback
   Description: Passes back project carousel current page
   as the first parameter of the callback. 
+  ~~~~~~~~~~~~~~~~~~~
+  Public Methods
+  ~~~~~~~~~~~~~~~~~~~
+  Method: goToPage(page)
+  Description: goToPage allows you the set the active page indicator
+  params:
+    Page - (type Number): The page indicator to activate
 
   */
 
@@ -141,7 +148,7 @@ class Carousel extends Component {
   }
 
   ////////////////////////
-  // Methods
+  // Pubic Methods
   ////////////////////////
 
   
@@ -209,7 +216,7 @@ export default Carousel;
   params: 
     currentPage - (type Number): A number representing the current visible page 
   Description: Called when background image has finished loading
-
+  
   */
 
 class  Poster extends Component {
