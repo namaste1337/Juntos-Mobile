@@ -60,9 +60,11 @@ const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
 // Properties
 const REGION_ANIMATION_DURATION_PROPERTY  = 500;
+const MODAL_ANIMATION_PROPERTY            = "slide";
 // Bools
 const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
+const MODAL_TRANSPARENT_BOOL              = false;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
@@ -201,7 +203,7 @@ class Projects extends Component {
 
   // Handles on poster pressed, populates 
   _onPosterPressed(projectData){
-    
+
     // Set the data for the project data
     // to be displayed in the project details
     // modal, make the project detail 
@@ -336,8 +338,8 @@ class Projects extends Component {
         </View> 
         <StatusBar hidden={this.state.statusBarHidden} />
         <Modal
-          animationType="slide"
-          transparent={false}
+          animationType={MODAL_ANIMATION_PROPERTY}
+          transparent={MODAL_TRANSPARENT_BOOL}
           visible={this.state.modalVisible}>
           {this.state.selectedProject != null &&
            <Details
