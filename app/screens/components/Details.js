@@ -105,15 +105,16 @@ Definiition: {
 }
 Default: none
 =========================
-Location: type Object
-Location: A location object containing the address and coordinated of the project
-Definiition: {
-  address:" 555 Fake St, San Francisco, Ca 95123, USA",
-  coordinates: {
-    lat: 104.64,
-    lng: 50.01
-  }
-}
+address: type String
+Description: The project address to be dispalyed
+Default: none
+=========================
+latitude: type Number
+Description: The project latitude to be displayed on the map
+Default: none
+=========================
+longitude: type Number
+Description: The project latitude to be displayed on the map
 Default: none
 
 
@@ -127,6 +128,7 @@ class  Details extends Component {
   ////////////////////////
 
   render() {
+    console.log(this.props);
     return (
      <ScrollView style={CommonStyles.container}>
         <Carousel>
@@ -150,7 +152,7 @@ class  Details extends Component {
                 <Image style={styles.mapIcon}source={PROJECT_MAP_ICON_IMAGE}/>
               </View>
               <View style={styles.headerBottomRight}>
-                <Text style={styles.projectAddress}>{this.props.location.address}</Text>
+                <Text style={styles.projectAddress}>{this.props.address}</Text>
               </View>
             </View>
           </View>
@@ -210,13 +212,13 @@ class  Details extends Component {
             <MapView 
             style={styles.mapView}
             showsUserLocation={SHOW_USER_LOCATION_PROPERTY}
-            region={{ latitude: this.props.location.coordinates.lat , longitude: this.props.location.coordinates.lng, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
+            region={{ latitude: this.props.latitude , longitude: this.props.longitude, latitudeDelta: LATITUDE_DELTA_NUMBER, longitudeDelta: LONGITUDE_DELTA_NUMBER}}>
               <MapView.Marker
-              identifier={this.props.location.address}
+              identifier={this.props.address}
               image={MAP_MARKER_IMAGE}
-              coordinate={{ latitude: this.props.location.coordinates.lat , longitude: this.props.location.coordinates.lng}}/>
+              coordinate={{ latitude: this.props.latitude , longitude: this.props.longitude}}/>
             </MapView>
-            <Text style={styles.mapViewAddress}>{this.props.location.address}</Text>
+            <Text style={styles.mapViewAddress}>{this.props.address}</Text>
           </View>
         </View>
      </ScrollView>
@@ -397,7 +399,9 @@ Details.propTypes = {
   foodProvided: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  address: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired
 
 }
 
