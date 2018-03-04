@@ -28,7 +28,7 @@ import CommonStyles, {COLORS} from "../common/styles"
 // Actions
 ////////////////////////
 
-import {navigateToCreateProjectDescription, getProjects} from "./../actions/project-actions.js";
+import {navigateToCreateProjectDescription, getProjectsByLocation} from "./../actions/project-actions.js";
 
 /////////////////////////////
 // Import Custom Components
@@ -213,7 +213,10 @@ class Projects extends Component {
       navigator.geolocation.requestAuthorization();
     // Get the users current location
     navigator.geolocation.getCurrentPosition(data => {
-      this.props.getProjects();
+      this._userLat = data.coords.latitude;
+      this._userLng = data.coords.longitude;
+      // Fetch project data by location and radius 
+      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius);
     }, error => {
       console.error(error);
     }, {
@@ -354,7 +357,7 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     navigateToCreateProjectDescription: () => dispatch(navigateToCreateProjectDescription()),
-    getProjects: () => dispatch(getProjects())
+    getProjectsByLocation: (lat, lng, radius) => dispatch(getProjectsByLocation(lat, lng, radius))
   };
 }
 
