@@ -59,6 +59,9 @@ const GPS_HIGH_ACCURACY_BOOL              = true;
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
 const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_project_button.png")
+// String 
+const MILES_UNIT_STRING                   = "Miles";
+const KILOMETERS_UNIT_STRING              = "Kilometers";
 
 class Projects extends Component {
 
@@ -86,15 +89,19 @@ class Projects extends Component {
 
   constructor(props){
     super(props)
-    // Set the initial region for the map component
+    // Set initial state
     this.state = {
-      region: {
-        latitude: INITIAL_LONGITUDE_NUMBER,
-        longitude: INITIAL_LATITUDE_NUMBER,
-        latitudeDelta: LATITUDE_DELTA_NUMBER,
-        longitudeDelta: LONGITUDE_DELTA_NUMBER
-      },
+      // NOTE: The radius will be a fixed for now,
+      // but the following is to future proof for
+      // a radius adjustment feature.
+      radius: 10000000,
     }
+    // The follwoing properties will be assgined in 
+    // navigator.geolocation.getCurrentPosition and
+    // will be used to calcaulte the distance form the
+    // user location to each project location.
+    this._userLng = null;
+    this._userLat = null;
   }
 
   ////////////////////////
@@ -116,20 +123,29 @@ class Projects extends Component {
   }
 
   // Handles calucalting the distance of two lat/lng points
-  _distance(lat1, lon1, lat2, lon2) {
+  // and return a string with the appropraite distance
+  // and unit.git 
+  _distance(lat1, lon1, lat2, lon2, unit) {
 
-  let radlat1 = Math.PI * lat1/180
-  let radlat2 = Math.PI * lat2/180
-  let theta = lon1-lon2
-  let radtheta = Math.PI * theta/180
-  // Calcaulte thet distance 
-  let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-  dist = Math.acos(dist)
-  dist = dist * 180/Math.PI
-  dist = dist * 60 * 1.1515
+    let unitString = MILES_UNIT_STRING;
 
-  return dist
-}
+    let radlat1 = Math.PI * lat1/180
+    let radlat2 = Math.PI * lat2/180
+    let theta = lon1-lon2
+    let radtheta = Math.PI * theta/180
+    // Calcaulte thet distance 
+    let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist)
+    dist = dist * 180/Math.PI
+    dist = dist * 60 * 1.1515
+
+    if (unit===KILOMETERS_UNIT_STRING) { 
+      dist = dist * 1.609344 
+      unitString = KILOMETERS_UNIT_STRING;
+    }
+
+    return parseInt(dist).toString() + " " + unitString;
+  }
 
   ////////////////////////
   // Callback
@@ -220,7 +236,12 @@ class Projects extends Component {
               source={project.images[0]}
               title={project.name}
               description={project.description}
-              distance={"how far"}
+              distance={this._distance(
+                this._userLat, 
+                this._userLng,
+                project.location.loc.coordinates[1],
+                project.location.loc.coordinates[0],
+                )}
               key={project.project_id}/>
           )
         );
