@@ -10,7 +10,7 @@ import {NavigationActions} from "react-navigation";
 // Import services
 /////////////////////////
 
-import {createProject, getAllProjects} from "./../services/api/projects";
+import ProjectServices from "./../services/api/projects";
 import {imageUpload} from "./../services/api/uploads";
 
 ////////////////////////
@@ -165,12 +165,24 @@ export function getProjects(){
 
 	return dispatch => {
 
-		getAllProjects().then(projects => {
+		ProjectServices.getAllProjects().then(projects => {
 			dispatch(populateProjectsData(projects));
 		}).catch(error => {
 			console.error(error);
 		});
 
+	}
+
+}
+
+export function getProjectsByLocation(lat, lng, radius){
+
+	return dispatch => {
+		ProjectServices.getProjectsByLocation(lat, lng, radius).then(projects => {
+			dispatch(populateProjectsData(projects));
+		}).catch(error => {	
+			console.error(error);
+		});
 	}
 
 }
@@ -185,7 +197,7 @@ export function createNewProject(projectObject){
 	 imageUpload(images).then( response => {
         let imagesArray = response.data
         projectObject.images = imagesArray;
-        return createProject(projectObject);
+        return ProjectServices.createProject(projectObject);
       }).then(response => {
       	// Segue back to the root screen
         console.log(response);
