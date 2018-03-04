@@ -96,9 +96,9 @@ class Projects extends Component {
       // a radius adjustment feature.
       radius: 10000000,
     }
-    // The follwoing properties will be assgined in 
+    // The following properties will be assigned in 
     // navigator.geolocation.getCurrentPosition and
-    // will be used to calcaulte the distance form the
+    // will be used to calculate the distance from the
     // user location to each project location.
     this._userLng = null;
     this._userLat = null;
@@ -109,7 +109,7 @@ class Projects extends Component {
   ////////////////////////
 
   // Handles animating the maps
-  // to the specified region
+  // to the specified region.
   _animateTo(lat, long){
     let region = new MapView.AnimatedRegion({
       latitude: lat,
@@ -122,9 +122,9 @@ class Projects extends Component {
    
   }
 
-  // Handles calucalting the distance of two lat/lng points
+  // Handles calculating the distance of two lat/lng points
   // and return a string with the appropraite distance
-  // and unit.git 
+  // and unit.
   _distance(lat1, lon1, lat2, lon2, unit) {
 
     let unitString = MILES_UNIT_STRING;
@@ -152,29 +152,29 @@ class Projects extends Component {
   ////////////////////////
 
   // Handles animating to the marker corresponding to 
-  // the current page of the project carousel
+  // the current page of the project carousel and 
+  // updating the carousel page indicator.
   _onPageChangeEnd(page){
 
     // Check if the currentPage is within bounds of
-    // of the temp coordinate length
+    // of the available project count
     if(page < this.props.projects.length){
       let project = this.props.projects[page];
       let coords  = project.location.loc.coordinates;
       let long    = coords[1];
       let lat     = coords[0];
-
       this._animateTo(long, lat);
     }
 
-    // Set the carousel indicator the corresponding page
+    // Set the carousel indicator the corresponding page.
     this._carouselIndicator.setActivePageIndicator(page);
 
   }
 
   // Handles on map marker press, when
   // a map marker is pressed the carousel is
-  // transition to the corresponding page
-  // and zooms in to the marker
+  // transitioned to the corresponding page
+  // and zooms in to the marker.
   _onMarkerPressed(e){
     
     // Determine the page for the marker.
@@ -192,20 +192,26 @@ class Projects extends Component {
   // Life Cycle
   ////////////////////////
 
+  // When a service call is made to fetch project
+  // the redux state is updated and re-rerenders.
+  // This calls for an animation to the first project
+  // in the newly fetched data.
   componentDidUpdate(){
-    // Retrieve the project data from the server
 
     let project   = this.props.projects[0];
     let location  = project.location.loc.coordinates;
     let lat       = location[0];
     let lng       = location[1];
 
+    // Animate to the first project marker
     this._animateTo(lng, lat);
 
   }
   
-  // Handles login for Map onMapReady callback
-  // for the map component
+  // Handles fetching the user GPD location and 
+  // and fetching the project data by locaton.
+  // The users lat and lon is cached, to later
+  // calcualte the project/user distance delta.
   componentDidMount(){
     // If the users device is iOS, prompt for 
     // location permissions
@@ -229,7 +235,7 @@ class Projects extends Component {
   // Screen UI
   ////////////////////////
 
-  // Handles rendering the carousel posters if data is available 
+  // Handles rendering the carousel posters if the project data is available 
   // else an activity indicator is shown.
   _renderCarouselPosters = (props) => {
     if (props.projects.length > 0){
@@ -254,7 +260,8 @@ class Projects extends Component {
     }
   }
 
-  // Handles rendering the map markers
+  // Handles rendering the map markers if the project data is available 
+  // else the nothing is returned
   _renderMarkers = (props) =>{
     if(props.projects.length > 0){
       let projects = props.projects;
