@@ -128,7 +128,6 @@ class  Details extends Component {
   ////////////////////////
 
   render() {
-    console.log(this.props);
     return (
      <ScrollView style={CommonStyles.container}>
         <Carousel>
