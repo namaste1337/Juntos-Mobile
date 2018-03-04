@@ -93,7 +93,9 @@ class ProjectDetails extends Component {
       foodProvided={this.props.tempProject.food_provided}
       description={this.props.tempProject.description}
       user={this.props.currentUser}
-      location={this.props.tempProject.location}/>
+      address={this.props.tempProject.location.address}
+      latitude={this.props.tempProject.location.coordinates.lat}
+      longitude={this.props.tempProject.location.coordinates.lng}/>
     );
   }
 }
