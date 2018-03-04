@@ -10,7 +10,9 @@ import {
   StyleSheet,
   Image,
   Platform,
-  Text
+  Modal,
+  TouchableHighlight,
+  StatusBar
 } from 'react-native';
 
 /////////////////////////////
@@ -23,6 +25,12 @@ deviceProperties
 } from "./../common/device";
 import {renderIf} from  "./../common/components";
 import CommonStyles, {COLORS} from "../common/styles"
+
+////////////////////////////
+// Import Screen Components
+////////////////////////////
+
+import Details from "./components/Details";
 
 ////////////////////////
 // Actions
@@ -94,6 +102,9 @@ class Projects extends Component {
       // NOTE: The radius will be a fixed for now,
       // but the following is to future proof for
       // a radius adjustment feature.
+      statusBarHidden: false,
+      selectedProject: null,
+      modalVisible: false,
       radius: 10000000,
     }
     // The following properties will be assigned in 
@@ -188,6 +199,22 @@ class Projects extends Component {
 
   }
 
+  // Handles on poster pressed, populates 
+  _onPosterPressed(projectData){
+    
+    // Set the data for the project data
+    // to be displayed in the project details
+    // modal, make the project detail 
+    // modal visible, and hide the status
+    // bar when the modal is visible.
+    this.setState({
+      selectedProject: projectData,
+      modalVisible: true,
+      statusBarHidden: true
+    });
+
+  }
+
   ////////////////////////
   // Life Cycle
   ////////////////////////
@@ -241,8 +268,9 @@ class Projects extends Component {
     if (props.projects.length > 0){
       return (
           props.projects.map(project => 
+            <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
              <Poster 
-              source={project.images[0]}
+              source={project.images[0].uri}
               title={project.name}
               description={project.description}
               distance={this._distance(
@@ -252,6 +280,7 @@ class Projects extends Component {
                 project.location.loc.coordinates[0],
                 )}
               key={project.project_id}/>
+            </TouchableHighlight>
           )
         );
     }
@@ -305,6 +334,27 @@ class Projects extends Component {
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.navigateToCreateProjectDescription() }/>
         </View> 
+        <StatusBar hidden={this.state.statusBarHidden} />
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}>
+          {this.state.selectedProject != null &&
+           <Details
+            images={this.state.selectedProject.images}
+            projectName={this.state.selectedProject.name}
+            startDate={this.state.selectedProject.start_date}
+            endDate={this.state.selectedProject.end_date}
+            currentStatus={this.state.selectedProject.current_status}
+            projectType={this.state.selectedProject.type}
+            foodProvided={this.state.selectedProject.food_provided}
+            description={this.state.selectedProject.description}
+            user={this.state.selectedProject.user.local}
+            address={this.state.selectedProject.location.address}
+            latitude={this.state.selectedProject.location.loc.coordinates[1]}
+            longitude={this.state.selectedProject.location.loc.coordinates[0]}/>
+          }
+        </Modal>
       </View>
     );
   }
