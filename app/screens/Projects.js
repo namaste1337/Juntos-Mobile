@@ -136,8 +136,7 @@ class Projects extends Component {
   }
 
   // Handles calculating the distance of two lat/lng points
-  // and return a string with the appropraite distance
-  // and unit.
+  // and returns the distance number.
   _distance(lat1, lon1, lat2, lon2, unit) {
 
     let radlat1 = Math.PI * lat1/180
@@ -156,9 +155,13 @@ class Projects extends Component {
     }
 
     return dist;
-    
+
   }
 
+
+  // Handles calculating the distance of two lat/lng points
+  // and returns a string with the appropraite distance
+  // and unit.
   _distanceString(lat1, lon1, lat2, lon2, unit){
 
     let unitString = MILES_UNIT_STRING;
