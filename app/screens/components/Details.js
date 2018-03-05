@@ -23,6 +23,7 @@ import PropTypes from "prop-types";
 ///////////////////////////////
 
 import Carousel, {Poster} from './../../components/Carousel';
+import Icon from './../../components/Icon';
 
 //////////////////////////////
 // Imports Common Files
@@ -47,6 +48,9 @@ const PROJECT_TYPE_ICON_IMAGE             = require("./../../assets/projects/pro
 const FOOD_PROVIDED_ICON_IMAGE            = require("./../../assets/projects/food_provided_icon.png");
 const PROJECT_MAP_ICON_IMAGE              = require("./../../assets/projects/map_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../../assets/projects/map_marker.png");
+const CLOSE_PROJECT_ICON_IMAGE            = require("./../../assets/projects/close_project_icon.png");
+
+
 // Numbers
 const ASPECT_RATIO_NUMBER                 = deviceProperties.width / deviceProperties.height;
 const LATITUDE_DELTA_NUMBER               = 0.0900;
@@ -116,6 +120,13 @@ Default: none
 longitude: type Number
 Description: The project latitude to be displayed on the map
 Default: none
+=========================
+onClosePress: type Function
+Description: Callback that is called when the close button is
+presse. Assigning the callback will render a close button in 
+top right of the screen.
+Default: none
+
 
 
 
@@ -135,6 +146,12 @@ class  Details extends Component {
            <Poster source={imageSource.uri} key={index}/>
          )}
         </Carousel>
+        {this.props.onClosePress != null &&
+        <View style={styles.closeButtonWrapper}>
+          <Icon
+          source={CLOSE_PROJECT_ICON_IMAGE} 
+          onPress={()=> this.props.onClosePress()} />
+        </View>}
         <View style={styles.contentWrapper}>
           <View style={styles.headerWrapper}>
             <View style={styles.projectHeader}>
@@ -291,6 +308,15 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     tintColor: COLORS.DARK_GREY
+  },
+
+  ////////////////////////
+  // Close Chevron Button
+  ////////////////////////
+
+  closeButtonWrapper:{
+    position: "absolute", 
+    left: 10
   },
 
   ////////////////////////
