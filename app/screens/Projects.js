@@ -140,8 +140,6 @@ class Projects extends Component {
   // and unit.
   _distance(lat1, lon1, lat2, lon2, unit) {
 
-    let unitString = MILES_UNIT_STRING;
-
     let radlat1 = Math.PI * lat1/180
     let radlat2 = Math.PI * lat2/180
     let theta = lon1-lon2
@@ -157,7 +155,20 @@ class Projects extends Component {
       unitString = KILOMETERS_UNIT_STRING;
     }
 
+    return dist;
+  }
+
+  _distanceString(lat1, lon1, lat2, lon2, unit){
+
+    let unitString = MILES_UNIT_STRING;
+    let dist = this._distance(lat1, lon1, lat2, lon2, unit);
+
+    if (unit===KILOMETERS_UNIT_STRING) { 
+      unitString = KILOMETERS_UNIT_STRING;
+    }
+
     return parseInt(dist).toString() + " " + unitString;
+
   }
 
   ////////////////////////
@@ -283,7 +294,7 @@ class Projects extends Component {
               source={project.images[0].uri}
               title={project.name}
               description={project.description}
-              distance={this._distance(
+              distance={this._distanceString(
                 this._userLat, 
                 this._userLng,
                 project.location.loc.coordinates[1],
