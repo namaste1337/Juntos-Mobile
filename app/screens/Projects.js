@@ -156,6 +156,7 @@ class Projects extends Component {
     }
 
     return dist;
+    
   }
 
   _distanceString(lat1, lon1, lat2, lon2, unit){
