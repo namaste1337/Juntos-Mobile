@@ -217,6 +217,14 @@ class Projects extends Component {
 
   }
 
+  _onModalClosePressed(){
+    this.setState({
+      selectedProject: null,
+      modalVisible: false,
+      statusBarHidden: false
+    });
+  }
+
   ////////////////////////
   // Life Cycle
   ////////////////////////
@@ -354,7 +362,8 @@ class Projects extends Component {
             user={this.state.selectedProject.user.local}
             address={this.state.selectedProject.location.address}
             latitude={this.state.selectedProject.location.loc.coordinates[1]}
-            longitude={this.state.selectedProject.location.loc.coordinates[0]}/>
+            longitude={this.state.selectedProject.location.loc.coordinates[0]}
+            onClosePress={()=> this._onModalClosePressed()}/>
           }
         </Modal>
       </View>
