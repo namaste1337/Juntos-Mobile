@@ -426,15 +426,15 @@ class Projects extends Component {
             </View>
           </View>
           {this.props.projects.length > 0 &&
-          <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
-          }
-          {this.props.projects.length > 0 &&
-          <Carousel 
-            ref={ref => this._projectCarousel = ref}
-            pageIndicator={PAGE_INDICATOR_BOOL}
-            onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-            <this._renderCarouselPosters projects={this.props.projects} />
-          </Carousel>
+          <View>
+            <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
+            <Carousel 
+              ref={ref => this._projectCarousel = ref}
+              pageIndicator={PAGE_INDICATOR_BOOL}
+              onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
+              <this._renderCarouselPosters projects={this.props.projects} />
+            </Carousel>
+          </View>
           } 
           {this.state.isFetching &&
             <ActivityIndicator style={styles.activityIndicator} animating={true} size={"large"}/>
