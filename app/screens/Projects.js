@@ -71,6 +71,7 @@ const MODAL_ANIMATION_PROPERTY            = "slide";
 const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
 const MODAL_TRANSPARENT_BOOL              = false;
+const ACTIVITY_INDICACTOR_ANIMATING_BOOL  = true;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
@@ -78,6 +79,7 @@ const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_pr
 // String 
 const MILES_UNIT_STRING                   = "Miles";
 const KILOMETERS_UNIT_STRING              = "Kilometers";
+const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
 
 class Projects extends Component {
 
@@ -437,7 +439,7 @@ class Projects extends Component {
           </View>
           } 
           {this.state.isFetching &&
-            <ActivityIndicator style={styles.activityIndicator} animating={true} size={"large"}/>
+            <ActivityIndicator style={styles.activityIndicator} animating={ACTIVITY_INDICACTOR_ANIMATING_BOOL} size={ACTIVITY_INDICATOR_SIZE_STRING}/>
           }
         </View>
         <View style={styles.addButtonWrapper}>
