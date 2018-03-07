@@ -145,6 +145,9 @@ class Projects extends Component {
     // user location to each project location.
     this._userLng = null;
     this._userLat = null;
+    // The following will be used to store the current 
+    // region, and will be used to re-fetch projects
+    // if the user presses the redo-search button.
     this._currentRegionLng = null;
     this._currentRegionLat = null;
   }
