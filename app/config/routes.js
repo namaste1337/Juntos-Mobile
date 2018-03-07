@@ -68,12 +68,12 @@ const Tabs = TabNavigator({
       title: PROJECT_SCREEN_TITLE_STRING,
     })
   },
-  Messages: {
-    screen: Messages,
-    navigationOptions: ({navigation}) => ({
-      title: MESSAGES_SCREEN_TITLE_STRING,
-    }), 
-  },
+  // Messages: {
+  //   screen: Messages,
+  //   navigationOptions: ({navigation}) => ({
+  //     title: MESSAGES_SCREEN_TITLE_STRING,
+  //   }), 
+  // },
   Settings: {
     screen: Settings,
     navigationOptions: ({navigation}) => ({
