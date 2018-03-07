@@ -80,6 +80,7 @@ const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_pr
 const MILES_UNIT_STRING                   = "Miles";
 const KILOMETERS_UNIT_STRING              = "Kilometers";
 const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
+const REDO_SEARCH_BUTTON_STRING           = "Redo Search In This Area";
 
 class Projects extends Component {
 
@@ -417,13 +418,15 @@ class Projects extends Component {
         >
           <this._renderMarkers projects={this.props.projects} />
         </MapView.Animated>
-
         <View style={styles.crouselWrapper}>
-          
-          <View style={{alignItems:"center"}}>
-            <View style={{width: 150, height: 50, marginBottom: 10}}>
+          <View style={styles.redoButtonView}>
+            <View style={styles.redoButtonWrapper}>
               { this.state.redoSearchVisible &&
-              <PrimaryButton  onPress={()=> this._onRedoSearchPress()} style={{paddingVertical: 10}} textStyle={{fontSize: 10}} buttonText={"Redo Search In This Area"} />
+              <PrimaryButton  
+                onPress={()=> this._onRedoSearchPress()} 
+                style={styles.redoButtonButton} 
+                textStyle={styles.redoButtonText} 
+                buttonText={REDO_SEARCH_BUTTON_STRING} />
               } 
             </View>
           </View>
@@ -484,6 +487,10 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-end"
   },
+
+  /////////////////////////
+  // Carousel
+  ////////////////////////
   map: {
     position: "absolute",
     top: 0,
@@ -491,6 +498,11 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+
+  /////////////////////////
+  // Add Button
+  ////////////////////////
+
   addButtonWrapper:{
     position:"absolute",
     top: 10,
@@ -508,13 +520,42 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 10
   },
+
+  /////////////////////////
+  // Carousel
+  ////////////////////////
+
   crouselWrapper:{
     height: 270
   },
+
+  /////////////////////////
+  // Activity Indicator
+  ////////////////////////
+
   activityIndicator:{
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  ////////////////////////
+  // Redo Button
+  ////////////////////////
+
+  redoButtonView:{
+    alignItems:"center"
+  },
+  redoButtonWrapper:{
+    width: 150, 
+    height: 50, 
+    marginBottom: 10
+  },
+  redoButtonButton:{
+    paddingVertical: 10
+  },
+  redoButtonText:{
+    fontSize: 10
   }
 });
 
