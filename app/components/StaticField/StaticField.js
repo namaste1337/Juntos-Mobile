@@ -56,6 +56,9 @@ class  StaticField extends Component {
     return(
       <TouchableOpacity onPress={()=> this._onPress() }>
         <InputValidation valid={this.props.valid} validationMessage={this.props.validationMessage}>
+          {this.props.title != null &&
+            <Text style={styles.title}>{this.props.title}</Text>
+          }
           {renderIf(this.props.value == null || this.props.value === "" ,
             <Text style={styles.placeHolderText}> {this.props.placeholder} </Text>
           )}
@@ -75,7 +78,6 @@ class  StaticField extends Component {
 
 StaticField.propTypes = {
   //Prop validation definitions for custom props
-  placeholder: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired
 
 }
