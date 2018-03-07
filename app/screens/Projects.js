@@ -217,8 +217,8 @@ class Projects extends Component {
   _extractLocation(project){
 
     let coords  = project.location.loc.coordinates;
-    let lng     = coords[1];
-    let lat     = coords[0];
+    let lat     = coords[1];
+    let lng     = coords[0];
 
     return { lng, lat};
 
@@ -238,7 +238,7 @@ class Projects extends Component {
     if(page < this.props.projects.length){
 
       let loc = this._extractLocation(this.props.projects[page]);
-      this._animateTo(loc.lng, loc.lat);
+      this._animateTo(loc.lat, loc.lng);
       this._carouselIndicator.setActivePageIndicator(page);
 
     }
@@ -362,7 +362,7 @@ class Projects extends Component {
       let loc   = this._extractLocation(this.props.projects[0]);
   
       // Animate to the first project marker
-      this._animateTo(loc.lng, loc.lat);
+      this._animateTo(loc.lat, loc.lng);
       this.setState({isFetching: IS_FETCHING_FALSE_BOOL})
     }
 
