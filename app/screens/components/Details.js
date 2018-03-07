@@ -123,7 +123,7 @@ Default: none
 =========================
 onClosePress: type Function
 Description: Callback that is called when the close button is
-presse. Assigning the callback will render a close button in 
+pressed. Assigning the callback will render a close button in 
 top right of the screen.
 Default: none
 
