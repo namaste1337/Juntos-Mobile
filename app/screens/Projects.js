@@ -292,9 +292,7 @@ class Projects extends Component {
   // for when the redo search button 
   // should be shown.
   _onRegionChangeComplete(region){
-    console.log(this.props.projects);
-    console.log(region)
-    console.log("Region Change Complete");
+
     let lat = region.latitude;
     let lng = region.longitude;
     let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
@@ -315,7 +313,6 @@ class Projects extends Component {
   // relative to the current region.
   _onRedoSearchPress(){
 
-    console.log("On redo search pressed");
     this.setState({
       redoSearchVisible: REDO_SEARCH_VISIBLE_FALSE_BOOL,
       isFetching: IS_FETCHING_TRUE_BOOL
@@ -331,7 +328,7 @@ class Projects extends Component {
   // to then allow for the redo search button logic
   // to be executed.
   _onAnimationComplete(event){
-    console.log("Animation is complete");
+
     if(!this.state.initialAnimation){
       this.setState({
         initialAnimation: INITIAL_ANIMATION_TRUE_BOOL
@@ -352,7 +349,7 @@ class Projects extends Component {
   // This calls for an animation to the first project
   // in the newly fetched data.
   componentDidUpdate(){
-    // console.log(this.state);
+
     if(this.props.projects.length > 0 && this.state.isFetching){
 
       let loc   = this._extractLocation(this.props.projects[0]);
