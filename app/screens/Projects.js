@@ -284,6 +284,10 @@ class Projects extends Component {
     });
   }
 
+  // Handles on region changes
+  // The method handles the logic 
+  // for when the redo search button 
+  // should be shown.
   _onRegionChangeComplete(region){
     console.log(this.props.projects);
     console.log(region)
