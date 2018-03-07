@@ -68,6 +68,10 @@ const Tabs = TabNavigator({
       title: PROJECT_SCREEN_TITLE_STRING,
     })
   },
+  // The following tab will be commented out for 
+  // now. The code will be left in place, since
+  // a messaging feature is planned for a future
+  // release.
   // Messages: {
   //   screen: Messages,
   //   navigationOptions: ({navigation}) => ({
