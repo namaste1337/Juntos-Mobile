@@ -36,7 +36,11 @@ import Details from "./components/Details";
 // Actions
 ////////////////////////
 
-import {navigateToCreateProjectDescription, getProjectsByLocation} from "./../actions/project-actions.js";
+import {
+  navigateToCreateProjectDescription, 
+  getProjectsByLocation,
+  clearProjectData
+} from "./../actions/project-actions.js";
 
 /////////////////////////////
 // Import Custom Components
@@ -440,7 +444,8 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     navigateToCreateProjectDescription: () => dispatch(navigateToCreateProjectDescription()),
-    getProjectsByLocation: (lat, lng, radius) => dispatch(getProjectsByLocation(lat, lng, radius))
+    getProjectsByLocation: (lat, lng, radius, limit) => dispatch(getProjectsByLocation(lat, lng, radius, limit)),
+    clearProjectData: () => dispatch(clearProjectData())
   };
 }
 
