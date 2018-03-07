@@ -63,6 +63,7 @@ const LATITUDE_DELTA_NUMBER               = 0.0900;
 const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
 const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
+const PROJECT_FETCH_LIMIT                 = 10;
 // Properties
 const REGION_ANIMATION_DURATION_PROPERTY  = 500;
 const MODAL_ANIMATION_PROPERTY            = "slide";
@@ -109,6 +110,10 @@ class Projects extends Component {
       // NOTE: The radius will be a fixed for now,
       // but the following is to future proof for
       // a radius adjustment feature.
+      isAnimating: false,
+      initialAnimation: false,
+      isFetching: false,
+      redoSearchVisible: false,
       statusBarHidden: false,
       selectedProject: null,
       modalVisible: false,
@@ -120,6 +125,8 @@ class Projects extends Component {
     // user location to each project location.
     this._userLng = null;
     this._userLat = null;
+    this._currentRegionLng = null;
+    this._currentRegionLat = null;
   }
 
   ////////////////////////
@@ -129,6 +136,9 @@ class Projects extends Component {
   // Handles animating the maps
   // to the specified region.
   _animateTo(lat, long){
+
+    this.setState({ isAnimating: false })
+
     let region = new MapView.AnimatedRegion({
       latitude: lat,
       longitude: long,
@@ -163,7 +173,6 @@ class Projects extends Component {
 
   }
 
-
   // Handles calculating the distance of two lat/lng points
   // and returns a string with the appropraite distance
   // and unit.
@@ -180,6 +189,16 @@ class Projects extends Component {
 
   }
 
+  _extractLocation(project){
+
+    let coords  = project.location.loc.coordinates;
+    let lng     = coords[1];
+    let lat     = coords[0];
+
+    return { lng, lat};
+
+  }
+
   ////////////////////////
   // Callback
   ////////////////////////
@@ -192,15 +211,12 @@ class Projects extends Component {
     // Check if the currentPage is within bounds of
     // of the available project count
     if(page < this.props.projects.length){
-      let project = this.props.projects[page];
-      let coords  = project.location.loc.coordinates;
-      let long    = coords[1];
-      let lat     = coords[0];
-      this._animateTo(long, lat);
-    }
 
-    // Set the carousel indicator the corresponding page.
-    this._carouselIndicator.setActivePageIndicator(page);
+      let loc = this._extractLocation(this.props.projects[page]);
+      this._animateTo(loc.lng, loc.lat);
+      // Set the carousel indicator the corresponding page.
+      this._carouselIndicator.setActivePageIndicator(page);
+    }
 
   }
 
@@ -237,6 +253,7 @@ class Projects extends Component {
 
   }
 
+
   _onModalClosePressed(){
     this.setState({
       selectedProject: null,
@@ -244,6 +261,52 @@ class Projects extends Component {
       statusBarHidden: false
     });
   }
+
+  _onRegionChangeComplete(region){
+    console.log(this.props.projects);
+    console.log(region)
+    console.log("Region Change Complete");
+    let lat = region.latitude;
+    let lng = region.longitude;
+
+    let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
+    console.log("Distance Delta: " + distanceDelta);
+    if(distanceDelta > 15 && this.state.initialAnimation && !this.state.isAnimating){
+      this.setState({
+        redoSearchVisible: true
+      })
+
+      this._currentRegionLng = lng;
+      this._currentRegionLat = lat;
+    }
+
+  }
+
+  _onRedoSearchPress(){
+
+    console.log("On redo search pressed");
+    this.setState({
+      redoSearchVisible: false,
+      isFetching: true
+    })
+
+    this.props.clearProjectData();
+    this.props.getProjectsByLocation(this._currentRegionLat, this._currentRegionLng , this.state.radius, PROJECT_FETCH_LIMIT);
+
+  }
+
+  _onAnimationComplete(event){
+    console.log("Animation is complete");
+    if(!this.state.initialAnimation){
+      this.setState({
+        initialAnimation: true
+      })
+    }
+
+    this.setState({isAnimating: false})
+
+  }
+
 
   ////////////////////////
   // Life Cycle
@@ -254,14 +317,15 @@ class Projects extends Component {
   // This calls for an animation to the first project
   // in the newly fetched data.
   componentDidUpdate(){
-
-    let project   = this.props.projects[0];
-    let location  = project.location.loc.coordinates;
-    let lat       = location[0];
-    let lng       = location[1];
-
-    // Animate to the first project marker
-    this._animateTo(lng, lat);
+    // console.log(this.state);
+    if(this.props.projects.length > 0 && this.state.isFetching){
+      
+      let loc   = this._extractLocation(this.props.projects[0]);
+  
+      // Animate to the first project marker
+      this._animateTo(loc.lng, loc.lat);
+      this.setState({isFetching: false})
+    }
 
   }
   
@@ -278,8 +342,13 @@ class Projects extends Component {
     navigator.geolocation.getCurrentPosition(data => {
       this._userLat = data.coords.latitude;
       this._userLng = data.coords.longitude;
+      // Set the current region, will be used
+      // to calculte deltas when the user pans
+      // the map.
+
       // Fetch project data by location and radius 
-      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius);
+      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT);
+      this.setState({isFetching: true});
     }, error => {
       console.error(error);
     }, {
@@ -295,7 +364,6 @@ class Projects extends Component {
   // Handles rendering the carousel posters if the project data is available 
   // else an activity indicator is shown.
   _renderCarouselPosters = (props) => {
-    if (props.projects.length > 0){
       return (
           props.projects.map(project => 
             <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
@@ -313,10 +381,6 @@ class Projects extends Component {
             </TouchableHighlight>
           )
         );
-    }
-    else{
-      return (<ActivityIndicatorOverlay isFetching={true}/>);
-    }
   }
 
   // Handles rendering the map markers if the project data is available 
@@ -346,20 +410,35 @@ class Projects extends Component {
         ref={ref => this._map = ref} 
         showsUserLocation
         style={styles.map}
+        onRegionChangeComplete={region => this._onRegionChangeComplete(region)}
+        onAnimationComplete={(event)=> this._onAnimationComplete(event.nativeEvent)}
         >
           <this._renderMarkers projects={this.props.projects} />
         </MapView.Animated>
 
         <View style={styles.crouselWrapper}>
+          
+          <View style={{alignItems:"center"}}>
+            <View style={{width: 150, height: 50, marginBottom: 10}}>
+              { this.state.redoSearchVisible &&
+              <PrimaryButton  onPress={()=> this._onRedoSearchPress()} style={{paddingVertical: 10}} textStyle={{fontSize: 10}} buttonText={"Redo Search In This Area"} />
+              } 
+            </View>
+          </View>
           {this.props.projects.length > 0 &&
           <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
           }
+          {this.props.projects.length > 0 &&
           <Carousel 
             ref={ref => this._projectCarousel = ref}
             pageIndicator={PAGE_INDICATOR_BOOL}
             onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
             <this._renderCarouselPosters projects={this.props.projects} />
           </Carousel>
+          } 
+          {this.state.isFetching &&
+            <ActivityIndicator style={styles.activityIndicator} animating={true} size={"large"}/>
+          }
         </View>
         <View style={styles.addButtonWrapper}>
           <Icon source={ADD_PROJECT_BUTTON_IMAGE} style={styles.addProjectIcon} onPress={()=> this.props.navigateToCreateProjectDescription() }/>
@@ -428,7 +507,12 @@ const styles = StyleSheet.create({
     shadowRadius: 10
   },
   crouselWrapper:{
-    height: 210
+    height: 270
+  },
+  activityIndicator:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 
