@@ -300,13 +300,17 @@ class Projects extends Component {
     let lng = region.longitude;
     let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
 
-    if(distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD && this.state.initialAnimation && !this.state.isAnimating){
+    if(distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
+      && this.state.initialAnimation 
+      && !this.state.isAnimating){
+
       this.setState({
         redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
       })
 
       this._currentRegionLng = lng;
       this._currentRegionLat = lat;
+
     }
 
   }
@@ -396,23 +400,23 @@ class Projects extends Component {
   // Handles rendering the carousel posters if the project data is available
   _renderCarouselPosters = (props) => {
 
-      return (
-          props.projects.map(project => 
-            <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
-             <Poster 
-              source={project.images[0].uri}
-              title={project.name}
-              description={project.description}
-              distance={this._distanceString(
-                this._userLat, 
-                this._userLng,
-                project.location.loc.coordinates[1],
-                project.location.loc.coordinates[0],
-                )}
-              key={project.project_id}/>
-            </TouchableHighlight>
-          )
-        );
+    return (
+      props.projects.map(project => 
+        <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
+         <Poster 
+          source={project.images[0].uri}
+          title={project.name}
+          description={project.description}
+          distance={this._distanceString(
+            this._userLat, 
+            this._userLng,
+            project.location.loc.coordinates[1],
+            project.location.loc.coordinates[0],
+            )}
+          key={project.project_id}/>
+        </TouchableHighlight>
+      )
+    );
 
   }
 
