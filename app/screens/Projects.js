@@ -65,8 +65,7 @@ const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
 const PROJECT_FETCH_LIMIT_NUMBER          = 10;
 const REGION_ANIMATION_DURATION_NUMBER    = 500;
-// REDO_SEARCH_DISTANCE_THRESHOLD controls when the redo button should be shown.
-// It repsents the number of miles a user must pan the map before
+// The following value represents the number miles a user must pan the map before
 // showing the redo-Search button. Adjust accordingly 
 const REDO_SEARCH_DISTANCE_THRESHOLD      = 15 
 // Bools
@@ -123,7 +122,7 @@ class Projects extends Component {
 
   constructor(props){
     super(props)
-    // Set initial state
+
     this.state = {
       // NOTE: The radius will be a fixed for now,
       // but the following is to future proof for
@@ -239,8 +238,8 @@ class Projects extends Component {
 
       let loc = this._extractLocation(this.props.projects[page]);
       this._animateTo(loc.lng, loc.lat);
-      // Set the carousel indicator the corresponding page.
       this._carouselIndicator.setActivePageIndicator(page);
+
     }
 
   }
@@ -248,12 +247,12 @@ class Projects extends Component {
   // Handles on map marker press, when
   // a map marker is pressed the carousel is
   // transitioned to the corresponding page
-  // and zooms in to the marker.
+  // and the map zooms in on the marker.
   _onMarkerPressed(e){
     
     // Determine the page for the marker.
     // The marker page is determined by
-    // the assined indentifier props
+    // the assined indentifier prop
     // for each marker.
     let event = e.nativeEvent;
     let page  = parseInt(event.id);
@@ -262,10 +261,10 @@ class Projects extends Component {
 
   }
 
-  // Handles on poster pressed, populates 
+  // Handles on poster pressed 
   _onPosterPressed(projectData){
 
-    // Sets the proiject data
+    // Sets the project data
     // to be displayed in the project details
     // modal, make the project detail 
     // modal visible, and hide the status ber.
@@ -312,8 +311,8 @@ class Projects extends Component {
   }
 
   // Handles on the redo button press.
-  // The methos executes the re-fetch of projects
-  // from the current region.
+  // The method executes the re-fetch of projects
+  // relative to the current region.
   _onRedoSearchPress(){
 
     console.log("On redo search pressed");
@@ -348,7 +347,7 @@ class Projects extends Component {
   // Life Cycle
   ////////////////////////
 
-  // When a service call is made to fetch project
+  // When a service call is made to fetch projects
   // the redux state is updated and re-rerenders.
   // This calls for an animation to the first project
   // in the newly fetched data.
@@ -365,7 +364,7 @@ class Projects extends Component {
 
   }
   
-  // Handles fetching the user GPD location and 
+  // Handles fetching the user GPS location and 
   // and fetching the project data by locaton.
   // The users lat and lon is cached, to later
   // calcualte the project/user distance delta.
@@ -378,10 +377,6 @@ class Projects extends Component {
     navigator.geolocation.getCurrentPosition(data => {
       this._userLat = data.coords.latitude;
       this._userLng = data.coords.longitude;
-      // Set the current region, will be used
-      // to calculte deltas when the user pans
-      // the map.
-
       // Fetch project data by location and radius 
       this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
       this.setState({isFetching: IS_FETCHING_TRUE_BOOL});
@@ -397,8 +392,7 @@ class Projects extends Component {
   // Screen UI
   ////////////////////////
 
-  // Handles rendering the carousel posters if the project data is available 
-  // else an activity indicator is shown.
+  // Handles rendering the carousel posters if the project data is available
   _renderCarouselPosters = (props) => {
       return (
           props.projects.map(project => 
