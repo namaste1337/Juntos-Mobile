@@ -78,8 +78,6 @@ class  StaticField extends Component {
 
 StaticField.propTypes = {
   //Prop validation definitions for custom props
-  value: PropTypes.string.isRequired
-
 }
 
 export default StaticField;

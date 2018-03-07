@@ -11,6 +11,7 @@ import {
 import {
 FONTS,
 COLORS,
+FONT_WEIGHT
 } from "./../../common/styles";
 
 
@@ -20,9 +21,18 @@ COLORS,
 
 export default StyleSheet.create({
 
+  title:{
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT,
+    color: COLORS.LIGHT_GREY,
+    paddingHorizontal: 5,
+    fontSize: 13,
+  },
+
   text:{
     fontFamily: FONTS.PRIMARY,
-    color: COLORS.BLACK
+    color: COLORS.BLACK,
+    paddingVertical: 10,
   },
 
   placeHolderText:{
@@ -30,7 +40,7 @@ export default StyleSheet.create({
     color: COLORS.MID_GREY,
     fontSize: 14,
     paddingVertical: 10,
-    paddingHorizontal: 8
+    paddingHorizontal: 5
   },
 
 });
