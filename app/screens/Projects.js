@@ -63,10 +63,8 @@ const LATITUDE_DELTA_NUMBER               = 0.0900;
 const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
 const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
-const PROJECT_FETCH_LIMIT                 = 10;
-// Properties
-const REGION_ANIMATION_DURATION_PROPERTY  = 500;
-const MODAL_ANIMATION_PROPERTY            = "slide";
+const PROJECT_FETCH_LIMIT_NUMBER          = 10;
+const REGION_ANIMATION_DURATION_NUMBER    = 500;
 // Bools
 const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
@@ -81,6 +79,7 @@ const MILES_UNIT_STRING                   = "Miles";
 const KILOMETERS_UNIT_STRING              = "Kilometers";
 const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
 const REDO_SEARCH_BUTTON_STRING           = "Redo Search In This Area";
+const MODAL_ANIMATION_STRING              = "slide";
 
 class Projects extends Component {
 
@@ -149,7 +148,7 @@ class Projects extends Component {
       longitudeDelta: LONGITUDE_DELTA_NUMBER
     });
 
-    this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_PROPERTY);
+    this._map._component.animateToRegion(region, REGION_ANIMATION_DURATION_NUMBER);
    
   }
 
@@ -294,7 +293,7 @@ class Projects extends Component {
     })
 
     this.props.clearProjectData();
-    this.props.getProjectsByLocation(this._currentRegionLat, this._currentRegionLng , this.state.radius, PROJECT_FETCH_LIMIT);
+    this.props.getProjectsByLocation(this._currentRegionLat, this._currentRegionLng , this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
 
   }
 
@@ -350,7 +349,7 @@ class Projects extends Component {
       // the map.
 
       // Fetch project data by location and radius 
-      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT);
+      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
       this.setState({isFetching: true});
     }, error => {
       console.error(error);
@@ -450,7 +449,7 @@ class Projects extends Component {
         </View> 
         <StatusBar hidden={this.state.statusBarHidden} />
         <Modal
-          animationType={MODAL_ANIMATION_PROPERTY}
+          animationType={MODAL_ANIMATION_STRING}
           transparent={MODAL_TRANSPARENT_BOOL}
           visible={this.state.modalVisible}>
           {this.state.selectedProject != null &&
