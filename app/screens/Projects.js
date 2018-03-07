@@ -212,6 +212,8 @@ class Projects extends Component {
 
   }
 
+  // Handles returining the lat and lng from
+  // a project object.
   _extractLocation(project){
 
     let coords  = project.location.loc.coordinates;
