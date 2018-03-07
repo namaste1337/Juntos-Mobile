@@ -304,6 +304,10 @@ class Projects extends Component {
 
   }
 
+
+  // Handles on the redo button press.
+  // The methos executes the re-fetch of projects
+  // from the current region.
   _onRedoSearchPress(){
 
     console.log("On redo search pressed");
@@ -317,6 +321,10 @@ class Projects extends Component {
 
   }
 
+  // Handles on animation complete logic
+  // We listen for the initial animation to be complete
+  // to then allow for the redo search button logic
+  // to be executed.
   _onAnimationComplete(event){
     console.log("Animation is complete");
     if(!this.state.initialAnimation){
