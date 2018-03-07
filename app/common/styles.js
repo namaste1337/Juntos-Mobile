@@ -15,7 +15,7 @@ import {
 const { height } = Dimensions.get("window"); // Move to common/device.js
 // Primary Styles - Fonts
 export const FONTS = {
-  PRIMARY: "Arial"
+  PRIMARY: "Roboto"
 }
 // Primary Styles - Colors
 export const COLORS = {
