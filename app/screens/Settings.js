@@ -11,8 +11,9 @@ ScrollView,
 Image,
 StyleSheet,
 TouchableOpacity,
-View
+View,
 } from 'react-native';
+var DeviceInfo = require('react-native-device-info');
 
 //////////////////////////////
 // Imports Common Files
@@ -32,6 +33,7 @@ import {accountLogout} from "./../actions/account-actions.js";
 ///////////////////////////////
 
 import PrimaryButton from './../components/PrimaryButton';
+import StaticField from './../components/StaticField';
 
 ////////////////////////
 // Constants
@@ -60,10 +62,6 @@ class Settings extends Component {
     )
   }
 
-  ////////////////////////
-  // Callbacks
-  ////////////////////////
-
 
   ////////////////////////
   // Screen UI
@@ -72,10 +70,19 @@ class Settings extends Component {
   render() {
     return (
      <ScrollView style={CommonStyles.container}>
-     <View style={CommonStyles.contentWrapper}>
-        <PrimaryButton 
-        buttonText="Log out"
-        onPress={this.props.logout} />
+      <View style={CommonStyles.contentWrapper}>
+        { this.props.currentUser != null &&
+        <View>
+          <StaticField value={this.props.currentUser.email} />
+          <StaticField value={this.props.currentUser.username} />
+          <StaticField value={DeviceInfo.getVersion()} />
+        </View>
+        }
+        <View style={CommonStyles.contentWrapper}>
+           <PrimaryButton 
+           buttonText="Log out"
+           onPress={this.props.logout} />
+        </View>
       </View>
      </ScrollView>
     );
@@ -99,8 +106,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.session.isFetching,
-    isErrored: state.session.isErrored
+    currentUser: state.session.user
   };
 }
 
