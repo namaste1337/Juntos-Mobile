@@ -149,6 +149,7 @@ class Projects extends Component {
     // if the user presses the redo-search button.
     this._currentRegionLng = null;
     this._currentRegionLat = null;
+
   }
 
   ////////////////////////
@@ -280,11 +281,13 @@ class Projects extends Component {
   // The method handles the modal 
   // close state.
   _onModalClosePressed(){
+
     this.setState({
       selectedProject: null,
       modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       statusBarHidden: STATUS_BAR_HIDDEN_FALSE_BOOL
     });
+
   }
 
   // Handles on region changes
@@ -366,6 +369,7 @@ class Projects extends Component {
   // The users lat and lon is cached, to later
   // calcualte the project/user distance delta.
   componentDidMount(){
+
     // If the users device is iOS, prompt for 
     // location permissions
     if(Platform.OS == deviceTypes.ios)
@@ -391,6 +395,7 @@ class Projects extends Component {
 
   // Handles rendering the carousel posters if the project data is available
   _renderCarouselPosters = (props) => {
+
       return (
           props.projects.map(project => 
             <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
@@ -408,11 +413,13 @@ class Projects extends Component {
             </TouchableHighlight>
           )
         );
+
   }
 
   // Handles rendering the map markers if the project data is available 
   // else the nothing is returned
   _renderMarkers = (props) =>{
+
     if(props.projects.length > 0){
       let projects = props.projects;
       return(
@@ -428,6 +435,7 @@ class Projects extends Component {
     }else{
       return null;
     }
+    
   }
 
   render() {
