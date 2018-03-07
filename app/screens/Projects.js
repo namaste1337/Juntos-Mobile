@@ -135,6 +135,8 @@ class Projects extends Component {
       statusBarHidden: STATUS_BAR_HIDDEN_FALSE_BOOL,
       modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       selectedProject: null,
+      // The number of radial miles to search for projects
+      // from the user location, or from the current region.
       radius: 10000000,
     }
     // The following properties will be assigned in 
