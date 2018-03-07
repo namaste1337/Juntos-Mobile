@@ -263,11 +263,10 @@ class Projects extends Component {
   // Handles on poster pressed, populates 
   _onPosterPressed(projectData){
 
-    // Set the data for the project data
+    // Sets the proiject data
     // to be displayed in the project details
     // modal, make the project detail 
-    // modal visible, and hide the status
-    // bar when the modal is visible.
+    // modal visible, and hide the status ber.
     this.setState({
       selectedProject: projectData,
       modalVisible: MODAL_VISIBLE_TRUE_BOOL,
@@ -303,7 +302,6 @@ class Projects extends Component {
     }
 
   }
-
 
   // Handles on the redo button press.
   // The methos executes the re-fetch of projects
