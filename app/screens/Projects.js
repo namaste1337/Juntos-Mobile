@@ -65,6 +65,10 @@ const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
 const PROJECT_FETCH_LIMIT_NUMBER          = 10;
 const REGION_ANIMATION_DURATION_NUMBER    = 500;
+// REDO_SEARCH_DISTANCE_THRESHOLD controls when the redo button should be shown.
+// It repsents the number of miles a user must pan the map before
+// showing the redo-Search button. Adjust accordingly 
+const REDO_SEARCH_DISTANCE_THRESHOLD      = 15 
 // Bools
 const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
@@ -284,7 +288,7 @@ class Projects extends Component {
     let lng = region.longitude;
     let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
 
-    if(distanceDelta > 15 && this.state.initialAnimation && !this.state.isAnimating){
+    if(distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD && this.state.initialAnimation && !this.state.isAnimating){
       this.setState({
         redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
       })
