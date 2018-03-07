@@ -22,16 +22,17 @@ import Settings from "./../config/settings";
 function mutateProjectData(projectData){
 
   // Add the image server path to all images in each project
-  projectData.map(project => {
-    project.images.map((image, index) => {
-      project.images[index] = {uri: Settings.IMAGE_SERVER + Settings.IMAGE_PATH + image}; 
-    })
-      //Add the image server path to the user profile image
-    let profileImageName = project.user.local.profile.images[0];
-    project.user.local.profile.images[0] = Settings.IMAGE_SERVER + Settings.IMAGE_PATH + profileImageName; 
-
-  });
-
+  if(projectData.length > 0){
+    projectData.map(project => {
+      project.images.map((image, index) => {
+        project.images[index] = {uri: Settings.IMAGE_SERVER + Settings.IMAGE_PATH + image}; 
+      })
+        //Add the image server path to the user profile image
+      let profileImageName = project.user.local.profile.images[0];
+      project.user.local.profile.images[0] = Settings.IMAGE_SERVER + Settings.IMAGE_PATH + profileImageName; 
+  
+    });
+  }
 
   return projectData;
 
