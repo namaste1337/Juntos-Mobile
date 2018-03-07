@@ -33,9 +33,9 @@ export default {
 	},
 
 	// Handles getting project by location
-	getProjectsByLocation: function(lat, lng, radius){
+	getProjectsByLocation: function(lat, lng, radius, limit){
 
-		let query = "?geo=true&lat="+lat+"&lng="+lng+"&radius="+radius;
+		let query = "?geo=true&lat="+lat+"&lng="+lng+"&radius="+radius+"&limit="+limit;
 
 		return Services.fetchApi(PROJECTS_END_POINT+query, {}, Common.GET_METHOD);
 

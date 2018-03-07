@@ -186,10 +186,10 @@ export function getProjects(){
 
 }
 
-export function getProjectsByLocation(lat, lng, radius){
+export function getProjectsByLocation(lat, lng, radius, limit){
 
 	return dispatch => {
-		ProjectServices.getProjectsByLocation(lat, lng, radius).then(projects => {
+		ProjectServices.getProjectsByLocation(lat, lng, radius, limit).then(projects => {
 			dispatch(populateProjectsData(projects));
 		}).catch(error => {	
 			console.error(error);
