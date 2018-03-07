@@ -70,6 +70,18 @@ const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
 const MODAL_TRANSPARENT_BOOL              = false;
 const ACTIVITY_INDICACTOR_ANIMATING_BOOL  = true;
+const IS_ANIMATING_FALSE_BOOL             = false;
+const IS_ANIMATING_TRUE_BOOL              = true;
+const INITIAL_ANIMATION_FALSE_BOOL        = false;
+const INITIAL_ANIMATION_TRUE_BOOL         = true;
+const IS_FETCHING_FALSE_BOOL              = false;
+const IS_FETCHING_TRUE_BOOL               = true;
+const REDO_SEARCH_VISIBLE_FALSE_BOOL      = false;
+const REDO_SEARCH_VISIBLE_TRUE_BOOL       = true;
+const STATUS_BAR_HIDDEN_FALSE_BOOL        = false;
+const STATUS_BAR_HIDDEN_TRUE_BOOL         = true;
+const MODAL_VISIBLE_FALSE_BOOL            = false;
+const MODAL_VISIBLE_TRUE_BOOL             = true;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
@@ -112,13 +124,13 @@ class Projects extends Component {
       // NOTE: The radius will be a fixed for now,
       // but the following is to future proof for
       // a radius adjustment feature.
-      isAnimating: false,
-      initialAnimation: false,
-      isFetching: false,
-      redoSearchVisible: false,
-      statusBarHidden: false,
+      isAnimating: IS_ANIMATING_FALSE_BOOL,
+      initialAnimation: INITIAL_ANIMATION_FALSE_BOOL,
+      isFetching: IS_FETCHING_FALSE_BOOL,
+      redoSearchVisible: REDO_SEARCH_VISIBLE_FALSE_BOOL,
+      statusBarHidden: STATUS_BAR_HIDDEN_FALSE_BOOL,
+      modalVisible: MODAL_VISIBLE_FALSE_BOOL,
       selectedProject: null,
-      modalVisible: false,
       radius: 10000000,
     }
     // The following properties will be assigned in 
@@ -139,7 +151,7 @@ class Projects extends Component {
   // to the specified region.
   _animateTo(lat, long){
 
-    this.setState({ isAnimating: false })
+    this.setState({ isAnimating: IS_ANIMATING_TRUE_BOOL })
 
     let region = new MapView.AnimatedRegion({
       latitude: lat,
@@ -249,8 +261,8 @@ class Projects extends Component {
     // bar when the modal is visible.
     this.setState({
       selectedProject: projectData,
-      modalVisible: true,
-      statusBarHidden: true
+      modalVisible: MODAL_VISIBLE_TRUE_BOOL,
+      statusBarHidden: STATUS_BAR_HIDDEN_TRUE_BOOL
     });
 
   }
@@ -259,8 +271,8 @@ class Projects extends Component {
   _onModalClosePressed(){
     this.setState({
       selectedProject: null,
-      modalVisible: false,
-      statusBarHidden: false
+      modalVisible: MODAL_VISIBLE_FALSE_BOOL,
+      statusBarHidden: STATUS_BAR_HIDDEN_FALSE_BOOL
     });
   }
 
@@ -270,12 +282,11 @@ class Projects extends Component {
     console.log("Region Change Complete");
     let lat = region.latitude;
     let lng = region.longitude;
-
     let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
-    console.log("Distance Delta: " + distanceDelta);
+
     if(distanceDelta > 15 && this.state.initialAnimation && !this.state.isAnimating){
       this.setState({
-        redoSearchVisible: true
+        redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
       })
 
       this._currentRegionLng = lng;
@@ -288,8 +299,8 @@ class Projects extends Component {
 
     console.log("On redo search pressed");
     this.setState({
-      redoSearchVisible: false,
-      isFetching: true
+      redoSearchVisible: REDO_SEARCH_VISIBLE_FALSE_BOOL,
+      isFetching: IS_FETCHING_TRUE_BOOL
     })
 
     this.props.clearProjectData();
@@ -301,11 +312,11 @@ class Projects extends Component {
     console.log("Animation is complete");
     if(!this.state.initialAnimation){
       this.setState({
-        initialAnimation: true
+        initialAnimation: INITIAL_ANIMATION_TRUE_BOOL
       })
     }
 
-    this.setState({isAnimating: false})
+    this.setState({isAnimating: IS_ANIMATING_FALSE_BOOL})
 
   }
 
@@ -321,12 +332,12 @@ class Projects extends Component {
   componentDidUpdate(){
     // console.log(this.state);
     if(this.props.projects.length > 0 && this.state.isFetching){
-      
+
       let loc   = this._extractLocation(this.props.projects[0]);
   
       // Animate to the first project marker
       this._animateTo(loc.lng, loc.lat);
-      this.setState({isFetching: false})
+      this.setState({isFetching: IS_FETCHING_FALSE_BOOL})
     }
 
   }
@@ -350,7 +361,7 @@ class Projects extends Component {
 
       // Fetch project data by location and radius 
       this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
-      this.setState({isFetching: true});
+      this.setState({isFetching: IS_FETCHING_TRUE_BOOL});
     }, error => {
       console.error(error);
     }, {
