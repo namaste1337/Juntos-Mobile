@@ -146,6 +146,17 @@ export function resetProjectNavigation(){
 
 }
 
+export function clearProjectData(){
+
+	return {
+		type: ProjectActions.POPULATE_PROJECTS,
+		payload: {
+			data: []
+		}
+	};
+
+}
+
 // Handles populating the store project data evelope
 function populateProjectsData(projects){
 
