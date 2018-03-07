@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Allow access to add images</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allow access to add images</string>
 	<key>UIAppFonts</key>
