@@ -276,6 +276,8 @@ class Projects extends Component {
   }
 
 
+  // The method handles the modal 
+  // close state.
   _onModalClosePressed(){
     this.setState({
       selectedProject: null,
