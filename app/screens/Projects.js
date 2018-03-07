@@ -67,7 +67,7 @@ const PROJECT_FETCH_LIMIT_NUMBER          = 10;
 const REGION_ANIMATION_DURATION_NUMBER    = 500;
 // The following value represents the number miles a user must pan the map before
 // showing the redo-Search button. Adjust accordingly 
-const REDO_SEARCH_DISTANCE_THRESHOLD      = 15 
+const REDO_SEARCH_DISTANCE_THRESHOLD      = 20; 
 // Bools
 const PAGE_INDICATOR_BOOL                 = true;
 const GPS_HIGH_ACCURACY_BOOL              = true;
@@ -296,23 +296,34 @@ class Projects extends Component {
   // should be shown.
   _onRegionChangeComplete(region){
 
-    let lat = region.latitude;
-    let lng = region.longitude;
-    let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
+    if(this.props.projects.length > 0){
 
-    if(distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
-      && this.state.initialAnimation 
-      && !this.state.isAnimating){
+      let lat = region.latitude;
+      let lng = region.longitude;
 
-      this.setState({
-        redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
-      })
+      let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
+      let loc = this._extractLocation(this.props.projects[0]);
+      // The following line prevents the redo button from being shown when 
+      // re-fetching new project data.
+      let isFirstProject = ( 
+        parseFloat(loc.lat).toFixed(5) === parseFloat(lat).toFixed(5) && 
+        parseFloat(loc.lng).toFixed(5) === parseFloat(lng).toFixed(5)) 
+      ? true : false;
 
-      this._currentRegionLng = lng;
-      this._currentRegionLat = lat;
-
+      if(!isFirstProject &&
+        distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
+        && this.state.initialAnimation 
+        && !this.state.isAnimating){
+  
+        this.setState({
+          redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
+        })
+  
+        this._currentRegionLng = lng;
+        this._currentRegionLat = lat;
+  
+      }
     }
-
   }
 
   // Handles on the redo button press.
