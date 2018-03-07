@@ -12,7 +12,8 @@ import {
   Platform,
   Modal,
   TouchableHighlight,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 } from 'react-native';
 
 /////////////////////////////
