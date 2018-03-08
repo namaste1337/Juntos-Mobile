@@ -116,10 +116,11 @@ class Login extends Component {
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE} 
               onChangeText={(passwordField) => this.setState({passwordField})}
               secureTextEntry/>
-            <TouchableText 
+            {/*<TouchableText 
               text={FORGOT_PASSWORD_TEXT_STRING} 
               onPress={this.onForgotPasswordPressed} 
               style={styles.forgotPasswordText} /> 
+            */}
             <PrimaryButton 
               buttonText={SIGN_IN_TEXT_STRING} 
               onPress={this.onSignInPressed} />
