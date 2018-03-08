@@ -25,8 +25,13 @@ const CANCELABEL_BOOL = true;
 ////////////////////////
 
 // Basic alerts will display a header, message, and ok button
-export function basicAlert(header, message){
+export function basicAlert(header, message,callback){
 
-    Alert.alert( header, message, [ {text: OK_STRING }], { cancelable: CANCELABEL_BOOL } )
+    Alert.alert( header, message, [ 
+    	{text: OK_STRING,
+    	onPress: () =>{ if(callback != null){ callback() }}
+    	}], 
+    		{ cancelable: CANCELABEL_BOOL 
+    	} );
 
 }
