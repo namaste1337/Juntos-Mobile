@@ -49,6 +49,7 @@ const USERNAME_FIELD_KEYBOARD_TYPE_PROPERTY = "email-address";
 const USERNAME_FIELD_AUTO_CORRECT_PROPERTY  = false;
 const PASSWORD_FIELD_KEYBOARD_TYPE_PROPERTY = "default";
 const INPUT_FIELD_RETURN_KEY_TYPE           = "done";
+const AUTO_CAPITIALIZE_NONE_PROPERTY        = "none";
 //Strings
 const USERNAME_FIELD_PLACE_HOLDER_STRING    = "E-mail";
 const PASSWORD_FIELD_PLACE_HOLDER_STRING    = "Password";
@@ -83,7 +84,7 @@ class Login extends Component {
     // Callbacks
     ////////////////////////
 
-    this.onSignInPressed         = () => this.props.accountLogin(this.state.usernameField, this.state.passwordField);
+    this.onSignInPressed         = () => this.props.accountLogin(this.state.usernameField.toLowerCase(), this.state.passwordField);
     this.onSignUpPressed         = () => this.props.navigation.navigate(NAVIGATE_SIGNUP);
     this.onForgotPasswordPressed = () => this.props.navigation.navigate(NAVIGATE_FORGOT_PASSWORD);
     
@@ -109,11 +110,13 @@ class Login extends Component {
               keyboardType={USERNAME_FIELD_KEYBOARD_TYPE_PROPERTY}
               autoCorrect={USERNAME_FIELD_AUTO_CORRECT_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE}
+              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}
               onChangeText={(usernameField) => this.setState({usernameField})} />
             <PrimaryTextInput 
               placeholder={PASSWORD_FIELD_PLACE_HOLDER_STRING} 
               keyboardType={PASSWORD_FIELD_KEYBOARD_TYPE_PROPERTY}
               returnKeyType={INPUT_FIELD_RETURN_KEY_TYPE} 
+              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}
               onChangeText={(passwordField) => this.setState({passwordField})}
               secureTextEntry/>
             {/*<TouchableText 

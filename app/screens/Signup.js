@@ -64,6 +64,7 @@ const PROFILE_IMAGE_BEHAVIOR                    = "contain";
 const IMAGE_PICKER_WIDTH                        = 400;
 const IMAGE_PICKER_HEIGHT                       = 400;
 const IMAGE_PICKER_CROPPING                     = true;
+const AUTO_CAPITIALIZE_NONE_PROPERTY            = "none";
 //States
 const USERNAME_VALIDATION_TRUE_STATE            = true;
 const USERNAME_VALIDATION_FALSE_STATE           = false;
@@ -138,7 +139,7 @@ class Signup extends Component {
   //Handles sign up button press
   _onSignUpbuttonPress(){
     if(this._validateFields())
-      this.props.accountSignup(this.state.usernameField, this.state.emailField, this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
+      this.props.accountSignup(this.state.usernameField, this.state.emailField.toLowerCase(), this.state.passwordField, this.state.profileImageData.uri, this.state.profileImageData.mime);
   }
 
 
@@ -272,20 +273,23 @@ class Signup extends Component {
             returnKeyType={RETURN_KEY_TYPE} 
             keyboardType={DEFAULT_KEYBOARD_TYPE}
             valid={this.state.usernameIsValid}
-            validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} />
+            validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} 
+            autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
           <PrimaryTextInput
             onChangeText={emailField => this.setState({emailField})} 
             placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
             returnKeyType={RETURN_KEY_TYPE} 
             keyboardType={EMAIL_KEYBOARD_TYPE}
             valid={this.state.emailIsValid}
-            validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} />
+            validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} 
+            autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
           <PrimaryTextInput 
             onChangeText={passwordField => this.setState({passwordField})} 
             placeholder={PASSWORD_FIELD_PLACEHOLDER_STRING} 
             secureTextEntry
             returnKeyType={RETURN_KEY_TYPE}
-            keyboardType={DEFAULT_KEYBOARD_TYPE}/>
+            keyboardType={DEFAULT_KEYBOARD_TYPE}
+            autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
           <PrimaryTextInput 
             onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
             placeholder={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING} 
@@ -293,7 +297,8 @@ class Signup extends Component {
             returnKeyType={RETURN_KEY_TYPE}
             keyboardType={DEFAULT_KEYBOARD_TYPE}
             valid={this.state.confirmPasswordIsValid}
-            validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} />
+            validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} 
+            autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
           <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={SIGNUP_BUTTON_STRING}/>
         </KeyboardAvoidingView>
         <ActivityIndicatorOverlay isFetching={this.props.isFetching}/>
