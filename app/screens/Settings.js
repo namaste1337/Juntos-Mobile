@@ -73,9 +73,9 @@ class Settings extends Component {
       <View style={CommonStyles.contentWrapper}>
         { this.props.currentUser != null &&
         <View>
-          <StaticField value={this.props.currentUser.email} />
-          <StaticField value={this.props.currentUser.username} />
-          <StaticField value={DeviceInfo.getVersion()} />
+          <StaticField title={"E-mail"} value={this.props.currentUser.email} />
+          <StaticField title={"Username"} value={this.props.currentUser.username} />
+          <StaticField title={"Version"} value={DeviceInfo.getVersion()} />
         </View>
         }
         <View style={CommonStyles.contentWrapper}>
