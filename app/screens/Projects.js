@@ -397,10 +397,11 @@ class Projects extends Component {
       navigator.geolocation.requestAuthorization();
     // Get the users current location
     navigator.geolocation.getCurrentPosition(data => {
+
       this._userLat = data.coords.latitude;
       this._userLng = data.coords.longitude;
       this._currentRegionLat = data.coords.latitude;
-      this._currentRegionLng = data.coords.longitu;
+      this._currentRegionLng = data.coords.longitude;
   
       // Fetch project data by location and radius 
       this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
