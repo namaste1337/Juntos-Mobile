@@ -11,7 +11,8 @@ Dimensions,
 Image,
 StyleSheet,
 View,
-ActionSheetIOS
+ActionSheetIOS,
+Linking
 } from 'react-native';
 
 //////////////////////////////
@@ -22,6 +23,7 @@ ActionSheetIOS
 import CommonStyles, {COLORS, FONTS} from "../../common/styles.js"
 // Conditional rendering
 import {renderIf} from "./../../common/components";
+import {basicAlert} from  "./../../common/alerts";
 
 //////////////////////////////
 // Imports Custom Components
@@ -48,6 +50,11 @@ const CANCEL_OPTIONS_STRING             = "Cancel";
 const CAMERA_OPTIONS_STRING             = "Camera";
 const GALLERY_OPTIONS_STRING            = "Gallery";
 const REMOVE_OPTIONS_STRING             = "Remove";
+const PHOTO_WARNING_HEADER_STRING       = "Juntos Requires Photos Access";
+const PHOTO_WARNING_BODY_STRING         = "Go to the app settings and enable Photos.";
+const CAMERA_WARNING_HEADER_STRING      = "Juntos Requires Camera Access";
+const CAMERA_WARNING_BODY_STRING        = "Go to the app settings and enable Camera.";
+const APP_SETTINGS_URL_STRING           = "app-settings:";
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER          = 45;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
@@ -62,6 +69,9 @@ const {width, height}                   = Dimensions.get('window');
 // the image grid offset is calculated from the the padding of the parent
 // view component and the margin of each imageCard.
 const IMAGE_GRID_PLACEMENT              = (width-IMAGE_GRID_OFFSET_NUMBER)/3;
+// Regex Patterns
+const IMAGE_ACCCESS_PATTERN             = /Cannot access images/;
+const CAMERA_PERMISSIONS_PATTERN        = /camera permission/;
 
 class CreateProjectImages extends Component {
 
@@ -199,7 +209,10 @@ class CreateProjectImages extends Component {
 
     ImagePicker.openPicker(MEDIA_OPTIONS_PROPERTY).then(image => {
       this._processImage(image);
-    })
+    }).catch(error=>{
+      if(error.message.match(IMAGE_ACCCESS_PATTERN))
+        this._displayPhotoSettingsPrompt();
+    });
 
   }
 
@@ -208,6 +221,10 @@ class CreateProjectImages extends Component {
 
     ImagePicker.openCamera(MEDIA_OPTIONS_PROPERTY).then(image => {
       this._processImage(image);
+    }).catch(error=>{
+      console.log(error.message);
+      if(error.message.match(CAMERA_PERMISSIONS_PATTERN))
+        this._displayCameraSettingsPrompt();
     });
 
   }
@@ -220,8 +237,38 @@ class CreateProjectImages extends Component {
     this.setState(function(previousState){
       previousState.projectImages[previousState.projectImages.length] = source;
       return previousState;
-    });
+    })
 
+  }  
+
+  // Prompts the user to enable Photo permissions 
+  // via the iOS app settings screen.
+  _displayPhotoSettingsPrompt(){
+
+    if(!this.state.showingGpsWarning){
+      basicAlert(
+        PHOTO_WARNING_HEADER_STRING, 
+        PHOTO_WARNING_BODY_STRING,
+        () =>{ 
+          Linking.openURL(APP_SETTINGS_URL_STRING)
+        });
+      }
+  }
+
+  // Prompts the user to enable Camera permissions 
+  // via the iOS app settings screen.
+  _displayCameraSettingsPrompt(){
+
+    if(!this.state.showingGpsWarning){
+      basicAlert(
+        CAMERA_WARNING_HEADER_STRING, 
+        CAMERA_WARNING_BODY_STRING,
+        () =>{ 
+          Linking.openURL(APP_SETTINGS_URL_STRING)
+
+      });
+  
+    }
   }
 
   ////////////////////////
