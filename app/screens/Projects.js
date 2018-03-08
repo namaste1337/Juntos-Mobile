@@ -13,7 +13,9 @@ import {
   Modal,
   TouchableHighlight,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  Linking,
+  AppState
 } from 'react-native';
 
 /////////////////////////////
@@ -26,6 +28,7 @@ deviceProperties
 } from "./../common/device";
 import {renderIf} from  "./../common/components";
 import CommonStyles, {COLORS} from "../common/styles"
+import {basicAlert} from  "./../common/alerts";
 
 ////////////////////////////
 // Import Screen Components
@@ -85,6 +88,10 @@ const STATUS_BAR_HIDDEN_FALSE_BOOL        = false;
 const STATUS_BAR_HIDDEN_TRUE_BOOL         = true;
 const MODAL_VISIBLE_FALSE_BOOL            = false;
 const MODAL_VISIBLE_TRUE_BOOL             = true;
+const SHOWING_GPS_WARNING_FALSE_BOOL      = false;
+const SHOWING_GPS_WARNING_TRUE_BOOL       = true;
+const GPS_ENABLED_FALSE_BOOL              = false;
+const GPS_ENABLED_TRUE_BOOL               = true;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
@@ -95,6 +102,12 @@ const KILOMETERS_UNIT_STRING              = "Kilometers";
 const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
 const REDO_SEARCH_BUTTON_STRING           = "Redo Search In This Area";
 const MODAL_ANIMATION_STRING              = "slide";
+const APP_STATE_CHANGE_STRING             = "change";
+const APP_STATE_ACTIVE_STRING             = "active";
+const GPS_WARNING_HEADER_STRING           = "Juntos Requires Location Access";
+const GPS_WARNING_BODY_STRING             = "Go to the app settings and enable location.";
+const APP_SETTING_URL_STRING              = 'app-settings:';
+
 
 class Projects extends Component {
 
@@ -137,6 +150,11 @@ class Projects extends Component {
       // The number of radial miles to search for projects
       // from the user location, or from the current region.
       radius: 10000000,
+      // The following value determines if the GPS has been enabled
+      // to allow for the fetching of project data by location. 
+      gpsEnabled: GPS_ENABLED_FALSE_BOOL,
+      // Prevents double prompting of the GPS settings warning.
+      showingGpsWarning: SHOWING_GPS_WARNING_FALSE_BOOL
     }
     // The following properties will be assigned in 
     // navigator.geolocation.getCurrentPosition and
@@ -221,6 +239,63 @@ class Projects extends Component {
     let lng     = coords[0];
 
     return { lng, lat};
+
+  }
+
+  // Prompts the user to enable GPS via the 
+  // iOS app settings screen.
+  _displayGpsSettingsPrompt(){
+
+    if(!this.state.showingGpsWarning){
+      basicAlert(
+        GPS_WARNING_HEADER_STRING, 
+        GPS_WARNING_BODY_STRING,
+        () =>{ 
+          Linking.openURL(APP_SETTING_URL_STRING)
+          this.setState({
+            showingGpsWarning: SHOWING_GPS_WARNING_FALSE_BOOL
+          })
+        });
+  
+      this.setState({
+        showingGpsWarning: SHOWING_GPS_WARNING_TRUE_BOOL
+      })
+    }
+  }
+
+  // Handles fetching the user GPS location and 
+  // then fetching the project data by locaton.
+  // The users lat and lng is cached, to later
+  // calcualte the project to user location distance deltas.
+  _getDataByGpsLocation(){
+
+    // If the users device is iOS, prompt for 
+    // location permissions
+    if(Platform.OS == deviceTypes.ios)
+      navigator.geolocation.requestAuthorization();
+    // Get the users current location
+    navigator.geolocation.getCurrentPosition(data => {
+
+      this._userLat = data.coords.latitude;
+      this._userLng = data.coords.longitude;
+
+      // We cache this location to later be able to
+      // determine if the use has panned the map.
+      // If the map is panned past the threshold 
+      // the user will be presented with a redo search 
+      // in this area button.
+      this._currentRegionLat = data.coords.latitude;
+      this._currentRegionLng = data.coords.longitude;
+  
+      // Fetch project data by location and radius 
+      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
+      this.setState({isFetching: IS_FETCHING_TRUE_BOOL, gpsEnabled: GPS_ENABLED_TRUE_BOOL});
+    }, error => {
+      if(Platform.OS == deviceTypes.ios)
+        this._displayGpsSettingsPrompt();
+    }, {
+      enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
+    });
 
   }
 
@@ -316,7 +391,7 @@ class Projects extends Component {
         && this.state.initialAnimation 
         && distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
       ){
-        
+
         this.setState({
           redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
         })
@@ -361,9 +436,27 @@ class Projects extends Component {
   }
 
 
+  // Handles listening for app state changes.
+  // If GPS has not been enables atleast once, 
+  // the app will continously prompt to do so.
+  _handleAppStateChange = (nextAppState) => {
+    if (nextAppState === APP_STATE_ACTIVE_STRING) {
+      if(!this.state.gpsEnabled){
+        this._getDataByGpsLocation();
+      }
+    }
+  }
+
   ////////////////////////
   // Life Cycle
   ////////////////////////
+
+  // Handles removing the app state listener
+  componentWillUnmount() {
+
+    AppState.removeEventListener(APP_STATE_CHANGE_STRING, this._handleAppStateChange);
+  
+  }
 
   // When a service call is made to fetch projects
   // the redux state is updated and re-rerenders.
@@ -382,33 +475,16 @@ class Projects extends Component {
 
   }
   
-  // Handles fetching the user GPS location and 
-  // and fetching the project data by locaton.
-  // The users lat and lon is cached, to later
-  // calcualte the project/user distance delta.
+
+  // Handles listening for foreground/background app state changes
+  // which are required to prompt for GPS permissions.
   componentDidMount(){
-
-    // If the users device is iOS, prompt for 
-    // location permissions
-    if(Platform.OS == deviceTypes.ios)
-      navigator.geolocation.requestAuthorization();
-    // Get the users current location
-    navigator.geolocation.getCurrentPosition(data => {
-
-      this._userLat = data.coords.latitude;
-      this._userLng = data.coords.longitude;
-      this._currentRegionLat = data.coords.latitude;
-      this._currentRegionLng = data.coords.longitude;
-  
-      // Fetch project data by location and radius 
-      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
-      this.setState({isFetching: IS_FETCHING_TRUE_BOOL});
-    }, error => {
-      console.error(error);
-    }, {
-      enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
-    });
-
+    // Begin listening to app state changes
+    // This will be used to determine if the user 
+    // has enabled GPS permissions
+    AppState.addEventListener(APP_STATE_CHANGE_STRING, this._handleAppStateChange);
+    // Get data by GPS location
+    this._getDataByGpsLocation();
   }
 
   ////////////////////////
