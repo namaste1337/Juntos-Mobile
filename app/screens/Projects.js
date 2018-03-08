@@ -300,20 +300,25 @@ class Projects extends Component {
 
       let lat = region.latitude;
       let lng = region.longitude;
-
       let distanceDelta = this._distance(this._currentRegionLat, this._currentRegionLng, lat, lng);
       let loc = this._extractLocation(this.props.projects[0]);
+      
       // The following line prevents the redo button from being shown when 
       // re-fetching new project data.
       let isFirstProject = ( 
         parseFloat(loc.lat).toFixed(5) === parseFloat(lat).toFixed(5) && 
         parseFloat(loc.lng).toFixed(5) === parseFloat(lng).toFixed(5)) 
       ? true : false;
-
-      if(!isFirstProject &&
-        distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
+    
+      if(
+        !isFirstProject
         && this.state.initialAnimation 
-        && !this.state.isAnimating){
+        && !this.state.isAnimating
+        && distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
+      ){
+
+         console.log(distanceDelta);
+      console.log(isFirstProject, this.state.initialAnimation, this.state.isAnimating);
   
         this.setState({
           redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
@@ -323,6 +328,7 @@ class Projects extends Component {
         this._currentRegionLat = lat;
   
       }
+
     }
   }
 
@@ -393,6 +399,9 @@ class Projects extends Component {
     navigator.geolocation.getCurrentPosition(data => {
       this._userLat = data.coords.latitude;
       this._userLng = data.coords.longitude;
+      this._currentRegionLat = data.coords.latitude;
+      this._currentRegionLng = data.coords.longitu;
+  
       // Fetch project data by location and radius 
       this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
       this.setState({isFetching: IS_FETCHING_TRUE_BOOL});
