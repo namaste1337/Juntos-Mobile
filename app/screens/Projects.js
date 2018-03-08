@@ -307,19 +307,16 @@ class Projects extends Component {
       // re-fetching new project data.
       let isFirstProject = ( 
         parseFloat(loc.lat).toFixed(5) === parseFloat(lat).toFixed(5) && 
-        parseFloat(loc.lng).toFixed(5) === parseFloat(lng).toFixed(5)) 
-      ? true : false;
-    
+        parseFloat(loc.lng).toFixed(5) === parseFloat(lng).toFixed(5)
+      )
+     
       if(
         !isFirstProject
-        && this.state.initialAnimation 
         && !this.state.isAnimating
+        && this.state.initialAnimation 
         && distanceDelta > REDO_SEARCH_DISTANCE_THRESHOLD 
       ){
-
-         console.log(distanceDelta);
-      console.log(isFirstProject, this.state.initialAnimation, this.state.isAnimating);
-  
+        
         this.setState({
           redoSearchVisible: REDO_SEARCH_VISIBLE_TRUE_BOOL
         })
