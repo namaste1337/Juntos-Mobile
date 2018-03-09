@@ -42,7 +42,6 @@ export default function session(
 	switch (action.type) {
 		case AccountActions.ACCOUNT_SUCCESS:
 			return Object.assign({}, state, {
-
         		isLoggedIn: action.payload.isLoggedIn,
         		isFetching: action.payload.isFetching,
             user: mutateUser(action.payload.user)
