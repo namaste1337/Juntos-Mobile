@@ -47,6 +47,7 @@ const MISSING_METHOD_PARAMETER_STRING       = "Error: Missing method parameter";
 const MISSING_BODY_PARAMETER_STRING         = "Error: Missing body parameter";
 const MISSING_PAYLOAD_PARAMETER_STRING      = "Error: Missing payload parameter";
 const MISSING_ENDPOINT_PARAMETER_STRING     = "Error: Missing endPoint parameter";
+const PLEASE_TRY_AGAIN_NETWORK_ERROR_STRING = ", please try again."
 ////////////////////////////
 // Getters and Setters
 ////////////////////////////
@@ -185,7 +186,6 @@ export default Services = {
       let init    = _handleInit(headers, method, body);
   
       fetch(url, init).then(response => {
-  
         // Retrieve the status code
         let statusCode    = response.status;
 
@@ -206,7 +206,8 @@ export default Services = {
         });
       }).catch(error => {
           // Log network level errors
-          console.log(error);
+          reject(error);
+          basicAlert("", error.message.toString() + PLEASE_TRY_AGAIN_NETWORK_ERROR_STRING);
         });
     });
   
