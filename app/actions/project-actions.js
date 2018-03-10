@@ -22,7 +22,8 @@ export const ProjectActions = {
 	POPULATE_TEMP_DESCRIPTION: "POPULATE_TEMP_DESCRIPTION",
 	POPULATE_TEMP_DETAILS: "POPULATE_TEMP_DETAILS",
 	POPULATE_TEMP_IMAGES: "POPULATE_TEMP_IMAGES",
-	POPULATE_PROJECTS: "PopulateProjects"
+	POPULATE_PROJECTS: "PopulateProjects",
+	PROJECT_CREATE_SENDING: "PROJECT_CREATE_SENDING",
 }
 
 ////////////////////////
@@ -167,6 +168,17 @@ function populateProjectsData(projects){
 
 }
 
+function createProjectProcessing(bool){
+
+	return {
+		type: ProjectActions.PROJECT_CREATE_SENDING,
+		payload: {
+			isSending: bool
+		}
+	};
+
+}
+
 ////////////////////////
 // Thunks Functions
 ////////////////////////
@@ -208,12 +220,13 @@ export function createNewProject(projectObject){
 	 imageUpload(images).then( response => {
         let imagesArray = response.data
         projectObject.images = imagesArray;
+        dispatch(createProjectProcessing(true));
         return ProjectServices.createProject(projectObject);
       }).then(response => {
-      	// Segue back to the root screen
-        console.log(response);
+      	dispatch(createProjectProcessing(false));
+      	dispatch(resetProjectNavigation());
     }).catch(error => {
-       console.log(error);
+    	dispatch(createProjectProcessing(false));
     })
   }
 

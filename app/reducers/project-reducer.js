@@ -47,6 +47,7 @@ export default function project(
 	state = {
     tempProject: {},
     data: [],
+    isSending: false
 	}, action)
 {
 	switch (action.type) {
@@ -82,6 +83,10 @@ export default function project(
       case ProjectActions.POPULATE_PROJECTS:
         return Object.assign({}, state, {
           data: mutateProjectData(action.payload.data)
+        });
+      case ProjectActions.PROJECT_CREATE_SENDING:
+        return Object.assign({}, state, {
+          isSending: action.payload.isSending
         });
     default:
       return state;

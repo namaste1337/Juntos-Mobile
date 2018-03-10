@@ -24,6 +24,7 @@ import CommonStyles from "./../../common/styles.js"
 ////////////////////////////
 
 import Details from "./../components/Details";
+import ActivityIndicatorOverlay from "./../../components/ActivityIndicatorOverlay";
 
 ////////////////////////
 // Actions
@@ -74,7 +75,6 @@ class ProjectDetails extends Component {
   // and reseting the navigation back to the root screen
   _onSubmit = () => {
     this.props.createNewProject(this.props.tempProject);
-    this.props.resetProjectNavigation();
   }
 
   ////////////////////////
@@ -83,23 +83,33 @@ class ProjectDetails extends Component {
 
   render() {
     return (
-      <Details
-      images={this.props.tempProject.images}
-      projectName={this.props.tempProject.name}
-      startDate={this.props.tempProject.start_date}
-      endDate={this.props.tempProject.end_date}
-      currentStatus={this.props.tempProject.current_status}
-      projectType={this.props.tempProject.type}
-      foodProvided={this.props.tempProject.food_provided}
-      description={this.props.tempProject.description}
-      user={this.props.currentUser}
-      address={this.props.tempProject.location.address}
-      latitude={this.props.tempProject.location.coordinates.lat}
-      longitude={this.props.tempProject.location.coordinates.lng}/>
+      <View style={styles.detailsWrapper}>
+        <Details
+        images={this.props.tempProject.images}
+        projectName={this.props.tempProject.name}
+        startDate={this.props.tempProject.start_date}
+        endDate={this.props.tempProject.end_date}
+        currentStatus={this.props.tempProject.current_status}
+        projectType={this.props.tempProject.type}
+        foodProvided={this.props.tempProject.food_provided}
+        description={this.props.tempProject.description}
+        user={this.props.currentUser}
+        address={this.props.tempProject.location.address}
+        latitude={this.props.tempProject.location.coordinates.lat}
+        longitude={this.props.tempProject.location.coordinates.lng}/>
+        <ActivityIndicatorOverlay isFetching={this.props.isSending}/>
+      </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+
+  detailsWrapper:{
+    flex: 1
+  }
+
+})
 
 ////////////////////////
 // Map to props
@@ -108,6 +118,7 @@ class ProjectDetails extends Component {
 const mapStateToProps = (state) => {
   return {
     tempProject: state.project.tempProject,
+    isSending: state.project.isSending,
     currentUser: state.session.user
   };
 }
@@ -115,7 +126,6 @@ const mapStateToProps = (state) => {
 const mapDistpatchToProps = (dispatch) => {
   return {
     createNewProject: projectObject => dispatch(createNewProject(projectObject)),
-    resetProjectNavigation : () => dispatch(resetProjectNavigation())
   };
 }
 
