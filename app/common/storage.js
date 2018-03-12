@@ -35,7 +35,7 @@ export function getLoginState(){
 
 }
 
-// Helper function to set the data for 
+// Helper function to set the profile data for 
 // the current logged in user
 export function setUser(userObject){
 
@@ -44,7 +44,7 @@ export function setUser(userObject){
 }
 
 // Helper function to get the current logged 
-// in user data
+// in user profile data
 export function getUser(){
 
   return getValue(USER_OBJECT_KEY);
