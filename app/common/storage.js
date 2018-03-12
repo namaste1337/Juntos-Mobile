@@ -15,6 +15,7 @@ import {AsyncStorage} from "react-native"
 // user login state
 // Keys
 export const USER_LOGIN_STATE_KEY = "@UserLoginState:key";
+export const USER_OBJECT_KEY = "@UserObject:key";
 
 //////////////////////////////
 // Helper Functions
@@ -31,6 +32,22 @@ export function setLoginState(bool){
 export function getLoginState(){
 
   return getValue(USER_LOGIN_STATE_KEY);
+
+}
+
+// Helper function to set the data for 
+// the current logged in user
+export function setUser(userObject){
+
+  setValue(USER_OBJECT_KEY, userObject);
+
+}
+
+// Helper function to get the current logged 
+// in user data
+export function getUser(){
+
+  return getValue(USER_OBJECT_KEY);
 
 }
 
