@@ -26,7 +26,7 @@ export const USER_OBJECT_KEY = "@UserObject:key";
 // the current logged in user
 export function setUser(userObject){
 
-  setValue(USER_OBJECT_KEY, JSON.stringify(userObject));
+  setValue(USER_OBJECT_KEY, userObject);
 
 }
 
@@ -34,7 +34,7 @@ export function setUser(userObject){
 // in user profile data
 export function getUser(){
 
-  return JSON.parse(getValue(USER_OBJECT_KEY));
+  return getValue(USER_OBJECT_KEY);
 
 }
 

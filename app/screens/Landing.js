@@ -52,7 +52,7 @@ class LandingView extends Component {
      determineTransition(){
         getUser().then(user => {
          if(user != undefined && user != "null"){
-          this.props.accountUpdateUser(user);
+          this.props.accountUpdateUser(JSON.parse(user));
           this.props.redirectToSignedIn();
           // Check if the users session is still valid
          }else{

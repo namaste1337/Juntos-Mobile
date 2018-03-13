@@ -56,9 +56,9 @@ function accountError(bool){
 
 // Handles account success state 
 function accountSuccess(isFetchingBool, user){
-
+  
   // Set the user profile data
-  setUser(user);
+  setUser(JSON.stringify(user));
 
 	return {
 		type: AccountActions.ACCOUNT_SUCCESS,
