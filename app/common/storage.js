@@ -21,25 +21,12 @@ export const USER_OBJECT_KEY = "@UserObject:key";
 // Helper Functions
 ///////////////////////////////
 
-// Helper function to set the login state
-export function setLoginState(bool){
-
-  setValue(USER_LOGIN_STATE_KEY, bool);
-
-}
-
-// Helper function to get the login state
-export function getLoginState(){
-
-  return getValue(USER_LOGIN_STATE_KEY);
-
-}
 
 // Helper function to set the profile data for 
 // the current logged in user
 export function setUser(userObject){
 
-  setValue(USER_OBJECT_KEY, userObject);
+  setValue(USER_OBJECT_KEY, JSON.stringify(userObject));
 
 }
 
@@ -47,7 +34,7 @@ export function setUser(userObject){
 // in user profile data
 export function getUser(){
 
-  return getValue(USER_OBJECT_KEY);
+  return JSON.parse(getValue(USER_OBJECT_KEY));
 
 }
 

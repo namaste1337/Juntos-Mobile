@@ -19,7 +19,7 @@ import {imageUpload} from "./../services/api/uploads";
 /////////////////////////
 
 import {basicAlert} from "./../common/alerts";
-import {setLoginState} from "./../common/storage";
+import {setLoginState, setUser} from "./../common/storage";
 
 ////////////////////////
 // Constants
@@ -54,29 +54,16 @@ function accountError(bool){
 
 }
 
-// Updates the currently logged in user data
-function accountUpdateUser(user){
-
-  return {
-    type: AccountActions.ACCOUNT_SUCCESS,
-    payload:{
-      user
-    }
-  }
-
-}
-
 // Handles account success state 
-function accountSuccess(isFetchingBool, isLoggedInBool, user){
+function accountSuccess(isFetchingBool, user){
 
-  // Update sign in state to true 
-  setLoginState("true");
+  // Set the user profile data
+  setUser(user);
 
 	return {
 		type: AccountActions.ACCOUNT_SUCCESS,
 		payload: {
 			isFetching: isFetchingBool,
-			isLoggedIn: isLoggedInBool,
       user
 		}	
 	}
@@ -90,6 +77,18 @@ function accountProcessing(bool){
 		type: AccountActions.ACCOUNT_PROCESSING,
 		payload: bool
 	}
+
+}
+
+// Updates the currently logged in user data
+export function accountUpdateUser(user){
+
+  return {
+    type: AccountActions.ACCOUNT_SUCCESS,
+    payload:{
+      user
+    }
+  }
 
 }
 
@@ -119,8 +118,10 @@ export function redirectToSignedOut(){
 // the user to the logout portion of the app
 export function accountLogout(){
 
-    // Update sign in state to false 
-    setLoginState("false");
+    // Reset the user profile information
+    // to prevent out sign in
+    setUser(null);
+    
     return redirectToSignedOut();
   
 }
@@ -128,17 +129,6 @@ export function accountLogout(){
 ////////////////////////
 // Thunks Functions
 ////////////////////////
-
-// Handles server call to ping for active session
-export function accountPing(){
-  return (dispatch) => {
-    ping().then(function(response){
-      console.log(response)
-      let user = response.data.local;
-      dispatch(accountUpdateUser(user));
-    })
-  }
-}
 
 // Handles server call for login request
 export function accountLogin(email, password){
@@ -149,7 +139,7 @@ export function accountLogin(email, password){
   	login(email, password).then(response =>{
       // Account Success
       let user = response.data.user.local;
-      dispatch(accountSuccess(true, true, user));
+      dispatch(accountSuccess(true, user));
       dispatch(redirectToSignedIn());
   	})
   	.catch(error =>{ 
@@ -181,7 +171,7 @@ export function accountSignup(username, email, password, profileImagePath, image
 		.then((response) => {
       let user = response.data.user.local;
       // Account sign up success
-      dispatch(accountSuccess(true, true, user));
+      dispatch(accountSuccess(true, user));
       dispatch(redirectToSignedIn());
     })
     .catch(error => { 

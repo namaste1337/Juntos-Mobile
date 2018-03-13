@@ -17,7 +17,11 @@ from 'react-native';
 // Imports actions
 ///////////////////////////////
 
-import { redirectToSignedIn, redirectToSignedOut, accountPing } from '../actions/account-actions';
+import { 
+  redirectToSignedIn, 
+  redirectToSignedOut,
+  accountUpdateUser
+} from '../actions/account-actions';
 
 //////////////////////////////
 // Imports Common Files
@@ -25,7 +29,7 @@ import { redirectToSignedIn, redirectToSignedOut, accountPing } from '../actions
 
 // Common styles
 import CommonStyles from "../common/styles";
-import {getLoginState} from "../common/storage"
+import {getUser} from "../common/storage"
 
 ////////////////////////
 // Constants
@@ -46,19 +50,17 @@ class LandingView extends Component {
      // The following method determines the next transitions
      // based on a logInState boolean retrieved from async store.
      determineTransition(){
-        getLoginState().then(value => {
-         let isSignedIn = value;
-         if(isSignedIn === "true" || isSignedIn === "undefined"){
+        getUser().then(user => {
+         if(user != undefined && user != "null"){
+          this.props.accountUpdateUser(user);
           this.props.redirectToSignedIn();
           // Check if the users session is still valid
-          this.props.accountPing();
          }else{
           this.props.redirectToSignedOut();
          }
         }).catch( error => {
          console.log(error);
         })
-
      }
 
      componentDidMount(){
@@ -115,7 +117,7 @@ function matchDistpatchToProps(dispatch){
   return bindActionCreators({
     redirectToSignedIn: redirectToSignedIn,
     redirectToSignedOut: redirectToSignedOut,
-    accountPing: accountPing
+    accountUpdateUser: accountUpdateUser
   }, dispatch);
   
 }
