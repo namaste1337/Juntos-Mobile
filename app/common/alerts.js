@@ -5,16 +5,18 @@
 // Import Modules
 ////////////////////////
 
-import { Alert } from 'react-native';
+import { 
+ Alert
+} from 'react-native';
 
 ////////////////////////
 // Constants
 ////////////////////////
 
 //Strings
-const OK_STRING = "OK";
+const OK_STRING					    = "OK";
 //Bools
-const CANCELABEL_BOOL = true;
+const CANCELABEL_BOOL 			= true;
 
 ////////////////////////
 // Helper Functions
@@ -27,11 +29,11 @@ const CANCELABEL_BOOL = true;
 // Basic alerts will display a header, message, and ok button
 export function basicAlert(header, message,callback){
 
-    Alert.alert( header, message, [ 
-    	{text: OK_STRING,
-    	onPress: () =>{ if(callback != null){ callback() }}
-    	}], 
-    		{ cancelable: CANCELABEL_BOOL 
-    	} );
+  Alert.alert( header, message, [ 
+  	{text: OK_STRING,
+  	onPress: () =>{ if(callback != null){ callback() }}
+  	}], 
+  		{ cancelable: CANCELABEL_BOOL 
+  } );
 
 }
