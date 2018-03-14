@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
-import ImagePicker from 'react-native-image-crop-picker';
 import { NavigationActions } from 'react-navigation';
 import {
   StyleSheet,
@@ -30,6 +29,12 @@ import { accountSignup } from '../actions/account-actions';
 import CommonStyles, {COLORS, FONTS} from "../common/styles";
 import {validateEmail} from "../common/validations";
 import {renderIf} from "../common/components";
+
+//////////////////////////////
+// Imports Libs
+///////////////////////////////
+
+import JTImagePicker from "./../lib/JTImagePicker";
 
 //////////////////////////////
 // Imports Custom Components
@@ -61,9 +66,6 @@ const EMAIL_KEYBOARD_TYPE                       = "email-address";
 const DEFAULT_KEYBOARD_TYPE                     = "default";
 const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
 const PROFILE_IMAGE_BEHAVIOR                    = "contain";
-const IMAGE_PICKER_WIDTH                        = 400;
-const IMAGE_PICKER_HEIGHT                       = 400;
-const IMAGE_PICKER_CROPPING                     = true;
 const AUTO_CAPITIALIZE_NONE_PROPERTY            = "none";
 //States
 const USERNAME_VALIDATION_TRUE_STATE            = true;
@@ -97,6 +99,9 @@ class Signup extends Component {
       confirmPasswordIsValid: PASSWORD_VALIDATION_TRUE_STATE,
       profileImageValid: PROFILE_IMAGE_TRUE_STATE
     };
+
+    // Create a new instance of JTImagePicker
+    this._jtImagePicker =  new JTImagePicker();
   }
 
   ////////////////////
@@ -116,11 +121,8 @@ class Signup extends Component {
   //Handles profile image button press
   _onProfileImagePress(){
 
-    ImagePicker.openPicker({
-      width: IMAGE_PICKER_WIDTH,
-      height: IMAGE_PICKER_HEIGHT,
-      cropping: IMAGE_PICKER_CROPPING
-    }).then(image => {
+    this._jtImagePicker.openGallery().then(image => {
+
       let source = { uri: image.path };
       this.setState({
         profileImageData: {
@@ -130,10 +132,9 @@ class Signup extends Component {
         profileImage: source,
         profileImageValid: PROFILE_IMAGE_TRUE_STATE
       });
-    }).catch(error => {
-      console.log(error);
-    });
 
+    })
+    
   }
 
   //Handles sign up button press
