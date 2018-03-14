@@ -10,7 +10,7 @@ import {NavigationActions} from "react-navigation";
 // Import services
 /////////////////////////
 
-import {login, ping} from "./../services/api/sessions";
+import {login} from "./../services/api/sessions";
 import {signUp} from "./../services/api/users";
 import {imageUpload} from "./../services/api/uploads";
 
