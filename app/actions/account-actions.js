@@ -10,7 +10,7 @@ import {NavigationActions} from "react-navigation";
 // Import services
 /////////////////////////
 
-import {login} from "./../services/api/sessions";
+import {login, logout} from "./../services/api/sessions";
 import {signUp} from "./../services/api/users";
 import {imageUpload} from "./../services/api/uploads";
 
@@ -119,9 +119,10 @@ export function redirectToSignedOut(){
 export function accountLogout(){
 
     // Reset the user profile information
-    // to prevent out sign in
-    setUser(null);
-    
+    // to prevent out sign in and send
+    // a logout request to the server
+    setUser("");
+    logout();
     return redirectToSignedOut();
   
 }
