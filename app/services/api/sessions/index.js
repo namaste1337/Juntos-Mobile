@@ -33,7 +33,7 @@ export function login(email, password){
 // Handles logout request
 export function logout(){
 
-	return Services.fetchApi(SESSIONS_END_POINT, null, Common.DELETE_METHOD);
+	return Services.fetchApi(SESSIONS_END_POINT, {}, Common.DELETE_METHOD);
 
 }
 
