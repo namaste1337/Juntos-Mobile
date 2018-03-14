@@ -1,24 +1,50 @@
+///////////////////////////
+// Imports
+///////////////////////////
+
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-//Thunk import
-import thunk from 'redux-thunk';
-// Reducer import
-import ALL_REDUCERS from './app/config/store';
-// Redux Imports
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-// Import React Navigation Component
+
+///////////////////////////
+// Navigation
+///////////////////////////
+
 import AppNavigatorContainer from './app/navigation/AppNavigatorContainer';
-// Load object extensions
-require('./app/extensions/strings')
-// Import networkEvents 
-import Services, { NETWORK_EVENT_TYPES } from "./app/services/api";
-// Import account actions 
-import { accountLogout } from './app/actions/account-actions';
-// Redux Logger
+
+///////////////////////////
+// Redux Middleware
+///////////////////////////
+
+import thunk from 'redux-thunk';
 import logger from 'redux-logger'
-// Create the store
+
+///////////////////////////
+// Reducer Setup
+///////////////////////////
+
+import ALL_REDUCERS from './app/config/store';
 const store = createStore(ALL_REDUCERS, applyMiddleware(thunk), applyMiddleware(logger));
+
+///////////////////////////
+// Actions
+///////////////////////////
+
+import { accountLogout } from './app/actions/account-actions';
+
+///////////////////////////
+// Extensions
+///////////////////////////
+
+require('./app/extensions/strings');
+
+///////////////////////////
+// Services
+///////////////////////////
+
+import Services, { NETWORK_EVENT_TYPES } from "./app/services/api";
+
+
 
 export default class App extends React.Component {
 
