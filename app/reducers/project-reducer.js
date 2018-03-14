@@ -47,7 +47,9 @@ export default function project(
 	state = {
     tempProject: {},
     data: [],
-    isSending: false
+    isSending: false,
+    isErrored: false,
+    isFetching: false
 	}, action)
 {
 	switch (action.type) {
@@ -80,9 +82,17 @@ export default function project(
           newState.tempProject = tempProject;
           return newState;
         })();
-      case ProjectActions.POPULATE_PROJECTS:
+      case ProjectActions.GET_PROJECTS:
         return Object.assign({}, state, {
           data: mutateProjectData(action.payload.data)
+        });
+      case ProjectActions.GET_PROJECTS_IS_FETCHING:
+        return Object.assign({}, state, {
+          isFetching: action.payload
+        });
+      case ProjectActions.GET_PROJECTS_ERROR:
+        return Object.assign({}, state, {
+          isErrored: action.payload
         });
       case ProjectActions.PROJECT_CREATE_SENDING:
         return Object.assign({}, state, {

@@ -22,7 +22,9 @@ export const ProjectActions = {
 	POPULATE_TEMP_DESCRIPTION: "POPULATE_TEMP_DESCRIPTION",
 	POPULATE_TEMP_DETAILS: "POPULATE_TEMP_DETAILS",
 	POPULATE_TEMP_IMAGES: "POPULATE_TEMP_IMAGES",
-	POPULATE_PROJECTS: "PopulateProjects",
+	GET_PROJECTS: "GET_PROJECTS",
+	GET_PROJECTS_IS_FETCHING: "GET_PROJECTS_IS_FETCHING",
+	GET_PROJECTS_ERROR: "GET_PROJECTS_ERROR",
 	PROJECT_CREATE_SENDING: "PROJECT_CREATE_SENDING",
 }
 
@@ -150,7 +152,7 @@ export function resetProjectNavigation(){
 export function clearProjectData(){
 
 	return {
-		type: ProjectActions.POPULATE_PROJECTS,
+		type: ProjectActions.GET_PROJECTS,
 		payload: {
 			data: []
 		}
@@ -162,9 +164,27 @@ export function clearProjectData(){
 function populateProjectsData(projects){
 
 	return {
-		type: ProjectActions.POPULATE_PROJECTS,
+		type: ProjectActions.GET_PROJECTS,
 		payload: projects
 	};
+
+}
+
+function fetchingProjectData(isFetching){
+
+	return {
+		type: ProjectActions.GET_PROJECTS_IS_FETCHING,
+		payload: isFetching
+	}
+
+}
+
+function fetchingProjectDataError(isErrored){
+
+	return {
+		type: ProjectActions.GET_PROJECTS_ERROR,
+		payload: isErrored
+	}
 
 }
 
@@ -201,10 +221,14 @@ export function getProjects(){
 export function getProjectsByLocation(lat, lng, radius, limit){
 
 	return dispatch => {
+		dispatch(fetchingProjectData(true));
 		ProjectServices.getProjectsByLocation(lat, lng, radius, limit).then(projects => {
 			dispatch(populateProjectsData(projects));
+			dispatch(fetchingProjectData(false));
 		}).catch(error => {	
-			console.error(error);
+			console.log("Error has occured when fetching projects");
+			dispatch(fetchingProjectData(false));
+			dispatch(fetchingProjectDataError(true));
 		});
 	}
 

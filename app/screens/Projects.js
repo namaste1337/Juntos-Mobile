@@ -15,7 +15,7 @@ import {
   StatusBar,
   ActivityIndicator,
   Linking,
-  AppState
+  AppState,
 } from 'react-native';
 
 /////////////////////////////
@@ -101,6 +101,7 @@ const MILES_UNIT_STRING                   = "Miles";
 const KILOMETERS_UNIT_STRING              = "Kilometers";
 const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
 const REDO_SEARCH_BUTTON_STRING           = "Redo Search In This Area";
+const RETRY_BUTTON_STRING                 = "RETRY";
 const MODAL_ANIMATION_STRING              = "slide";
 const APP_STATE_CHANGE_STRING             = "change";
 const APP_STATE_ACTIVE_STRING             = "active";
@@ -142,7 +143,6 @@ class Projects extends Component {
       // a radius adjustment feature.
       isAnimating: IS_ANIMATING_FALSE_BOOL,
       initialAnimation: INITIAL_ANIMATION_FALSE_BOOL,
-      isFetching: IS_FETCHING_FALSE_BOOL,
       redoSearchVisible: REDO_SEARCH_VISIBLE_FALSE_BOOL,
       statusBarHidden: STATUS_BAR_HIDDEN_FALSE_BOOL,
       modalVisible: MODAL_VISIBLE_FALSE_BOOL,
@@ -177,6 +177,15 @@ class Projects extends Component {
   // Handles animating the maps
   // to the specified region.
   _animateTo(lat, long){
+
+    // We watch for the initial animation  to then 
+    // allow for the redo search button logic
+    // to be executed.
+    if(!this.state.initialAnimation){
+      this.setState({
+        initialAnimation: INITIAL_ANIMATION_TRUE_BOOL
+      })
+    }
 
     this.setState({ isAnimating: IS_ANIMATING_TRUE_BOOL })
 
@@ -289,7 +298,7 @@ class Projects extends Component {
   
       // Fetch project data by location and radius 
       this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
-      this.setState({isFetching: IS_FETCHING_TRUE_BOOL, gpsEnabled: GPS_ENABLED_TRUE_BOOL});
+      this.setState({gpsEnabled: GPS_ENABLED_TRUE_BOOL});
     }, error => {
       if(Platform.OS == deviceTypes.ios)
         this._displayGpsSettingsPrompt();
@@ -411,7 +420,7 @@ class Projects extends Component {
 
     this.setState({
       redoSearchVisible: REDO_SEARCH_VISIBLE_FALSE_BOOL,
-      isFetching: IS_FETCHING_TRUE_BOOL
+      initialAnimation: INITIAL_ANIMATION_FALSE_BOOL
     })
 
     this.props.clearProjectData();
@@ -420,16 +429,7 @@ class Projects extends Component {
   }
 
   // Handles on animation complete logic
-  // We listen for the initial animation to be complete
-  // to then allow for the redo search button logic
-  // to be executed.
   _onAnimationComplete(event){
-
-    if(!this.state.initialAnimation){
-      this.setState({
-        initialAnimation: INITIAL_ANIMATION_TRUE_BOOL
-      })
-    }
 
     this.setState({isAnimating: IS_ANIMATING_FALSE_BOOL})
 
@@ -464,13 +464,12 @@ class Projects extends Component {
   // in the newly fetched data.
   componentDidUpdate(){
 
-    if(this.props.projects.length > 0 && this.state.isFetching){
+    if(this.props.projects.length > 0 && !this.state.initialAnimation){
 
       let loc   = this._extractLocation(this.props.projects[0]);
   
       // Animate to the first project marker
       this._animateTo(loc.lat, loc.lng);
-      this.setState({isFetching: IS_FETCHING_FALSE_BOOL})
     }
 
   }
@@ -571,8 +570,17 @@ class Projects extends Component {
             </Carousel>
           </View>
           } 
-          {this.state.isFetching &&
+          {this.props.isFetching &&
             <ActivityIndicator style={styles.activityIndicator} animating={ACTIVITY_INDICACTOR_ANIMATING_BOOL} size={ACTIVITY_INDICATOR_SIZE_STRING}/>
+          }
+          {this.props.isErrored && !this.props.isFetching &&
+          <View style={styles.retryButtonWrapper}>
+            <PrimaryButton  
+            onPress={()=> this._onRedoSearchPress()} 
+            style={styles.retryButton} 
+            textStyle={styles.retryButtonText} 
+            buttonText={RETRY_BUTTON_STRING} />
+          </View>
           }
         </View>
         <View style={styles.addButtonWrapper}>
@@ -669,6 +677,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  /////////////////////////
+  // Retry Button
+  ////////////////////////
+
+  retryButtonWrapper:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  retryButton:{
+    width: 150, 
+    height: 50, 
+    marginBottom: 10,
+    borderRadius: 30
+  },
+  retryButtonText:{
+    paddingHorizontal: 10,
+    fontSize: 20
+  },
+
   ////////////////////////
   // Redo Button
   ////////////////////////
@@ -679,10 +707,11 @@ const styles = StyleSheet.create({
   redoButtonWrapper:{
     width: 150, 
     height: 50, 
-    marginBottom: 10
+    marginBottom: 10,
   },
   redoButtonButton:{
-    paddingVertical: 10
+    paddingVertical: 10,
+    borderRadius: 30
   },
   redoButtonText:{
     fontSize: 10
@@ -695,7 +724,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.project.data
+    projects: state.project.data,
+    isFetching: state.project.isFetching,
+    isErrored: state.project.isErrored
   };
 }
 
