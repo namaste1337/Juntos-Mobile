@@ -48,6 +48,7 @@ const SCROLL_VIEW_Y_ORIGIN_PROPERTY         = 0;
 const SCROLL_VIEW_ANIMATED_PROPERTY         = true;
 const SCROLL_VIEW_ANIMATION_TIME_1000       = 1000;
 const SCROLL_VIEW_ANIMATION_TIME_2000       = 2000;
+const DESCRIPTION_MAX_CHARACTERS            = 50;
 
 // Bools
 const SCROLL_VIEW_BOUNCED_TRUE_BOOL         = true;
@@ -235,7 +236,7 @@ class  Poster extends Component {
             <Text style={styles.carouselDistanceText}> {props.distance}  </Text>
           </View>
           <View>
-            <Text style={styles.carouselDescriptionText}> {props.description}  </Text>
+            <Text style={styles.carouselDescriptionText}> {props.description.substring(0, DESCRIPTION_MAX_CHARACTERS) + "..."}  </Text>
           </View>
         </View>
       );
