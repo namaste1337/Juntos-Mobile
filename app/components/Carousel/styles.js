@@ -81,6 +81,7 @@ export default StyleSheet.create({
     backgroundColor: COLORS.TRANSPARENT,
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.BOLD,
+    marginLeft: -3,
     fontSize: 20
   },
   carouselDescriptionText:{
