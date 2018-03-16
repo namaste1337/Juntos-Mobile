@@ -39,7 +39,13 @@ import StaticField from './../components/StaticField';
 // Constants
 ////////////////////////
 const screenCenter                  = Dimensions.get('window').width/2;
-const PROJECT_TABBAR_ICON_IMAGE     = require('./../assets/tabbar/settings_icon.png')
+// Images
+const PROJECT_TABBAR_ICON_IMAGE     = require('./../assets/tabbar/settings_icon.png');
+// Strings
+const EMAIL_TITLE_STRING            = "E-mail";
+const USERNAME_TITLE_STRING         = "Username";
+const VERSION_TITLE_STRING          = "Version";
+const LOG_OUT_BUTTON_STRING         = "Log out";
 
 class Settings extends Component {
 
@@ -62,7 +68,6 @@ class Settings extends Component {
     )
   }
 
-
   ////////////////////////
   // Screen UI
   ////////////////////////
@@ -73,14 +78,14 @@ class Settings extends Component {
       <View style={CommonStyles.contentWrapper}>
         { this.props.currentUser != null &&
         <View>
-          <StaticField title={"E-mail"} value={this.props.currentUser.email} />
-          <StaticField title={"Username"} value={this.props.currentUser.username} />
-          <StaticField title={"Version"} value={DeviceInfo.getVersion()} />
+          <StaticField title={EMAIL_TITLE_STRING} value={this.props.currentUser.email} />
+          <StaticField title={USERNAME_TITLE_STRING} value={this.props.currentUser.username} />
+          <StaticField title={VERSION_TITLE_STRING} value={DeviceInfo.getVersion()} />
         </View>
         }
         <View style={CommonStyles.contentWrapper}>
            <PrimaryButton 
-           buttonText="Log out"
+           buttonText={LOG_OUT_BUTTON_STRING}
            onPress={this.props.logout} />
         </View>
       </View>
