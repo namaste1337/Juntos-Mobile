@@ -92,6 +92,7 @@ const SHOWING_GPS_WARNING_FALSE_BOOL      = false;
 const SHOWING_GPS_WARNING_TRUE_BOOL       = true;
 const GPS_ENABLED_FALSE_BOOL              = false;
 const GPS_ENABLED_TRUE_BOOL               = true;
+const SHOW_MY_LOCATION_BUTTON_FALSE_BOOL  = false;
 // Image
 const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
 const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
@@ -542,6 +543,7 @@ class Projects extends Component {
         ref={ref => this._map = ref} 
         showsUserLocation
         toolbarEnabled
+        showsMyLocationButton={SHOW_MY_LOCATION_BUTTON_FALSE_BOOL}
         style={styles.map}
         onRegionChangeComplete={region => this._onRegionChangeComplete(region)}
         onAnimationComplete={(event)=> this._onAnimationComplete(event.nativeEvent)}
