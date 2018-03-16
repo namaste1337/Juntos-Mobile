@@ -19,7 +19,6 @@ COLORS,
 export default StyleSheet.create({
   
   inputValidationWrapper:{
-    height: 49,
     marginVertical: 10,
     borderBottomWidth: 1,
     borderColor: COLORS.MID_GREY,
