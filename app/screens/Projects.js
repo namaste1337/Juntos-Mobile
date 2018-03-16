@@ -73,7 +73,7 @@ const REGION_ANIMATION_DURATION_NUMBER    = 500;
 const REDO_SEARCH_DISTANCE_THRESHOLD      = 20; 
 // Bools
 const PAGE_INDICATOR_BOOL                 = true;
-const GPS_HIGH_ACCURACY_BOOL              = true;
+const GPS_HIGH_ACCURACY_BOOL              = false;
 const MODAL_TRANSPARENT_BOOL              = false;
 const ACTIVITY_INDICACTOR_ANIMATING_BOOL  = true;
 const IS_ANIMATING_FALSE_BOOL             = false;
