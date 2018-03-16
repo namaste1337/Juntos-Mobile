@@ -541,6 +541,7 @@ class Projects extends Component {
         <MapView.Animated
         ref={ref => this._map = ref} 
         showsUserLocation
+        toolbarEnabled
         style={styles.map}
         onRegionChangeComplete={region => this._onRegionChangeComplete(region)}
         onAnimationComplete={(event)=> this._onAnimationComplete(event.nativeEvent)}
