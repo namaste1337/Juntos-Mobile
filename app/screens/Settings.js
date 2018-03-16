@@ -38,7 +38,7 @@ import StaticField from './../components/StaticField';
 ////////////////////////
 // Constants
 ////////////////////////
-const screenCenter                  = Dimensions.get('window').width/2;
+
 // Images
 const PROJECT_TABBAR_ICON_IMAGE     = require('./../assets/tabbar/settings_icon.png');
 // Strings
