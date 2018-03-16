@@ -28,6 +28,15 @@ import styles from "./styles";
 class  InputValidation extends Component {
 
   ////////////////////////
+  // Default Props
+  ////////////////////////
+
+  static defaultProps = {
+    ...Component.defaultProps,
+    valid: true
+  }
+
+  ////////////////////////
   // Methods
   ////////////////////////
 
