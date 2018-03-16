@@ -649,14 +649,6 @@ const styles = StyleSheet.create({
   addProjectIcon:{
     width: 50,
     height: 50,
-    backgroundColor: COLORS.WHITE,
-    borderRadius: 25,
-    shadowColor: COLORS.BLACK,
-    shadowOffset: {
-      width: 10,
-      height: 10
-    },
-    shadowRadius: 10
   },
 
   /////////////////////////
