@@ -5,12 +5,9 @@
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 import { 
-Text, 
-Dimensions,
 ScrollView,
 Image,
 StyleSheet,
-TouchableOpacity,
 View,
 } from 'react-native';
 var DeviceInfo = require('react-native-device-info');
