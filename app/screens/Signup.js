@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   ///////////////////////
 
   profileImageUploadWrapper:{
-    paddingVertical: 20,
+    paddingBottom: 10,
     marginBottom: 10,
     flexDirection: "row",
     alignItems:"center",
