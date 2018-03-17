@@ -52,6 +52,7 @@ export default StyleSheet.create({
   },
   contentWrapper: {
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
 
   /////////////////////////
