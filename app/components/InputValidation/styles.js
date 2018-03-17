@@ -19,7 +19,7 @@ COLORS,
 export default StyleSheet.create({
   
   inputValidationWrapper:{
-    marginVertical: 10,
+    marginBottom: 10,
     borderBottomWidth: 1,
     borderColor: COLORS.MID_GREY,
     justifyContent: "flex-end",
