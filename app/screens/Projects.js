@@ -344,6 +344,7 @@ class Projects extends Component {
     let page  = parseInt(event.id);
     // Scroll to the page
     this._projectCarousel.goToPage(page);
+    this._carouselIndicator.setActivePageIndicator(page);
 
   }
 
