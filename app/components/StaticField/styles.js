@@ -25,7 +25,7 @@ export default StyleSheet.create({
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT,
     color: COLORS.LIGHT_GREY,
-    paddingHorizontal: 5,
+    paddingHorizontal: 3,
     fontSize: 13,
   },
 
