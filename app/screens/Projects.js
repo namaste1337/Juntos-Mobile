@@ -357,9 +357,11 @@ class Projects extends Component {
     // modal visible, and hide the status ber.
     this.setState({
       selectedProject: projectData,
-      modalVisible: MODAL_VISIBLE_TRUE_BOOL,
-      statusBarHidden: STATUS_BAR_HIDDEN_TRUE_BOOL
+      modalVisible: MODAL_VISIBLE_TRUE_BOOL
     });
+
+    if(Platform.OS == deviceTypes.ios)
+      this.setState({statusBarHidden: STATUS_BAR_HIDDEN_TRUE_BOOL})
 
   }
 
