@@ -85,7 +85,7 @@ export default StyleSheet.create({
   },
   buttonFixedBottom:{
     flex: 1,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     marginVertical: 10,
   },
 
