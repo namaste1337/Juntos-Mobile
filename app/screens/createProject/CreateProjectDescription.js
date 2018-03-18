@@ -247,10 +247,6 @@ class CreateProjectDescription extends Component {
 ////////////////////////
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.WHITE,
-  },
   tabBarIcon:{
     width: 25,
     height: 25
