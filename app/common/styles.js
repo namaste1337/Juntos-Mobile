@@ -60,8 +60,10 @@ export default StyleSheet.create({
   /////////////////////////
 
   headerTextButton:{
-    marginRight: 10,
-    color: COLORS.PRIMARY
+    marginRight: 15,
+    fontSize: 18,
+    color: COLORS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT
   },
 
   /////////////////////////
