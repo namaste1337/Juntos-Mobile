@@ -80,6 +80,8 @@ class  PrimaryTextInput extends Component {
 
     return (
 
+      // TODO: The following should implement the StaticField 
+      // component to redude duplication.
       <View style={textInputWrapStyle}>
         <TextInput
           {...this.props}
