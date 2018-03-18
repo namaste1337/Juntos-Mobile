@@ -105,8 +105,8 @@ class  PrimaryTextInput extends Component {
             </View>
             )}
             {/* Render the validation */}
+            {renderIf(!this.props.valid, <Text style={styles.inputValidationMessage}> {this.props.validationMessage} </Text>)}
           </View>
-          {renderIf(!this.props.valid, <Text style={styles.inputValidationMessage}> {this.props.validationMessage} </Text>)}
       </View>
 
     )
