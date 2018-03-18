@@ -7,7 +7,9 @@ import {bindActionCreators, connect} from 'react-redux';
 import {  
 StyleSheet,
 View,
-KeyboardAvoidingView
+KeyboardAvoidingView,
+TouchableOpacity,
+Text
 } from 'react-native';
 
  
@@ -66,6 +68,24 @@ const PROJECT_DESCRIPTION_VALIDATION_FALSE_STATE_BOOL    = false;
 
 class CreateProjectDescription extends Component {
 
+  ////////////////////////
+  // Navigation Options
+  ////////////////////////
+
+  static navigationOptions = ({navigation}) => {
+
+    const params = navigation.state.params || {};
+
+    return {
+      headerRight: (
+        <TouchableOpacity onPress={params.onNextButtonPress}>
+          <Text style={CommonStyles.headerTextButton}>{"Next"}</Text>
+        </TouchableOpacity>
+      ),
+    }
+
+  }
+
   ///////////////////////
   // Constructor
   ///////////////////////
@@ -83,6 +103,14 @@ class CreateProjectDescription extends Component {
       projectLocationIsValid: PROJECT_LOCATION_VALIDATION_TRUE_STATE_BOOL,
       projectDescriptionIsValid: PROJECT_DESCRIPTION_VALIDATION_TRUE_STATE_BOOL
     };
+  }
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  componentWillMount(){
+    this.props.navigation.setParams({ onNextButtonPress: () => this._onNextButtonPress() });
   }
 
   ////////////////////////
@@ -229,15 +257,13 @@ class CreateProjectDescription extends Component {
             validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
             valid={this.state.projectDescriptionIsValid} />
         </KeyboardAvoidingView>
-        <View style={CommonStyles.buttonFixedWrapper}> 
-          <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onNextButtonPress()} buttonText={NEXT_BUTTON_STRING}/>
-        </View>
         <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
           <GooglePlaces 
           ref={ref=> this._places = ref}
           onPress={(data, details) => this._onGooglePlacesPress(data, details)}/>
         </View>
       </View>
+
     );
   }
 }
