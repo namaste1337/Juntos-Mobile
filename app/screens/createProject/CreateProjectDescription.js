@@ -204,38 +204,38 @@ class CreateProjectDescription extends Component {
 
     return (
       <View style={CommonStyles.container}>
-      <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY} style={CommonStyles.contentWrapper}>
-        <PrimaryTextInput
-          onChangeText={projectNameField => this.setState({projectNameField})} 
-          placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
-          returnKeyType={RETURN_KEY_TYPE_PROPERTY} 
-          validationMessage={FIELD_VALIDATION_MESSAGE_STRING} 
-          valid={this.state.projectNameIsValid}/>
-        <PrimaryTextInput  
-          placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
-          returnKeyType={RETURN_KEY_TYPE_PROPERTY}
-          keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
-          value={this.state.projectLocationField}
-          validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
-          valid={this.state.projectLocationIsValid}
-          onFocus={() => this._onLocationFieldFocus() }/>
-        <PrimaryTextInput 
-          onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
-          placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
-          multiline={MULTILINE_ENABLED_TRUE_BOOL}
-          maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
-          returnKeyType={RETURN_KEY_TYPE_PROPERTY}
-          keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
-          validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
-          valid={this.state.projectDescriptionIsValid} />
-      </KeyboardAvoidingView>
-      <View style={CommonStyles.buttonFixedWrapper}> 
-        <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onNextButtonPress()} buttonText={NEXT_BUTTON_STRING}/>
-      </View>
-      <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
-        <GooglePlaces 
-        ref={ref=> this._places = ref}
-        onPress={(data, details) => this._onGooglePlacesPress(data, details)}/>
+        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY} style={CommonStyles.contentWrapper}>
+          <PrimaryTextInput
+            onChangeText={projectNameField => this.setState({projectNameField})} 
+            placeholder={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
+            returnKeyType={RETURN_KEY_TYPE_PROPERTY} 
+            validationMessage={FIELD_VALIDATION_MESSAGE_STRING} 
+            valid={this.state.projectNameIsValid}/>
+          <PrimaryTextInput  
+            placeholder={LOCATION_FIELD_PLACEHOLDER_STRING} 
+            returnKeyType={RETURN_KEY_TYPE_PROPERTY}
+            keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
+            value={this.state.projectLocationField}
+            validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+            valid={this.state.projectLocationIsValid}
+            onFocus={() => this._onLocationFieldFocus() }/>
+          <PrimaryTextInput 
+            onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
+            placeholder={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
+            multiline={MULTILINE_ENABLED_TRUE_BOOL}
+            maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
+            returnKeyType={RETURN_KEY_TYPE_PROPERTY}
+            keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
+            validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+            valid={this.state.projectDescriptionIsValid} />
+        </KeyboardAvoidingView>
+        <View style={CommonStyles.buttonFixedWrapper}> 
+          <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onNextButtonPress()} buttonText={NEXT_BUTTON_STRING}/>
+        </View>
+        <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
+          <GooglePlaces 
+          ref={ref=> this._places = ref}
+          onPress={(data, details) => this._onGooglePlacesPress(data, details)}/>
         </View>
       </View>
     );
