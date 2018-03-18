@@ -8,7 +8,9 @@ import {
 View,
 KeyboardAvoidingView,
 StyleSheet,
-Picker
+Picker,
+TouchableOpacity,
+Text
 } from 'react-native';
 
 //////////////////////////////
@@ -65,6 +67,29 @@ const PROJECT_TYPE_PICKER_DATA                  = ["Donation", "Senior Citizens"
 
 class CreateProjectDetails extends Component {
 
+
+  ////////////////////////
+  // Navigation Options
+  ////////////////////////
+
+  static navigationOptions = ({navigation}) => {
+
+    const params = navigation.state.params || {};
+
+    return {
+      headerRight: (
+        <TouchableOpacity onPress={params.onNextButtonPress}>
+          <Text style={CommonStyles.headerTextButton}>{"Next"}</Text>
+        </TouchableOpacity>
+      ),
+    }
+
+  }
+
+  ////////////////////////
+  // Constructor
+  ////////////////////////
+
   constructor(props){
     super(props);
     this.state = {
@@ -81,6 +106,15 @@ class CreateProjectDetails extends Component {
 
     }
   }
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  componentWillMount(){
+    this.props.navigation.setParams({ onNextButtonPress: () => this._onNextButtonPress() });
+  }
+
 
   ////////////////////////
   // Setters and Getters
@@ -182,7 +216,7 @@ class CreateProjectDetails extends Component {
 
 
   // Handles on project start date value change
-  _onNexButtonPress(){
+  _onNextButtonPress(){
     
     let isValid = this._validateFields();
     if(isValid){
@@ -318,9 +352,6 @@ class CreateProjectDetails extends Component {
 
     return (
       <View style={CommonStyles.container}>
-        <View style={CommonStyles.buttonFixedWrapper}> 
-          <PrimaryButton style={CommonStyles.buttonFixedBottom} onPress={() => this._onNexButtonPress()} buttonText={NEXT_BUTTON_STRING}/>
-        </View>
         <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY} style={CommonStyles.contentWrapper}>
           <DatePickerField  
           placeholder={PROJECT_START_PLACEHOLDER_STRING} 
