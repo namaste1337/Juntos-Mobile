@@ -24,17 +24,16 @@ export default StyleSheet.create({
   /////////////////////
 
  inputWrap: {
-    marginVertical: 10,
-    height: 50,
+    height: 60,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.MID_GREY
+    borderBottomColor: COLORS.MID_GREY,
   },
   input: {
     flex: 1,
     height: 100,
+    fontSize: 14,
     fontFamily: FONTS.PRIMARY,
     paddingHorizontal: 10,
-    paddingVertical: 10,
   },
 
   /////////////////////
@@ -43,14 +42,15 @@ export default StyleSheet.create({
 
   multilineInputSmall: {
     flex: 1,
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: FONTS.PRIMARY,
     paddingHorizontal: 10,
     paddingVertical: 10,
     textAlignVertical: "top",
   },
    multilineInputWrapSmall: {
-    height: 74,
+    paddingTop: 10,
+    minHeight: 100,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.MID_GREY,
   },
