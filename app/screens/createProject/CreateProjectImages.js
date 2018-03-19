@@ -12,6 +12,7 @@ StyleSheet,
 View,
 ActionSheetIOS,
 } from 'react-native';
+import DialogAndroid from 'react-native-dialogs';
 
 //////////////////////////////
 // Imports Common Files
@@ -21,6 +22,10 @@ ActionSheetIOS,
 import CommonStyles, {COLORS, FONTS} from "../../common/styles.js"
 // Conditional rendering
 import {renderIf} from "./../../common/components";
+import {
+deviceTypes, 
+deviceOS
+} from "./../../common/device";
 
 //////////////////////////////
 // Imports Libs
@@ -53,6 +58,12 @@ const CANCEL_OPTIONS_STRING             = "Cancel";
 const CAMERA_OPTIONS_STRING             = "Camera";
 const GALLERY_OPTIONS_STRING            = "Gallery";
 const REMOVE_OPTIONS_STRING             = "Remove";
+const SELECT_MEDIA_DIALOG_TITLE_STRING  = "Select Media";
+const MEDIA_ACTION_DIALOG_TITLE_STRING  = "Media Action"; 
+//Arrays
+const MEDIA_OPTIONS_IOS_ARRAY           = [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING];
+const MEDIA_OPTIONS_ANDROID_ARRAY       = [GALLERY_OPTIONS_STRING, CAMERA_OPTIONS_STRING];
+const REMOVE_OPTIONS_ANDROID_ARRAY      = [REMOVE_OPTIONS_STRING];
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER          = 45;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
@@ -85,6 +96,37 @@ class CreateProjectImages extends Component {
     this._jtImagePicker = new JTImagePicker();
 
   }
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  componentWillMount(){
+
+    // Configure the android media dialog
+    let andoridCameraDialogOptions = { 
+      items: MEDIA_OPTIONS_ANDROID_ARRAY,
+      title: SELECT_MEDIA_DIALOG_TITLE_STRING,
+      itemsCallback: (id, text) => this._openMediaType(id)
+    }
+
+    // Configure the android media dialog
+    let androidRemoveDialogOptions = { 
+      items: REMOVE_OPTIONS_ANDROID_ARRAY,
+      title: MEDIA_ACTION_DIALOG_TITLE_STRING,
+      itemsCallback: (id, text) => this._removeImageByIndex(id)
+    }
+
+    // Create and set the options for the media dialog
+    this.mediaDialog = new DialogAndroid();
+    this.mediaDialog.set(andoridCameraDialogOptions);
+
+    // Create nd set the options for the remove dialog
+    this.removeDialog = new DialogAndroid();
+    this.removeDialog.set(androidRemoveDialogOptions);
+
+  }
+
 
   ////////////////////////
   // Callbacks
@@ -168,29 +210,48 @@ class CreateProjectImages extends Component {
   // Displays an action sheet for the available media types
   _displayGalleryCameraMenu(){
 
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING],
-      cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
-    },
-    (buttonIndex) => {
-      this._openMediaType(buttonIndex);
-    });
+    if(deviceOS == deviceTypes.ios){
+
+      // Show the iOS Action Sheet
+      ActionSheetIOS.showActionSheetWithOptions({
+        options: MEDIA_OPTIONS_ARRAY,
+        cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
+      },
+      (buttonIndex) => {
+        this._openMediaType(buttonIndex);
+      });
+
+    }else{
+
+      // Show the android dialog
+      this.mediaDialog.show();
+
+    }
 
   }
 
   // Display an action sheet that allows for image removal
   _displayRemoveImageMenu(imageIndex){
 
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: [CANCEL_OPTIONS_STRING, REMOVE_OPTIONS_STRING],
-      destructiveButtonIndex: DESTRUCTIVE_BUTTON_INDEX_NUMBER,
-      cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
-    },
-    (buttonIndex) => {
-      if (buttonIndex === DESTRUCTIVE_BUTTON_INDEX_NUMBER) { 
-       this._removeImageByIndex(imageIndex);
-      }
-    });
+    if(deviceOS == deviceTypes.ios){
+
+      ActionSheetIOS.showActionSheetWithOptions({
+        options: MEDIA_OPTIONS_ARRAY,
+        destructiveButtonIndex: DESTRUCTIVE_BUTTON_INDEX_NUMBER,
+        cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
+      },
+      (buttonIndex) => {
+        if (buttonIndex === DESTRUCTIVE_BUTTON_INDEX_NUMBER) { 
+         this._removeImageByIndex(imageIndex);
+        }
+      });
+
+    }else{
+
+      // Show the android remove dialog
+      this.removeDialog.show();
+
+    }
 
   }
 
