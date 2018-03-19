@@ -63,7 +63,7 @@ const PROJECT_TYPE_VALID_FALSE_BOOL             = false;
 // Data
 const FOOD_PROVIDED_PICKER_DATA                 = ["Yes", "No"];
 const CURRENT_STATUS_PICKER_DATA                = ["Planning", "In Progress", "Finalizing"];
-const PROJECT_TYPE_PICKER_DATA                  = ["Donation", "Senior Citizens", "Animals", "Enviroment", "School"];
+const PROJECT_TYPE_PICKER_DATA                  = ["Donation", "Senior Citizens", "Animals", "Enviroment", "School", "Other"];
 
 class CreateProjectDetails extends Component {
 
