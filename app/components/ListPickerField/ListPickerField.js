@@ -13,12 +13,17 @@ import {
   Dimensions
 } from 'react-native'
 import PropTypes from "prop-types";
+import DialogAndroid from 'react-native-dialogs';
 
 ////////////////////////
 // Imports Common Files
 ////////////////////////
 
 import {COLORS} from "./../../common/styles";
+import {
+deviceTypes, 
+deviceOS
+} from "./../../common/device";
 
 //////////////////////
 //Import Styles
@@ -67,6 +72,25 @@ class  ListPickerField extends Component {
       yCoordinate: new Animated.Value(height),
       listPickerValue: PICKER_VALUE_EMPTY_STRING
     }
+
+  }
+
+  ////////////////////////
+  // Life cycle
+  ////////////////////////
+
+  componentWillMount(){
+
+    // Configure the Android Material dialog
+    this.options = { 
+      items: this.props.pickerData,
+      title: this.props.placeholder,
+      itemsCallback: (id, text) => this._onItemSelectAndroid(text)
+    }
+
+    this.dialog = new DialogAndroid();
+    this.dialog.set(this.options);
+
   }
 
   ////////////////////////
@@ -93,13 +117,28 @@ class  ListPickerField extends Component {
   // Callbacks
   ////////////////////////
 
+  // Handles item selelction for the android
+  // material dialog.
+  _onItemSelectAndroid(item){
+
+    this._onPickerItemSelect(item);
+    this._sendValueToCallback(item);
+
+  }
+
   // Handles displaying the picker when 
   // the field is selected
   _onInputPress(){
 
-    this.setState({
-      modalVisible: MODAL_VISIBLE_TRUE_BOOL
-    })
+    if(deviceOS == deviceTypes.ios){
+      // Show the iOS list picker wheel
+      this.setState({
+        modalVisible: MODAL_VISIBLE_TRUE_BOOL
+      })
+    }else{
+      // Show the android dialog list
+      this.dialog.show();
+    }
 
   }
 
