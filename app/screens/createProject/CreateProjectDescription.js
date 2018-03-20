@@ -9,7 +9,8 @@ StyleSheet,
 View,
 KeyboardAvoidingView,
 TouchableOpacity,
-Text
+Text,
+Keyboard
 } from 'react-native';
 
  
@@ -19,7 +20,11 @@ Text
 
 // Common styles
 import CommonStyles from "./../../common/styles";
-import {deviceProperties} from "./../../common/device";
+import {
+deviceProperties,
+deviceTypes, 
+deviceOS 
+} from "./../../common/device";
 import {COLORS} from "./../../common/styles";
 
 ////////////////////////
@@ -143,6 +148,10 @@ class CreateProjectDescription extends Component {
       
       // Navigate to next view to continue the create project sequence
       this.props.navigateToCreateProjectDetails();
+
+      // Close the keyboard 
+      if(deviceOS == deviceTypes.android)
+        Keyboard.dismiss();
 
     }
 
