@@ -39,6 +39,7 @@ import JTImagePicker from "./../../lib/JTImagePicker";
 
 import PrimaryButton from "./../../components/PrimaryButton";
 import CardView from "./../../components/CardView";
+import TouchableText from "./../../components/TouchableText";
 
 ////////////////////////
 // Actions
@@ -59,7 +60,8 @@ const CAMERA_OPTIONS_STRING             = "Camera";
 const GALLERY_OPTIONS_STRING            = "Gallery";
 const REMOVE_OPTIONS_STRING             = "Remove";
 const SELECT_MEDIA_DIALOG_TITLE_STRING  = "Select Media";
-const MEDIA_ACTION_DIALOG_TITLE_STRING  = "Media Action"; 
+const MEDIA_ACTION_DIALOG_TITLE_STRING  = "Media Action";
+const PREVIEW_BUTTON_STRING             = "Preview";
 //Arrays
 const MEDIA_OPTIONS_IOS_ARRAY           = [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING];
 const MEDIA_OPTIONS_ANDROID_ARRAY       = [GALLERY_OPTIONS_STRING, CAMERA_OPTIONS_STRING];
@@ -79,6 +81,20 @@ const IMAGE_GRID_PLACEMENT              = (width-IMAGE_GRID_OFFSET_NUMBER)/3;
 
 class CreateProjectImages extends Component {
 
+  ////////////////////////
+  // Navigation Options
+  ////////////////////////
+
+  static navigationOptions = ({navigation}) => {
+
+    const params = navigation.state.params || {};
+
+    return {
+      headerRight: (
+        <TouchableText style={CommonStyles.headerTextButton} text={PREVIEW_BUTTON_STRING} onPress={params.onPreviewImageButtonPress} />
+      ),
+    }
+  }
 
   ////////////////////////
   // Constructor
@@ -125,7 +141,10 @@ class CreateProjectImages extends Component {
     this.removeDialog = new DialogAndroid();
     this.removeDialog.set(androidRemoveDialogOptions);
 
+    this.props.navigation.setParams({ onPreviewImageButtonPress: () => this._onPreviewImageButtonPress() });
+ 
   }
+
 
 
   ////////////////////////
@@ -299,12 +318,7 @@ class CreateProjectImages extends Component {
             <Text style={styles.addImageText}>Add Image</Text>
           </CardView>
         </View>
-      </View>
-      <View style={CommonStyles.buttonFixedWrapper}> 
-        <PrimaryButton style={CommonStyles.buttonFixedBottom} 
-        onPress={() => this._onPreviewImageButtonPress()} 
-        buttonText={PREVIEW_PROJECT_BUTTON_STRING}/>
-      </View>
+      </View> 
      </View>
     );
   }
