@@ -38,6 +38,7 @@ navigateToCreateProjectDetails
 import PrimaryButton from "./../../components/PrimaryButton";
 import PrimaryTextInput from "./../../components/PrimaryTextInput";
 import GooglePlaces from "./../../components/GooglePlaces";
+import TouchableText from "./../../components/TouchableText";
 
 ////////////////////////
 // Constants
@@ -78,9 +79,7 @@ class CreateProjectDescription extends Component {
 
     return {
       headerRight: (
-        <TouchableOpacity onPress={params.onNextButtonPress}>
-          <Text style={CommonStyles.headerTextButton}>{"Next"}</Text>
-        </TouchableOpacity>
+        <TouchableText style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
       ),
     }
 

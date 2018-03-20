@@ -31,6 +31,7 @@ import PrimaryTextInput from './../../components/PrimaryTextInput';
 import DatePickerField from './../../components/DatePickerField';
 import PrimaryButton from './../../components/PrimaryButton';
 import ListPickerField from './../../components/ListPickerField';
+import TouchableText from "./../../components/TouchableText";
 
 ////////////////////////
 // Constants
@@ -75,9 +76,7 @@ class CreateProjectDetails extends Component {
 
     return {
       headerRight: (
-        <TouchableOpacity onPress={params.onNextButtonPress}>
-          <Text style={CommonStyles.headerTextButton}>{"Next"}</Text>
-        </TouchableOpacity>
+        <TouchableText style={CommonStyles.headerTextButton} text={"Next"} onPress={params.onNextButtonPress} />
       ),
     }
 
