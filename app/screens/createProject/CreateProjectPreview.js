@@ -25,6 +25,7 @@ import CommonStyles from "./../../common/styles.js"
 
 import Details from "./../components/Details";
 import ActivityIndicatorOverlay from "./../../components/ActivityIndicatorOverlay";
+import TouchableText from "./../../components/TouchableText";
 
 ////////////////////////
 // Actions
@@ -51,9 +52,7 @@ class ProjectDetails extends Component {
 
     return {
       headerRight: (
-        <TouchableOpacity onPress={() => params.onSubmit()}>
-          <Text style={CommonStyles.headerTextButton}>{SAVE_STRING}</Text>
-        </TouchableOpacity>
+        <TouchableText style={CommonStyles.headerTextButton} text={SAVE_STRING} onPress={() => params.onSubmit()} />
       ),
     }
 
