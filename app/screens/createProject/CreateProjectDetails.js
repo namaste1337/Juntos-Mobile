@@ -76,7 +76,7 @@ class CreateProjectDetails extends Component {
 
     return {
       headerRight: (
-        <TouchableText style={CommonStyles.headerTextButton} text={"Next"} onPress={params.onNextButtonPress} />
+        <TouchableText style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
       ),
     }
 
