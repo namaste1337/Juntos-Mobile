@@ -8,9 +8,6 @@ import {
 View,
 KeyboardAvoidingView,
 StyleSheet,
-Picker,
-TouchableOpacity,
-Text
 } from 'react-native';
 
 //////////////////////////////
