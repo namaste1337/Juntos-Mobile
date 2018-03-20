@@ -233,7 +233,7 @@ class CreateProjectImages extends Component {
 
       // Show the iOS Action Sheet
       ActionSheetIOS.showActionSheetWithOptions({
-        options: MEDIA_OPTIONS_ARRAY,
+        options: MEDIA_OPTIONS_IOS_ARRAY,
         cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
       },
       (buttonIndex) => {
