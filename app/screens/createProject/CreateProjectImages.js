@@ -91,7 +91,7 @@ class CreateProjectImages extends Component {
 
     return {
       headerRight: (
-        <TouchableText style={CommonStyles.headerTextButton} text={PREVIEW_BUTTON_STRING} onPress={params.onPreviewImageButtonPress} />
+        <TouchableText parentStyle={CommonStyles.headerParentStyle} style={CommonStyles.headerTextButton} text={PREVIEW_BUTTON_STRING} onPress={params.onPreviewImageButtonPress} />
       ),
     }
   }

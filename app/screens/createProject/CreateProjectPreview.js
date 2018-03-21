@@ -50,7 +50,7 @@ class ProjectDetails extends Component {
 
     return {
       headerRight: (
-        <TouchableText style={CommonStyles.headerTextButton} text={SAVE_STRING} onPress={() => params.onSubmit()} />
+        <TouchableText parentStyle={CommonStyles.headerParentStyle} style={CommonStyles.headerTextButton} text={SAVE_STRING} onPress={() => params.onSubmit()} />
       ),
     }
 

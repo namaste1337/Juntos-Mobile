@@ -7,7 +7,7 @@ import {bindActionCreators, connect} from 'react-redux';
 import { 
 View,
 KeyboardAvoidingView,
-StyleSheet,
+StyleSheet
 } from 'react-native';
 
 //////////////////////////////
@@ -76,7 +76,7 @@ class CreateProjectDetails extends Component {
 
     return {
       headerRight: (
-        <TouchableText style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
+        <TouchableText parentStyle={CommonStyles.headerParentStyle} style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
       ),
     }
 

@@ -82,7 +82,7 @@ class CreateProjectDescription extends Component {
 
     return {
       headerRight: (
-        <TouchableText style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
+        <TouchableText parentStyle={CommonStyles.headerParentStyle} style={CommonStyles.headerTextButton} text={NEXT_BUTTON_STRING} onPress={params.onNextButtonPress} />
       ),
     }
 

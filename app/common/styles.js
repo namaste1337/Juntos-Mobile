@@ -59,6 +59,10 @@ export default StyleSheet.create({
   //  Header Buttons
   /////////////////////////
 
+  headerParentStyle:{
+    flex: 1,
+    justifyContent: "center"
+  },
   headerTextButton:{
     marginRight: 15,
     fontSize: 18,
