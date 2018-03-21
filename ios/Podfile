@@ -29,12 +29,10 @@ target 'Juntos' do
     'DevSupport'
   ]
   pod 'react-native-maps', path: rn_maps_path
-  
-
   pod 'Picker', :path => '../node_modules/react-native-picker'
-
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-
+  pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
+  
 end
 
 
