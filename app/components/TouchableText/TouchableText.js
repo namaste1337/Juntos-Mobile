@@ -21,7 +21,8 @@ import styles from "./styles";
 
 //Strings
 const ACTIVE_OPACITY = 0.5; // Move to commons/styles.js
-
+// Properties
+const HIT_SLOP_PROPERTY = {top: 10, left: 10,bottom: 10, right: 10};
 ////////////////////////
 // Component
 ////////////////////////
@@ -34,10 +35,8 @@ class  TouchableText extends Component {
 
   render(){
     return (
-      <TouchableOpacity activeOpacity={ACTIVE_OPACITY}>
-        <View>
-          <Text style={[this.props.style, styles.textButton]} onPress={this.props.onPress}>{this.props.text}</Text>
-        </View>
+      <TouchableOpacity style={this.props.parentStyle} hitSlop={HIT_SLOP_PROPERTY} onPress={this.props.onPress} activeOpacity={ACTIVE_OPACITY}>
+        <Text style={[styles.textButton, this.props.style]} >{this.props.text}</Text>
       </TouchableOpacity>
     )
   }
