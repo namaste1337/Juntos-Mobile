@@ -63,54 +63,59 @@ import Icon from "./../components/Icon";
 ////////////////////////
 
 // Number
-const ASPECT_RATIO_NUMBER                 = deviceProperties.width / deviceProperties.height;
-const LATITUDE_DELTA_NUMBER               = 0.0900;
-const LONGITUDE_DELTA_NUMBER              = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
-const INITIAL_LONGITUDE_NUMBER            = 95.50; // Center of the U.S.
-const INITIAL_LATITUDE_NUMBER             = -98.35; // Center of the U.S.
-const PROJECT_FETCH_LIMIT_NUMBER          = 10;
-const REGION_ANIMATION_DURATION_NUMBER    = 500;
+const ASPECT_RATIO_NUMBER                     = deviceProperties.width / deviceProperties.height;
+const LATITUDE_DELTA_NUMBER                   = 0.0900;
+const LONGITUDE_DELTA_NUMBER                  = LATITUDE_DELTA_NUMBER * ASPECT_RATIO_NUMBER;
+const INITIAL_LONGITUDE_NUMBER                = 95.50; // Center of the U.S.
+const INITIAL_LATITUDE_NUMBER                 = -98.35; // Center of the U.S.
+const PROJECT_FETCH_LIMIT_NUMBER              = 10;
+const REGION_ANIMATION_DURATION_NUMBER        = 500;
 // The following value represents the number miles a user must pan the map before
 // showing the redo-Search button. Adjust accordingly 
-const REDO_SEARCH_DISTANCE_THRESHOLD      = 20; 
+const REDO_SEARCH_DISTANCE_THRESHOLD          = 20; 
 // Bools
-const PAGE_INDICATOR_BOOL                 = true;
-const GPS_HIGH_ACCURACY_BOOL              = false;
-const MODAL_TRANSPARENT_BOOL              = false;
-const ACTIVITY_INDICACTOR_ANIMATING_BOOL  = true;
-const IS_ANIMATING_FALSE_BOOL             = false;
-const IS_ANIMATING_TRUE_BOOL              = true;
-const INITIAL_ANIMATION_FALSE_BOOL        = false;
-const INITIAL_ANIMATION_TRUE_BOOL         = true;
-const IS_FETCHING_FALSE_BOOL              = false;
-const IS_FETCHING_TRUE_BOOL               = true;
-const REDO_SEARCH_VISIBLE_FALSE_BOOL      = false;
-const REDO_SEARCH_VISIBLE_TRUE_BOOL       = true;
-const STATUS_BAR_HIDDEN_FALSE_BOOL        = false;
-const STATUS_BAR_HIDDEN_TRUE_BOOL         = true;
-const MODAL_VISIBLE_FALSE_BOOL            = false;
-const MODAL_VISIBLE_TRUE_BOOL             = true;
-const SHOWING_GPS_WARNING_FALSE_BOOL      = false;
-const SHOWING_GPS_WARNING_TRUE_BOOL       = true;
-const GPS_ENABLED_FALSE_BOOL              = false;
-const GPS_ENABLED_TRUE_BOOL               = true;
-const SHOW_MY_LOCATION_BUTTON_FALSE_BOOL  = false;
+const PAGE_INDICATOR_BOOL                     = true;
+const GPS_HIGH_ACCURACY_BOOL                  = false;
+const MODAL_TRANSPARENT_BOOL                  = false;
+const ACTIVITY_INDICACTOR_ANIMATING_BOOL      = true;
+const IS_ANIMATING_FALSE_BOOL                 = false;
+const IS_ANIMATING_TRUE_BOOL                  = true;
+const INITIAL_ANIMATION_FALSE_BOOL            = false;
+const INITIAL_ANIMATION_TRUE_BOOL             = true;
+const IS_FETCHING_FALSE_BOOL                  = false;
+const IS_FETCHING_TRUE_BOOL                   = true;
+const REDO_SEARCH_VISIBLE_FALSE_BOOL          = false;
+const REDO_SEARCH_VISIBLE_TRUE_BOOL           = true;
+const STATUS_BAR_HIDDEN_FALSE_BOOL            = false;
+const STATUS_BAR_HIDDEN_TRUE_BOOL             = true;
+const MODAL_VISIBLE_FALSE_BOOL                = false;
+const MODAL_VISIBLE_TRUE_BOOL                 = true;
+const SHOWING_GPS_WARNING_FALSE_BOOL          = false;
+const SHOWING_GPS_WARNING_TRUE_BOOL           = true;
+const GPS_ENABLED_FALSE_BOOL                  = false;
+const GPS_ENABLED_TRUE_BOOL                   = true;
+const SHOW_MY_LOCATION_BUTTON_FALSE_BOOL      = false;
+// Values
+const PERMISSION_RESPONSE_DENIED_VALUE        = "denied";
+const PERMISSION_RESPONSE_RESTRICTED_VALUE    = "restricted";
+const PERMISSION_RESPONSE_UNDETERMINED_VALUE  = "undetermined";
+const PERMISSION_LOCATION_VALUE               = "location";
 // Image
-const PROJECT_TABBAR_ICON_IMAGE           = require("./../assets/tabbar/project_icon.png");
-const MAP_MARKER_IMAGE                    = require("./../assets/projects/map_marker.png");
-const ADD_PROJECT_BUTTON_IMAGE            = require("./../assets/projects/add_project_button.png")
-// String 
-const MILES_UNIT_STRING                   = "Miles";
-const KILOMETERS_UNIT_STRING              = "Kilometers";
-const ACTIVITY_INDICATOR_SIZE_STRING      = "large";
-const REDO_SEARCH_BUTTON_STRING           = "Redo Search In This Area";
-const RETRY_BUTTON_STRING                 = "RETRY";
-const MODAL_ANIMATION_STRING              = "slide";
-const APP_STATE_CHANGE_STRING             = "change";
-const APP_STATE_ACTIVE_STRING             = "active";
-const GPS_WARNING_HEADER_STRING           = "Juntos Requires Location Access";
-const GPS_WARNING_BODY_STRING             = "Please turn on your GPS, and enable GPS permissions."
-
+const PROJECT_TABBAR_ICON_IMAGE               = require("./../assets/tabbar/project_icon.png");
+const MAP_MARKER_IMAGE                        = require("./../assets/projects/map_marker.png");
+const ADD_PROJECT_BUTTON_IMAGE                = require("./../assets/projects/add_project_button.png")
+// String     
+const MILES_UNIT_STRING                       = "Miles";
+const KILOMETERS_UNIT_STRING                  = "Kilometers";
+const ACTIVITY_INDICATOR_SIZE_STRING          = "large";
+const REDO_SEARCH_BUTTON_STRING               = "Redo Search In This Area";
+const RETRY_BUTTON_STRING                     = "RETRY";
+const MODAL_ANIMATION_STRING                  = "slide";
+const APP_STATE_CHANGE_STRING                 = "change";
+const APP_STATE_ACTIVE_STRING                 = "active";
+const GPS_WARNING_HEADER_STRING               = "Juntos Requires Location Access";
+const GPS_WARNING_BODY_STRING                 = "Please turn on your GPS, and enable GPS permissions."
+  
 
 class Projects extends Component {
 
@@ -288,9 +293,9 @@ class Projects extends Component {
   _getDataByGpsLocation(){
 
     // Handle iOS and Android dangerous permissions
-    Permissions.request('location').then(response => {
+    Permissions.request(PERMISSION_LOCATION_VALUE).then(response => {
       console.log(response);
-      if(response === "denied" || response === "restricted" || response === "undetermined"){
+      if(response === PERMISSION_RESPONSE_DENIED_VALUE || response === PERMISSION_RESPONSE_RESTRICTED_VALUE || response === PERMISSION_RESPONSE_UNDETERMINED_VALUE){
         this._platformGpsSettingPrompt();
         return 
       }
