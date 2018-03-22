@@ -596,7 +596,8 @@ class Projects extends Component {
         <Modal
           animationType={MODAL_ANIMATION_STRING}
           transparent={MODAL_TRANSPARENT_BOOL}
-          visible={this.state.modalVisible}>
+          visible={this.state.modalVisible}
+          onRequestClose={()=> this._onModalClosePressed()}>
           {this.state.selectedProject != null &&
            <Details
             images={this.state.selectedProject.images}
