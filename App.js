@@ -3,8 +3,10 @@
 ///////////////////////////
 
 import React from 'react';
-import {Provider} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
+import { BackHandler } from "react-native";
+import { addNavigationHelpers, NavigationActions } from "react-navigation";
 
 ///////////////////////////
 // Navigation
@@ -45,8 +47,47 @@ require('./app/extensions/strings');
 import Services, { NETWORK_EVENT_TYPES } from "./app/services/api";
 
 
+///////////////////////////
+// Constants
+///////////////////////////
+
+// Events
+const HARDWARE_BACK_PRESS_EVENT = "hardwareBackPress";
+// Bools
+const ON_BACK_PRESS_FALSE_BOOL  = false;
+const ON_BACK_PRESS_TRUE_BOOL   = true;
 
 export default class App extends React.Component {
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  // Handles Android back button press
+  onBackPress = () => {
+
+    const state = store.getState();
+    const nav   = state.nav;
+
+    if (nav.index === 0) {
+      return ON_BACK_PRESS_FALSE_BOOL;
+    }
+
+    store.dispatch(NavigationActions.back());
+    return ON_BACK_PRESS_TRUE_BOOL;
+
+  };
+
+  ////////////////////////
+  // Life Cycle
+  ////////////////////////
+
+  componentWillUnmount() {
+
+    // Remove the Android back button listener
+    BackHandler.removeEventListener(HARDWARE_BACK_PRESS_EVENT, this.onBackPress);
+    
+  } 
 
   componentWillMount(){
 
@@ -57,13 +98,22 @@ export default class App extends React.Component {
   		store.dispatch(accountLogout());
   	})
 
-  } 
+    // Listen for the Android back button
+    BackHandler.addEventListener(HARDWARE_BACK_PRESS_EVENT, this.onBackPress);
+
+  }
+
+  ////////////////////////
+  // Screen UI
+  ////////////////////////
 
   render() {
+
     return (
       <Provider store={store}>
         <AppNavigatorContainer />
       </Provider>
     );
   }
+
 }
