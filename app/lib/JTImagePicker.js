@@ -9,6 +9,7 @@ import {
   Linking
 } from "react-native"
 import ImagePicker from 'react-native-image-crop-picker';
+import OpenAppSettings from 'react-native-app-settings';
 
 //////////////////////////////
 // Imports Custom Components
@@ -21,26 +22,40 @@ import {basicAlert} from  "./../common/alerts";
 ////////////////////////
 
 // Properties
-const MEDIA_OPTIONS_PROPERTY            = { width: 400, height: 300, cropping: true }
-// Strings
-const PHOTO_WARNING_HEADER_STRING       = "Juntos Requires Photos Access";
-const PHOTO_WARNING_BODY_STRING         = "Go to the app settings and enable Photos.";
-const CAMERA_WARNING_HEADER_STRING      = "Juntos Requires Camera Access";
-const CAMERA_WARNING_BODY_STRING        = "Go to the app settings and enable Camera.";
-const APP_SETTINGS_URL_STRING           = "app-settings:";
+const MEDIA_OPTIONS_PROPERTY              = { width: 400, height: 300, cropping: true }
+// Strings  
+const PHOTO_WARNING_HEADER_STRING         = "Juntos Requires Photos Access";
+const PHOTO_WARNING_BODY_STRING           = "Go to the app settings and enable Photos Permissions.";
+const CAMERA_WARNING_HEADER_STRING        = "Juntos Requires Camera Access";
+const CAMERA_WARNING_BODY_STRING          = "Go to the app settings and enable Camera Permissions.";
+const FILE_WARNING_HEADER_STRING          = "Juntos Requires Storage Access";
+const FILE_WARNING_BODY_STRING            = "Go to the app settings and enable Storage Permissions.";
 // Regex Patterns
-const IMAGE_ACCCESS_PATTERN             = /Cannot access images/;
-const CAMERA_PERMISSIONS_PATTERN        = /camera permission/;
+const IMAGE_ACCCESS_PATTERN               = /Cannot access images/;
+const CAMERA_PERMISSIONS_PATTERN          = /camera permission/;
+const ANDROID_FILE_PERMISSIONS_PATTERN    = /open failed: ENOENT/;
 
 class JTImagePicker {
+
+  ////////////////////////
+  // Constructor
+  ////////////////////////
+
+  constructor(){
+
+    this._isAlertVisible = false;
+
+  }
 
   ////////////////////////
   // Callbacks
   ////////////////////////
 
+  // Handles on Alert buttton press
   _onAlertButtonPress = () => {
 
-    Linking.openURL(APP_SETTINGS_URL_STRING)
+    OpenAppSettings.open();
+    this._isAlertVisible = false;
 
   }
 
@@ -48,33 +63,16 @@ class JTImagePicker {
   // Private Methods
   ////////////////////////
 
-
-  // Prompts the user to enable Photo permissions 
-  // via the iOS app settings screen.
-  _photoSettingsAlert(){
-    
+  // Creates an alert takes a header and body
+  _createAlert(header, body){
     if(!this._isAlertVisible){
+      this._isAlertVisible = true;
       basicAlert(
-        PHOTO_WARNING_HEADER_STRING, 
-        PHOTO_WARNING_BODY_STRING,
+        header, 
+        body,
         this._onAlertButtonPress
       );
     }
-
-  }
-  
-  // Prompts the user to enable Camera permissions 
-  // via the iOS app settings screen.
-  _cameraSettingsAlert(){
-  
-    if(!this._isAlertVisible){
-      basicAlert(
-        CAMERA_WARNING_HEADER_STRING, 
-        CAMERA_WARNING_BODY_STRING,
-        this._onAlertButtonPress
-      );
-    }
-      
   }
 
   ////////////////////////
@@ -89,7 +87,7 @@ class JTImagePicker {
         resolve(image);
       }).catch(error=>{
         if(error.message.match(IMAGE_ACCCESS_PATTERN))
-          this._photoSettingsAlert();
+          this._createAlert(PHOTO_WARNING_HEADER_STRING, PHOTO_WARNING_BODY_STRING);
       });
     })
 
@@ -102,9 +100,11 @@ class JTImagePicker {
       ImagePicker.openCamera(MEDIA_OPTIONS_PROPERTY).then(image => {
         resolve(image);
       }).catch(error=>{
-        console.log(error.message);
-        if(error.message.match(CAMERA_PERMISSIONS_PATTERN))
-          this._cameraSettingsAlert();
+        if(error.message.match(CAMERA_PERMISSIONS_PATTERN)){
+          this._createAlert(CAMERA_WARNING_HEADER_STRING, CAMERA_WARNING_BODY_STRING); 
+        }else if(error.message.match(ANDROID_FILE_PERMISSIONS_PATTERN)){
+          this._createAlert(FILE_WARNING_HEADER_STRING, FILE_WARNING_BODY_STRING);
+        }
       });
     });
 
