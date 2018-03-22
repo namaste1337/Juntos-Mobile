@@ -5,6 +5,8 @@
 import React, { Component } from 'react';
 import {bindActionCreators, connect} from 'react-redux';
 import MapView from 'react-native-maps';
+import Permissions from 'react-native-permissions';
+import OpenAppSettings from 'react-native-app-settings';
 import {
   View,
   StyleSheet,
@@ -107,8 +109,7 @@ const MODAL_ANIMATION_STRING              = "slide";
 const APP_STATE_CHANGE_STRING             = "change";
 const APP_STATE_ACTIVE_STRING             = "active";
 const GPS_WARNING_HEADER_STRING           = "Juntos Requires Location Access";
-const GPS_WARNING_BODY_STRING             = "Go to the app settings and enable location.";
-const APP_SETTING_URL_STRING              = 'app-settings:';
+const GPS_WARNING_BODY_STRING             = "Please turn on your GPS, and enable GPS permissions."
 
 
 class Projects extends Component {
@@ -252,16 +253,15 @@ class Projects extends Component {
 
   }
 
-  // Prompts the user to enable GPS via the 
-  // iOS app settings screen.
-  _displayGpsSettingsPrompt(){
+  // Created a setting prompt for GPS settings
+  _displayGpsSettingsPrompt(header, body){
 
     if(!this.state.showingGpsWarning){
       basicAlert(
-        GPS_WARNING_HEADER_STRING, 
-        GPS_WARNING_BODY_STRING,
+        header, 
+        body,
         () =>{ 
-          Linking.openURL(APP_SETTING_URL_STRING)
+          OpenAppSettings.open();
           this.setState({
             showingGpsWarning: SHOWING_GPS_WARNING_FALSE_BOOL
           })
@@ -271,6 +271,14 @@ class Projects extends Component {
         showingGpsWarning: SHOWING_GPS_WARNING_TRUE_BOOL
       })
     }
+
+  }
+
+  // Handles displaying the GPS setting prompt
+  _platformGpsSettingPrompt(){
+      
+    this._displayGpsSettingsPrompt(GPS_WARNING_HEADER_STRING, GPS_WARNING_BODY_STRING);
+
   }
 
   // Handles fetching the user GPS location and 
@@ -279,32 +287,38 @@ class Projects extends Component {
   // calcualte the project to user location distance deltas.
   _getDataByGpsLocation(){
 
-    // If the users device is iOS, prompt for 
-    // location permissions
-    if(Platform.OS == deviceTypes.ios)
-      navigator.geolocation.requestAuthorization();
-    // Get the users current location
-    navigator.geolocation.getCurrentPosition(data => {
+    // Handle iOS and Android dangerous permissions
+    Permissions.request('location').then(response => {
+      console.log(response);
+      if(response === "denied" || response === "restricted" || response === "undetermined"){
+        this._platformGpsSettingPrompt();
+        return 
+      }
 
-      this._userLat = data.coords.latitude;
-      this._userLng = data.coords.longitude;
+      // Returns once the user has chosen to 'allow' or to 'not allow' access
+      // Response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+      navigator.geolocation.getCurrentPosition(data => {
 
-      // We cache this location to later be able to
-      // determine if the use has panned the map.
-      // If the map is panned past the threshold 
-      // the user will be presented with a redo search 
-      // in this area button.
-      this._currentRegionLat = data.coords.latitude;
-      this._currentRegionLng = data.coords.longitude;
+        this._userLat = data.coords.latitude;
+        this._userLng = data.coords.longitude;
   
-      // Fetch project data by location and radius 
-      this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
-      this.setState({gpsEnabled: GPS_ENABLED_TRUE_BOOL});
-    }, error => {
-      if(Platform.OS == deviceTypes.ios)
-        this._displayGpsSettingsPrompt();
-    }, {
-      enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
+        // We cache this location to later be able to
+        // determine if the use has panned the map.
+        // If the map is panned past the threshold 
+        // the user will be presented with a redo search 
+        // in this area button.
+        this._currentRegionLat = data.coords.latitude;
+        this._currentRegionLng = data.coords.longitude;
+    
+        // Fetch project data by location and radius 
+        this.props.getProjectsByLocation(this._userLat, this._userLng, this.state.radius, PROJECT_FETCH_LIMIT_NUMBER);
+        this.setState({gpsEnabled: GPS_ENABLED_TRUE_BOOL});
+      }, error => {
+        this._platformGpsSettingPrompt();
+      }, {
+        enableHighAccuracy: GPS_HIGH_ACCURACY_BOOL // Allows for high accuracy gps coordinates
+      });
+
     });
 
   }
