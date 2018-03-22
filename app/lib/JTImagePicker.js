@@ -34,6 +34,9 @@ const FILE_WARNING_BODY_STRING            = "Go to the app settings and enable S
 const IMAGE_ACCCESS_PATTERN               = /Cannot access images/;
 const CAMERA_PERMISSIONS_PATTERN          = /camera permission/;
 const ANDROID_FILE_PERMISSIONS_PATTERN    = /open failed: ENOENT/;
+// Bool
+const ALERT_VISIBLE_TRUE_BOOL             = true;
+const ALERT_VISIBLE_FALSE_BOOL            = false;
 
 class JTImagePicker {
 
@@ -43,7 +46,7 @@ class JTImagePicker {
 
   constructor(){
 
-    this._isAlertVisible = false;
+    this._isAlertVisible = ALERT_VISIBLE_FALSE_BOOL;
 
   }
 
@@ -55,7 +58,7 @@ class JTImagePicker {
   _onAlertButtonPress = () => {
 
     OpenAppSettings.open();
-    this._isAlertVisible = false;
+    this._isAlertVisible = ALERT_VISIBLE_FALSE_BOOL;
 
   }
 
@@ -66,7 +69,7 @@ class JTImagePicker {
   // Creates an alert takes a header and body
   _createAlert(header, body){
     if(!this._isAlertVisible){
-      this._isAlertVisible = true;
+      this._isAlertVisible = ALERT_VISIBLE_TRUE_BOOL;
       basicAlert(
         header, 
         body,
