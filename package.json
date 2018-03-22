@@ -12,6 +12,7 @@
 		"create-react-class": "^15.6.2",
 		"react": "16.2.0",
 		"react-native": "0.53.0",
+		"react-native-app-settings": "^2.0.0",
 		"react-native-cli": "^2.0.1",
 		"react-native-datepicker": "^1.6.0",
 		"react-native-device-info": "^0.17.4",
