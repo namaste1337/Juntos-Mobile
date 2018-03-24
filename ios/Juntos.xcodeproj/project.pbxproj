@@ -1305,6 +1305,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.juntosplatform.production;
 				PRODUCT_NAME = Juntos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1335,6 +1336,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.juntosplatform.production;
 				PRODUCT_NAME = Juntos;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
