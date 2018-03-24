@@ -65,11 +65,11 @@ const PREVIEW_BUTTON_STRING             = "Preview";
 //Arrays
 const MEDIA_OPTIONS_IOS_ARRAY           = [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS_STRING, GALLERY_OPTIONS_STRING];
 const MEDIA_OPTIONS_ANDROID_ARRAY       = [GALLERY_OPTIONS_STRING, CAMERA_OPTIONS_STRING];
-const REMOVE_OPTIONS_ANDROID_ARRAY      = [REMOVE_OPTIONS_STRING];
+const REMOVE_OPTIONS_ARRAY              = [REMOVE_OPTIONS_STRING];
 // Numbers
 const IMAGE_GRID_OFFSET_NUMBER          = 45;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
-const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 1;
+const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 0;
 const OPEN_CAMERA_BUTTON_INDEX_NUMBER   = 1;
 const IMAGE_DELETE_COUNT_NUMBER         = 1; 
 // Device
@@ -128,7 +128,7 @@ class CreateProjectImages extends Component {
 
     // Configure the android media dialog
     let androidRemoveDialogOptions = { 
-      items: REMOVE_OPTIONS_ANDROID_ARRAY,
+      items: REMOVE_OPTIONS_ARRAY,
       title: MEDIA_ACTION_DIALOG_TITLE_STRING,
       itemsCallback: (id, text) => this._removeImageByIndex(id)
     }
@@ -255,7 +255,7 @@ class CreateProjectImages extends Component {
     if(deviceOS == deviceTypes.ios){
 
       ActionSheetIOS.showActionSheetWithOptions({
-        options: MEDIA_OPTIONS_ARRAY,
+        options: REMOVE_OPTIONS_ARRAY,
         destructiveButtonIndex: DESTRUCTIVE_BUTTON_INDEX_NUMBER,
         cancelButtonIndex: CANCEL_BUTTON_INDEX_NUMBER,
       },
