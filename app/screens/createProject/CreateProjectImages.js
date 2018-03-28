@@ -130,7 +130,7 @@ class CreateProjectImages extends Component {
     let androidRemoveDialogOptions = { 
       items: REMOVE_OPTIONS_ARRAY,
       title: MEDIA_ACTION_DIALOG_TITLE_STRING,
-      itemsCallback: (id, text) => this._removeImageByIndex(id)
+      itemsCallback: (id, text) => this._removeImageByIndex(id - 1)
     }
 
     // Create and set the options for the media dialog
