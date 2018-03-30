@@ -72,7 +72,7 @@ const SCROLL_VIEW_BOUNCED_FALSE_BOOL        = false;
   Method: goToPage(page)
   Description: goToPage allows navigation to an item in the carousel
   params:
-    Page - (type Number): The page indicator to activate
+    Page - (type Number): The the carousel shoudl navigate to
 
   */
 
@@ -104,7 +104,8 @@ class Carousel extends Component {
   ////////////////////////
 
   // ScrollDidEnd calculate the current page 
-  // that the user has scrolled too.
+  // that the user has scrolled too and pass 
+  // it to onPageChangeDidEnd.
   _onScrollDidEnd(event: Object){
 
     let currentEvent    = event.nativeEvent;
