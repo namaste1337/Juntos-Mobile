@@ -1,4 +1,4 @@
-// Export for Date
+// Export for DatePickerField
 
 ////////////////////////
 // Import Component

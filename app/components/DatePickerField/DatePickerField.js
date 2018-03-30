@@ -144,8 +144,8 @@ class DatePickerField extends Component {
 // Styes
 ////////////////////////
 
-// Special react-native-datepicker requires
-//  a style object with property overrides.
+// Special Case: React-native-datepicker requires
+// style object with property overrides.
 const buttonStyles= {
   btnTextConfirm: {
     color: COLORS.PRIMARY

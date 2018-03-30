@@ -1,4 +1,4 @@
-// Styles for DatePicker
+// Styles for DatePickerField
 
 ////////////////////////
 // Import Modules
