@@ -11,16 +11,17 @@ import {AsyncStorage} from "react-native"
 // Constants
 ///////////////////////////////
 
-// This key will be utilizes to fetch and store the currect 
-// user login state
+
 // Keys
+
+// This key will be utilizes to fetch and store the current 
+// user login state
 export const USER_LOGIN_STATE_KEY = "@UserLoginState:key";
 export const USER_OBJECT_KEY = "@UserObject:key";
 
 //////////////////////////////
 // Helper Functions
 ///////////////////////////////
-
 
 // Helper function to set the profile data for 
 // the current logged in user
@@ -42,7 +43,7 @@ export function getUser(){
 // Functions
 ///////////////////////////////
 
-// Handles setting a values by key to async storage
+// Handles setting a value by key to async storage
 export async function setValue(key, value){
 
   try{
@@ -53,7 +54,7 @@ export async function setValue(key, value){
 
 }
 
-// Handles fetching a value from async storage
+// Handles fetching a value from async storage by key
 export async function getValue(key){
 
 	try {
