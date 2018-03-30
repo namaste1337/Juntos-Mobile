@@ -1,4 +1,4 @@
-// This file host actions related to account authentication
+// This file host actions related to session state.
 
 ////////////////////////
 // Import Modules
@@ -33,7 +33,7 @@ const NAVIGATE_SIGNED_OUT_SCREEN = "Login";
 // Action Types
 ////////////////////////
 
-// Available account actions
+// Available account actions.
 export const AccountActions = {
   ACCOUNT_ERROR: "ACCOUNT_ERORR",
   ACCOUNT_SUCCESS: "ACCOUNT_SUCCESS",
@@ -44,7 +44,7 @@ export const AccountActions = {
 // Action Creators
 ////////////////////////
 
-// Handles account error state 
+// Action handles account error state. 
 function accountError(bool){
 
 	return {
@@ -54,7 +54,7 @@ function accountError(bool){
 
 }
 
-// Handles account success state 
+// Action handles account success state. 
 function accountSuccess(isFetchingBool, user){
   
   // Set the user profile data
@@ -70,7 +70,7 @@ function accountSuccess(isFetchingBool, user){
 
 }
 
-// Handles state where account is being processed
+// Action handles account pocessing state.
 function accountProcessing(bool){
 
 	return {
@@ -80,7 +80,7 @@ function accountProcessing(bool){
 
 }
 
-// Updates the currently logged in user data
+// Action handles updates user data state.
 export function accountUpdateUser(user){
 
   return {
@@ -92,8 +92,9 @@ export function accountUpdateUser(user){
 
 }
 
-// action redirects user to singedin portion of the app
+// Action handles redirects user to singed in portion of the app.
 export function redirectToSignedIn(){
+
   const resetAction = NavigationActions.reset({
     index: 0,
     actions: [
@@ -101,10 +102,12 @@ export function redirectToSignedIn(){
     ]
   })
   return resetAction;
+
 }
 
-// Action redirects user to signedOut portion of the app
+// Action handles redirects user to signed out portion of the app.
 export function redirectToSignedOut(){
+
     const resetAction = NavigationActions.reset({
     index: 0,
     actions: [
@@ -112,15 +115,15 @@ export function redirectToSignedOut(){
     ]
   })
   return resetAction;
+
 }
 
-// Handles updating the login state and transition 
-// the user to the logout portion of the app
+// Action handles updating the login state and transitioning 
+// the user to the logged out portion of the app.
 export function accountLogout(){
 
-    // Reset the user profile information
-    // to prevent out sign in and send
-    // a logout request to the server
+    // Remove the user profile information
+    // And send a log out request to the server.
     setUser("");
     logout();
     return redirectToSignedOut();
@@ -131,8 +134,9 @@ export function accountLogout(){
 // Thunks Functions
 ////////////////////////
 
-// Handles server call for login request
+// Action handles server login request.
 export function accountLogin(email, password){
+
   return (dispatch) => {
   	// Show the spinner
   	dispatch(accountProcessing(true));
@@ -153,12 +157,12 @@ export function accountLogin(email, password){
 
 };
 
-//Handles server request for signup
+// Action handles server sign up request.
 export function accountSignup(username, email, password, profileImagePath, imageMime){
+
 	return dispatch => {
 		// Show spinner 
 		dispatch(accountProcessing(true));
-		// Begin signup sequence
     // Image upload expects and array
     let imageArray = [];
     imageArray.push({
