@@ -41,7 +41,8 @@ class  ActivityIndicatorOverlay extends Component {
   ////////////////////////
 
   render(){
-    // Property is requires to determine if
+    
+    // Property is required to determine if
     // the activity is visible or hidden
     let isFetching = this.props.isFetching;
 
