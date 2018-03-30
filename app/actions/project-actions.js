@@ -132,11 +132,15 @@ export function populateTempImages(imageArray){
 
 }
 
+//TODO: Placeholder, action should clear the tempProject data
+// after the project has been created on the server.
 export function clearTempProject(){
+
+
 
 }
 
-// Handles reseting the navigation back to 
+// Action handles reseting the navigation back to 
 // the root view once a project is saved
 export function resetProjectNavigation(){
 
@@ -149,6 +153,8 @@ export function resetProjectNavigation(){
 
 }
 
+// Action handles clearing the project data fetched from 
+// the server.
 export function clearProjectData(){
 
 	return {
@@ -160,7 +166,7 @@ export function clearProjectData(){
 
 }
 
-// Handles populating the store project data evelope
+// Action handles populating project data fetched from the server
 function populateProjectsData(projects){
 
 	return {
@@ -170,6 +176,7 @@ function populateProjectsData(projects){
 
 }
 
+// Action handles state for fetching project data
 function fetchingProjectData(isFetching){
 
 	return {
@@ -179,6 +186,7 @@ function fetchingProjectData(isFetching){
 
 }
 
+// Action handles state for errors when fetching project data
 function fetchingProjectDataError(isErrored){
 
 	return {
@@ -188,6 +196,7 @@ function fetchingProjectDataError(isErrored){
 
 }
 
+// Action handles state for processing a project
 function createProjectProcessing(bool){
 
 	return {
@@ -203,7 +212,7 @@ function createProjectProcessing(bool){
 // Thunks Functions
 ////////////////////////
 
-// Handles request to fetch all projects
+// Action handles request to fetch all projects
 export function getProjects(){
 
 	return dispatch => {
@@ -218,6 +227,7 @@ export function getProjects(){
 
 }
 
+// Action handes request for fetching projects by location
 export function getProjectsByLocation(lat, lng, radius, limit){
 
 	return dispatch => {
@@ -234,7 +244,7 @@ export function getProjectsByLocation(lat, lng, radius, limit){
 
 }
 
-// Handles creating a new project 
+// Action handles request for creating a new project
 export function createNewProject(projectObject){
 
 	let images = projectObject.images;
