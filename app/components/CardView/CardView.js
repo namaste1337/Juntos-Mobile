@@ -5,8 +5,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity
 } from 'react-native'
 
 ////////////////////////
@@ -35,9 +33,9 @@ class  CardView extends Component {
   render(){
 
     return(
-      <TouchableOpacity onPress={this.props.onPress} style={[styles.cardViewWrapper, this.props.style]}>
-      {this.props.children}
-      </TouchableOpacity>
+      <View onPress={this.props.onPress} style={[styles.cardViewWrapper, this.props.style]}>
+        {this.props.children}
+      </View>
     )
   }
 };     
