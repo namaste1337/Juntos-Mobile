@@ -197,6 +197,7 @@ class  AnimatedCarousel extends Component {
     return (
       <Animated.ScrollView
         scrollEventThrottle={16}
+        showsHorizontalScrollIndicator={false}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: xOffset } } }],
           { useNativeDriver: true }
