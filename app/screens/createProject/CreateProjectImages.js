@@ -11,6 +11,7 @@ Image,
 StyleSheet,
 View,
 ActionSheetIOS,
+TouchableOpacity
 } from 'react-native';
 import DialogAndroid from 'react-native-dialogs';
 
@@ -309,14 +310,18 @@ class CreateProjectImages extends Component {
         <View style={styles.imagesWrapper}>
           {this.state.projectImages.map((image, index) => {
            return (
-            <CardView key={index} style={styles.imageCard} onPress={()=> this._onCardImagePress(index)}>
-              <Image style={styles.cardImage} source={image}/>
-            </CardView>);
-          })}
-          <CardView style={styles.addImageCardView} onPress={()=> this._onAddImagePress()}>
-            <Image style={styles.addImageIcon} source={imageAddButton} />
-            <Text style={styles.addImageText}>Add Image</Text>
-          </CardView>
+              <TouchableOpacity key={index} onPress={()=> this._onCardImagePress(index)}>
+                <CardView style={styles.imageCard}>
+                  <Image style={styles.cardImage} source={image}/>
+                </CardView>
+              </TouchableOpacity>
+            )})}
+            <TouchableOpacity onPress={()=> this._onAddImagePress()}>
+              <CardView style={styles.addImageCardView}>
+                <Image style={styles.addImageIcon} source={imageAddButton} />
+                <Text style={styles.addImageText}>Add Image</Text>
+              </CardView>
+            </TouchableOpacity>
         </View>
       </View> 
      </View>
