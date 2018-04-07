@@ -26,6 +26,13 @@ import {
 } from 'react-native';
 import PropTypes from "prop-types";
 
+/////////////////////////////
+// Import Custom Components
+/////////////////////////////
+
+import {Poster} from "./../../components/Carousel";
+import CardView from "./../../components/CardView";
+
 ////////////////////////
 // Import Commmon Files
 ////////////////////////
@@ -38,7 +45,7 @@ import {renderIf} from "./../../common/components";
 // Import Styles
 ////////////////////////
 
-// import styles from "./styles";
+import styles from "./styles";
 
 ////////////////////////
 // Constants
@@ -66,7 +73,65 @@ const xOffset      = new Animated.Value(0);
 // //States
 // const INITIAL_PROFILE_IMAGE_SOURCE_STATE =  require("../assets/profile/default_profile.png")
 
+////////////////////////
+// Animated
+/////////////////////////
+
+const transitionAnimation = index => {
+  return {
+    opacity: xOffset.interpolate({
+      inputRange: [
+        (index - 1) * SCREEN_WIDTH,
+        index * SCREEN_WIDTH,
+        (index + 1) * SCREEN_WIDTH
+      ],
+      outputRange: [0.80, 1, 0.80]
+    }),
+    transform: [
+      { perspective: 800 },
+      {
+        scale: xOffset.interpolate({
+          inputRange: [
+            (index - 1) * SCREEN_WIDTH,
+            index * SCREEN_WIDTH,
+            (index + 1) * SCREEN_WIDTH
+          ],
+          outputRange: [0.80, .90, 0.80]
+        })
+      },
+      {
+        translateX: xOffset.interpolate({
+          inputRange: [
+            (index - 1) * SCREEN_WIDTH,
+            index * SCREEN_WIDTH,
+            (index + 1) * SCREEN_WIDTH
+          ],
+          outputRange: [-60, 0, 60]
+        })
+      }
+    ]
+  };
+};
+
+////////////////////////
+// Statless Component 
+/////////////////////////
  
+const AnimatedCard = props => {
+  return (
+    <View style={styles.scrollPage}>
+      <Animated.View style={[styles.animatedCard, props.style, transitionAnimation(props.index)]}>
+        <CardView>
+          <Poster 
+            title={"Awesome Title"} 
+            description="Awesone Description" 
+            distance={"2 miles"}
+            source={"https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"}/>
+        </CardView>
+      </Animated.View>
+    </View>
+  );
+};
 
 
 ////////////////////////
@@ -98,42 +163,6 @@ class  AnimatedCarousel extends Component {
 
   }
 
-
-  screen = props => {
-    return (
-      <View style={styles.scrollPage}>
-        <Animated.View style={[styles.screen, this.transitionAnimation(props.index)]}>
-          <Text style={styles.text}>{props.text}</Text>
-        </Animated.View>
-      </View>
-    );
-  };
-
-  transitionAnimation = index => {
-  return {
-    opacity: xOffset.interpolate({
-      inputRange: [
-        (index - 1) * SCREEN_WIDTH,
-        index * SCREEN_WIDTH,
-        (index + 1) * SCREEN_WIDTH
-      ],
-      outputRange: [0, 1, 0]
-    }),
-    transform: [
-      { perspective: 800 },
-      {
-        scale: xOffset.interpolate({
-          inputRange: [
-            (index - 1) * SCREEN_WIDTH,
-            index * SCREEN_WIDTH,
-            (index + 1) * SCREEN_WIDTH
-          ],
-          outputRange: [0.25, .90, 0.25]
-        })
-      }
-    ]
-  };
-};
   ////////////////////////
   // Animations
   ////////////////////////
@@ -176,13 +205,13 @@ class  AnimatedCarousel extends Component {
         pagingEnabled
         style={styles.scrollView}
       >
-        <this.screen text="Screen 1" index={0} />
-        <this.screen text="Screen 2" index={1} />
-        <this.screen text="Screen 3" index={2} />
-        <this.screen text="Screen 4" index={3} />
-        <this.screen text="Screen 5" index={4} />
-        <this.screen text="Screen 6" index={5} />
-        <this.screen text="Screen 7" index={6} />
+        <AnimatedCard text="Screen 1" index={0} />
+        <AnimatedCard text="Screen 2" index={1} />
+        <AnimatedCard text="Screen 3" index={2} />
+        <AnimatedCard text="Screen 4" index={3} />
+        <AnimatedCard text="Screen 5" index={4} />
+        <AnimatedCard text="Screen 6" index={5} />
+        <AnimatedCard text="Screen 7" index={6} />
       </Animated.ScrollView>
     );
   }
@@ -201,66 +230,24 @@ AnimatedCarousel.propTypes = {
 export default AnimatedCarousel;
 
 
-// import React, { Component } from "react";
-// import {
-//   Animated,
-//   Dimensions,
-//   ScrollView,
-//   StyleSheet,
-//   Text,
-//   View
-// } from "react-native";
-
-// const SCREEN_WIDTH = Dimensions.get("window").width;
-
-// const xOffset = new Animated.Value(0);
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <View>
-//         <Animated.ScrollView
-//           scrollEventThrottle={16}
-//           onScroll={Animated.event(
-//             [{ nativeEvent: {contentOffset: { x: xOffset} } }],
-//             { useNativeDriver: true }
-//           )}
-//           horizontal
-//           pagingEnabled
-//           decelerationRate={"fast"}
-//           style={styles.scrollView}
-//         >
-//           <Screen style={{backgroundColor: "pink"}} text="Card 1" index={0} />
-//           <Screen style={{backgroundColor: "black"}} text="Card 2" index={1} />
-//           <Screen style={{backgroundColor: "purple"}} text="Card 3" index={2} />
-//           <Screen style={{backgroundColor: "blue"}} text="Card 4" index={3} />
-//           <Screen style={{backgroundColor: "red"}} text="Card 5" index={4} />
-//           <Screen style={{backgroundColor: "green"}} text="Card 6" index={5} />
-//           <Screen style={{backgroundColor: "orange"}} text="Card 7" index={6} />
-//         </Animated.ScrollView>
-//       </View>
-//     );
+// const styles = StyleSheet.create({
+//   scrollView: {
+//     flexDirection: "row",
+//     width: SCREEN_WIDTH,
+//   },
+//   scrollPage: {
+//     // width: SCREEN_WIDTH,
+//   },
+//   screen: {
+//     width: SCREEN_WIDTH,
+//     height: 180,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     borderRadius: 4,
+//     backgroundColor: "orange"
+//   },
+//   text: {
+//     fontSize: 45,
+//     fontWeight: "bold"
 //   }
-// }
-
-const styles = StyleSheet.create({
-  scrollView: {
-    flexDirection: "row",
-    width: SCREEN_WIDTH,
-  },
-  scrollPage: {
-    // width: SCREEN_WIDTH,
-  },
-  screen: {
-    width: SCREEN_WIDTH,
-    height: 180,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4,
-    backgroundColor: "orange"
-  },
-  text: {
-    fontSize: 45,
-    fontWeight: "bold"
-  }
-});
+// });
