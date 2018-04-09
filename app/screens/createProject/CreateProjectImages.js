@@ -39,7 +39,7 @@ import JTImagePicker from "./../../lib/JTImagePicker";
 ///////////////////////////////
 
 import PrimaryButton from "./../../components/PrimaryButton";
-import CardView from "./../../components/CardView";
+import ShadowView from "./../../components/ShadowView";
 import TouchableText from "./../../components/TouchableText";
 
 ////////////////////////
@@ -311,16 +311,16 @@ class CreateProjectImages extends Component {
           {this.state.projectImages.map((image, index) => {
            return (
               <TouchableOpacity key={index} onPress={()=> this._onCardImagePress(index)}>
-                <CardView style={styles.imageCard}>
+                <ShadowView style={styles.imageCard}>
                   <Image style={styles.cardImage} source={image}/>
-                </CardView>
+                </ShadowView>
               </TouchableOpacity>
             )})}
             <TouchableOpacity onPress={()=> this._onAddImagePress()}>
-              <CardView style={styles.addImageCardView}>
+              <ShadowView style={styles.addImageCardView}>
                 <Image style={styles.addImageIcon} source={imageAddButton} />
                 <Text style={styles.addImageText}>Add Image</Text>
-              </CardView>
+              </ShadowView>
             </TouchableOpacity>
         </View>
       </View> 
