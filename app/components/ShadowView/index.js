@@ -4,6 +4,6 @@
 // Import Component
 ////////////////////////
 
-import CardView from './CardView'
+import ShadowView from './ShadowView'
 
-export default CardView;
+export default ShadowView;

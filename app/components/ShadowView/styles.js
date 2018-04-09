@@ -18,15 +18,15 @@ COLORS,
   
 export default StyleSheet.create({
 
-	cardViewWrapper:{
+  shadowViewWrapper:{
 		shadowColor: "#000",
-    	shadowOffset: {
-    	  height: 1
-    	},
-    	shadowOpacity: 0.5,
-    	shadowRadius: 1,
-	}
-
+    shadowOffset: {
+      height: 1
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    overflow: "visible"
+	},
 });
 
 

@@ -11,8 +11,6 @@ import {
 // Imports Common Files
 ////////////////////////
 
-// Conditional rendering
-import {renderIf} from "./../../common/components";
 
 ////////////////////////
 // Import Styles
@@ -24,7 +22,7 @@ import styles from "./styles";
 // Componenet
 ////////////////////////
 
-class  CardView extends Component {
+class  ShadowView extends Component {
 
   ////////////////////////
   // Methods
@@ -33,10 +31,10 @@ class  CardView extends Component {
   render(){
 
     return(
-      <View onPress={this.props.onPress} style={[styles.cardViewWrapper, this.props.style]}>
+      <View onPress={this.props.onPress} style={[styles.shadowViewWrapper, this.props.style]}>
         {this.props.children}
       </View>
     )
   }
 };     
-export default CardView;
+export default ShadowView;
