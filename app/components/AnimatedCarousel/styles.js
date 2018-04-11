@@ -1,4 +1,4 @@
-// Styles for <Componenet_Name>
+// Styles for AnimatedCarousel
 
 ////////////////////////
 // Import Modules
@@ -30,10 +30,6 @@ export default StyleSheet.create({
   ///////////////////////
 
   scrollView: {
-    flexDirection: "row",
-    width: deviceProperties.width,
-  },
-  scrollPage: {
     width: deviceProperties.width,
   },
 
@@ -41,15 +37,13 @@ export default StyleSheet.create({
   // Animated Card
   ///////////////////////
 
-  animatedCard: {
-    width: deviceProperties.width,
-    height: 180,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 6,
+  card: {
+    marginTop: 10, 
+    height: 150, 
+    width: deviceProperties.width - 50, 
+    borderRadius: 6, 
     overflow: "hidden" 
   },
-
 
 });
 

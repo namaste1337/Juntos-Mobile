@@ -1,9 +1,9 @@
-// Export for AnimateCarousel
+// Export for AnimatedCarousel
 
 ////////////////////////
 // Import Component
 ////////////////////////
 
-import AnimatedCarousel from './AnimatedCarousel.js';
+import AnimatedCarousel, {Card} from './AnimatedCarousel.js';
 
-export default AnimatedCarousel;
+export {AnimatedCarousel as default, Card};
