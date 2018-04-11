@@ -23,9 +23,9 @@ export default StyleSheet.create({
     height: "100%",
 		shadowColor: "#000",
     shadowOffset: {
-      height: 3
+      height: 1
     },
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.3,
     shadowRadius: 2,
 	},
 });
