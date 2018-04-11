@@ -19,13 +19,14 @@ COLORS,
 export default StyleSheet.create({
 
   shadowViewWrapper:{
+    width: "100%",
+    height: "100%",
 		shadowColor: "#000",
     shadowOffset: {
-      height: 1
+      height: 3
     },
     shadowOpacity: 0.5,
-    shadowRadius: 1,
-    overflow: "visible"
+    shadowRadius: 2,
 	},
 });
 
