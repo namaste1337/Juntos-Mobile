@@ -53,9 +53,10 @@ import {
 /////////////////////////////
 
 import PrimaryButton from "./../components/PrimaryButton";
-import Carousel, {Poster, Indicator} from "./../components/Carousel";
+import {Indicator} from "./../components/Carousel";
 import ActivityIndicatorOverlay from './../components/ActivityIndicatorOverlay';
 import Icon from "./../components/Icon";
+import AnimatedCarousel, {Card} from "./../components/AnimatedCarousel";
 
 
 ////////////////////////
@@ -362,7 +363,7 @@ class Projects extends Component {
     let event = e.nativeEvent;
     let page  = parseInt(event.id);
     // Scroll to the page
-    this._projectCarousel.goToPage(page);
+    this._animatedCarousel.goToPage(page);
     this._carouselIndicator.setActivePageIndicator(page);
 
   }
@@ -514,26 +515,23 @@ class Projects extends Component {
   ////////////////////////
 
   // Handles rendering the carousel posters if the project data is available
-  _renderCarouselPosters = (props) => {
-
+  _renderCards = (itemObject) => {
+    let item = itemObject.item
     return (
-      props.projects.map(project => 
-        <TouchableHighlight key={project.project_id} onPress={()=> this._onPosterPressed(project)}>
-         <Poster 
-          source={project.images[0].uri}
-          title={project.name}
-          description={project.description}
+        <TouchableHighlight key={item.project_id} onPress={()=> this._onPosterPressed(item)}>
+         <Card 
+          source={item.images[0].uri}
+          title={item.name}
+          description={item.description}
           distance={this._distanceString(
             this._userLat, 
             this._userLng,
-            project.location.loc.coordinates[1],
-            project.location.loc.coordinates[0],
+            item.location.loc.coordinates[1],
+            item.location.loc.coordinates[0],
             )}
-          key={project.project_id}/>
+          key={item.project_id}/>
         </TouchableHighlight>
-      )
-    );
-
+      );
   }
 
   // Handles rendering the map markers if the project data is available 
@@ -587,12 +585,12 @@ class Projects extends Component {
           {this.props.projects.length > 0 &&
           <View>
             <Indicator children={this.props.projects} ref={ref=> this._carouselIndicator = ref}/>
-            <Carousel 
-              ref={ref => this._projectCarousel = ref}
+            <AnimatedCarousel
+              renderItem={this._renderCards}
+              data={this.props.projects}
+              ref={ ref => this._animatedCarousel = ref}
               pageIndicator={PAGE_INDICATOR_BOOL}
-              onPageChangeEnd={page=> this._onPageChangeEnd(page)}>
-              <this._renderCarouselPosters projects={this.props.projects} />
-            </Carousel>
+              onSnapToItem={page=> this._onPageChangeEnd(page)} />
           </View>
           } 
           {this.props.isFetching &&
