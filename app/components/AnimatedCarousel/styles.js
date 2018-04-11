@@ -38,8 +38,8 @@ export default StyleSheet.create({
   ///////////////////////
 
   card: {
-    marginTop: 10, 
-    height: 150, 
+    marginTop: 5, 
+    height: 160, 
     width: deviceProperties.width - 50, 
     borderRadius: 6, 
     overflow: "hidden" 
