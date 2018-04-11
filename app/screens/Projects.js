@@ -13,7 +13,7 @@ import {
   Image,
   Platform,
   Modal,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
   StatusBar,
   ActivityIndicator,
   Linking,
@@ -518,19 +518,21 @@ class Projects extends Component {
   _renderCards = (itemObject) => {
     let item = itemObject.item
     return (
-        <TouchableHighlight key={item.project_id} onPress={()=> this._onPosterPressed(item)}>
-         <Card 
-          source={item.images[0].uri}
-          title={item.name}
-          description={item.description}
-          distance={this._distanceString(
-            this._userLat, 
-            this._userLng,
-            item.location.loc.coordinates[1],
-            item.location.loc.coordinates[0],
-            )}
-          key={item.project_id}/>
-        </TouchableHighlight>
+        <TouchableWithoutFeedback key={item.project_id} onPress={()=> this._onPosterPressed(item)}>
+         <View>
+          <Card 
+           source={item.images[0].uri}
+           title={item.name}
+           description={item.description}
+           distance={this._distanceString(
+             this._userLat, 
+             this._userLng,
+             item.location.loc.coordinates[1],
+             item.location.loc.coordinates[0],
+             )}
+           key={item.project_id}/>
+          </View>
+        </TouchableWithoutFeedback>
       );
   }
 
