@@ -92,7 +92,8 @@ export default StyleSheet.create({
     fontWeight: FONT_WEIGHT.LIGHT
   },
   carouselDistanceText:{
-    flex:1, 
+    flex:1,
+    marginRight: 50, 
     color: COLORS.WHITE,
     textAlign: "right",
     backgroundColor: COLORS.TRANSPARENT,
