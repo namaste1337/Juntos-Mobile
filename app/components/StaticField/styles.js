@@ -24,13 +24,14 @@ export default StyleSheet.create({
   title:{
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT,
-    color: COLORS.LIGHT_GREY,
+    color: COLORS.PRIMARY,
     paddingHorizontal: 3,
     fontSize: 13,
   },
 
   text:{
     fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT,
     color: COLORS.BLACK,
     paddingVertical: 10,
   },
