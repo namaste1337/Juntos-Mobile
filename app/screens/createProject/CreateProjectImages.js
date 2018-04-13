@@ -11,7 +11,8 @@ Image,
 StyleSheet,
 View,
 ActionSheetIOS,
-TouchableOpacity
+TouchableOpacity,
+ScrollView
 } from 'react-native';
 import DialogAndroid from 'react-native-dialogs';
 
@@ -41,6 +42,7 @@ import JTImagePicker from "./../../lib/JTImagePicker";
 import PrimaryButton from "./../../components/PrimaryButton";
 import ShadowView from "./../../components/ShadowView";
 import TouchableText from "./../../components/TouchableText";
+import CardView from "./../../components/CardView";
 
 ////////////////////////
 // Actions
@@ -68,7 +70,7 @@ const MEDIA_OPTIONS_IOS_ARRAY           = [CANCEL_OPTIONS_STRING, CAMERA_OPTIONS
 const MEDIA_OPTIONS_ANDROID_ARRAY       = [GALLERY_OPTIONS_STRING, CAMERA_OPTIONS_STRING];
 const REMOVE_OPTIONS_ARRAY              = [CANCEL_OPTIONS_STRING, REMOVE_OPTIONS_STRING];
 // Numbers
-const IMAGE_GRID_OFFSET_NUMBER          = 45;
+const IMAGE_GRID_OFFSET_NUMBER          = 56;
 const CANCEL_BUTTON_INDEX_NUMBER        = 0;
 const DESTRUCTIVE_BUTTON_INDEX_NUMBER   = 1;
 const OPEN_CAMERA_BUTTON_INDEX_NUMBER   = 1;
@@ -305,8 +307,8 @@ class CreateProjectImages extends Component {
     console.log(this.state);
     return (
      <View style={CommonStyles.container}>
-     {renderIf(!this.state.imagesValid, <View style={styles.validationTextWrapper}><Text style={styles.validationText}> You must add 1 image to your project</Text></View>)}
-      <View style={styles.scrollViewWrapper}>
+     <CardView>
+        {renderIf(!this.state.imagesValid, <View style={styles.validationTextWrapper}><Text style={styles.validationText}> You must add 1 image to your project</Text></View>)}
         <View style={styles.imagesWrapper}>
           {this.state.projectImages.map((image, index) => {
            return (
@@ -323,7 +325,7 @@ class CreateProjectImages extends Component {
               </ShadowView>
             </TouchableOpacity>
         </View>
-      </View> 
+      </CardView>
      </View>
     );
   }
@@ -346,13 +348,12 @@ const styles = StyleSheet.create({
   imagesWrapper:{
     flexDirection: "row",
     flexWrap: "wrap",
-    paddingLeft: 7.5,
-    paddingVertical: 15
   },
 
   imageCard:{
-    marginHorizontal: 5,
-    marginVertical: 5
+    height: width/4,
+    marginRight: 5,
+    marginBottom: 5
   },
   cardImage:{
     width: IMAGE_GRID_PLACEMENT,
@@ -372,8 +373,8 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 5,
-    marginHorizontal: 5
+    marginRight: 5,
+    marginBottom: 5
   },
   addImageIcon:{
     height: 40,
