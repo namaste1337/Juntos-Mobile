@@ -21,7 +21,7 @@ export default StyleSheet.create({
   inputValidationWrapper:{
     height: 60,
     marginBottom: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: COLORS.MID_GREY,
     justifyContent: "center",
   },
