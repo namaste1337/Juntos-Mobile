@@ -31,6 +31,7 @@ import {accountLogout} from "./../actions/account-actions.js";
 
 import PrimaryButton from './../components/PrimaryButton';
 import StaticField from './../components/StaticField';
+import CardView from "./../components/CardView";
 
 ////////////////////////
 // Constants
@@ -72,20 +73,18 @@ class Settings extends Component {
   render() {
     return (
      <ScrollView style={CommonStyles.container}>
-      <View style={CommonStyles.contentWrapper}>
-        { this.props.currentUser != null &&
-        <View>
-          <StaticField title={EMAIL_TITLE_STRING} value={this.props.currentUser.email} />
-          <StaticField title={USERNAME_TITLE_STRING} value={this.props.currentUser.username} />
-          <StaticField title={VERSION_TITLE_STRING} value={DeviceInfo.getVersion()} />
-        </View>
-        }
-        <View style={CommonStyles.contentWrapper}>
-           <PrimaryButton 
-           buttonText={LOG_OUT_BUTTON_STRING}
-           onPress={this.props.logout} />
-        </View>
-      </View>
+      <CardView>
+         { this.props.currentUser != null &&
+         <View>
+           <StaticField title={EMAIL_TITLE_STRING} value={this.props.currentUser.email} />
+           <StaticField title={USERNAME_TITLE_STRING} value={this.props.currentUser.username} />
+           <StaticField title={VERSION_TITLE_STRING} value={DeviceInfo.getVersion()} />
+         </View>
+         }
+         <PrimaryButton 
+         buttonText={LOG_OUT_BUTTON_STRING}
+         onPress={this.props.logout} />
+      </CardView>
      </ScrollView>
     );
   }
