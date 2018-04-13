@@ -20,6 +20,7 @@ export const FONTS = {
 // Primary Styles - Colors
 export const COLORS = {
   PRIMARY: "#FF3366",
+  PRIMARY_BACKGROUND: "#f7f7f7",
   TRANSPARENT: "transparent",
   RGB_TRANSPARENT: "rgba(0,0,0,0)",
   MID_TRANSPARENCY: "rgba(0,0,0,0.5)",
@@ -45,7 +46,7 @@ export const FONT_WEIGHT = {
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.WHITE
+    backgroundColor: COLORS.PRIMARY_BACKGROUND
   },
   keyboardViewWrapper: {
     height
