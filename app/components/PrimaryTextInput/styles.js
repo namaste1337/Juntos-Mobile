@@ -11,6 +11,7 @@ import {
 import {
 FONTS,
 COLORS,
+FONT_WEIGHT
 } from "./../../common/styles";
 
 ////////////////////////
@@ -19,21 +20,31 @@ COLORS,
 
 export default StyleSheet.create({
   
+  title:{
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT,
+    color: COLORS.PRIMARY,
+    paddingHorizontal: 0,
+    fontSize: 13
+  },
+
   /////////////////////
   // Singleline input
   /////////////////////
 
  inputWrap: {
     height: 60,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: COLORS.MID_GREY,
+    paddingTop: 10
   },
   input: {
     flex: 1,
     height: 100,
-    fontSize: 14,
+    fontSize: 17,
     fontFamily: FONTS.PRIMARY,
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
+    fontWeight: FONT_WEIGHT.LIGHT
   },
 
   /////////////////////
@@ -42,16 +53,17 @@ export default StyleSheet.create({
 
   multilineInputSmall: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 17,
     fontFamily: FONTS.PRIMARY,
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
     paddingVertical: 10,
     textAlignVertical: "top",
+    fontWeight: FONT_WEIGHT.LIGHT
   },
    multilineInputWrapSmall: {
     paddingTop: 10,
     minHeight: 100,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: COLORS.MID_GREY,
   },
 
@@ -64,8 +76,9 @@ export default StyleSheet.create({
   },
   multilineCounter:{
     color: COLORS.MID_GREY,
-    paddingLeft: 11,
-    fontFamily: FONTS.PRIMARY
+    paddingLeft: 0,
+    fontFamily: FONTS.PRIMARY,
+    fontWeight: FONT_WEIGHT.LIGHT
   },
   inputValidationMessage: {
     flex: 1,

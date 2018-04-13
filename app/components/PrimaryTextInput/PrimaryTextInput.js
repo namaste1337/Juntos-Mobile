@@ -83,6 +83,7 @@ class  PrimaryTextInput extends Component {
       // TODO: The following should implement the StaticField 
       // component to redude duplication.
       <View style={textInputWrapStyle}>
+        <Text style={styles.title}>{this.props.title}</Text>
         <TextInput
           {...this.props}
           onChangeText={field =>{
@@ -93,7 +94,7 @@ class  PrimaryTextInput extends Component {
             {/* Pass the field to the parent component */}
             this.props.onChangeText(field);
           }}
-          placeholderTextColor={COLORS.MID_GREY}
+          placeholderTextColor={COLORS.DARK_GREY}
           underlineColorAndroid={COLORS.RGB_TRANSPARENT} 
           style={textInputStyle} 
           blurOnSubmit={BLUR_ON_SUBMIT_PROPERTY}/>
