@@ -41,7 +41,7 @@ import PrimaryButton from "./../../components/PrimaryButton";
 import PrimaryTextInput from "./../../components/PrimaryTextInput";
 import GooglePlaces from "./../../components/GooglePlaces";
 import TouchableText from "./../../components/TouchableText";
-import ShadowView from "./../../components/ShadowView";
+import CardView from "./../../components/CardView";
 
 ////////////////////////
 // Constants
@@ -237,34 +237,34 @@ class CreateProjectDescription extends Component {
   render() {
 
     return (
-      <View style={[CommonStyles.container, {backgroundColor: "white"}]}>
-                <View style={{borderColor: COLORS.MID_GREY, borderWidth: StyleSheet.hairlineWidth, flex: 1, margin: 20, paddingLeft: 10, paddingRight: 10, paddingBottom: 30, backgroundColor: "white", borderRadius: 10}}>
-                  <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY}>
-                    <PrimaryTextInput
-                      onChangeText={projectNameField => this.setState({projectNameField})} 
-                      title={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
-                      returnKeyType={RETURN_KEY_TYPE_PROPERTY} 
-                      validationMessage={FIELD_VALIDATION_MESSAGE_STRING} 
-                      valid={this.state.projectNameIsValid}/>
-                    <PrimaryTextInput  
-                      title={LOCATION_FIELD_PLACEHOLDER_STRING} 
-                      returnKeyType={RETURN_KEY_TYPE_PROPERTY}
-                      keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
-                      value={this.state.projectLocationField}
-                      validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
-                      valid={this.state.projectLocationIsValid}
-                      onFocus={() => this._onLocationFieldFocus() }/>
-                    <PrimaryTextInput 
-                      onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
-                      title={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
-                      multiline={MULTILINE_ENABLED_TRUE_BOOL}
-                      maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
-                      returnKeyType={RETURN_KEY_TYPE_PROPERTY}
-                      keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
-                      validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
-                      valid={this.state.projectDescriptionIsValid} />
-                  </KeyboardAvoidingView>
-                </View>
+      <View style={CommonStyles.container}>
+            <CardView>
+              <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY}>
+                <PrimaryTextInput
+                  onChangeText={projectNameField => this.setState({projectNameField})} 
+                  title={PROJECT_NAME_FIELD_PLACEHOLDER_STRING}
+                  returnKeyType={RETURN_KEY_TYPE_PROPERTY} 
+                  validationMessage={FIELD_VALIDATION_MESSAGE_STRING} 
+                  valid={this.state.projectNameIsValid}/>
+                <PrimaryTextInput  
+                  title={LOCATION_FIELD_PLACEHOLDER_STRING} 
+                  returnKeyType={RETURN_KEY_TYPE_PROPERTY}
+                  keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
+                  value={this.state.projectLocationField}
+                  validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+                  valid={this.state.projectLocationIsValid}
+                  onFocus={() => this._onLocationFieldFocus() }/>
+                <PrimaryTextInput 
+                  onChangeText={projectDescriptionField => this.setState({projectDescriptionField})} 
+                  title={DESCRIPTION_FIELD_PLACEHOLDER_STRING} 
+                  multiline={MULTILINE_ENABLED_TRUE_BOOL}
+                  maxLength={MULTILINE_INPUT_MAX_CHARACTER_PROPERTY}
+                  returnKeyType={RETURN_KEY_TYPE_PROPERTY}
+                  keyboardType={DEFAULT_KEYBOARD_TYPE_PROPERTY}
+                  validationMessage={FIELD_VALIDATION_MESSAGE_STRING}
+                  valid={this.state.projectDescriptionIsValid} />
+              </KeyboardAvoidingView>
+            </CardView>
             <View style={[styles.googlePlacesWrapper, { display: this.state.placeSearchVisible }]}>
               <GooglePlaces 
               ref={ref=> this._places = ref}
