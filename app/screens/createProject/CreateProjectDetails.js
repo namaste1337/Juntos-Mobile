@@ -32,6 +32,7 @@ import DatePickerField from './../../components/DatePickerField';
 import PrimaryButton from './../../components/PrimaryButton';
 import ListPickerField from './../../components/ListPickerField';
 import TouchableText from "./../../components/TouchableText";
+import CardView from "./../../components/CardView";
 
 ////////////////////////
 // Constants
@@ -348,35 +349,38 @@ class CreateProjectDetails extends Component {
 
     return (
       <View style={CommonStyles.container}>
-        <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY} style={CommonStyles.contentWrapper}>
-          <DatePickerField  
-          placeholder={PROJECT_START_PLACEHOLDER_STRING} 
-          validationMessage={REQUIRED_FIELDS_STRING} 
-          valid={this.state.isProjectStartDateValid} 
-          onDateChange={value => this._onProjectStartDateChange(value)}/>
-          <DatePickerField placeholder={PROJECT_END_PLACEHOLDER_STRING} 
-          validationMessage={REQUIRED_FIELDS_STRING}
-          valid={this.state.isProjectEndDateValid}
-          onDateChange={value => this._onProjectEndDateChange(value)}/>
-         <ListPickerField 
-          placeholder={FOOD_PROVIDED_PLACEHOLDER_STRING} 
-          validationMessage={REQUIRED_FIELDS_STRING} 
-          pickerData={FOOD_PROVIDED_PICKER_DATA}
-          valid={this.state.isFoodProvidedValid}
-          onValueChange={(value)=> this._onFoodProvidedChange(value)}/>
-          <ListPickerField 
-          placeholder={CURRENT_STATUS_PLACEHOLDER_STRING} 
-          validationMessage={REQUIRED_FIELDS_STRING} 
-          pickerData={CURRENT_STATUS_PICKER_DATA}
-          valid={this.state.isCurrentStatusValid}
-          onValueChange={(value)=> this._onCurrentStatusChange(value)}/>
-          <ListPickerField 
-          placeholder={PROJECT_TYPE_PLACEHOLDER_STRING} 
-          validationMessage={REQUIRED_FIELDS_STRING} 
-          valid={this.state.isProjectTypeValid}
-          pickerData={PROJECT_TYPE_PICKER_DATA}
-          onValueChange={(value)=> this._onProjectTypeValueChange(value)}/>
-        </KeyboardAvoidingView>
+        <CardView>  
+          <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR_PROPERTY}>
+            <DatePickerField  
+            title={PROJECT_START_PLACEHOLDER_STRING}
+            validationMessage={REQUIRED_FIELDS_STRING} 
+            valid={this.state.isProjectStartDateValid} 
+            onDateChange={value => this._onProjectStartDateChange(value)}/>
+            <DatePickerField 
+            title={PROJECT_END_PLACEHOLDER_STRING}
+            validationMessage={REQUIRED_FIELDS_STRING}
+            valid={this.state.isProjectEndDateValid}
+            onDateChange={value => this._onProjectEndDateChange(value)}/>
+           <ListPickerField 
+            title={FOOD_PROVIDED_PLACEHOLDER_STRING}
+            validationMessage={REQUIRED_FIELDS_STRING} 
+            pickerData={FOOD_PROVIDED_PICKER_DATA}
+            valid={this.state.isFoodProvidedValid}
+            onValueChange={(value)=> this._onFoodProvidedChange(value)}/>
+            <ListPickerField 
+            title={CURRENT_STATUS_PLACEHOLDER_STRING}
+            validationMessage={REQUIRED_FIELDS_STRING} 
+            pickerData={CURRENT_STATUS_PICKER_DATA}
+            valid={this.state.isCurrentStatusValid}
+            onValueChange={(value)=> this._onCurrentStatusChange(value)}/>
+            <ListPickerField 
+            title={PROJECT_TYPE_PLACEHOLDER_STRING}
+            validationMessage={REQUIRED_FIELDS_STRING} 
+            valid={this.state.isProjectTypeValid}
+            pickerData={PROJECT_TYPE_PICKER_DATA}
+            onValueChange={(value)=> this._onProjectTypeValueChange(value)}/>
+          </KeyboardAvoidingView>
+        </CardView>
       </View>
     );
   }
