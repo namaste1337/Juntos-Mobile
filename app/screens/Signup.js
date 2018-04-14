@@ -273,31 +273,31 @@ class Signup extends Component {
                 </Text>
               </View>
               <PrimaryTextInput
-                onChangeText={usernameField => this.setState({usernameField})} 
-                placeholder={USER_NAME_PLACEHOLDER_STRING}
+                onChangeText={usernameField => this.setState({usernameField})}
+                title={USER_NAME_PLACEHOLDER_STRING}
                 returnKeyType={RETURN_KEY_TYPE} 
                 keyboardType={DEFAULT_KEYBOARD_TYPE}
                 valid={this.state.usernameIsValid}
                 validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} 
                 autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
               <PrimaryTextInput
-                onChangeText={emailField => this.setState({emailField})} 
-                placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
+                onChangeText={emailField => this.setState({emailField})}
+                title={EMAIL_FIELD_PLACEHOLDER_STRING}
                 returnKeyType={RETURN_KEY_TYPE} 
                 keyboardType={EMAIL_KEYBOARD_TYPE}
                 valid={this.state.emailIsValid}
                 validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} 
                 autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
               <PrimaryTextInput 
-                onChangeText={passwordField => this.setState({passwordField})} 
-                placeholder={PASSWORD_FIELD_PLACEHOLDER_STRING} 
+                onChangeText={passwordField => this.setState({passwordField})}
+                title={PASSWORD_FIELD_PLACEHOLDER_STRING}
                 secureTextEntry
                 returnKeyType={RETURN_KEY_TYPE}
                 keyboardType={DEFAULT_KEYBOARD_TYPE}
                 autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
               <PrimaryTextInput 
                 onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
-                placeholder={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING} 
+                title={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING}
                 secureTextEntry
                 returnKeyType={RETURN_KEY_TYPE}
                 keyboardType={DEFAULT_KEYBOARD_TYPE}
