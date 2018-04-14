@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
     alignItems:"center",
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: COLORS.MID_GREY
   },
   profileImagePlaceHolder:{
