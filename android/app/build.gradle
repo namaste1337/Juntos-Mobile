@@ -138,7 +138,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-svg')
     compile project(':react-native-app-settings')
     compile project(':react-native-dialogs')
     compile project(':react-native-device-info')
