@@ -28,7 +28,7 @@ import {
 ///////////////////////////////
 
 // Common styles
-import CommonStyles from "../common/styles";
+import CommonStyles,{COLORS} from "../common/styles";
 import {getUser} from "../common/storage"
 
 ////////////////////////
@@ -78,7 +78,7 @@ class LandingView extends Component {
 
       return (
 
-        <View style={CommonStyles.container}>
+        <View style={[CommonStyles.container, styles.containerOverrides]}>
           <View style={styles.logoWrapper}>
             <Image style={styles.logoImage} source={logo} resizeMode={LOGO_IMAGE_RESIZE_MODE_PROPERTY}/>
           </View>
@@ -96,6 +96,9 @@ class LandingView extends Component {
 
 const styles = StyleSheet.create({
 
+  containerOverrides:{
+    backgroundColor: COLORS.WHITE
+  },
   logoWrapper:{
     flex: 1,
     alignItems: "center",
