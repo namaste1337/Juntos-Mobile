@@ -44,6 +44,7 @@ import JTImagePicker from "./../lib/JTImagePicker";
 import ActivityIndicatorOverlay from "./../components/ActivityIndicatorOverlay";
 import PrimaryTextInput from "./../components/PrimaryTextInput";
 import PrimaryButton from "./../components/PrimaryButton";
+import CardView from "./../components/CardView";
 
 //////////////////
 // Constants
@@ -258,51 +259,53 @@ class Signup extends Component {
     return (
       <View style={CommonStyles.container}>
         <ScrollView>
-          <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} style={CommonStyles.contentWrapper}>
-            <View style={styles.profileImageUploadWrapper}>
-              <TouchableOpacity onPress={() => this._onProfileImagePress()}>
-                <Image source={profilePlaceholder} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImagePlaceHolder} />
-                <Image source={this.state.profileImage} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImage} />
-                <Image style={styles.profileImageAddButton} source={imageAddButton} />
-                {renderIf(!this.state.profileImageValid, <Text style={styles.profileValidation}>Required</Text>)}
-              </TouchableOpacity>
-              <Text style={styles.profileImageText}> 
-                Please select an image for your profile. This image will be shown to other users on the platform.
-              </Text>
-            </View>
-            <PrimaryTextInput
-              onChangeText={usernameField => this.setState({usernameField})} 
-              placeholder={USER_NAME_PLACEHOLDER_STRING}
-              returnKeyType={RETURN_KEY_TYPE} 
-              keyboardType={DEFAULT_KEYBOARD_TYPE}
-              valid={this.state.usernameIsValid}
-              validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} 
-              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
-            <PrimaryTextInput
-              onChangeText={emailField => this.setState({emailField})} 
-              placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
-              returnKeyType={RETURN_KEY_TYPE} 
-              keyboardType={EMAIL_KEYBOARD_TYPE}
-              valid={this.state.emailIsValid}
-              validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} 
-              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
-            <PrimaryTextInput 
-              onChangeText={passwordField => this.setState({passwordField})} 
-              placeholder={PASSWORD_FIELD_PLACEHOLDER_STRING} 
-              secureTextEntry
-              returnKeyType={RETURN_KEY_TYPE}
-              keyboardType={DEFAULT_KEYBOARD_TYPE}
-              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
-            <PrimaryTextInput 
-              onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
-              placeholder={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING} 
-              secureTextEntry
-              returnKeyType={RETURN_KEY_TYPE}
-              keyboardType={DEFAULT_KEYBOARD_TYPE}
-              valid={this.state.confirmPasswordIsValid}
-              validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} 
-              autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
-            <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={SIGNUP_BUTTON_STRING}/>
+          <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR}>
+            <CardView>
+              <View style={styles.profileImageUploadWrapper}>
+                <TouchableOpacity onPress={() => this._onProfileImagePress()}>
+                  <Image source={profilePlaceholder} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImagePlaceHolder} />
+                  <Image source={this.state.profileImage} behavior={PROFILE_IMAGE_BEHAVIOR} style={styles.profileImage} />
+                  <Image style={styles.profileImageAddButton} source={imageAddButton} />
+                  {renderIf(!this.state.profileImageValid, <Text style={styles.profileValidation}>Required</Text>)}
+                </TouchableOpacity>
+                <Text style={styles.profileImageText}> 
+                  Please select an image for your profile. This image will be shown to other users on the platform.
+                </Text>
+              </View>
+              <PrimaryTextInput
+                onChangeText={usernameField => this.setState({usernameField})} 
+                placeholder={USER_NAME_PLACEHOLDER_STRING}
+                returnKeyType={RETURN_KEY_TYPE} 
+                keyboardType={DEFAULT_KEYBOARD_TYPE}
+                valid={this.state.usernameIsValid}
+                validationMessage={USER_NAME_VALIDATION_MESSAGE_STRING} 
+                autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
+              <PrimaryTextInput
+                onChangeText={emailField => this.setState({emailField})} 
+                placeholder={EMAIL_FIELD_PLACEHOLDER_STRING}
+                returnKeyType={RETURN_KEY_TYPE} 
+                keyboardType={EMAIL_KEYBOARD_TYPE}
+                valid={this.state.emailIsValid}
+                validationMessage={EMAIL_VALIDATION_MESSAGE_STRING} 
+                autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
+              <PrimaryTextInput 
+                onChangeText={passwordField => this.setState({passwordField})} 
+                placeholder={PASSWORD_FIELD_PLACEHOLDER_STRING} 
+                secureTextEntry
+                returnKeyType={RETURN_KEY_TYPE}
+                keyboardType={DEFAULT_KEYBOARD_TYPE}
+                autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
+              <PrimaryTextInput 
+                onChangeText={confirmPasswordField => this.setState({confirmPasswordField})} 
+                placeholder={CONFIRM_PASSWORD_FIELD_PLACEHOLDER_STRING} 
+                secureTextEntry
+                returnKeyType={RETURN_KEY_TYPE}
+                keyboardType={DEFAULT_KEYBOARD_TYPE}
+                valid={this.state.confirmPasswordIsValid}
+                validationMessage={PASSWORD_VALIDATION_MESSAGE_STRING} 
+                autoCapitalize={AUTO_CAPITIALIZE_NONE_PROPERTY}/>
+              <PrimaryButton onPress={() => this._onSignUpbuttonPress()} buttonText={SIGNUP_BUTTON_STRING}/>
+            </CardView>
           </KeyboardAvoidingView>
         </ScrollView>
         <ActivityIndicatorOverlay isFetching={this.props.isFetching}/>
