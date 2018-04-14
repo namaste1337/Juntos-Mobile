@@ -96,7 +96,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={CommonStyles.container} >
+      <View style={[CommonStyles.container, styles.containerOverrides]} >
         <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_BEHAVIOR_PROPERTY} style={CommonStyles.keyboardViewWrapper}>
           <View style={styles.logoWrap}>
             <Image 
@@ -128,7 +128,7 @@ class Login extends Component {
               buttonText={SIGN_IN_TEXT_STRING} 
               onPress={this.onSignInPressed} />
           </View>
-          <View style={CommonStyles.container}>
+          <View style={[CommonStyles.container, styles.containerOverrides]}>
             <View style={styles.signupWrap}>
               <Text style={styles.accountText}>Dont have an account?</Text>
               <TouchableText 
@@ -152,6 +152,9 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
 
+  containerOverrides:{
+    backgroundColor: COLORS.WHITE
+  },
   logoWrap: {
     marginVertical: 40,
     flex: 1,
