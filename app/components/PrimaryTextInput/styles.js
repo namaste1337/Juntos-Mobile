@@ -13,6 +13,7 @@ FONTS,
 COLORS,
 FONT_WEIGHT
 } from "./../../common/styles";
+import {deviceOS, deviceTypes} from "./../../common/device";
 
 ////////////////////////
 // Styles
@@ -24,7 +25,6 @@ export default StyleSheet.create({
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT,
     color: COLORS.PRIMARY,
-    paddingHorizontal: 0,
     fontSize: 13
   },
 
@@ -33,17 +33,14 @@ export default StyleSheet.create({
   /////////////////////
 
  inputWrap: {
-    height: 60,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: COLORS.MID_GREY,
-    paddingTop: 10
+    marginBottom: 10
   },
   input: {
-    flex: 1,
-    height: 100,
+    height: deviceOS === deviceTypes.ios ? 25 : 40,
     fontSize: 17,
     fontFamily: FONTS.PRIMARY,
-    paddingHorizontal: 0,
     fontWeight: FONT_WEIGHT.LIGHT
   },
 
@@ -55,14 +52,11 @@ export default StyleSheet.create({
     flex: 1,
     fontSize: 17,
     fontFamily: FONTS.PRIMARY,
-    paddingHorizontal: 0,
-    paddingVertical: 10,
     textAlignVertical: "top",
     fontWeight: FONT_WEIGHT.LIGHT
   },
    multilineInputWrapSmall: {
-    paddingTop: 10,
-    minHeight: 100,
+    minHeight: deviceOS === deviceTypes.ios ? 100 : 115,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: COLORS.MID_GREY,
   },
@@ -76,7 +70,6 @@ export default StyleSheet.create({
   },
   multilineCounter:{
     color: COLORS.MID_GREY,
-    paddingLeft: 0,
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT
   },
