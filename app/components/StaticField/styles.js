@@ -34,6 +34,7 @@ export default StyleSheet.create({
     fontWeight: FONT_WEIGHT.LIGHT,
     color: COLORS.BLACK,
     paddingVertical: 10,
+    fontSize: 17
   },
 
   placeHolderText:{
