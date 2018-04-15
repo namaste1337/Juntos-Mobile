@@ -38,7 +38,7 @@ export default StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    height: deviceOS === deviceTypes.ios ? 25 : 40,
+    height: 40,
     fontSize: 17,
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT
