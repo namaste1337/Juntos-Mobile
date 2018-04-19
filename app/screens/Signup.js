@@ -69,6 +69,7 @@ const EMAIL_KEYBOARD_TYPE                       = "email-address";
 const DEFAULT_KEYBOARD_TYPE                     = "default";
 const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = deviceOS === deviceTypes.ios ? "position" : "";
 const PROFILE_IMAGE_BEHAVIOR                    = "contain";
+const KEYBOARD_AVOIDING_VIEW_VERTICAL_OFFSET    = -40;
 const AUTO_CAPITIALIZE_NONE_PROPERTY            = "none";
 //States
 const USERNAME_VALIDATION_TRUE_STATE            = true;
@@ -260,7 +261,7 @@ class Signup extends Component {
     return (
       <View style={CommonStyles.container}>
         <ScrollView>
-          <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR}>
+          <KeyboardAvoidingView behavior={KEYBOARD_AVOIDING_VIEW_BEHAVIOR} keyboardVerticalOffset={KEYBOARD_AVOIDING_VIEW_VERTICAL_OFFSET}>
             <CardView>
               <View style={styles.profileImageUploadWrapper}>
                 <TouchableOpacity onPress={() => this._onProfileImagePress()}>

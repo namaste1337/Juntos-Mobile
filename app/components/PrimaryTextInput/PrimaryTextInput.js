@@ -94,7 +94,7 @@ class  PrimaryTextInput extends Component {
             {/* Pass the field to the parent component */}
             this.props.onChangeText(field);
           }}
-          placeholderTextColor={COLORS.DARK_GREY}
+          placeholderTextColor={COLORS.LIGHT_GREY}
           underlineColorAndroid={COLORS.RGB_TRANSPARENT} 
           style={textInputStyle} 
           blurOnSubmit={BLUR_ON_SUBMIT_PROPERTY}/>
