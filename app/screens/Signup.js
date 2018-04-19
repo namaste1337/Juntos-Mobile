@@ -30,6 +30,7 @@ import { accountSignup } from '../actions/account-actions';
 import CommonStyles, {COLORS, FONTS} from "../common/styles";
 import {validateEmail} from "../common/validations";
 import {renderIf} from "../common/components";
+import {deviceTypes, deviceOS} from "../common/device"
 
 //////////////////////////////
 // Imports Libs
@@ -63,10 +64,10 @@ const USER_NAME_VALIDATION_MESSAGE_STRING       = "Username is required"
 const EMAIL_VALIDATION_MESSAGE_STRING           = "E-mail is invalid";
 const PASSWORD_VALIDATION_MESSAGE_STRING        = "Password is invalid or does not match";
 //Properties
-const RETURN_KEY_TYPE                           = "done";
+const RETURN_KEY_TYPE                           =  "done";
 const EMAIL_KEYBOARD_TYPE                       = "email-address";
 const DEFAULT_KEYBOARD_TYPE                     = "default";
-const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = "position";
+const KEYBOARD_AVOIDING_VIEW_BEHAVIOR           = deviceOS === deviceTypes.ios ? "position" : "";
 const PROFILE_IMAGE_BEHAVIOR                    = "contain";
 const AUTO_CAPITIALIZE_NONE_PROPERTY            = "none";
 //States
