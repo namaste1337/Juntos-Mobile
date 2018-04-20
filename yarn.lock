@@ -3592,9 +3592,9 @@ mkdirp@0.x.x, "mkdirp@>=0.5 0", mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment@2.x.x:
-  version "2.19.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.4.tgz#17e5e2c6ead8819c8ecfad83a0acccb312e94682"
+moment@^2.22.0:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
 
 morgan@^1.9.0:
   version "1.9.0"
@@ -4128,10 +4128,10 @@ react-native-cli@^2.0.1:
     semver "^5.0.3"
 
 react-native-datepicker@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.6.0.tgz#3a40dc9b112023c49d60ba2a0789d440b7e3d97c"
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.1.tgz#c1442f783b6adebb521217f9ebc94773265a0cec"
   dependencies:
-    moment "2.x.x"
+    moment "^2.22.0"
 
 react-native-device-info@^0.17.4:
   version "0.17.4"
