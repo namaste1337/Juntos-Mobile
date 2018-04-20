@@ -82,7 +82,7 @@ export default StyleSheet.create({
     fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.BOLD,
     marginLeft: -3,
-    fontSize: 20
+    fontSize: 15
   },
   carouselDescriptionText:{
     color: COLORS.WHITE,
