@@ -7,7 +7,7 @@
 
 # About
 
-The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB. The goal is to help cash strapped non-profits by developing a framework to allow the development of a native application on a shoe string budget. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.
+The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.
 
 # Prerequisites
 
@@ -15,18 +15,16 @@ The prerequisite are a set of instructions that are required before being able t
 
 The following outlines the prerequisites process:
 
- - Client Side
-	- Android SDK 
-		- Environment Variables for Mac
-		- Download Android Platform-Tools v23.0.0 & Build Tools  v23.0.1
-		- Emulator
-	- MacOS (Required to create builds for iOS
-		- Xcode
-	- Yarn
- - Server Side
-	 - NodeJS
-	 - MongoDB
-		 - Import Data
+- Android SDK 
+	- Environment Variables for Mac
+	- Download Android Platform-Tools v23.0.0 & Build Tools  v23.0.1
+	- Emulator Configuration
+- MacOS (Required to create builds for iOS
+	- Xcode
+- Yarn
+- NodeJS
+- MongoDB
+	- Import Data
 		
 **NOTE!!!!:** Currently, we only support development on Mac. We do have planned Windows support for the future, please check back for updates.
 		
@@ -38,7 +36,9 @@ The Android SDK is required by React Native as the build tool to generate a bina
 
 To get started with Android SDK you will need to download the command line tools from the Android Developer website, please use the following link:
 
-[https://developer.android.com/studio/index.html](https://developer.android.com/studio/index.html)
+    
+
+> [https://developer.android.com/studio/index.html](https://developer.android.com/studio/index.html)
 
 Once downloaded please extract to your preferred directory. Please make note of the install directory since it will be used to setup the environment variables.
 
@@ -48,7 +48,10 @@ Once downloaded please extract to your preferred directory. Please make note of 
 
 The Android development environment requires a few additions to your .bash_profile. This will allow React Native and your terminal direct access to many of the useful commands like; android, emulator, and adb which allow you to manage SDK packages, configure emulators, and the capability to build, install, and run APK packages.
 
-1.  Locate the file .bash_profile(This file will be located in your home directory) and open it up with your favorite text editor. If the .bash_profile does not exist in your home directory you can create it with the following command: touch .bash_profile
+1.  Locate the file .bash_profile(This file will be located in your home directory) and open it up with your favorite text editor. If the .bash_profile does not exist in your home directory you can create it with the following command:
+
+	 `touch .bash_profile`
+	 
 2.  Once you have your .bash_profile open, please insert the following exports to the end of your file. Please be sure to replace the *directory* tag with the install path of your Android SDK command line tools:
 
 >     export ANDROID_SDK_ROOT=<directory>/tools  
@@ -81,7 +84,7 @@ Last, to insure that we have access to all the commands required to build and ru
 
     source ~/.bash_profile
 
-**Emulator**
+**Emulator Configuration**
 
 
 
@@ -95,6 +98,7 @@ Now that you have your development environment setup, your ready to get the Junt
   
 
 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzgzOTc5NDZdfQ==
+eyJoaXN0b3J5IjpbMTkyNzc1MzEyNl19
 -->
