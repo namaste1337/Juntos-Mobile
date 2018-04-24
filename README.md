@@ -145,7 +145,7 @@ To verify that node has been installed run node in the command line this will pu
     node
 Give it a try, type in `i=3` and then `console.log(i+3)`. You can also verify npm by running the command `npm`, this will display a list of available parameters and commands that can be used for node package management.
 
-## MONGODB
+## MongoDB
 MongoDB is a document-oriented database used as the primary storage for the Juntos Platform. MongoDB interact with NodeJS and ExpressJS to save and retrieve data and at the Mobile clients request. The following will guide you through the steps of installing MongoDB, running MongoDB, and importing the test data.
 
 
@@ -155,7 +155,7 @@ MongoDB is a document-oriented database used as the primary storage for the Junt
 Now that you have your development environment setup, your ready to get the Juntos Platform up and running.
 
 
-**Linking Native Libraries**
+**Linking Node Modules**
 
 The following modules require some massaging to properly function with the mobile client. Some of the work can be handled by `react-native link` but others may require some manual configuration.  Below you will find links for each of the modules leading to the instructions written by there authors, to facilitate completing this step.
 
@@ -174,5 +174,5 @@ The following modules require some massaging to properly function with the mobil
 At the time of writing this document there are issues connecting to the system_image repositories which is required to setup the Android emulator. So for the moment we recommended that you use an Android device for testing development builds 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTc3OTU2MzVdfQ==
+eyJoaXN0b3J5IjpbLTk1MTc2NDQ2MF19
 -->
