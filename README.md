@@ -5,7 +5,7 @@
 
 <h1 id="contents">Contents</h1>
 <ul>
-<li><a href="#anchors-in-markdown">About</a></li>
+<li>About</li>
 <li>Prerequisites</li>
 <li>Getting Started</li>
 <li>Development Builds</li>
@@ -151,16 +151,46 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <p><code>chmod 777 /data/db</code></p>
 </li>
 </ol>
-<p><strong>Importing Test Data</strong></p>
+<p><strong>Running MongoDB</strong></p>
 <p>We can now run mongoDB via the command line, we also want to make sure that it runs as a background process.</p>
 <pre><code>mongod &amp;
 </code></pre>
 <p>The ampersand tells the system that we want MongoDB running as a background process, until we manually kill the process or the system is restarted.</p>
-<p><strong>Running MongoDB</strong></p>
+<p><strong>Importing Test Data</strong></p>
+<p>Provided is some test data to populate the Mongo database. This is the same data that is found in the demo application. But if you wish to create your own data via the Mobile client you may skip this step.</p>
+<p>First you will need to download the test data from the following link:</p>
+<blockquote>
+<p><a href="https://www.juntosplatform.org/juntos_test_data.zip">https://www.juntosplatform.org/juntos_test_data.zip</a></p>
+</blockquote>
+<p>juntos_test_data.zip contains a single folder /juntos this is the folder that will be fed to mongorestore to populate mongo with the test data.</p>
+<pre><code>mongorestore --db juntos /juntos
+</code></pre>
 <h1 id="getting-started">Getting Started</h1>
 <p>Now that you have your development environment setup, your ready to get the Juntos Platform up and running.</p>
+<h2 id="juntos-backend">Juntos Backend</h2>
+<p><strong>Pulling Juntos Backend</strong></p>
+<p>To get the latest feature and updates for the Juntos Backend it is recommended that you clone from master with the following:</p>
+<pre><code>git clone https://github.com/CheCm19/Juntos-Backend.git
+</code></pre>
+<p><strong>Installing Node Modules</strong></p>
+<p>Once you have pulled the backend to your local directory you will have to install all the node module dependencies with the following:</p>
+<pre><code>npm install
+</code></pre>
+<p><strong>Starting up Juntos backend</strong></p>
+<p>To start the back-end run the following command:</p>
+<pre><code>npm start
+</code></pre>
+<h2 id="juntos-mobile">Juntos Mobile</h2>
+<p><strong>Pulling Juntos Mobile</strong></p>
+<p>To get the latest feature and updates for Juntos Mobile it is recommended that you clone from master with the following:</p>
+<pre><code>git clone https://github.com/CheCm19/Juntos-Mobile.git
+</code></pre>
+<p><strong>Installing Node Modules</strong></p>
+<p>Once you have pulled the Mobile client to your local directory you will have to install all the node module dependencies with the following:</p>
+<pre><code>npm install
+</code></pre>
 <p><strong>Linking Node Modules</strong></p>
-<p>The following modules require some massaging to properly function with the mobile client. Some of the work can be handled by <code>react-native link</code> but others may require some manual configuration.  Below you will find links for each of the modules leading to the instructions written by there authors that will help completing this step.</p>
+<p>The following modules require some massaging to properly function with the mobile client. Some of the work can be handled by <code>react-native link</code> but others may require some manual configurations.  Below you will find links for each of the modules leading to the instructions written by there authors to help complete this step.</p>
 <ul>
 <li><a href="https://www.npmjs.com/package/react-native-app-settings">react-native-app-settings</a></li>
 <li><a href="https://github.com/rebeccahughes/react-native-device-info">react-native-device-info</a></li>
@@ -171,6 +201,13 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <li><a href="https://github.com/beefe/react-native-picker">react-native-picker</a></li>
 </ul>
 <h1 id="development-builds">Development Builds</h1>
+<p><strong>iOS Development Builds</strong></p>
+<p>Execute the following command to build and install to the iOS simulator:</p>
+<pre><code>react-native run-ios
+</code></pre>
 <p><strong>Android Development Builds</strong></p>
-<p>At the time of writing this document there are issues connecting to the system_image repositories which is required to setup the Android emulator. So for the moment we recommended that you use an Android device for testing development builds</p>
+<p>Execute the following command to build and install to an android device:</p>
+<pre><code>  react-native run-android
+</code></pre>
+<p><strong>Note:</strong> At the time of writing this document there are issues connecting to the system_image repositories which is required to setup the Android emulator. So for the moment we recommended that you use an Android device for testing development builds</p>
 
