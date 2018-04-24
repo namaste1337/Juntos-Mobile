@@ -15,7 +15,7 @@ The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB. The
 
   
 
-## Prerequisites
+# Prerequisites
 
   
 
@@ -136,5 +136,5 @@ Now that you have your development environment setup, your ready to get the Junt
 
 [https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzE4MjU2NDcsMTc3MzQ1MzQ2MV19
+eyJoaXN0b3J5IjpbLTExNjUwNDI1MzYsMTc3MzQ1MzQ2MV19
 -->
