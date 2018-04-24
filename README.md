@@ -21,11 +21,15 @@ The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB. The
 
 The prerequisite are a set of instructions that are required before being able to run the Juntos Platform on Mobile(iOS and Android). The instructions facilitate the development environment set up process, by providing detailed instructions for both Mac and Windows.
 
-  
+ 
 
-**Contents**
+- Client Side
+	- Android SDK Command Line Tools
+	- Download and Install Android SDK 23.0.1
 
--Client Side
+	 - 
+
+ -Client Side
 
 -Android SDK Command Line Tools
 
@@ -136,5 +140,6 @@ Now that you have your development environment setup, your ready to get the Junt
 
 [https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNjUwNDI1MzYsMTc3MzQ1MzQ2MV19
+eyJoaXN0b3J5IjpbMjA3NDg1NDMwMCwtMTE2NTA0MjUzNiwxNz
+czNDUzNDYxXX0=
 -->
