@@ -23,25 +23,15 @@ The prerequisite are a set of instructions that are required before being able t
 
  
 
-- Client Side
+ - Client Side
 	- Android SDK Command Line Tools
-	- Download and Install Android SDK 23.0.1
-
+		- Download and Install Android SDK 23.0.1
+		- Environment Variables for Mac and Windows 10
+	- MacOS (Required to create builds for iOS
+		- Xcode
+	- Yarn
+ - Serverside
 	 - 
-
- -Client Side
-
--Android SDK Command Line Tools
-
--Download and Install Android SDK 23.0.1
-
--Environment Variables for Mac and Window 10
-
--MacOS (Required to create builds for iOS)
-
--Xcode
-
--Yarn
 
   
 
@@ -140,6 +130,6 @@ Now that you have your development environment setup, your ready to get the Junt
 
 [https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3NDg1NDMwMCwtMTE2NTA0MjUzNiwxNz
+eyJoaXN0b3J5IjpbMTA3MDQ3NjU3MiwtMTE2NTA0MjUzNiwxNz
 czNDUzNDYxXX0=
 -->
