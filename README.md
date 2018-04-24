@@ -5,7 +5,7 @@
 
 <h1 id="contents">Contents</h1>
 <ul>
-<li>About</li>
+<li><a href="#anchors-in-markdown">About</a></li>
 <li>Prerequisites</li>
 <li>Getting Started</li>
 <li>Development Builds</li>
@@ -113,7 +113,7 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <li>Once simulator has finished downloading Xcode can be closed.</li>
 </ol>
 <p>We will revisit Xcode when it comes time to create a production build. Now that you have completed the Xcode configurations, React Native will handle the process of building, installing and launching your simulator for iOS development builds.</p>
-<h2 id="node-js"><a href="#anchors-in-markdown">Node JS</a></h2>
+<h2 id="node.js">Node.js</h2>
 <p>NodeJS is a Javascript runtime that has been built on top of Google’s V8 Javascript engine. And is utilized in the Juntos-Backend with ExpressJS to develop Restful API’s which handle the storage of user, and project data for the Juntos Platform. The latest version of Node.js now includes NPM a great tool for managing Node modules,  NPM will be used extensively in the “Getting Started” section to get both the Mobile and Backend up and running.</p>
 <p>Here we will be using <code>brew</code> to get Node.js installed.</p>
 <ol>
