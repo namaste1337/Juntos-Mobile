@@ -30,26 +30,17 @@ The prerequisite are a set of instructions that are required before being able t
 	- MacOS (Required to create builds for iOS
 		- Xcode
 	- Yarn
- - Serverside
-	 - 
+ - Server Side
+	 - NodeJS
+	 - MongoDB
+		 - Import Data
 
-  
-
--Server Side
-
--NodeJS
-
--MongoDB
-
--Import data
-
-  
 
 **Warning:** To run the Juntos Platform on an iOS device you must have access to a MacOS device as required by Apple.
 
   
 
-Android SDK Command Line Tools (Client Side)
+## Android SDK Command Line Tools (Client Side)
 
   
 
@@ -130,6 +121,6 @@ Now that you have your development environment setup, your ready to get the Junt
 
 [https://yarnpkg.com/lang/en/docs/install/](https://yarnpkg.com/lang/en/docs/install/)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MDQ3NjU3MiwtMTE2NTA0MjUzNiwxNz
+eyJoaXN0b3J5IjpbMTQwMDY5OTYwMCwtMTE2NTA0MjUzNiwxNz
 czNDUzNDYxXX0=
 -->
