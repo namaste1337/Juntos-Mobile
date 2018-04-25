@@ -22,7 +22,7 @@
 <ul>
 <li>Command Line Tools</li>
 <li>Environment Variables for Mac</li>
-<li>Download Android Platform-Tools v23.0.0 &amp; Build Tools  v23.0.1</li>
+<li>Accept License Agreements</li>
 </ul>
 </li>
 <li>iOS
@@ -45,11 +45,22 @@
 <h2 id="android">Android</h2>
 <p><strong>Command Line Tools</strong></p>
 <p>The Android SDK is required by React Native as the build tool to generate a binary known as an APK(Similar to a .exe or .dmg), it also host a variety of tools that allow for the installing, debugging, and monitoring of your application.</p>
-<p>To get started with Android SDK you will need to download the command line tools from the Android Developer website, please use the following link:</p>
+<ol>
+<li>To get started with the Android SDK you will need to download the command line tools from the Android Developer website, please use the following link:</li>
+</ol>
 <blockquote>
 <p><a href="https://developer.android.com/studio/index.html">https://developer.android.com/studio/index.html</a></p>
 </blockquote>
-<p>Once downloaded please extract to your preferred directory. Please make note of the install directory since it will be used to setup the environment variables.</p>
+<ol start="2">
+<li>
+<p>Once you have downloaded the command line tools, create a folder named <code>android_sdk</code> in your home directory:</p>
+<p><code>mkdir android_sdk</code></p>
+<p>Please make note of the install directory since it will be used to setup the environment variables.</p>
+</li>
+<li>
+<p>Extract the command line tools to the <code>android_sdk</code> folder from the step above.</p>
+</li>
+</ol>
 <p><strong>NOTE:</strong> When visiting the Android Developer website, the link to download the command line tools is not evident. You must click the “Download Options” link, this will redirect you to the “Select a different platform” section of the page, if you continue to scroll downward you will come across the “Get just the command line tools” section. Here is where you select the the platform for which you wish to install the Command Line tools.</p>
 <p><strong>Environment Variables</strong></p>
 <p>The Android development environment requires a few additions to your .bash_profile. This will allow React Native and your command line direct access to many of the useful commands like; android, emulator, and adb which allow you to manage SDK packages, configure emulators, and the capability to build, install, and run APK packages.</p>
@@ -59,14 +70,14 @@
 <p><code>touch .bash_profile</code></p>
 </li>
 <li>
-<p>Once you have your .bash_profile open, please insert the following exports to the end of your file. Please be sure to replace the <em>directory</em> tag with the install path of your Android SDK command line tools:</p>
+<p>Once you have your .bash_profile open, please insert the following exports to the end of your file. Please be sure to replace the <em>directory</em> tag, with the path to your <code>android_sdk</code> folder:</p>
 </li>
 </ol>
 <blockquote>
-<pre><code>export ANDROID_SDK_ROOT=&lt;directory&gt;/tools
+<pre><code>export ANDROID_SDK_ROOT=&lt;directory&gt;/android_sdk
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$ANDROID_SDK_ROOT:$PATH
-export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/bin:$PATH
+export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/tools/bin:$PATH
 </code></pre>
 </blockquote>
 <p><strong>Note:</strong> The exports above include a few directories that do not exist. These directories will be created once you have finished the process detailed in the “Download Android Platform-Tools v23.0.0 &amp; Build Tools  v23.0.1” section of the readme.</p>
@@ -77,18 +88,9 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <blockquote>
 <p>source ~/.bash_profile</p>
 </blockquote>
-<p><strong>Download Android Platform-Tools v23.0.0 &amp; Build Tools  v23.0.1</strong></p>
-<p>Now that you have have downloaded the Android SDK command line tools  and configured  your environment variables, we are ready to move on to installing the required platform-tools and build-tools.</p>
-<p>Here we will use the <em>sdkmanager</em> tool that was made available via enviroment variables. To install the platform-tools required by the Juntos project execute the following command:</p>
-<pre><code>sdkmanager platform-tools 'platforms;android-23'
-</code></pre>
-<p>Next, install the build tools:</p>
-<pre><code>sdkmanager 'build-tools;23.0.1'
-</code></pre>
-<p><strong>Note:</strong>  <em>sdkmanager</em> defaults the download path to the Desktop. Move the packages to the command line tools directory since this will serve as your primary directory for all of your android related tools. The folders should reflect the environment variable exports from above.</p>
-<p>Last, to insure that we have access to all the commands required to build and run Juntos. You will need to reset the .bash_profile once more:</p>
-<pre><code>source ~/.bash_profile
-</code></pre>
+<p><strong>Accept License Agreements</strong></p>
+<p>We need to accept the license agreements, before we are allowed to build for Android. So lets go ahead and do that, by running the following command:</p>
+<p><code>yes | sudo sdkmanager --licenses</code></p>
 <h2 id="ios">iOS</h2>
 <p>The following will cover the installation of Xcode, developer account setup and iOS simulator configuration.</p>
 <p><strong>Note:</strong> iOS requires a that you join the Apple Developer program to be enable you to sign and ship your applications. There is a an annual fee of $100 USD, if your not a member you can join via the link below:</p>
@@ -146,16 +148,17 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 </li>
 <li>
 <p>Once MongoDB has finished installing you must  now create the /data/db directory. This is where the mongo data will live.</p>
-<p><code>mkdir /data/db</code></p>
+<p><code>sudo mkdir /data</code><br>
+<code>sudo mkdir /data/db</code></p>
 </li>
 <li>
 <p>We must make sure that the directory has the right permissions. You want to grant it full read and write permissions.</p>
-<p><code>chmod 777 /data/db</code></p>
+<p><code>sudo chmod 777 /data/db</code></p>
 </li>
 </ol>
 <p><strong>Running MongoDB</strong></p>
 <p>We can now run mongoDB via the command line, we also want to make sure that it runs as a background process.</p>
-<pre><code>mongod &amp;
+<pre><code>sudo mongod &amp;
 </code></pre>
 <p>The ampersand tells the system that we want MongoDB running as a background process, until we manually kill the process or the system is restarted.</p>
 <p><strong>Importing Test Data</strong></p>
