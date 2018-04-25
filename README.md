@@ -63,7 +63,7 @@
 </li>
 </ol>
 <blockquote>
-<pre><code>export ANDROID_SDK_ROOT=/Users/cesarmiranda/Desktop/tools
+<pre><code>export ANDROID_SDK_ROOT=&lt;directory&gt;/tools
 export ANDROID_HOME=$ANDROID_SDK_ROOT
 export PATH=$ANDROID_SDK_ROOT:$PATH
 export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/bin:$PATH
