@@ -89,7 +89,7 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <p>source ~/.bash_profile</p>
 </blockquote>
 <p><strong>Accept License Agreements</strong></p>
-<p>We need to accept the license agreements, before we are allowed to build for Android. So lets go ahead and do that, by running the following command:</p>
+<p>We need to accept the Android SDK license agreements, before we are allowed to build for Android. So lets go ahead and do that, by running the following command:</p>
 <p><code>yes | sudo sdkmanager --licenses</code></p>
 <h2 id="ios">iOS</h2>
 <p>The following will cover the installation of Xcode, developer account setup and iOS simulator configuration.</p>
