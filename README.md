@@ -194,17 +194,6 @@ export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDR
 <p>Once you have pulled the Mobile client to your local directory you will have to install all the node module dependencies with the following:</p>
 <pre><code>npm install
 </code></pre>
-<p><strong>Linking Node Modules</strong></p>
-<p>The following modules require some massaging to properly function with the mobile client. Some of the work can be handled by <code>react-native link</code> but others may require some manual configurations.  Below you will find links for each of the modules leading to the instructions written by there authors to help complete this step.</p>
-<ul>
-<li><a href="https://www.npmjs.com/package/react-native-app-settings">react-native-app-settings</a></li>
-<li><a href="https://github.com/rebeccahughes/react-native-device-info">react-native-device-info</a></li>
-<li><a href="https://www.npmjs.com/package/react-native-dialogs">react-native-dialogs</a></li>
-<li><a href="https://github.com/ivpusic/react-native-image-crop-picker">react-native-image-crop-picker</a></li>
-<li><a href="https://github.com/react-community/react-native-maps">react-native-maps</a></li>
-<li><a href="https://github.com/yonahforst/react-native-permissions">react-native-permissions</a></li>
-<li><a href="https://github.com/beefe/react-native-picker">react-native-picker</a></li>
-</ul>
 <h1 id="development-builds">Development Builds</h1>
 <p><strong>iOS Development Builds</strong></p>
 <p>Execute the following command to build and install to the iOS simulator:</p>
