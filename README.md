@@ -11,7 +11,7 @@
 <li>Development Builds</li>
 </ul>
 <h1 id="about">About</h1>
-<p>The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow users to congregate and collaborate.</p>
+<p>The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.</p>
 <p>Try the demo app, the Juntos Platform is live on both the iOS App store and Android Play Store if you would like to try the features of the latest release:</p>
 <p><a href="https://www.juntosplatform.org/#download"><code>https://www.juntosplatform.org/#download</code></a></p>
 <h1 id="prerequisites">Prerequisites</h1>
@@ -20,6 +20,7 @@
 <ul>
 <li>Android
 <ul>
+<li>Command Line Tools</li>
 <li>Environment Variables for Mac</li>
 <li>Download Android Platform-Tools v23.0.0 &amp; Build Tools  v23.0.1</li>
 </ul>
@@ -35,6 +36,7 @@
 <li>MongoDB
 <ul>
 <li>Installing MongoDB</li>
+<li>Running MongoDB</li>
 <li>Import Data</li>
 </ul>
 </li>
