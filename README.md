@@ -200,7 +200,7 @@ If you wish to use our test data, please follow along, the data provided is the 
 
     mongorestore --db juntos juntos/
 
-3. Next, you will need to download the image test assets to insure that, these are the images associated with the mongo test data from the above test. The image assets can be found at the following link:
+3. Next, you will need to download the image test assets, these are the images associated with the mongo test data from the above step. The image assets can be found at the following link:
 
     https://www.juntosplatform.org/juntos_test_images.zip
 
@@ -249,5 +249,5 @@ When you executing the initial build for Android, you may notice that it's takin
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyOTI3MTQwMF19
+eyJoaXN0b3J5IjpbLTE0NzExNTMwNzZdfQ==
 -->
