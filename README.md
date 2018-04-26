@@ -31,7 +31,6 @@ The following outlines the prerequisites process:
  - MongoDB
 	 - Installing MongoDB
 	 - Running MongoDB
-	 - Import Data
 		
 **NOTE!!!!:** Currently, we only support development on Mac. We do have planned Windows support for the future, please check back for updates.
 		
@@ -249,5 +248,5 @@ When you executing the initial build for Android, you may notice that it's takin
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NzExNTMwNzZdfQ==
+eyJoaXN0b3J5IjpbLTE2MjAxNzEzNDRdfQ==
 -->
