@@ -351,10 +351,12 @@ const styles = StyleSheet.create({
   },
 
   detailTextHeader:{
+    fontFamily: FONTS.PRIMARY,
     color: COLORS.PRIMARY,
-    fontWeight: FONT_WEIGHT.BOLD
+    fontWeight: FONT_WEIGHT.REGULAR
   },
   detailTextData:{
+    fontFamily: FONTS.PRIMARY,
     fontWeight: FONT_WEIGHT.LIGHT
   },
 
