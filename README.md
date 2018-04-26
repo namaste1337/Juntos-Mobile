@@ -9,7 +9,7 @@
 
 The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.
 
-Try the demo app, the Juntos Platform is live on both the iOS App store and Android Play Store if you would like to try the features of the latest release: 
+Try the demo app! The Juntos Platform is live on both the iOS App store and Android Play Store, if you would like to try the features from the latest release: 
 
 [`https://www.juntosplatform.org/#download`](https://www.juntosplatform.org/#download)
 
@@ -39,7 +39,7 @@ The following outlines the prerequisites process:
 
 **Command Line Tools**
 
-The Android SDK is required by React Native as the build tool to generate a binary known as an APK(Similar to a .exe or .dmg), it also host a variety of tools that allow for the installing, debugging, and monitoring of your application.
+The Android Command Line tools are required by React Native as the build tool to generate a binary known as an APK(Similar to a .exe or .dmg), it also host a variety of tools that allow for the installing, debugging, and monitoring of your application.
 
 1. To get started with the Android SDK you will need to download the command line tools from the Android Developer website, please use the following link:
 
@@ -70,7 +70,7 @@ The Android development environment requires a few additions to your .bash_profi
 >     export PATH=$ANDROID_SDK_ROOT:$PATH
 >     export PATH=$ANDROID_SDK_ROOT/build-tools:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/tools/bin:$PATH
 
-**Note:** The exports above include a few directories that do not exist. These directories will be created when you run the initial build for Android.
+**Note:** The exports above include a few directories that do not exist. These directories will be automatically created when you run the initial build for Android.
 
 3.  Once you have added the exports from above, save and and close your file.
 4.  To complete the environment set up, the .bash_profile must be reset for the terminal to include the Android SDK commands. To do so, run the following terminal command in the directory of your .bash_profile: 
@@ -167,19 +167,6 @@ We can now run mongoDB via the command line, we also want to make sure that it r
 
     sudo mongod &
  The ampersand tells the system that we want MongoDB running as a background process, until we manually kill the process or the system is restarted.
-
-**Importing Test Data**
-
-Provided is some test data to populate the Mongo database. This is the same data that is found in the demo application. But if you wish to create your own data via the Mobile client you may skip this step.
-
-First you will need to download the test data from the following link:
-
-> https://www.juntosplatform.org/juntos_test_data.zip
-
-juntos_test_data.zip contains a single folder /juntos this is the folder that will be fed to mongorestore to populate mongo with the test data.
-
-    mongorestore --db juntos /juntos
-
  
 # Getting Started
 
@@ -187,7 +174,7 @@ Now that you have your development environment setup, your ready to get the Junt
 
 ## Juntos Backend
 
-**Pulling Juntos Backend**
+**Cloning Juntos Backend**
 
 To get the latest feature and updates for the Juntos Backend it is recommended that you clone from master with the following:
 
@@ -199,15 +186,38 @@ Once you have pulled the backend to your local directory you will have to instal
 
     npm install
 
+
+
+**Importing Test Data**
+
+If you wish to use our test data, please follow along, the data provided is the same data that is found in the live demo application. But if you wish to create your own data via the Mobile client you may skip this step.
+
+1. First you will need to download the test data from the following link:
+
+> https://www.juntosplatform.org/juntos_test_data.zip
+
+2. juntos_test_data.zip contains a single folder `juntos/` this is the folder that will be fed to mongorestore to populate mongo with the test data.
+
+    mongorestore --db juntos juntos/
+
+3. Next, you will need to download the image test assets to insure that, these are the images associated with the mongo test data from the above test. The image assets can be found at the following link:
+
+    https://www.juntosplatform.org/juntos_test_images.zip
+
+4. Now unzip the `juntos_test_images.zip` this will reveal a single folder `images/`.
+
+5. Next, replace the existing images folder located in   `Juntos-Backend/public/images` with the images folder from the above step.
+
 **Starting up Juntos backend**
 
 To start the back-end run the following command:
 
     npm start
+    
 
 ## Juntos Mobile
 
-**Pulling Juntos Mobile**
+**Cloning  Juntos Mobile**
 
 To get the latest feature and updates for Juntos Mobile it is recommended that you clone from master with the following:
 
@@ -233,10 +243,11 @@ Execute the following command to build and install to the iOS simulator:
 Execute the following command to build and install to an android device:
 
       react-native run-android
+When you executing the initial build for Android, you may notice that it's taking longer than expected. That is because the initial build process must download the required Android SDK and dependencies.
 
 **Note:** At the time of writing this document there are issues connecting to the system_image repositories which is required to setup the Android emulator. So for the moment we recommended that you use an Android device for testing development builds 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzOTM0Mjc2N119
+eyJoaXN0b3J5IjpbLTUyOTI3MTQwMF19
 -->
