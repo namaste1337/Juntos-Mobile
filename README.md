@@ -5,10 +5,10 @@
 
 <h1 id="contents">Contents</h1>
 <ul>
-<li>About</li>
-<li>Prerequisites</li>
-<li>Getting Started</li>
-<li>Development Builds</li>
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#about">About</a></li>
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#prerequisites">Prerequisites</a></li>
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#getting-started">Getting Started</a></li>
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#development-builds">Development Builds</a></li>
 </ul>
 <h1 id="about">About</h1>
 <p>The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.</p>
