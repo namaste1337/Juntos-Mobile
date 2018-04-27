@@ -71,6 +71,10 @@ const INITIAL_LONGITUDE_NUMBER                = 95.50; // Center of the U.S.
 const INITIAL_LATITUDE_NUMBER                 = -98.35; // Center of the U.S.
 const PROJECT_FETCH_LIMIT_NUMBER              = 10;
 const REGION_ANIMATION_DURATION_NUMBER        = 500;
+// Nudges the center of the map upward, 
+// so the Redo Search in the Area button does 
+// not overlap the map markers on smaller screen devices.
+const LATITUDE_CENTER_OFFSET                  = 0.015; 
 // The following value represents the number miles a user must pan the map before
 // showing the redo-Search button. Adjust accordingly 
 const REDO_SEARCH_DISTANCE_THRESHOLD          = 20; 
@@ -198,7 +202,7 @@ class Projects extends Component {
     this.setState({ isAnimating: IS_ANIMATING_TRUE_BOOL })
 
     let region = new MapView.AnimatedRegion({
-      latitude: lat,
+      latitude: lat - LATITUDE_CENTER_OFFSET,
       longitude: long,
       latitudeDelta: LATITUDE_DELTA_NUMBER,
       longitudeDelta: LONGITUDE_DELTA_NUMBER
