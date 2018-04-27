@@ -40,9 +40,10 @@ import styles from "./styles";
 ////////////////////////
 
 //Properties
-const DECELERATION_RATE_PROPERTY = 0.1;
-const SLIDER_WIDTH_PROPERTY      = deviceProperties.width;
-const ITEM_WIDTH_PROPERTY        = deviceProperties.width - 50;
+const SLIDER_WIDTH_PROPERTY             = deviceProperties.width;
+const ITEM_WIDTH_PROPERTY               = deviceProperties.width - 50;
+const SLIDER_USE_SCROLL_VIEW_PROPERTY   = true;
+const SLIDER_LOCK_SCROLL_VIEW_PROPERTY  = true
 
 
 ////////////////////////
@@ -85,13 +86,14 @@ class  AnimatedCarousel extends Component {
   ////////////////////////
   // Methods
   ////////////////////////
-        // scrollEndDragDebounceValue={0.1}
+  
   render () {
     return (
       <Carousel
         ref={ref=> this._carsourel = ref}
-        decelerationRate={DECELERATION_RATE_PROPERTY}
         sliderWidth={SLIDER_WIDTH_PROPERTY}
+        useScrollView={SLIDER_USE_SCROLL_VIEW_PROPERTY}
+        lockScrollWhileSnapping={SLIDER_LOCK_SCROLL_VIEW_PROPERTY}
         itemWidth={ITEM_WIDTH_PROPERTY} 
         {...this.props} />
     );
