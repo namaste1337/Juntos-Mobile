@@ -5,10 +5,10 @@
 
 <h1 id="contents">Contents</h1>
 <ul>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#about">About</a></li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#prerequisites">Prerequisites</a></li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#getting-started">Getting Started</a></li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#development-builds">Development Builds</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#development-builds">Development Builds</a></li>
 </ul>
 <h1 id="about">About</h1>
 <p>The Juntos Platform was developed with React Native, Redux, NodeJS, MongoDB with the goal to help cash strapped non-profits by developing a framework to allow rapid development of a native application. To achieve this goal the project is primarily focused on developing features that are common across the non-profit industry, that allow user to congregate and collaborate.</p>
@@ -18,22 +18,22 @@
 <p>The prerequisite are a set of instructions that are required before being able to run the Juntos Platform on Mobile(iOS and Android). The instructions facilitate the development environment set up process, by providing detailed instructions for Mac.</p>
 <p>The following outlines the prerequisites process:</p>
 <ul>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#android">Android</a>
+<li><a href="#android">Android</a>
 <ul>
 <li>Command Line Tools</li>
 <li>Environment Variables for Mac</li>
 <li>Accept License Agreements</li>
 </ul>
 </li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#ios">iOS</a>
+<li><a href="#ios">iOS</a>
 <ul>
 <li>Xcode</li>
 <li>Developer Account Setup</li>
 <li>iOS Simulator Configuration</li>
 </ul>
 </li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#nodejs">Node.js</a></li>
-<li><a href="https://github.com/CheCm19/Juntos-Mobile#mongodb">MongoDB</a>
+<li><a href="#nodejs">Node.js</a></li>
+<li><a href="#mongodb">MongoDB</a>
 <ul>
 <li>Installing MongoDB</li>
 <li>Running MongoDB</li>
