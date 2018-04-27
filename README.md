@@ -18,22 +18,22 @@
 <p>The prerequisite are a set of instructions that are required before being able to run the Juntos Platform on Mobile(iOS and Android). The instructions facilitate the development environment set up process, by providing detailed instructions for Mac.</p>
 <p>The following outlines the prerequisites process:</p>
 <ul>
-<li>Android
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#android">Android</a>
 <ul>
 <li>Command Line Tools</li>
 <li>Environment Variables for Mac</li>
 <li>Accept License Agreements</li>
 </ul>
 </li>
-<li>iOS
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#ios">iOS</a>
 <ul>
 <li>Xcode</li>
 <li>Developer Account Setup</li>
 <li>iOS Simulator Configuration</li>
 </ul>
 </li>
-<li>Node.js</li>
-<li>MongoDB
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#nodejs">Node.js</a></li>
+<li><a href="https://github.com/CheCm19/Juntos-Mobile#mongodb">MongoDB</a>
 <ul>
 <li>Installing MongoDB</li>
 <li>Running MongoDB</li>
