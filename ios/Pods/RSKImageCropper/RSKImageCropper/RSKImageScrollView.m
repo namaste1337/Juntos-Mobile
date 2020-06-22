@@ -136,41 +136,20 @@
 {
     // center zoomView as it becomes smaller than the size of the screen
     
-    // we need to use contentInset instead of contentOffset for better positioning when zoomView fills the screen
-    if (self.aspectFill) {
-        CGFloat top = 0;
-        CGFloat left = 0;
-        
-        // center vertically
-        if (self.contentSize.height < CGRectGetHeight(self.bounds)) {
-            top = (CGRectGetHeight(self.bounds) - self.contentSize.height) * 0.5f;
-        }
-        
-        // center horizontally
-        if (self.contentSize.width < CGRectGetWidth(self.bounds)) {
-            left = (CGRectGetWidth(self.bounds) - self.contentSize.width) * 0.5f;
-        }
-        
-        self.contentInset = UIEdgeInsetsMake(top, left, top, left);
-    } else {
-        CGRect frameToCenter = self.zoomView.frame;
-        
-        // center horizontally
-        if (CGRectGetWidth(frameToCenter) < CGRectGetWidth(self.bounds)) {
-            frameToCenter.origin.x = (CGRectGetWidth(self.bounds) - CGRectGetWidth(frameToCenter)) * 0.5f;
-        } else {
-            frameToCenter.origin.x = 0;
-        }
-        
-        // center vertically
-        if (CGRectGetHeight(frameToCenter) < CGRectGetHeight(self.bounds)) {
-            frameToCenter.origin.y = (CGRectGetHeight(self.bounds) - CGRectGetHeight(frameToCenter)) * 0.5f;
-        } else {
-            frameToCenter.origin.y = 0;
-        }
-        
-        self.zoomView.frame = frameToCenter;
+    CGFloat top = 0;
+    CGFloat left = 0;
+
+    // center vertically
+    if (self.contentSize.height < CGRectGetHeight(self.bounds)) {
+        top = (CGRectGetHeight(self.bounds) - self.contentSize.height) * 0.5f;
     }
+
+    // center horizontally
+    if (self.contentSize.width < CGRectGetWidth(self.bounds)) {
+        left = (CGRectGetWidth(self.bounds) - self.contentSize.width) * 0.5f;
+    }
+    
+    self.contentInset = UIEdgeInsetsMake(top, left, top, left);
 }
 
 #pragma mark - Configure scrollView to display new image
@@ -208,27 +187,30 @@
     // calculate min/max zoomscale
     CGFloat xScale = boundsSize.width  / _imageSize.width;    // the scale needed to perfectly fit the image width-wise
     CGFloat yScale = boundsSize.height / _imageSize.height;   // the scale needed to perfectly fit the image height-wise
+    
     CGFloat minScale;
     if (!self.aspectFill) {
         minScale = MIN(xScale, yScale); // use minimum of these to allow the image to become fully visible
     } else {
         minScale = MAX(xScale, yScale); // use maximum of these to allow the image to fill the screen
     }
+    
     CGFloat maxScale = MAX(xScale, yScale);
     
     // Image must fit/fill the screen, even if its size is smaller.
     CGFloat xImageScale = maxScale*_imageSize.width / boundsSize.width;
-    CGFloat yImageScale = maxScale*_imageSize.height / boundsSize.width;
+    CGFloat yImageScale = maxScale*_imageSize.height / boundsSize.height;
+    
     CGFloat maxImageScale = MAX(xImageScale, yImageScale);
     
     maxImageScale = MAX(minScale, maxImageScale);
     maxScale = MAX(maxScale, maxImageScale);
-
+    
     // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
     if (minScale > maxScale) {
         minScale = maxScale;
     }
-        
+    
     self.maximumZoomScale = maxScale;
     self.minimumZoomScale = minScale;
 }
@@ -269,6 +251,10 @@
 
 - (void)prepareToResize
 {
+    if (_zoomView == nil) {
+        return;
+    }
+    
     CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     _pointToCenterAfterResize = [self convertPoint:boundsCenter toView:self.zoomView];
 
@@ -282,6 +268,10 @@
 
 - (void)recoverFromResizing
 {
+    if (_zoomView == nil) {
+        return;
+    }
+    
     [self setMaxMinZoomScalesForCurrentBounds];
     
     // Step 1: restore zoom scale, first making sure it is within the allowable range.
